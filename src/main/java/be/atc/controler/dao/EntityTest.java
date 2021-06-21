@@ -1,7 +1,7 @@
 package be.atc.controler.dao;
 
 import be.atc.controler.connexion.EMF;
-import be.atc.entities.UsersEntity;
+import be.atc.entities.UsersEnt;
 
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
@@ -17,12 +17,12 @@ public class EntityTest {
 //        return usersEnt;
 //    }
 
-    public List<UsersEntity> listDesPersonnes() {
-        List<UsersEntity> user = new ArrayList<>();
+    public List<UsersEnt> listDesPersonnes() {
+        List<UsersEnt> user = new ArrayList<>();
         try {
             EntityManager em = EMF.getEM();
             user = em
-                    .createQuery("select u from UsersEntity u ")
+                    .createQuery("select u from UsersEnt u ")
                     .getResultList();
         } catch (Exception e) {
             System.out.println("Erreur dans l'entityTest: " + e);

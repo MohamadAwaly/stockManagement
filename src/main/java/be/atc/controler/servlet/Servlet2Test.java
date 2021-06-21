@@ -2,8 +2,7 @@ package be.atc.controler.servlet;
 
 import be.atc.controler.connexion.EMF;
 import be.atc.controler.dao.EntityTest;
-import be.atc.entities.UsersEntity;
-import be.atc.entities.UsersEntity;
+import be.atc.entities.UsersEnt;
 import be.atc.service.UserService;
 
 import javax.persistence.EntityManager;
@@ -37,7 +36,7 @@ public class Servlet2Test extends HttpServlet {
             throws ServletException, IOException {
         EntityManager em = EMF.getEM();
 //        Query query = em.createNamedQuery("User.findall");
-        List<UsersEntity> userList = user.showAllUser();
+        List<UsersEnt> userList = user.showAllUser();
 //        userList = user.showAllUser();
         try {
             request.setAttribute("adresse", userList);

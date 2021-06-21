@@ -3,7 +3,25 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
              version="2.2">
-    <persistence-unit name="default">
+    <persistence-unit name="stock-management" transaction-type="JTA">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <jta-data-source>java:comp/env/jdbc/jpa</jta-data-source>
+        <class>be.atc.entities.AdressEntity</class>
+        <class>be.atc.entities.CitiesEntity</class>
+        <class>be.atc.entities.CountriesEntity</class>
+        <class>be.atc.entities.UsersEntity</class>
+        <properties>
+            <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+            <property name="eclipselink.create-ddl-jdbc-file-name" value="createDDL_ddlGeneration.jdbc"/>
+            <property name="eclipselink.drop-ddl-jdbc-file-name" value="dropDDL_ddlGeneration.jdbc"/>
+            <property name="eclipselink.ddl-generation.output-mode" value="both"/>
 
+            <property name="eclipselink.jdbc.url" value="jdbc:mysql://localhost:3308/stock-management"/>
+            <property name="eclipselink.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name='javax.persistence.jdbc.user' value='root'/>
+            <property name='javax.persistence.jdbc.password' value=''/>
+
+
+        </properties>
     </persistence-unit>
 </persistence>

@@ -2,7 +2,8 @@ package be.atc.controler.enumm;
 
 public enum ModeOfPayement {
 
-    Cash("Cash");
+    Cash("Cash"),
+    Bancontact("Bancontact");
 
     private String text;
 

@@ -6,16 +6,20 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table( name = "adress_users", schema = "stock-management" )
+@Table( name = "adress_users", schema = "stockmanagement" )
 public class AdressUsersEntity {
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
     @Column( name = "id_adress_users", nullable = false )
     private int          idAdressUsers;
+
     @Basic
     @Column( name = "typeadress", nullable = false )
     @Enumerated( EnumType.STRING )
     private TypeAdress   typeAdress;
+
     private AdressEntity address;
     private UsersEntity  users;
 

@@ -3,8 +3,10 @@ package be.atc.entities;
 import javax.persistence.*;
 import java.util.Objects;
 
-@Entity @Table( name = "countries", schema = "stock-management")
+@Entity @Table( name = "countries", schema = "stockmanagement")
 public class CountriesEntity {
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column( name = "id_country", nullable = false )

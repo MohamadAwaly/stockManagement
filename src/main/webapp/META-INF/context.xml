@@ -1,4 +1,4 @@
-<Context path="/stockManagement" docBase="stock-management" reloadable="true"
+<Context path="/stockManagement" docBase="stockmanagement" reloadable="true"
          crossContext="true">
     <!-- maxActive: Maximum number of dB connections in pool. Make sure you
     configure your mysqld max_connections large enough to handle
@@ -25,5 +25,5 @@
               maxActive="100" maxIdle="30" maxWait="10000"
               username="root" password=""
               driverClassName="com.mysql.jdbc.Driver"
-              url="jdbc:mysql://localhost:3308/stock-management?autoReconnect=true"/>
+              url="jdbc:mysql://localhost:3306/stockmanagement?autoReconnect=true"/>
 </Context>

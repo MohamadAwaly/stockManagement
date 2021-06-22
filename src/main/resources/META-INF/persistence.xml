@@ -6,20 +6,54 @@
     <persistence-unit name="stock-management" transaction-type="JTA">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <jta-data-source>java:comp/env/jdbc/jpa</jta-data-source>
-        <class>be.atc.entities.AdressEntity</class>
-        <class>be.atc.entities.CitiesEntity</class>
-        <class>be.atc.entities.CountriesEntity</class>
-        <class>be.atc.entities.UsersEntity</class>
+        <class>be.atc.entities.AddressEnt</class>
+        <class>be.atc.entities.AdressUsersEnt</class>
+        <class>be.atc.entities.CommandsuppliersBatchsEnt</class>
+        <class>be.atc.entities.DocumenttypesEnt</class>
+        <class>be.atc.entities.BatchsEnt</class>
+        <class>be.atc.entities.BrandsEnt</class>
+        <class>be.atc.entities.CategoriesEnt</class>
+        <class>be.atc.entities.CitiesEnt</class>
+        <class>be.atc.entities.CommandsuppliersEnt</class>
+        <class>be.atc.entities.CountriesEnt</class>
+        <class>be.atc.entities.DocumentsEnt</class>
+        <class>be.atc.entities.OrdersEnt</class>
+        <class>be.atc.entities.OrdersDocumentsEnt</class>
+        <class>be.atc.entities.OrdersProductsEnt</class>
+        <class>be.atc.entities.ProductsEnt</class>
+        <class>be.atc.entities.ProductsCategoriesEnt</class>
+        <class>be.atc.entities.RolesEnt</class>
+        <class>be.atc.entities.SuppliersEnt</class>
+        <class>be.atc.entities.UsersEnt</class>
+        <class>be.atc.entities.test</class>
         <properties>
-            <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
-            <property name="eclipselink.create-ddl-jdbc-file-name" value="createDDL_ddlGeneration.jdbc"/>
-            <property name="eclipselink.drop-ddl-jdbc-file-name" value="dropDDL_ddlGeneration.jdbc"/>
-            <property name="eclipselink.ddl-generation.output-mode" value="both"/>
+<!--            <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>-->
+<!--            <property name="eclipselink.ddl-generation" value="create-tables"/>-->
+<!--            <property name="eclipselink.create-ddl-jdbc-file-name" value="createDDL_ddlGeneration.jdbc"/>-->
+<!--            <property name="eclipselink.drop-ddl-jdbc-file-name" value="dropDDL_ddlGeneration.jdbc"/>-->
+<!--            <property name="eclipselink.ddl-generation.output-mode" value="database"/>-->
 
-            <property name="eclipselink.jdbc.url" value="jdbc:mysql://localhost:3308/stock-management"/>
-            <property name="eclipselink.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-            <property name='javax.persistence.jdbc.user' value='root'/>
-            <property name='javax.persistence.jdbc.password' value=''/>
+<!--            <property name="eclipselink.jdbc.url" value="jdbc:mysql://localhost:3306/stock-management"/>-->
+<!--            <property name="eclipselink.jdbc.driver" value="com.mysql.jdbc.Driver"/>-->
+<!--            <property name='javax.persistence.jdbc.user' value='root'/>-->
+<!--            <property name='javax.persistence.jdbc.password' value=''/>-->
+
+<!--            <property name="eclipselink.ddl-generation" value="create-tables"/>-->
+<!--            <property name="eclipselink.ddl-generation.output-mode" value="database"/>-->
+<!--            <property name="eclipselink.application-location" value="/sql" />-->
+<!--            <property name="eclipselink.create-ddl-jdbc-file-name" value="database" />-->
+
+<!--            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>-->
+<!--            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/stock-management"/>-->
+<!--            <property name="javax.persistence.jdbc.user" value="root"/>-->
+<!--            <property name="javax.persistence.jdbc.password" value=""/>-->
+<!--            &lt;!&ndash;property name="eclipselink.logging.level" value="FINEST"/&ndash;&gt;-->
+<!--            <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>-->
+<!--            <property name="eclipselink.create-ddl-jdbc-file-name" value="createDDL_ddlGeneration.jdbc"/>-->
+<!--            <property name="eclipselink.drop-ddl-jdbc-file-name" value="dropDDL_ddlGeneration.jdbc"/>-->
+<!--            <property name="eclipselink.ddl-generation.output-mode" value="both"/>-->
+
+
 
 
         </properties>

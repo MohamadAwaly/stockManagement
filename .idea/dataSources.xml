@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="stock-management" uuid="6f7ad5a8-5ba7-42c1-9129-54ff4a81ca13">
+    <data-source source="LOCAL" name="stockmanagement" uuid="d81a0894-14fe-4678-b6ac-451dea1662b5">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3308/stock-management</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/stockmanagement</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
       <driver-properties>
         <property name="serverTimezone" value="UTC" />

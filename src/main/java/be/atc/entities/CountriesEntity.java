@@ -1,17 +1,20 @@
 package be.atc.entities;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Objects;
 
-@Entity @Table( name = "countries", schema = "stock-management", catalog = "" ) public class CountriesEnt {
-    private int                   idCountry;
-    private String                country;
-    private Collection<CitiesEnt> citiesByIdCountry;
+@Entity @Table( name = "countries", schema = "stockmanagement")
+public class CountriesEntity {
+    private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    @Column( name = "ID_Country", nullable = false ) public int getIdCountry() {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column( name = "id_country", nullable = false )
+    private int                   idCountry;
+    @Basic @Column( name = "country", nullable = false, length = 60 )
+    private String                country;
+
+    public int getIdCountry() {
         return idCountry;
     }
 
@@ -19,7 +22,7 @@ import java.util.Objects;
         this.idCountry = idCountry;
     }
 
-    @Basic @Column( name = "Country", nullable = false, length = 60 ) public String getCountry() {
+    public String getCountry() {
         return country;
     }
 
@@ -32,7 +35,7 @@ import java.util.Objects;
             return true;
         if ( o == null || getClass() != o.getClass() )
             return false;
-        CountriesEnt that = (CountriesEnt) o;
+        CountriesEntity that = (CountriesEntity) o;
         return idCountry == that.idCountry && Objects.equals( country, that.country );
     }
 
@@ -40,11 +43,4 @@ import java.util.Objects;
         return Objects.hash( idCountry, country );
     }
 
-    @OneToMany( mappedBy = "countriesByIdCountry" ) public Collection<CitiesEnt> getCitiesByIdCountry() {
-        return citiesByIdCountry;
-    }
-
-    public void setCitiesByIdCountry( Collection<CitiesEnt> citiesByIdCountry ) {
-        this.citiesByIdCountry = citiesByIdCountry;
-    }
 }

@@ -2,7 +2,6 @@ package be.atc.controler.servlet;
 
 import be.atc.controler.connexion.EMF;
 import be.atc.controler.dao.EntityTest;
-import be.atc.entities.UsersEnt;
 import be.atc.service.UserService;
 
 import javax.persistence.EntityManager;

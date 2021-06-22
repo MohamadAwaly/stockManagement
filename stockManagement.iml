@@ -22,7 +22,7 @@
         <setting name="provider-name" value="EclipseLink" />
         <datasource-mapping>
           <factory-entry name="default" />
-          <factory-entry name="stock-management" value="6f7ad5a8-5ba7-42c1-9129-54ff4a81ca13" />
+          <factory-entry name="stock-management" value="d81a0894-14fe-4678-b6ac-451dea1662b5" />
         </datasource-mapping>
         <naming-strategy-map>
           <unit-entry name="stock-management" />

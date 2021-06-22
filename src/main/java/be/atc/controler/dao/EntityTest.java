@@ -1,7 +1,6 @@
 package be.atc.controler.dao;
 
 import be.atc.controler.connexion.EMF;
-import be.atc.entities.UsersEnt;
 
 import javax.persistence.EntityManager;
 import java.util.ArrayList;

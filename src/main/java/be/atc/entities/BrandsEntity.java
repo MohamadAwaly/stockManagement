@@ -47,7 +47,7 @@ public class BrandsEntity {
     }
 
     //Relation avec la table products
-    @OneToMany(mappedBy = "brands")
+    @OneToMany( mappedBy = "brands" )
     public Collection<ProductsEntity> getProducts() {
         return products;
     }

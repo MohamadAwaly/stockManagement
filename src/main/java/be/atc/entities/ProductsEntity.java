@@ -154,7 +154,8 @@ public class ProductsEntity {
     }
 
     //Relation avec la table brand
-    @ManyToOne @JoinColumn( name = "id_brand", referencedColumnName = "id_brand", nullable = false )
+    @ManyToOne
+    @JoinColumn(name = "id_brand", referencedColumnName = "id_brand", nullable = false)
     public BrandsEntity getBrands() {
         return brands;
     }

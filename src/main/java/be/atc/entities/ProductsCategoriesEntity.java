@@ -10,7 +10,7 @@ public class ProductsCategoriesEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_Products_categories", nullable = false)
+    @Column(name = "id_products_categories", nullable = false)
     private int idProductsCategories;
 
     private ProductsEntity products;

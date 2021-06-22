@@ -11,7 +11,7 @@ public class ProductsEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_Product", nullable = false)
+    @Column(name = "id_product", nullable = false)
     private int idProduct;
     @Basic
     @Column(name = "code", nullable = false, length = 255)
@@ -154,8 +154,7 @@ public class ProductsEntity {
     }
 
     //Relation avec la table brand
-    @ManyToOne
-    @JoinColumn(name = "id_brand", referencedColumnName = "id_brand", nullable = false)
+    @ManyToOne @JoinColumn( name = "id_brand", referencedColumnName = "id_brand", nullable = false )
     public BrandsEntity getBrands() {
         return brands;
     }

@@ -1,6 +1,7 @@
 package be.atc.service;
 
 import be.atc.controler.connexion.EMF;
+import be.atc.entities.UsersEntity;
 import org.apache.log4j.Logger;
 
 import javax.persistence.EntityManager;
@@ -13,7 +14,7 @@ public class UserService {
 
     public List showAllUser() {
         Query query = em.createNamedQuery("User.findall");
-        List<UsersEnt> userList = query.getResultList();
+        List<UsersEntity> userList = query.getResultList();
         return userList;
     }
 }

@@ -2,7 +2,7 @@ package be.atc.controler.enumm;
 
 public enum TypeAdress {
 
-    Private("Cash"),
+    Private("Private"),
     Professional("Professional"),
     billing("billing");
 

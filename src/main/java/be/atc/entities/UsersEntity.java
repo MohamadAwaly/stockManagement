@@ -44,6 +44,7 @@ public class UsersEntity {
     private String login;
 
     private RolesEntity roles;
+
     private Collection<AdressUsersEntity> adress;
     private Collection<CommandsuppliersEntity> commandsuppliers;
     private Collection<OrdersEntity> orders;

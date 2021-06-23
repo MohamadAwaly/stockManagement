@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
 
+@Entity @Table( name = "brands", schema = "stockmanagement")
 public class BrandsEntity {
     private static final long serialVersionUID = 1L;
 

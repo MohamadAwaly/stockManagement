@@ -20,7 +20,7 @@ public class CommandsuppliersEntity {
 
     private SuppliersEntity                          suppliers;
     private UsersEntity                              users;
-    private Collection<CommandsuppliersBatchsEntity> commandsuppliers;
+    private Collection<CommandsuppliersBatchsEntity> commandsuppliersBatchs;
 
     public int getIdCommandSuppliers() {
         return idCommandSuppliers;
@@ -47,12 +47,12 @@ public class CommandsuppliersEntity {
         CommandsuppliersEntity that = (CommandsuppliersEntity) o;
         return idCommandSuppliers == that.idCommandSuppliers && Objects.equals( orderDate, that.orderDate ) && Objects
                 .equals( suppliers, that.suppliers ) && Objects.equals( users, that.users ) && Objects
-                .equals( commandsuppliers, that.commandsuppliers );
+                .equals( commandsuppliersBatchs, that.commandsuppliersBatchs );
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash( idCommandSuppliers, orderDate, suppliers, users, commandsuppliers );
+        return Objects.hash( idCommandSuppliers, orderDate, suppliers, users, commandsuppliersBatchs );
     }
 
     //Relation avec la table supplier
@@ -78,12 +78,12 @@ public class CommandsuppliersEntity {
     }
 
     //Relation avec la table CommandeSupplierBatchs
-    @OneToMany( mappedBy = "commandsuppliers" )
-    public Collection<CommandsuppliersBatchsEntity> getCommandsuppliers() {
-        return commandsuppliers;
+    @OneToMany( mappedBy = "commandesuppliers" )
+    public Collection<CommandsuppliersBatchsEntity> getCommandsuppliersBatchs() {
+        return commandsuppliersBatchs;
     }
 
-    public void setCommandsuppliers( Collection<CommandsuppliersBatchsEntity> commandsuppliers ) {
-        this.commandsuppliers = commandsuppliers;
+    public void setCommandsuppliersBatchs( Collection<CommandsuppliersBatchsEntity> commandsuppliersBatchs ) {
+        this.commandsuppliersBatchs = commandsuppliersBatchs;
     }
 }

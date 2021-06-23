@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 @NamedQueries( value = {
-        @NamedQuery( name = "User.findall",
+        @NamedQuery( name = "User.finddall",
                 query = "SELECT u FROM UsersEntity u" )
 } )
 @Entity
@@ -44,7 +44,7 @@ public class UsersEntity {
     private String login;
 
     @Column( name = "active", nullable = false, length = 60 )
-    private String active;
+    private boolean active;
 
     private RolesEntity roles;
 
@@ -124,15 +124,15 @@ public class UsersEntity {
         this.login = login;
     }
 
-    public String getActive() {
+    public boolean isActive() {
         return active;
     }
 
-    public void setActive( String active ) {
+    public void setActive(boolean active) {
         this.active = active;
     }
 
-    @Override public boolean equals( Object o ) {
+    @Override public boolean equals(Object o ) {
         if ( this == o )
             return true;
         if ( o == null || getClass() != o.getClass() )
@@ -176,7 +176,7 @@ public class UsersEntity {
     }
 
     //Relation avec la table de commandesupplier via le champs commandsuppliers
-    @OneToMany( mappedBy = "commandsuppliers" )
+    @OneToMany( mappedBy = "users" )
     public Collection<CommandsuppliersEntity> getCommandsuppliers() {
         return commandsuppliers;
     }

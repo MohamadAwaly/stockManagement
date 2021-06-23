@@ -5,7 +5,10 @@ import be.atc.entities.UsersEntity;
 import org.apache.log4j.Logger;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -13,9 +16,11 @@ public class UserService {
     private static Logger log = Logger.getLogger(UserService.class);
     EntityManager em = EMF.getEM();
 
-    public List showAllUser() {
+    public List showAllUsers() {
+        List<UsersEntity> user = new ArrayList<>();
         Query query = em.createNamedQuery("User.finddall");
-        List<UsersEntity> userList = query.getResultList();
-        return userList;
+        user = query.getResultList();
+        //user = em.createQuery( "select  u from UsersEntity u" ).getResultList();
+        return user;
     }
 }

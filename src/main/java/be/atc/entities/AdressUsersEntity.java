@@ -1,6 +1,6 @@
 package be.atc.entities;
 
-import be.atc.enumm.TypeAdress;
+import be.atc.controler.enumm.TypeAdress;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -18,7 +18,7 @@ public class AdressUsersEntity {
     @Basic
     @Column( name = "typeadress", nullable = false )
     @Enumerated( EnumType.STRING )
-    private TypeAdress   typeAdress;
+    private TypeAdress typeAdress;
 
     private AdressEntity address;
     private UsersEntity  users;

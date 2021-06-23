@@ -3,16 +3,16 @@ package be.atc.entities;
 import javax.persistence.*;
 import java.util.Objects;
 
-@Entity @Table( name = "countries", schema = "stockmanagement")
+@Entity @Table( name = "countries", schema = "stockmanagement" )
 public class CountriesEntity {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue( strategy = GenerationType.IDENTITY )
     @Column( name = "id_country", nullable = false )
-    private int                   idCountry;
+    private int    idCountry;
     @Basic @Column( name = "country", nullable = false, length = 60 )
-    private String                country;
+    private String country;
 
     public int getIdCountry() {
         return idCountry;

@@ -41,7 +41,7 @@
                         <a class="dropdown-item" href="#">Update user</a>
                         <a class="dropdown-item" href="#">Delete user</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Users list</a>
+                        <a class="dropdown-item" href="UsersShowAll">Liste des utilisateurs</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">

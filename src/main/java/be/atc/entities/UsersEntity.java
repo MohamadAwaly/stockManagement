@@ -48,6 +48,7 @@ public class UsersEntity {
 
     @Column( name = "active", nullable = false)
     private boolean active;
+    @ManyToOne @JoinColumn( name = "id_role", referencedColumnName = "id_role", nullable = false )
     private RolesEntity roles;
 //    private long id_role;
 
@@ -158,7 +159,7 @@ public class UsersEntity {
     }
 
     //Relation avec la table Roles via le champ id role
-    @ManyToOne @JoinColumn( name = "id_role", referencedColumnName = "id_role", nullable = false )
+
     public RolesEntity getRoles() {
         return roles;
     }

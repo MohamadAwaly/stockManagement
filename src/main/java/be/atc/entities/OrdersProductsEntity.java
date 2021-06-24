@@ -18,8 +18,9 @@ public class OrdersProductsEntity {
     private int     unitPrice;
     @Basic @Column( name = "deliver", nullable = true )
     private Boolean deliver;
-
+    @ManyToOne @JoinColumn( name = "id_order", referencedColumnName = "id_order", nullable = false )
     private OrdersEntity   orders;
+    @ManyToOne @JoinColumn( name = "id_product", referencedColumnName = "id_product", nullable = false )
     private ProductsEntity products;
 
     public int getIdOrdersProducts() {
@@ -72,7 +73,7 @@ public class OrdersProductsEntity {
     }
 
     // Relation avec la table order
-    @ManyToOne @JoinColumn( name = "id_order", referencedColumnName = "id_order", nullable = false )
+
     public OrdersEntity getOrders() {
         return orders;
     }
@@ -82,7 +83,7 @@ public class OrdersProductsEntity {
     }
 
     //Relation avec la table product
-    @ManyToOne @JoinColumn( name = "id_product", referencedColumnName = "id_product", nullable = false )
+
     public ProductsEntity getProducts() {
         return products;
     }

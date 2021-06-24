@@ -22,6 +22,8 @@ public class CitiesEntity {
     @Column( name = "postalCode", nullable = false )
     private int postalCode;
 
+    @ManyToOne
+    @JoinColumn( name = "id_country", referencedColumnName = "id_country", nullable = false )
     private CountriesEntity country;
 
     public int getIdCity() {
@@ -64,8 +66,7 @@ public class CitiesEntity {
         return Objects.hash( idCity, citie, postalCode, country );
     }
 
-    @ManyToOne
-    @JoinColumn( name = "id_country", referencedColumnName = "id_country", nullable = false )
+
     public CountriesEntity getCountry() {
         return country;
     }

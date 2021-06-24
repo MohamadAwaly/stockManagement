@@ -19,7 +19,11 @@ public class CommandsuppliersBatchsEntity {
     @Column( name = "lotQuantity", nullable = false )
     private int lotQuantity;
 
+    @ManyToOne
+    @JoinColumn( name = "id_commandSupplier", referencedColumnName = "id_commandSuppliers", nullable = false )
     private CommandsuppliersEntity commandsuppliers;
+    @ManyToOne
+    @JoinColumn( name = "id_batch", referencedColumnName = "id_batch", nullable = false )
     private BatchsEntity           batchs;
 
     public int getIdCommandsuppliersBatchs() {
@@ -64,8 +68,7 @@ public class CommandsuppliersBatchsEntity {
     }
 
     //Relation avec la table commandsuppliers
-    @ManyToOne
-    @JoinColumn( name = "id_commandSupplier", referencedColumnName = "id_commandSuppliers", nullable = false )
+
     public CommandsuppliersEntity getCommandsuppliers() {
         return commandsuppliers;
     }
@@ -75,8 +78,7 @@ public class CommandsuppliersBatchsEntity {
     }
 
     //Relation avec la table batchs
-    @ManyToOne
-    @JoinColumn( name = "id_batch", referencedColumnName = "id_batch", nullable = false )
+
     public BatchsEntity getBatchs() {
         return batchs;
     }

@@ -12,8 +12,11 @@ public class ProductsCategoriesEntity {
     @GeneratedValue( strategy = GenerationType.IDENTITY )
     @Column( name = "id_products_categories", nullable = false )
     private int idProductsCategories;
-
+    @ManyToOne
+    @JoinColumn( name = "id_product", referencedColumnName = "id_product", nullable = false )
     private ProductsEntity   products;
+    @ManyToOne
+    @JoinColumn( name = "id_category", referencedColumnName = "id_categorie", nullable = false )
     private CategoriesEntity categories;
 
     public int getIdProductsCategories() {
@@ -41,8 +44,7 @@ public class ProductsCategoriesEntity {
     }
 
     //Realtion avec la table products
-    @ManyToOne
-    @JoinColumn( name = "id_product", referencedColumnName = "id_product", nullable = false )
+
     public ProductsEntity getProducts() {
         return products;
     }
@@ -52,8 +54,7 @@ public class ProductsCategoriesEntity {
     }
 
     //Relation avec la table categorie
-    @ManyToOne
-    @JoinColumn( name = "id_category", referencedColumnName = "id_categorie", nullable = false )
+
     public CategoriesEntity getCategories() {
         return categories;
     }

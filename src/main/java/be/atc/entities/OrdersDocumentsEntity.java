@@ -13,7 +13,9 @@ public class OrdersDocumentsEntity {
     @Column( name = "ID_Orders_docuements", nullable = false )
     private int idOrdersDocuements;
 
+    @ManyToOne @JoinColumn( name = "id_order", referencedColumnName = "id_order", nullable = false )
     private OrdersEntity    orders;
+    @ManyToOne @JoinColumn( name = "id_document", referencedColumnName = "id_document", nullable = false )
     private DocumentsEntity documents;
 
     public int getIdOrdersDocuements() {
@@ -39,7 +41,7 @@ public class OrdersDocumentsEntity {
     }
 
     //Relation avec la table orders
-    @ManyToOne @JoinColumn( name = "id_order", referencedColumnName = "id_order", nullable = false )
+
     public OrdersEntity getOrders() {
         return orders;
     }
@@ -49,7 +51,7 @@ public class OrdersDocumentsEntity {
     }
 
     //Relation avec la table document
-    @ManyToOne @JoinColumn( name = "id_document", referencedColumnName = "id_document", nullable = false )
+
     public DocumentsEntity getDocuments() {
         return documents;
     }

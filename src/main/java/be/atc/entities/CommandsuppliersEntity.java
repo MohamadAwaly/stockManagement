@@ -18,7 +18,11 @@ public class CommandsuppliersEntity {
     @Column( name = "orderDate", nullable = false )
     private Date orderDate;
 
+    @ManyToOne
+    @JoinColumn( name = "id_supplier", referencedColumnName = "id_supplier", nullable = false )
     private SuppliersEntity                          suppliers;
+    @ManyToOne
+    @JoinColumn( name = "id_user", referencedColumnName = "id_user", nullable = false )
     private UsersEntity                              users;
     private Collection<CommandsuppliersBatchsEntity> commandsuppliersBatchs;
 
@@ -56,8 +60,7 @@ public class CommandsuppliersEntity {
     }
 
     //Relation avec la table supplier
-    @ManyToOne
-    @JoinColumn( name = "id_supplier", referencedColumnName = "id_supplier", nullable = false )
+
     public SuppliersEntity getSuppliers() {
         return suppliers;
     }
@@ -67,8 +70,7 @@ public class CommandsuppliersEntity {
     }
 
     //Relation avec la tables Users
-    @ManyToOne
-    @JoinColumn( name = "id_user", referencedColumnName = "id_user", nullable = false )
+
     public UsersEntity getUsers() {
         return users;
     }

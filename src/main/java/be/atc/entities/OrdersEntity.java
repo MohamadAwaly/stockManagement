@@ -39,6 +39,8 @@ public class OrdersEntity {
     @Enumerated( EnumType.STRING )
     private ModeOfPayement modeOfPayement;
 
+    @ManyToOne
+    @JoinColumn( name = "id_user", referencedColumnName = "id_user", nullable = false )
     private UsersEntity                       users;
     private Collection<OrdersDocumentsEntity> ordersDocuments;
     private Collection<OrdersProductsEntity>  ordersProducts;
@@ -130,8 +132,7 @@ public class OrdersEntity {
     }
 
     //Relation avec la table Uers
-    @ManyToOne
-    @JoinColumn( name = "id_user", referencedColumnName = "id_user", nullable = false )
+
     public UsersEntity getUsers() {
         return users;
     }

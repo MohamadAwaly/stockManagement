@@ -20,7 +20,11 @@ public class AdressUsersEntity {
     @Enumerated( EnumType.STRING )
     private TypeAdress typeAdress;
 
+    @ManyToOne
+    @JoinColumn( name = "id_adress", referencedColumnName = "id_adress", nullable = false )
     private AdressEntity address;
+    @ManyToOne
+    @JoinColumn( name = "id_user", referencedColumnName = "id_user", nullable = false )
     private UsersEntity  users;
 
     public int getIdAdressUsers() {
@@ -53,8 +57,7 @@ public class AdressUsersEntity {
         return Objects.hash( idAdressUsers, typeAdress, address, users );
     }
 
-    @ManyToOne
-    @JoinColumn( name = "id_adress", referencedColumnName = "id_adress", nullable = false )
+
     public AdressEntity getAddress() {
         return address;
     }
@@ -63,8 +66,7 @@ public class AdressUsersEntity {
         this.address = address;
     }
 
-    @ManyToOne
-    @JoinColumn( name = "id_user", referencedColumnName = "id_user", nullable = false )
+
     public UsersEntity getUsers() {
         return users;
     }

@@ -23,6 +23,8 @@ public class BatchsEntity {
     @Column( name = "numberBatch", nullable = false )
     private int numberBatch;
 
+    @ManyToOne
+    @JoinColumn( name = "id_products", referencedColumnName = "id_product", nullable = false )
     private ProductsEntity                           products;
     private Collection<CommandsuppliersBatchsEntity> commandsuppliersBatch;
 
@@ -76,8 +78,7 @@ public class BatchsEntity {
     }
 
     //Relation avec la table products
-    @ManyToOne
-    @JoinColumn( name = "id_products", referencedColumnName = "id_product", nullable = false )
+
     public ProductsEntity getProducts() {
         return products;
     }

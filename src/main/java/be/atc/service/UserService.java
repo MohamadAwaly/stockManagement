@@ -6,15 +6,26 @@ import org.apache.log4j.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
+
 
 public class UserService {
     private static Logger log = Logger.getLogger(UserService.class);
     EntityManager em = EMF.getEM();
 
-    public List showAllUser() {
-        Query query = em.createNamedQuery("User.findall");
-        List<UsersEntity> userList = query.getResultList();
-        return userList;
+//    public List showAllUsers() {
+//        List<UsersEntity> user = new ArrayList<>();
+//        Query query = em.createNamedQuery("User.finddall");
+//        user = query.getResultList();
+//        //user = em.createQuery( "select  u from UsersEntity u" ).getResultList();
+//        return user;
+//    }
+    public List showAllUsers() {
+        List<Object> user = new ArrayList<>();
+        Query query = em.createNamedQuery("User.finddall");
+        user = query.getResultList();
+        //user = em.createQuery( "select  u from UsersEntity u" ).getResultList();
+        return user;
     }
 }

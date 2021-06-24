@@ -19,6 +19,7 @@ public class DocumentsEntity {
     @Basic @Column( name = "DateDocument", nullable = false )
     private Date dateDocument;
 
+    @ManyToOne @JoinColumn( name = "id_documentType", referencedColumnName = "id_typeDocument", nullable = false )
     private DocumenttypesEntity               documenttypes;
     private Collection<OrdersDocumentsEntity> ordersDocuments;
 
@@ -62,7 +63,7 @@ public class DocumentsEntity {
     }
 
     //Relation avec la table documentType
-    @ManyToOne @JoinColumn( name = "id_documentType", referencedColumnName = "id_typeDocument", nullable = false )
+
     public DocumenttypesEntity getDocumenttypes() {
         return documenttypes;
     }

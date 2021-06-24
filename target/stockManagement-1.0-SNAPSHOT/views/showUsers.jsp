@@ -10,7 +10,7 @@
     <tr>
         <th>ID</th>
         <th>login</th>
-<%--        <th>ID_Role</th>--%>
+        <th>Role</th>
         <th>lastName</th>
         <th>firstName</th>
         <th>dayOfBirth</th>
@@ -26,7 +26,7 @@
         <tr>
             <td><c:out value="${ user.idUser } "/></td>
             <td><c:out value="${ user.login } "/></td>
-<%--            <td><c:out value="${ user.roles } "/></td>--%>
+            <td><c:out value="${ user.roles.role } "/></td>
             <td><c:out value="${ user.lastName } "/></td>
             <td><c:out value="${ user.firstName } "/></td>
             <td><c:out value="${ user.dayOfBirth } "/></td>

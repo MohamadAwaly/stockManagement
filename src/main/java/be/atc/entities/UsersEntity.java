@@ -136,26 +136,17 @@ public class UsersEntity {
         this.active = active;
     }
 
-    @Override public boolean equals( Object o ) {
-        if ( this == o )
-            return true;
-        if ( o == null || getClass() != o.getClass() )
-            return false;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         UsersEntity that = (UsersEntity) o;
-        return idUser == that.idUser && active == that.active && Objects.equals( lastName, that.lastName )
-                && Objects.equals( firstName, that.firstName ) && Objects
-                .equals( dayOfBirth, that.dayOfBirth ) && Objects.equals( inscriptionDate, that.inscriptionDate )
-                && Objects.equals( vat, that.vat ) && Objects.equals( mail, that.mail )
-                && Objects.equals( password, that.password ) && Objects.equals( login, that.login )
-                && Objects.equals( adress, that.adress ) && Objects
-                .equals( commandsuppliers, that.commandsuppliers ) && Objects.equals( orders, that.orders );
+        return idUser == that.idUser && active == that.active && Objects.equals(lastName, that.lastName) && Objects.equals(firstName, that.firstName) && Objects.equals(dayOfBirth, that.dayOfBirth) && Objects.equals(inscriptionDate, that.inscriptionDate) && Objects.equals(vat, that.vat) && Objects.equals(mail, that.mail) && Objects.equals(password, that.password) && Objects.equals(login, that.login) && Objects.equals(roles, that.roles) && Objects.equals(adress, that.adress) && Objects.equals(commandsuppliers, that.commandsuppliers) && Objects.equals(orders, that.orders);
     }
 
-    @Override public int hashCode() {
-        return Objects
-                .hash( idUser, lastName, firstName, dayOfBirth, inscriptionDate, vat, mail, password, login, active,
-                        adress,
-                        commandsuppliers, orders );
+    @Override
+    public int hashCode() {
+        return Objects.hash(idUser, lastName, firstName, dayOfBirth, inscriptionDate, vat, mail, password, login, active, roles, adress, commandsuppliers, orders);
     }
 
     //Relation avec la table Roles via le champ id role

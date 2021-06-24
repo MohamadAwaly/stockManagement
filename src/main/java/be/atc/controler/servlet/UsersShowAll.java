@@ -16,23 +16,22 @@ public class UsersShowAll extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<UsersEntity> userList = user.showAllUser();
+        List<UsersEntity> userList = user.showAllUsers();
         try {
-            request.setAttribute("adresse", userList);
+            request.setAttribute("user", userList);
         } catch (Exception e) {
             System.out.println("Erreur servlet get");
         }
         this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
     }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<UsersEntity> userList = user.showAllUser();
-        try {
-            request.setAttribute("adresse", userList);
-        } catch (Exception e) {
-            System.out.println("Erreur servlet get");
-        }
-        this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+//        List<UsersEntity> userList = user.showAllUsers();
+//        try {
+//            request.setAttribute("users", userList);
+//        } catch (Exception e) {
+//            System.out.println("Erreur servlet get");
+//        }
+//        this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
     }
 }

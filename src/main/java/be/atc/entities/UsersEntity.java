@@ -7,7 +7,10 @@ import java.util.Objects;
 
 @NamedQueries( value = {
         @NamedQuery( name = "User.finddall",
-                query = "SELECT u FROM UsersEntity u" )
+                query = "SELECT u FROM UsersEntity u" ),
+        @NamedQuery( name = "User.findName",
+                query = "SELECT u.lastName FROM UsersEntity u" )
+
 } )
 @Entity
 @Table( name = "users", schema = "stockmanagement" )
@@ -43,10 +46,10 @@ public class UsersEntity {
     @Column( name = "login", nullable = false, length = 60 )
     private String login;
 
-    @Column( name = "active", nullable = false, length = 60 )
+    @Column( name = "active", nullable = false)
     private boolean active;
-
     private RolesEntity roles;
+//    private long id_role;
 
     private Collection<AdressUsersEntity>      adress;
     private Collection<CommandsuppliersEntity> commandsuppliers;
@@ -132,30 +135,29 @@ public class UsersEntity {
         this.active = active;
     }
 
-    @Override public boolean equals(Object o ) {
+    @Override public boolean equals( Object o ) {
         if ( this == o )
             return true;
         if ( o == null || getClass() != o.getClass() )
             return false;
         UsersEntity that = (UsersEntity) o;
-        return idUser == that.idUser && Objects.equals( lastName, that.lastName ) && Objects
-                .equals( firstName, that.firstName ) && Objects.equals( dayOfBirth, that.dayOfBirth )
-                && Objects.equals( inscriptionDate, that.inscriptionDate ) && Objects
-                .equals( vat, that.vat ) && Objects.equals( mail, that.mail ) && Objects
-                .equals( password, that.password ) && Objects.equals( login, that.login ) && Objects
-                .equals( active, that.active ) && Objects.equals( roles, that.roles ) && Objects
-                .equals( adress, that.adress ) && Objects.equals( commandsuppliers, that.commandsuppliers )
-                && Objects.equals( orders, that.orders );
+        return idUser == that.idUser && active == that.active && Objects.equals( lastName, that.lastName )
+                && Objects.equals( firstName, that.firstName ) && Objects
+                .equals( dayOfBirth, that.dayOfBirth ) && Objects.equals( inscriptionDate, that.inscriptionDate )
+                && Objects.equals( vat, that.vat ) && Objects.equals( mail, that.mail )
+                && Objects.equals( password, that.password ) && Objects.equals( login, that.login )
+                && Objects.equals( adress, that.adress ) && Objects
+                .equals( commandsuppliers, that.commandsuppliers ) && Objects.equals( orders, that.orders );
     }
 
     @Override public int hashCode() {
         return Objects
                 .hash( idUser, lastName, firstName, dayOfBirth, inscriptionDate, vat, mail, password, login, active,
-                        roles,
-                        adress, commandsuppliers, orders );
+                        adress,
+                        commandsuppliers, orders );
     }
 
-    //Relation avec la table Roles via le champ users
+    //Relation avec la table Roles via le champ id role
     @ManyToOne @JoinColumn( name = "id_role", referencedColumnName = "id_role", nullable = false )
     public RolesEntity getRoles() {
         return roles;

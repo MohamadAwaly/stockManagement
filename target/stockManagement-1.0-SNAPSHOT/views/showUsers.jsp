@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <c:import url="header.jsp"/>
-<p class="test">Liste de tout les utilisateurs</p>
+<h2>Liste de tout les utilisateurs</h2>
 
 <table class="table table-striped table-hover" border="1px solid black">
     <thead>

@@ -1,5 +1,6 @@
 package be.atc.controler.servlet;
 
+import be.atc.entities.RolesEntity;
 import be.atc.entities.UsersEntity;
 import be.atc.service.UserService;
 import org.apache.log4j.Level;
@@ -27,10 +28,7 @@ public class AddUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            logger.log(Level.INFO, "Servlet add user");
-
             LocalDate currentDate = LocalDate.now();
-            logger.log(Level.INFO, "Date dans la servlet " + currentDate);
             UsersEntity newuser = new UsersEntity();
             newuser.setLastName(request.getParameter("lastName"));
             newuser.setFirstName(request.getParameter("firstName"));
@@ -40,9 +38,9 @@ public class AddUser extends HttpServlet {
             newuser.setMail(request.getParameter("email"));
             newuser.setPassword(request.getParameter("password"));
             newuser.setLogin(request.getParameter("login"));
+//            newuser.setRoles();
             newuser.setActive(true);
             userService.addUser(newuser);
-            logger.log(Level.INFO, "apres le add utilisateur");
             this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
         } catch (Exception e) {
             logger.log(Level.INFO,"Erreur " +  e.getMessage());

@@ -24,8 +24,7 @@ public class UserService {
     //String lastName, String firstName, Date dayOfBirth,
     //                        Date inscriptionDate, String vat, String mail, String password, String login
     public void addUser(UsersEntity user) {
-        logger.log(Level.INFO, "User service, add user");
-        logger.log(Level.INFO,"lastName dans user Service: " + user.getFirstName());
+        em.persist(user);
     }
 
 }

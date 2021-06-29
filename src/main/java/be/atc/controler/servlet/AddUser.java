@@ -18,6 +18,7 @@ public class AddUser extends HttpServlet {
     public static final String VUE = "/views/addUser.jsp";
     public UserService userService = new UserService();
     private static Logger logger = Logger.getLogger(AddUser.class);
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
@@ -29,24 +30,23 @@ public class AddUser extends HttpServlet {
             logger.log(Level.INFO, "Servlet add user");
 
             LocalDate currentDate = LocalDate.now();
-            logger.log(Level.INFO, "Date " + currentDate );
+            logger.log(Level.INFO, "Date dans la servlet " + currentDate);
             UsersEntity newuser = new UsersEntity();
             newuser.setLastName(request.getParameter("lastName"));
-            logger.log(Level.INFO,"login dans la servlet: " + request.getParameter("login"));
             newuser.setFirstName(request.getParameter("firstName"));
-//        newuser.setDayOfBirth(Date.valueOf(request.getParameter("dayOfBirth")));
-//        newuser.setInscriptionDate(Date.valueOf(request.getParameter(String.valueOf(currentDate))));
+            newuser.setDayOfBirth(Date.valueOf(request.getParameter("dayOfBirth")));
+            newuser.setInscriptionDate(Date.valueOf(currentDate));
             newuser.setVat(request.getParameter("vat"));
             newuser.setMail(request.getParameter("email"));
             newuser.setPassword(request.getParameter("password"));
             newuser.setLogin(request.getParameter("login"));
-//        newuser.setActive(request.getParameter("active"));
+            newuser.setActive(true);
             userService.addUser(newuser);
+            logger.log(Level.INFO, "apres le add utilisateur");
             this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
-        } catch (Exception e){
-            logger.log(Level.INFO, e.getMessage());
+        } catch (Exception e) {
+            logger.log(Level.INFO,"Erreur " +  e.getMessage());
         }
-
 
     }
 }

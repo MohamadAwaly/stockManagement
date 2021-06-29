@@ -8,7 +8,6 @@ import org.apache.log4j.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -20,13 +19,13 @@ public class UserService {
         List<UsersEntity> user = new ArrayList<>();
         Query query = em.createNamedQuery("User.finddall");
         user = query.getResultList();
-        //user = em.createQuery( "select  u from UsersEntity u" ).getResultList();
         return user;
     }
     //String lastName, String firstName, Date dayOfBirth,
     //                        Date inscriptionDate, String vat, String mail, String password, String login
     public void addUser(UsersEntity user) {
-        logger.log(Level.INFO,"lastName: " + user.getFirstName());
+        logger.log(Level.INFO, "User service, add user");
+        logger.log(Level.INFO,"lastName dans user Service: " + user.getFirstName());
     }
 
 }

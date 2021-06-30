@@ -36,6 +36,11 @@
         <label for="password" class="form-label"><span class="etoile">*</span> Mot de passe</label>
         <input type="password" name="password" class="form-control" id="password">
     </div>
+    <div class="mb-3">
+        <label for="rpPassword" class="form-label"><span class="etoile">*</span> Confirmer le mot de passe</label>
+        <input type="password" name="rpPassword" class="form-control" id="rpPassword">
+    </div>
+
 <%--    <div class="mb-3 form-check">--%>
 <%--        <input type="checkbox" class="form-check-input" id="active" name="active">--%>
 <%--        <label class="form-check-label" for="active">active</label>--%>
@@ -49,7 +54,16 @@
                 </c:forEach>
         </SELECT>
     </div>
+    <div class="mb-3">
+        <label for="idCity" class="form-label"><span class="etoile">*</span> Ville  : </label>
+        <SELECT id="idCity" name="idCity" size="1" class="form-label">
+            <c:forEach var="cities" items="${ cities }">
+            <OPTION value="${ cities.idCity}">
+                    <c:out value="${ cities.postalCode } "/>
+                    <c:out value="${ cities.citie } "/>
+                </c:forEach>
+        </SELECT>
+    </div>
     <button type="submit" class="btn btn-primary">Valider</button>
 </form>
-
 <c:import url="footer.jsp"/>

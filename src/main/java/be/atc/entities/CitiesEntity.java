@@ -1,8 +1,12 @@
 package be.atc.entities;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Objects;
+
+@NamedQueries(value = {
+        @NamedQuery(name = "city.listAll",
+                query = "SELECT c FROM CitiesEntity c")
+})
 
 @Entity
 @Table( name = "cities", schema = "stockmanagement" )

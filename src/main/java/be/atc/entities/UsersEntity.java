@@ -154,7 +154,6 @@ public class UsersEntity {
     public RolesEntity getRoles() {
         return roles;
     }
-
     public void setRoles(RolesEntity roles) {
         this.roles = roles;
     }

@@ -73,6 +73,12 @@
             <artifactId>jquery</artifactId>
             <version>3.6.0</version>
         </dependency>
+<!--        Crypt password-->
+        <dependency>
+            <groupId>org.mindrot</groupId>
+            <artifactId>jbcrypt</artifactId>
+            <version>0.3m</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

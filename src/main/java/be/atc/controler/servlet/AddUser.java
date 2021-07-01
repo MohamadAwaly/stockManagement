@@ -64,8 +64,8 @@ public class AddUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        EntityManager em = EMF.getEM();
-        EntityTransaction trans = em.getTransaction();
+//        EntityManager em = EMF.getEM();
+//        EntityTransaction trans = em.getTransaction();
 
         try {
             List<RolesEntity> roleList = roleService.showAllRoles();
@@ -99,34 +99,35 @@ public class AddUser extends HttpServlet {
             newuser.setLogin(request.getParameter("login"));
             newuser.setRoles(role);
             newuser.setActive(true);
+            userService.addUser(newuser);
 
 
             //retrieve adress data
-            AdressEntity adress = new AdressEntity();
-            adress.setStreet(request.getParameter("street"));
-            adress.setNumber(Integer.parseInt(request.getParameter("number")));
-            adress.setBox(Integer.parseInt(request.getParameter("box")));
+//            AdressEntity adress = new AdressEntity();
+//            adress.setStreet(request.getParameter("street"));
+//            adress.setNumber(Integer.parseInt(request.getParameter("number")));
+//            adress.setBox(Integer.parseInt(request.getParameter("box")));
 
             //initialize a city and recover the user's city
-            CitiesEntity city = new CitiesEntity();
-            int paramCity = Integer.parseInt(request.getParameter("city"));
-            for (CitiesEntity citiesEntity : citiesList) {
-                if (paramCity == citiesEntity.getIdCity()) {
-                    city.setIdCity(citiesEntity.getIdCity());
-                    city.setCitie(city.getCitie());
-                }
-            }
-            adress.setCity(city);
+//            CitiesEntity city = new CitiesEntity();
+//            int paramCity = Integer.parseInt(request.getParameter("city"));
+//            for (CitiesEntity citiesEntity : citiesList) {
+//                if (paramCity == citiesEntity.getIdCity()) {
+//                    city.setIdCity(citiesEntity.getIdCity());
+//                    city.setCitie(city.getCitie());
+//                }
+//            }
+//            adress.setCity(city);
 
             //initialize entity entity join
-            AdressUsersEntity adressUsers = new AdressUsersEntity();
-            adressUsers.setUsers(newuser);
-            adressUsers.setAddress(adress);
-
-            TypeAdress typeAdress = TypeAdress.valueOf(request.getParameter("typeAdresse"));
-            adressUsers.setTypeAdress(typeAdress);
+//            AdressUsersEntity adressUsers = new AdressUsersEntity();
+//            adressUsers.setUsers(newuser);
+//            adressUsers.setAddress(adress);
+//
+//            TypeAdress typeAdress = TypeAdress.valueOf(request.getParameter("typeAdresse"));
+//            adressUsers.setTypeAdress(typeAdress);
 //            trans.begin();
-            userService.addUser(newuser);
+
 //            trans.commit();
 //            adressService.addUserAdress(adress);
 
@@ -134,8 +135,6 @@ public class AddUser extends HttpServlet {
             this.getServletContext().getRequestDispatcher(VUE_LISTEUTILISATEUR).forward(request, response);
         } catch (Exception e) {
             logger.log(Level.INFO, "Erreur " + e.getMessage());
-        } finally {
-//            em.close();
         }
 
     }

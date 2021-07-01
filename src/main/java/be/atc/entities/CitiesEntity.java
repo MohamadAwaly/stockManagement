@@ -5,7 +5,7 @@ import java.util.Objects;
 
 @NamedQueries(value = {
         @NamedQuery(name = "city.listAll",
-                query = "SELECT c FROM CitiesEntity c")
+                query = "SELECT c FROM CitiesEntity c order by c.postalCode ASC")
 })
 
 @Entity

@@ -2,9 +2,10 @@ package be.atc.controler.enumm;
 
 public enum TypeAdress {
 
-    Private("Private"),
+    Domicile("Domicile"),
     Professional("Professional"),
-    billing("billing");
+    Facturation("Facturation"),
+    Livraison("Livraison");
 
     private String text;
 

@@ -8,12 +8,11 @@ import java.util.Objects;
 @NamedQueries(value = {
         @NamedQuery(name = "User.finddall",
                 query = "SELECT u FROM UsersEntity u " +
-//                        "LEFT JOIN AdressUsersEntity au on au.address = u.idUser"+
-//                        "LEFT JOIN  AdressEntity a on a.adressUsers  = au.address"),
+                        "JOIN AdressUsersEntity au on au.users = u "+
+                        "JOIN AdressEntity a on au.address = a "+
                         "order by u.idUser desc "),
         @NamedQuery(name = "User.findName",
                 query = "SELECT u.lastName FROM UsersEntity u")
-
 })
 @Entity
 @Table(name = "users", schema = "stockmanagement")

@@ -49,3 +49,10 @@ public class UserService {
     }
 
 }
+
+//    public List showAllUsers() {
+//        List<UsersEntity> user = new ArrayList<>();
+//        Query query = em.createNamedQuery( "User.finddall" );
+//        user = query.getResultList();
+//        return user;
+//    }

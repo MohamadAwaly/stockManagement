@@ -37,9 +37,9 @@ public class UserService {
     public void addUser( UsersEntity user, AdressEntity adressEntity, AdressUsersEntity adressUser ) {
         try {
             trans.begin();
-            em.persist( user );
-            em.persist( adressEntity );
-//            em.persist( adressUser );
+            em.merge(user);
+            em.merge(adressEntity);
+            em.merge( adressUser );
             trans.commit();
         } catch ( Exception e ) {
             trans.rollback();

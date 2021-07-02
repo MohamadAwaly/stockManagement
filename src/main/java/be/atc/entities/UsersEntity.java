@@ -7,7 +7,7 @@ import java.util.Objects;
 
 @NamedQueries(value = {
         @NamedQuery(name = "User.finddall",
-                query = "SELECT u FROM UsersEntity u"),
+                query = "SELECT u FROM UsersEntity u order by u.idUser desc "),
         @NamedQuery(name = "User.findName",
                 query = "SELECT u.lastName FROM UsersEntity u")
 
@@ -159,7 +159,7 @@ public class UsersEntity {
     }
 
     //Realation avec la table de jointure adressUser via le champ users
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "users", cascade = CascadeType.PERSIST)
     public Collection<AdressUsersEntity> getAdress() {
         return adress;
     }

@@ -88,7 +88,7 @@ public class AdressEntity {
         this.city = city;
     }
 
-    @OneToMany(mappedBy = "address")
+    @OneToMany(mappedBy = "address", cascade = CascadeType.PERSIST)
     public Collection<AdressUsersEntity> getAdressUsers() {
         return adressUsers;
     }

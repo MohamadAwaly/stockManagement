@@ -128,13 +128,14 @@ public class AddUser extends HttpServlet {
 
 
 
-            adressService.addUserAdress( adress );
+//            adressService.addUserAdress( adress );
+
+            //Send parameter to JSP
             List<UsersEntity> userList = user.showAllUsers();
             request.setAttribute( "user", userList );
-
             this.getServletContext().getRequestDispatcher( VUE_LISTEUTILISATEUR ).forward( request, response );
         } catch ( Exception e ) {
-            logger.log( Level.INFO, "Erreur " + e.getMessage() );
+            logger.log( Level.INFO, "Erreur Servlet " + e.getMessage() );
         }
 
     }

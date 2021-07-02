@@ -7,7 +7,10 @@ import java.util.Objects;
 
 @NamedQueries(value = {
         @NamedQuery(name = "User.finddall",
-                query = "SELECT u FROM UsersEntity u order by u.idUser desc "),
+                query = "SELECT u FROM UsersEntity u " +
+//                        "LEFT JOIN AdressUsersEntity au on au.address = u.idUser"+
+//                        "LEFT JOIN  AdressEntity a on a.adressUsers  = au.address"),
+                        "order by u.idUser desc "),
         @NamedQuery(name = "User.findName",
                 query = "SELECT u.lastName FROM UsersEntity u")
 

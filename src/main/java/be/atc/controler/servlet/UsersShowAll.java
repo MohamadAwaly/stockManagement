@@ -1,5 +1,6 @@
 package be.atc.controler.servlet;
 
+import be.atc.entities.AdressUsersEntity;
 import be.atc.entities.UsersEntity;
 import be.atc.service.UserService;
 

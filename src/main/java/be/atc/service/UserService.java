@@ -14,9 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserService {
-    private static Logger logger = Logger.getLogger( UserService.class );
+    private static Logger logger = Logger.getLogger(UserService.class);
     EntityManager em = EMF.getEM();
     EntityTransaction trans = em.getTransaction();
+
     /**
      * show all user
      *
@@ -24,7 +25,7 @@ public class UserService {
      */
     public List showAllUsers() {
         List<UsersEntity> user = new ArrayList<>();
-        Query query = em.createNamedQuery( "User.finddall" );
+        Query query = em.createNamedQuery("User.finddall");
         user = query.getResultList();
         return user;
     }
@@ -34,25 +35,25 @@ public class UserService {
      *
      * @param user
      */
-    public void addUser( UsersEntity user, AdressEntity adressEntity, AdressUsersEntity adressUser ) {
+    public void addUser(UsersEntity user, AdressEntity adressEntity, AdressUsersEntity adressUser) {
         try {
             trans.begin();
             em.merge(user);
             em.merge(adressEntity);
-            em.merge( adressUser );
+            em.merge(adressUser);
             trans.commit();
-        } catch ( Exception e ) {
+        } catch (Exception e) {
             trans.rollback();
         } finally {
-            //            em.close();
+            // em.close();
         }
     }
 
-}
 
-//    public List showAllUsers() {
-//        List<UsersEntity> user = new ArrayList<>();
-//        Query query = em.createNamedQuery( "User.finddall" );
-//        user = query.getResultList();
-//        return user;
-//    }
+    public List showAllUserstest() {
+        List<Object[]> user = new ArrayList<>();
+        Query query = em.createNamedQuery("User.finddall");
+        user = query.getResultList();
+        return user;
+    }
+}

@@ -4,7 +4,6 @@ import be.atc.controler.connexion.EMF;
 import be.atc.entities.AdressEntity;
 import be.atc.entities.AdressUsersEntity;
 import be.atc.entities.UsersEntity;
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import javax.persistence.EntityManager;

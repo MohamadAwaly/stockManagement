@@ -11,21 +11,21 @@
     <div class="mb-3">
         <label for="login" class="form-label"><span class="etoile">*</span> Login</label>
         <input type="text" name="login" class="form-control" id="login" aria-describedby="login" required>
-        <div id="errorLogin" hidden class="alert alert-danger">Le login doit contenir au moin 4 Caract&egrave;res</div>
+        <div id="errorLogin" hidden class="alert alert-danger">Le login doit contenir au moin 4 caract&egrave;res</div>
     </div>
     <div class="row">
         <div class="col">
             <div class="mb-3">
                 <label for="lastName" class="form-label"><span class="etoile">*</span> Nom de famille</label>
                 <input type="text" name="lastName" class="form-control" id="lastName" aria-describedby="Nom" required>
-                <div id="errorlastName" hidden class="alert alert-danger">Le nom doit contenir au moin 3 Caract&egrave;res</div>
+                <div id="errorlastName" hidden class="alert alert-danger">Le nom doit contenir au moin 3 caract&egrave;res</div>
             </div>
         </div>
         <div class="col">
             <div class="mb-3">
                 <label for="firstName" class="form-label"><span class="etoile">*</span> Prenom</label>
                 <input type="text" name="firstName" class="form-control" id="firstName" aria-describedby="prenom" required>
-                <div id="errorfirstName" hidden class="alert alert-danger">Le prenom doit contenir au moin 3 Caract&egrave;re</div>
+                <div id="errorfirstName" hidden class="alert alert-danger">Le prenom doit contenir au moin 3 caract&egrave;re</div>
             </div>
         </div>
     </div>
@@ -37,21 +37,23 @@
     </div>
     <div class="mb-3">
         <label for="vat" class="form-label">Num&eacute;ro de tva</label>
-        <input type="text" name="vat" class="form-control" id="vat" aria-describedby="Numéro de tva">
-        <div id="errorTva" hidden class="alert alert-danger">Le numero de tva doit contenir au moin 4 Caract&egrave;re</div>
+        <input type="text" name="vat" class="form-control" id="vat" aria-describedby="Numéro de tva" placeholder="BE123456789">
+        <div id="errorTva" hidden class="alert alert-danger">Numero de tva non valide</div>
     </div>
     <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Email address</label>
-        <input type="email" name="email" class="form-control" id="exampleFormControlInput1"
+        <label for="email" class="form-label">Email address</label>
+        <input type="email" name="email" class="form-control" id="email"
                placeholder="name@example.com">
-        <div id="errorEmail" hidden class="alert alert-danger">L'email doit contenir au moin 4 Caract&egrave;re</div>
+        <div id="errorEmail" hidden class="alert alert-danger">Adresse email non valide</div>
     </div>
     <div class="row">
         <div class="col">
             <div class="mb-3">
                 <label for="password" class="form-label"><span class="etoile">*</span> Mot de passe</label>
                 <input type="password" name="password" class="form-control" id="password" required>
-                <div id="erroPassword" hidden class="alert alert-danger">Le login doit contenir au moin 4 Caract&egrave;re</div>
+                <div id="erroPassword" hidden class="alert alert-danger">Mot de passe doit contenir au moin 8 caract&egrave;re, une lettre majuscule,
+                une lettre minuscule, un caract&egrave;re sp&eacute;ciale</div>
+                <div id="errorRP" hidden class="alert alert-danger">Les mots de passe ne sont pas identique </div>
             </div>
         </div>
         <div class="col">
@@ -59,7 +61,7 @@
                 <label for="rpPassword" class="form-label"><span class="etoile">*</span> Confirmer le mot de
                     passe</label>
                 <input type="password" name="rpPassword" class="form-control" id="rpPassword" required>
-                <div id="errorRPassword" hidden class="alert alert-danger">Le login doit contenir au moin 4 Caract&egrave;re</div>
+                <div id="errorRPassword" hidden class="alert alert-danger">Les mots de passe ne sont pas identique </div>
             </div>
         </div>
     </div>

@@ -12,7 +12,9 @@ import java.util.Objects;
                         "JOIN AdressEntity a on au.address = a "+
                         "order by u.idUser desc "),
         @NamedQuery(name = "User.findName",
-                query = "SELECT u.lastName FROM UsersEntity u")
+                query = "SELECT u.lastName FROM UsersEntity u"),
+        @NamedQuery(name = "User.checkUserExist",
+                query = "SELECT u.login FROM UsersEntity u where u.login = :login")
 })
 @Entity
 @Table(name = "users", schema = "stockmanagement")

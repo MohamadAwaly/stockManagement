@@ -55,4 +55,11 @@ public class UserService {
         user = query.getResultList();
         return user;
     }
+
+    public boolean checkUserExist(String login) {
+        Query query = em.createNamedQuery("User.checkUserExist");
+        query.setParameter("login", login);
+        List<UsersEntity> user = query.getResultList();
+        return true;
+    }
 }

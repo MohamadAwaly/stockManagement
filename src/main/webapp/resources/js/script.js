@@ -14,6 +14,7 @@ $(document).ready(function () {
     var regVat = new RegExp("^(BE){0,1}[0]{0,1}[0-9]{9}$");
 
     //Form addUser
+
     login.keyup(function () {
         var errorVal = $(this).val();
         var errorLogin = document.getElementById("errorLogin");
@@ -28,7 +29,6 @@ $(document).ready(function () {
             errorLogin.hidden = true;
         }
     });
-    //form add User
     lastName.keyup(function () {
         var errorValLastName = $(this).val();
         var errorlastName = document.getElementById("errorlastName");
@@ -42,7 +42,6 @@ $(document).ready(function () {
             errorlastName.hidden = true;
         }
     })
-    //form add User
     firstName.keyup(function () {
         var errorVal = $(this).val();
         var errorfirstName = document.getElementById("errorfirstName");
@@ -57,9 +56,49 @@ $(document).ready(function () {
         }
     })
     dayOfBoirth.keyup(function () {
-        //form add User
+        const months = [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December'
+        ]
+        var errordate = document.getElementById("errodayOfBirth");
+        var errordate17ans = document.getElementById("errodayOfBirth17ans");
+        var today = new Date();
+        var dateFormLenght = $('#dayOfBirth').val();
+        var dateForm = new Date($('#dayOfBirth').val());
+        if (dateFormLenght.length == 10) {
+            if (dateForm.getUTCFullYear() > 1900) {
+                var dateOfBirth = new Date(dateForm.getDate() + " " + months[dateForm.getMonth()] + " " + dateForm.getUTCFullYear());
+                var resultDay = dateDiffInDays(dateOfBirth, today);
+                var resultMons = Math.round(resultDay / 30);
+                var resultYears = Math.round(resultMons / 12);
+                if (resultYears > 17 && resultYears < 100) {
+                    console.log("ok");
+                    $(this).removeClass("is-invalid");
+                    $(this).addClass("is-valid");
+                    errordate.hidden = true;
+                    errordate17ans.hidden= true;
+                } else {
+                    errordate17ans.hidden= false;
+                }
+            }
+        } else {
+            console.log("non ok");
+            $(this).removeClass("is-valid");
+            $(this).addClass("is-invalid");
+            errordate.hidden = false;
+        }
+
     })
-    //form add User
     vat.keyup(function () {
         var vatVal = $(this).val();
         var errorTva = document.getElementById("errorTva");
@@ -73,7 +112,6 @@ $(document).ready(function () {
             errorTva.hidden = false;
         }
     })
-    //form add User
     mail.keyup(function () {
         var email = $(this).val();
         var errorEmail = document.getElementById("errorEmail");
@@ -121,5 +159,22 @@ $(document).ready(function () {
 
     })
 });
+
+/**
+ * Retourne Return returns the difference between the two date in day
+ * @param a Date of birth
+ * @param b Today
+ * @returns {number}
+ */
+function dateDiffInDays(a, b) {
+    const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+
+    // Discard the time and time-zone information.
+    const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+    const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+
+    return Math.floor((utc2 - utc1) / _MS_PER_DAY);
+}
+
 
 

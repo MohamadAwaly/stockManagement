@@ -14,6 +14,7 @@ $(document).ready(function () {
     var regVat = new RegExp("^(BE){0,1}[0]{0,1}[0-9]{9}$");
 
     //Form addUser
+
     login.keyup(function () {
         var errorVal = $(this).val();
         var errorLogin = document.getElementById("errorLogin");
@@ -159,6 +160,12 @@ $(document).ready(function () {
     })
 });
 
+/**
+ * Retourne Return returns the difference between the two date in day
+ * @param a Date of birth
+ * @param b Today
+ * @returns {number}
+ */
 function dateDiffInDays(a, b) {
     const _MS_PER_DAY = 1000 * 60 * 60 * 24;
 
@@ -169,21 +176,5 @@ function dateDiffInDays(a, b) {
     return Math.floor((utc2 - utc1) / _MS_PER_DAY);
 }
 
-function dateDiff(dateold, datenew) {
-    var ynew = datenew.getFullYear();
-    var mnew = datenew.getMonth();
-    var dnew = datenew.getDate();
-    var yold = dateold.getFullYear();
-    var mold = dateold.getMonth();
-    var dold = dateold.getDate();
-    var diff = ynew - yold;
-    if (mold > mnew) diff--;
-    else {
-        if (mold == mnew) {
-            if (dold > dnew) diff--;
-        }
-    }
-    return diff;
-}
 
 

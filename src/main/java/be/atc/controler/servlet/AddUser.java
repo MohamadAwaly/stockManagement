@@ -45,12 +45,10 @@ public class AddUser extends HttpServlet {
         List<RolesEntity> roleList = roleService.showAllRoles();
         List<CitiesEntity> citiesList = citieService.showAllCities();
 
-        TypeAdress[] allTypeAdress = TypeAdress.values();
-        //        for ( TypeAdress adress : allTypeAdress ) {
-        //
-        //            logger.log( Level.INFO, "enum: " + adress );
-        //        }
+        boolean test = user.checkUserExist("admin");
+        logger.log(Level.INFO, "test Servlet: " + test);
 
+        TypeAdress[] allTypeAdress = TypeAdress.values();
         try {
             request.setAttribute( "roles", roleList );
             request.setAttribute( "cities", citiesList );
@@ -64,9 +62,6 @@ public class AddUser extends HttpServlet {
     @Override
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
-        //        EntityManager em = EMF.getEM();
-        //        EntityTransaction trans = em.getTransaction();
-
         try {
             List<RolesEntity> roleList = roleService.showAllRoles();
             List<CitiesEntity> citiesList = citieService.showAllCities();

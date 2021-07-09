@@ -18,29 +18,30 @@
         <th>inscriptionDate</th>
         <th>VAT</th>
         <th>mail</th>
-<%--        <th>password</th>--%>
         <th>active</th>
+        <th>rue</th>
+        <th>Ville</th>
     </tr>
     </thead>
     <tbody>
     <c:forEach var="user" items="${ user }">
-        <fmt:formatDate value="${user.dayOfBirth}" pattern="dd/MM/yyyy" var="dayOfBirth" />
-        <fmt:formatDate value="${user.inscriptionDate}" pattern="dd/MM/yyyy" var="inscriptionDate" />
+        <fmt:formatDate value="${user[0].dayOfBirth}" pattern="dd/MM/yyyy" var="dayOfBirth" />
+        <fmt:formatDate value="${user[0].inscriptionDate}" pattern="dd/MM/yyyy" var="inscriptionDate" />
         <tr>
-            <td><c:out value="${ user.idUser } "/></td>
-            <td><c:out value="${ user.login } "/></td>
-            <td><c:out value="${ user.roles.role } "/></td>
-            <td><c:out value="${ user.lastName } "/></td>
-            <td><c:out value="${ user.firstName } "/></td>
+            <td><c:out value="${ user[0].idUser } "/></td>
+            <td><c:out value="${ user[0].login } "/></td>
+            <td><c:out value="${ user[0].roles.role } "/></td>
+            <td><c:out value="${ user[0].lastName } "/></td>
+            <td><c:out value="${ user[0].firstName } "/></td>
             <td><c:out value="${ dayOfBirth } " /></td>
             <td><c:out value="${ inscriptionDate } "/></td>
-            <td><c:out value="${ user.vat } "/></td>
-            <td><c:out value="${ user.mail } "/></td>
-<%--            <td><c:out value="${ user.password } "/></td>--%>
-            <td><c:out value="${ user.active } "/></td>
+            <td><c:out value="${ user[0].vat } "/></td>
+            <td><c:out value="${ user[0].mail } "/></td>
+            <td><c:out value="${ user[0].active } "/></td>
+            <td><c:out value="${ user[1].street } "/></td>
+            <td><c:out value="${ user[1].city.citie } "/></td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
-
 <c:import url="footer.jsp"/>

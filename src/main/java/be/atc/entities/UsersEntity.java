@@ -4,10 +4,10 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.util.Collection;
 import java.util.Objects;
-
+//"JOIN RolesEntity r on u.roles = r "+
 @NamedQueries(value = {
         @NamedQuery(name = "User.finddall",
-                query = "SELECT u FROM UsersEntity u " +
+                query = "SELECT u, a FROM UsersEntity u " +
                         "JOIN AdressUsersEntity au on au.users = u "+
                         "JOIN AdressEntity a on au.address = a "+
                         "order by u.idUser desc "),

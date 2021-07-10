@@ -16,38 +16,20 @@ import java.util.List;
 
 @WebServlet( name = "usersshowall", value = "/UsersShowAll" )
 public class UsersShowAll extends HttpServlet {
-    private             UserService user = new UserService();
-    public static final String      VUE  = "/views/showUsers.jsp";
-    private static final Logger logger = Logger.getLogger(UsersShowAll.class);
+    private              UserService user   = new UserService();
+    public static final  String      VUE    = "/views/showUsers.jsp";
+    private static final Logger      logger = Logger.getLogger( UsersShowAll.class );
 
     @Override
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
-//        List<UsersEntity> userList = user.showAllUsers();
-        List<Object[]> userTest = user.showAllUserstest();
-        List<UsersEntity> testListeUser = new ArrayList<>();
-        List<AdressEntity> testListeAdress = new ArrayList<>();
-        UsersEntity testUSer = new UsersEntity();
-        AdressEntity adress = new AdressEntity();
-        for (Object[] test : userTest){
-            testListeUser.add((UsersEntity) test[0]);
-            testListeAdress.add((AdressEntity) test[1]);
-            testUSer = (UsersEntity) test[0];
-            adress = (AdressEntity) test[1];
-        }
-//        logger.log(Level.INFO, "testUser: " + testUSer.getIdUser()+" "+testUSer.getLastName() + " " + adress.getIdAdress()+ " "+adress.getStreet() );
+        List<Object[]> users = user.showAllUsers();
+        //        HttpSession session = request.getSession();
         try {
-            request.setAttribute( "user", userTest);
-//            request.setAttribute( "adress", testListeAdress);
+            request.setAttribute( "user", users );
         } catch ( Exception e ) {
             System.out.println( "Erreur servlet get" );
         }
-
-//        try {
-//            request.setAttribute( "user", userList );
-//        } catch ( Exception e ) {
-//            System.out.println( "Erreur servlet get" );
-//        }
         this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
     }
 

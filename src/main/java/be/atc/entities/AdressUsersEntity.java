@@ -13,7 +13,7 @@ public class AdressUsersEntity {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
     @Column( name = "id_adress_users", nullable = false )
-    private int          idAdressUsers;
+    private int idAdressUsers;
 
     @Basic
     @Column( name = "typeadress", nullable = false )
@@ -57,7 +57,6 @@ public class AdressUsersEntity {
         return Objects.hash( idAdressUsers, typeAdress, address, users );
     }
 
-
     public AdressEntity getAddress() {
         return address;
     }
@@ -65,7 +64,6 @@ public class AdressUsersEntity {
     public void setAddress( AdressEntity address ) {
         this.address = address;
     }
-
 
     public UsersEntity getUsers() {
         return users;

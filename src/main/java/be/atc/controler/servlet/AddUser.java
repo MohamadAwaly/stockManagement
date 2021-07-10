@@ -30,7 +30,8 @@ import java.util.List;
 public class AddUser extends HttpServlet {
     private static      Logger            logger               = Logger.getLogger( AddUser.class );
     public static final String            VUE                  = "/views/addUser.jsp";
-    public static final String            VUE_LISTEUTILISATEUR = "/views/showUsers.jsp";
+    public static final String            VUE_LISTUSER = "/views/showUsers.jsp";
+    public static final String            VUE_ADDUSER = "/views/addUser.jsp";
     private             UserService       userService          = new UserService();
     private             RoleService       roleService          = new RoleService();
     private             CitieService      citieService         = new CitieService();
@@ -38,17 +39,15 @@ public class AddUser extends HttpServlet {
     private             AdressEntity      adress               = new AdressEntity();
     private             AdressUsersEntity adressUser           = new AdressUsersEntity();
     private             UserService       user                 = new UserService();
+    List<RolesEntity> roleList = roleService.showAllRoles();
+    List<CitiesEntity> citiesList = citieService.showAllCities();
+    TypeAdress[] allTypeAdress = TypeAdress.values();
 
     @Override
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
-        List<RolesEntity> roleList = roleService.showAllRoles();
-        List<CitiesEntity> citiesList = citieService.showAllCities();
 
-        boolean test = user.checkUserExist("admin");
-        logger.log(Level.INFO, "test Servlet: " + test);
 
-        TypeAdress[] allTypeAdress = TypeAdress.values();
         try {
             request.setAttribute( "roles", roleList );
             request.setAttribute( "cities", citiesList );
@@ -71,7 +70,7 @@ public class AddUser extends HttpServlet {
             for ( RolesEntity roles : roleList ) {
                 if ( parameterrole == roles.getIdRole() ) {
                     role.setIdRole( roles.getIdRole() );
-                    role.setRole( role.getRole() );
+                    role.setRole( roles.getRole() );
                 }
             }
 
@@ -100,6 +99,7 @@ public class AddUser extends HttpServlet {
             adress.setStreet( request.getParameter( "street" ) );
             adress.setNumber( Integer.parseInt( request.getParameter( "number" ) ) );
             adress.setBox( Integer.parseInt( request.getParameter( "box" ) ) );
+
             //initialize a city and recover the user's city
             CitiesEntity city = new CitiesEntity();
             int paramCity = Integer.parseInt( request.getParameter( "city" ) );
@@ -119,16 +119,26 @@ public class AddUser extends HttpServlet {
             TypeAdress typeAdress = TypeAdress.valueOf( request.getParameter( "typeAdresse" ) );
             adressUsers.setTypeAdress( typeAdress );
 
-            userService.addUser( newuser, adress, adressUsers );
+            boolean adduser = false;
+            adduser = userService.addUser( newuser, adress, adressUsers );
+//            HttpSession session = request.getSession();
+            String errorUserExist = "l'utilisateur " + newuser.getLogin() + " existe déja ";
 
-
-
-//            adressService.addUserAdress( adress );
 
             //Send parameter to JSP
-            List<UsersEntity> userList = user.showAllUsers();
-            request.setAttribute( "user", userList );
-            this.getServletContext().getRequestDispatcher( VUE_LISTEUTILISATEUR ).forward( request, response );
+            if ( adduser ){
+                List<Object[]> userList = user.showAllUsers();
+                request.setAttribute( "user", userList );
+                this.getServletContext().getRequestDispatcher( VUE_LISTUSER ).forward( request, response );
+            } else {
+                request.setAttribute( "roles", roleList );
+                request.setAttribute( "cities", citiesList );
+                request.setAttribute( "allTypeAdress", allTypeAdress );
+                request.setAttribute( "error", errorUserExist );
+                request.setAttribute( "user", newuser );
+                this.getServletContext().getRequestDispatcher( VUE_ADDUSER ).forward( request, response );
+            }
+
         } catch ( Exception e ) {
             logger.log( Level.INFO, "Erreur Servlet " + e.getMessage() );
         }

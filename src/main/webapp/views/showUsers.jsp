@@ -19,6 +19,8 @@
         <th>mail</th>
         <th>active</th>
         <th>rue</th>
+        <th>Numero</th>
+        <th>boite</th>
         <th>Ville</th>
     </tr>
     </thead>
@@ -38,6 +40,8 @@
             <td><c:out value="${ user[0].mail } "/></td>
             <td><c:out value="${ user[0].active } "/></td>
             <td><c:out value="${ user[1].street } "/></td>
+            <td><c:out value="${ user[1].number } "/></td>
+            <td><c:out value="${ user[1].box } "/></td>
             <td><c:out value="${ user[1].city.citie } "/></td>
         </tr>
     </c:forEach>

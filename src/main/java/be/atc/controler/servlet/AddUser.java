@@ -1,6 +1,5 @@
 package be.atc.controler.servlet;
 
-import be.atc.controler.connexion.EMF;
 import be.atc.controler.enumm.TypeAdress;
 import be.atc.entities.*;
 import be.atc.service.AdressService;
@@ -9,44 +8,35 @@ import be.atc.service.RoleService;
 import be.atc.service.UserService;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 import org.mindrot.jbcrypt.BCrypt;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-import javax.security.auth.login.Configuration;
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.lang.reflect.Type;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
 @WebServlet( name = "AddUser", value = "/adduser" )
 public class AddUser extends HttpServlet {
-    private static      Logger            logger               = Logger.getLogger( AddUser.class );
-    public static final String            VUE                  = "/views/addUser.jsp";
-    public static final String            VUE_LISTUSER = "/views/showUsers.jsp";
-    public static final String            VUE_ADDUSER = "/views/addUser.jsp";
-    private             UserService       userService          = new UserService();
-    private             RoleService       roleService          = new RoleService();
-    private             CitieService      citieService         = new CitieService();
-    private             AdressService     adressService        = new AdressService();
-    private             AdressEntity      adress               = new AdressEntity();
-    private             AdressUsersEntity adressUser           = new AdressUsersEntity();
-    private             UserService       user                 = new UserService();
-    List<RolesEntity> roleList = roleService.showAllRoles();
-    List<CitiesEntity> citiesList = citieService.showAllCities();
-    TypeAdress[] allTypeAdress = TypeAdress.values();
+    private static final Logger       logger       = Logger.getLogger( AddUser.class );
+    public static final  String       VUE          = "/views/addUser.jsp";
+    public static final  String       VUE_LISTUSER = "/views/showUsers.jsp";
+    public static final  String       VUE_ADDUSER  = "/views/addUser.jsp";
+    private              UserService  userService  = new UserService();
+    private              RoleService  roleService  = new RoleService();
+    private              CitieService citieService = new CitieService();
+    private              UserService  user         = new UserService();
+    List<RolesEntity>  roleList      = roleService.showAllRoles();
+    List<CitiesEntity> citiesList    = citieService.showAllCities();
+    TypeAdress[]       allTypeAdress = TypeAdress.values();
 
     @Override
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
-
 
         try {
             request.setAttribute( "roles", roleList );
@@ -98,8 +88,11 @@ public class AddUser extends HttpServlet {
             AdressEntity adress = new AdressEntity();
             adress.setStreet( request.getParameter( "street" ) );
             adress.setNumber( Integer.parseInt( request.getParameter( "number" ) ) );
-            adress.setBox( Integer.parseInt( request.getParameter( "box" ) ) );
-
+            if ( request.getParameter( "box" ).equals( "" ) ) {
+                adress.setBox( 0 );
+            } else {
+                adress.setBox( Integer.parseInt( request.getParameter( "box" ) ) );
+            }
             //initialize a city and recover the user's city
             CitiesEntity city = new CitiesEntity();
             int paramCity = Integer.parseInt( request.getParameter( "city" ) );
@@ -121,12 +114,10 @@ public class AddUser extends HttpServlet {
 
             boolean adduser = false;
             adduser = userService.addUser( newuser, adress, adressUsers );
-//            HttpSession session = request.getSession();
+            //            HttpSession session = request.getSession();
             String errorUserExist = "l'utilisateur " + newuser.getLogin() + " existe déja ";
-
-
             //Send parameter to JSP
-            if ( adduser ){
+            if ( adduser ) {
                 List<Object[]> userList = user.showAllUsers();
                 request.setAttribute( "user", userList );
                 this.getServletContext().getRequestDispatcher( VUE_LISTUSER ).forward( request, response );
@@ -138,7 +129,6 @@ public class AddUser extends HttpServlet {
                 request.setAttribute( "user", newuser );
                 this.getServletContext().getRequestDispatcher( VUE_ADDUSER ).forward( request, response );
             }
-
         } catch ( Exception e ) {
             logger.log( Level.INFO, "Erreur Servlet " + e.getMessage() );
         }

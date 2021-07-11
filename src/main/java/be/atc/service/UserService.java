@@ -18,11 +18,6 @@ public class UserService {
     EntityManager     em    = EMF.getEM();
     EntityTransaction trans = em.getTransaction();
 
-    /**
-     * show all user
-     *
-     * @return
-     */
     //    public List showAllUsers() {
     //        List<Object> user = new ArrayList<>();
     //        Query query = em.createNamedQuery("User.finddall");
@@ -38,9 +33,8 @@ public class UserService {
     public boolean addUser( UsersEntity user, AdressEntity adressEntity, AdressUsersEntity adressUser ) {
         try {
             UserService usercheck = new UserService();
-            logger.log( Level.INFO,"dans le service adduser utilisateur: " + usercheck.checkUserExist( user.getLogin() ) );
             if ( usercheck.checkUserExist( user.getLogin() ) || usercheck.checkVatExist( user.getVat() ) ) {
-                logger.log( Level.INFO, "Utilisateur existe Impossible de l'ajouter" );
+                logger.log( Level.INFO, "user already exists, Cannot add" );
                 return false;
             } else {
                 trans.begin();
@@ -48,11 +42,11 @@ public class UserService {
                 em.merge( adressEntity );
                 em.merge( adressUser );
                 trans.commit();
-                logger.log( Level.INFO, "Utilisateur ajouter" );
+                logger.log( Level.INFO, "User added" );
                 return true;
             }
         } catch ( Exception e ) {
-            logger.log( Level.INFO, "Erreur dans le servis d'ajout user" );
+            logger.log( Level.INFO, "Error in method add user" );
             trans.rollback();
             return false;
         } finally {
@@ -107,8 +101,12 @@ public class UserService {
         String userVat = "";
         try {
             userVat = (String) query.getSingleResult();
-            if ( userVat.equals( vat ) ) {
-                return true;
+            if ( !vat.isEmpty() ) {
+                if ( userVat.equals( vat ) ) {
+                    return true;
+                } else {
+                    return false;
+                }
             } else {
                 return false;
             }
@@ -117,4 +115,5 @@ public class UserService {
             return false;
         }
     }
+
 }

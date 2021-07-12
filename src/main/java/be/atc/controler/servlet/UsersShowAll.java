@@ -1,17 +1,14 @@
 package be.atc.controler.servlet;
 
-import be.atc.entities.AdressEntity;
-import be.atc.entities.AdressUsersEntity;
-import be.atc.entities.UsersEntity;
 import be.atc.service.UserService;
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet( name = "usersshowall", value = "/UsersShowAll" )

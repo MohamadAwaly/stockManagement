@@ -4,7 +4,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <c:import url="header.jsp"/>
-<h2>Liste de tout les utilisateurs</h2>
+<!-- Button trigger modal -->
+<div class="pull-right mb-3">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            Mettre à jour
+        </button>
+        <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            Supprimer
+        </button>
+    </div>
+</div>
+
 <table class="table table-striped table-hover" border="1px solid black">
     <thead>
     <tr>
@@ -47,4 +58,5 @@
     </c:forEach>
     </tbody>
 </table>
+<c:import url="updateUser.jsp"/>
 <c:import url="footer.jsp"/>

@@ -50,7 +50,7 @@
         <div id="errorTva" hidden class="alert alert-danger">Numero de tva non valide</div>
     </div>
     <div class="mb-3">
-        <label for="email" class="form-label">Email address</label>
+        <label for="email" class="form-label">Adresse email</label>
         <input type="email" name="email" class="form-control" id="email"
                placeholder="name@example.com" value=<c:out value="${user.mail}"/>>
         <div id="errorEmail" hidden class="alert alert-danger">Adresse email non valide</div>

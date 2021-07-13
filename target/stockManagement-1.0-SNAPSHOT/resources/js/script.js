@@ -86,9 +86,9 @@ $(document).ready(function () {
                     $(this).removeClass("is-invalid");
                     $(this).addClass("is-valid");
                     errordate.hidden = true;
-                    errordate17ans.hidden= true;
+                    errordate17ans.hidden = true;
                 } else {
-                    errordate17ans.hidden= false;
+                    errordate17ans.hidden = false;
                 }
             }
         } else {
@@ -158,7 +158,26 @@ $(document).ready(function () {
         }
 
     })
+
+    /*Color lign on double click*/
+    $('.usersList').dblclick( function () {
+        $('.usersList').removeAttr('style');
+        $(this).css('background', '#31B0D5');
+        console.log($(this).find("td").eq(0).html());
+        console.log($(this).find("td").eq(1).html());
+        console.log($(this).find("td").eq(2).html());
+        console.log($(this).find("td").eq(3).html());
+        $('#iduserUpdate').attr('value',$(this).find("td").eq(0).html());
+        $('#loginUpdate').attr('value',$(this).find("td").eq(1).html());
+        $('#lastNameUpdate').attr('value',$(this).find("td").eq(2).html());
+        $('#firstNameUpdate').attr('value',$(this).find("td").eq(3).html());
+        $('#dayOfBirthUpdate').attr('value',$(this).find("td").eq(4).html());
+        $('#inscriptionDateUpdate').attr('value',$(this).find("td").eq(5).html());
+    });
+
+
 });
+
 
 /**
  * Retourne Return returns the difference between the two date in day

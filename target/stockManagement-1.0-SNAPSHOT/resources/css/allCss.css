@@ -37,6 +37,6 @@ form {
 .etoile{
     color: red;
 }
-.updateUser{
-    background: rgba(0,0,0,0.8)
+.formUpdateUser{
+    width: auto;
 }

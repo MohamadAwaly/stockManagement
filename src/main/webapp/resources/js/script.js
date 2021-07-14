@@ -163,21 +163,26 @@ $(document).ready(function () {
     $('.usersList').dblclick( function () {
         $('.usersList').removeAttr('style');
         $(this).css('background', '#31B0D5');
+
+        // var test1 = new Date($(this).find("td").eq(5).html());
+        var test1 = $(this).find("td").eq(5).html();
+        var day = test1.substring(0,2);
+        var month = test1.substring(3,5);
+        var test2 = new Date($(this).find("td").eq(5).html());
+        // var test = dateFormat(dTest);
+        console.log("date: " + dTest);
         $('#iduserUpdate').attr('value',$(this).find("td").eq(0).html());
         $('#loginUpdate').attr('value',$(this).find("td").eq(1).html());
-        $('#loginUpdate').attr('value',$(this).find("td").eq(1).html());
-        $('#lastNameUpdate').attr('value',$(this).find("td").eq(2).html());
-        $('#firstNameUpdate').attr('value',$(this).find("td").eq(3).html());
-        $('#dayOfBirthUpdate').attr('value',$(this).find("td").eq(4).html());
-        $('#inscriptionDateUpdate').attr('value',$(this).find("td").eq(5).html());
+        $('#lastNameUpdate').attr('value',$(this).find("td").eq(3).html());
+        $('#firstNameUpdate').attr('value',$(this).find("td").eq(4).html());
+        $('#dayOfBirthUpdate').attr('value',test2);
+        $('#inscriptionDateUpdate').attr('value',$(this).find("td").eq(6).html());
     });
-
-
 });
 
 
 /**
- * Retourne Return returns the difference between the two date in day
+ * Return the difference between the two date in day
  * @param a Date of birth
  * @param b Today
  * @returns {number}
@@ -191,6 +196,11 @@ function dateDiffInDays(a, b) {
 
     return Math.floor((utc2 - utc1) / _MS_PER_DAY);
 }
+// function dateFormat (date){
+//     // const utc = new Date(date.getDate() + " " + [date.getMonth()] + " " + date.getUTCFullYear());
+//     // const utc = new Date(date.getUTCFullYear() + " " + [date.getMonth()] + " " + date.getDate());
+//     return utc;
+// }
 
 
 

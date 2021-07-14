@@ -15,7 +15,22 @@
         </button>
     </div>
 </div>
-
+<form class="selectedUserForm">
+    <div class="row">
+        <div class="col">
+            <div class="mb-3">
+                <input type="text" name="selectedUser-Login" class="form-control" id="selectedUserLogin"
+                       aria-describedby="selectedUser">
+            </div>
+        </div>
+        <div class="col">
+<%--            <div class="mb-3">--%>
+                <input type="text" name="selectedUser-id" class="form-control" id="selectedUserid"
+                       aria-describedby="selectedUser" hidden>
+<%--            </div>--%>
+        </div>
+    </div>
+</form>
 <table class="table table-striped table-hover" border="1px solid black">
     <thead>
     <tr>

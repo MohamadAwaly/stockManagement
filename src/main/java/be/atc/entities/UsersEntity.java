@@ -16,7 +16,13 @@ import java.util.Objects;
         @NamedQuery( name = "User.checkUserExist",
                 query = "SELECT u.login FROM UsersEntity u where u.login = :login" ),
         @NamedQuery( name = "User.checkVatExist",
-                query = "SELECT u.vat FROM UsersEntity u where u.vat = :vat" )
+                query = "SELECT u.vat FROM UsersEntity u where u.vat = :vat" ),
+        @NamedQuery( name = "User.SelectById",
+                query = "SELECT u, a FROM UsersEntity u " +
+                        "JOIN AdressUsersEntity au on au.users = u " +
+                        "JOIN AdressEntity a on au.address = a " +
+                        "where u.idUser = :id" +
+                        "order by u.idUser desc " )
 } )
 @Entity
 @Table( name = "users", schema = "stockmanagement" )

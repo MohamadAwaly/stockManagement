@@ -116,4 +116,9 @@ public class UserService {
         }
     }
 
+    public List<Object[]> selectUserById (int id){
+        Query query = em.createNamedQuery( "User.SelectById" );
+        return query.getResultList();
+    }
+
 }

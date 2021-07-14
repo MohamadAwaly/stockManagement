@@ -166,10 +166,13 @@ $(document).ready(function () {
 
         // var test1 = new Date($(this).find("td").eq(5).html());
         var test1 = $(this).find("td").eq(5).html();
-        var dTest = test1.substring(0,2);
+        var day = test1.substring(0,2);
+        var month = test1.substring(3,5);
         var test2 = new Date($(this).find("td").eq(5).html());
         // var test = dateFormat(dTest);
-        console.log("date: " + dTest);
+        // console.log("date: " + dTest);
+        $('#selectedUserid').attr('value',$(this).find("td").eq(0).html());
+        $('#selectedUserLogin').attr('value',$(this).find("td").eq(1).html());
         $('#iduserUpdate').attr('value',$(this).find("td").eq(0).html());
         $('#loginUpdate').attr('value',$(this).find("td").eq(1).html());
         $('#lastNameUpdate').attr('value',$(this).find("td").eq(3).html());

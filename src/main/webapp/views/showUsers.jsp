@@ -22,12 +22,12 @@
         <th>ID</th>
         <th>login</th>
         <th>Role</th>
-        <th>lastName</th>
-        <th>firstName</th>
-        <th>dayOfBirth</th>
-        <th>inscriptionDate</th>
-        <th>VAT</th>
-        <th>mail</th>
+        <th>Nom</th>
+        <th>Prenom</th>
+        <th>Date de naissance</th>
+        <th>Date d'insdcription</th>
+        <th>TVA</th>
+        <th>Email</th>
         <th>active</th>
         <th>rue</th>
         <th>Numero</th>

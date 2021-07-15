@@ -8,7 +8,7 @@
 <div class="pull-right mb-3">
 <%--    #staticBackdrop--%>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="/userUpdate">
+        <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="userUpdate">
             Mettre à jour
         </button>
         <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
@@ -75,5 +75,5 @@
     </c:forEach>
     </tbody>
 </table>
-<c:import url="updateUser.jsp"/>
+<%--<c:import url="updateUser.jsp"/>--%>
 <c:import url="footer.jsp"/>

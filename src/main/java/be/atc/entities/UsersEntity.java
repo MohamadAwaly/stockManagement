@@ -21,8 +21,7 @@ import java.util.Objects;
                 query = "SELECT u, a FROM UsersEntity u " +
                         "JOIN AdressUsersEntity au on au.users = u " +
                         "JOIN AdressEntity a on au.address = a " +
-                        "where u.idUser = :id" +
-                        "order by u.idUser desc " )
+                        "where u.idUser = :id")
 } )
 @Entity
 @Table( name = "users", schema = "stockmanagement" )

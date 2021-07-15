@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:import url="header.jsp"/>
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
      aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -21,7 +22,7 @@
                     <div class="mb-1">
                         <label for="iduserUpdate" class="form-label" hidden><span class="etoile">*</span> id</label>
                         <input type="number" name="iduser" class="form-control" id="iduserUpdate" aria-describedby="idUser"
-                               required readonly hidden>
+                               required readonly>
                     </div>
                     <div class="mb-1">
                         <label for="loginUpdate" class="form-label"><span class="etoile">*</span> Login</label>
@@ -191,3 +192,4 @@
         </div>
     </div>
 </div>
+<c:import url="footer.jsp"/>

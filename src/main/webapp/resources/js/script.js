@@ -164,21 +164,21 @@ $(document).ready(function () {
         $('.usersList').removeAttr('style');
         $(this).css('background', '#31B0D5');
 
-        // var test1 = new Date($(this).find("td").eq(5).html());
+        var test1 = new Date($(this).find("td").eq(5).html());
         var test1 = $(this).find("td").eq(5).html();
         var day = test1.substring(0,2);
         var month = test1.substring(3,5);
-        var test2 = new Date($(this).find("td").eq(5).html());
+        // var test2 = new Date($(this).find("td").eq(5).html());
         // var test = dateFormat(dTest);
         // console.log("date: " + dTest);
         $('#selectedUserid').attr('value',$(this).find("td").eq(0).html());
         $('#selectedUserLogin').attr('value',$(this).find("td").eq(1).html());
-        $('#iduserUpdate').attr('value',$(this).find("td").eq(0).html());
-        $('#loginUpdate').attr('value',$(this).find("td").eq(1).html());
-        $('#lastNameUpdate').attr('value',$(this).find("td").eq(3).html());
-        $('#firstNameUpdate').attr('value',$(this).find("td").eq(4).html());
-        $('#dayOfBirthUpdate').attr('value',test2);
-        $('#inscriptionDateUpdate').attr('value',$(this).find("td").eq(6).html());
+        // $('#iduserUpdate').attr('value',$(this).find("td").eq(0).html());
+        // $('#loginUpdate').attr('value',$(this).find("td").eq(1).html());
+        // $('#lastNameUpdate').attr('value',$(this).find("td").eq(3).html());
+        // $('#firstNameUpdate').attr('value',$(this).find("td").eq(4).html());
+        // $('#dayOfBirthUpdate').attr('value',test2);
+        // $('#inscriptionDateUpdate').attr('value',$(this).find("td").eq(6).html());
     });
 });
 

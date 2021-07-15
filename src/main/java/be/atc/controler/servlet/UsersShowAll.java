@@ -1,6 +1,7 @@
 package be.atc.controler.servlet;
 
 import be.atc.service.UserService;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -25,7 +26,7 @@ public class UsersShowAll extends HttpServlet {
         try {
             request.setAttribute( "user", users );
         } catch ( Exception e ) {
-            System.out.println( "Erreur servlet get" );
+            logger.log(Level.ERROR, "Error: " + e.getMessage() );
         }
         this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
     }

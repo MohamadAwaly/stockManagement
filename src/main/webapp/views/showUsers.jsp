@@ -6,8 +6,9 @@
 <c:import url="header.jsp"/>
 <!-- Button trigger modal -->
 <div class="pull-right mb-3">
+<%--    #staticBackdrop--%>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="/userUpdate">
             Mettre à jour
         </button>
         <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
@@ -15,7 +16,7 @@
         </button>
     </div>
 </div>
-<form class="selectedUserForm">
+<form action="userUpdate" method="post" class="selectedUserForm">
     <div class="row">
         <div class="col">
             <div class="mb-3">
@@ -30,6 +31,7 @@
             </div>
         </div>
     </div>
+    <button type="submit" class="btn btn-primary">Valider</button>
 </form>
 <table class="table table-striped table-hover" border="1px solid black">
     <thead>

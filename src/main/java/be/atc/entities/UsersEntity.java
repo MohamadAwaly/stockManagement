@@ -18,7 +18,7 @@ import java.util.Objects;
         @NamedQuery( name = "User.checkVatExist",
                 query = "SELECT u.vat FROM UsersEntity u where u.vat = :vat" ),
         @NamedQuery( name = "User.SelectById",
-                query = "SELECT u, a FROM UsersEntity u " +
+                query = "SELECT u, a, au FROM UsersEntity u " +
                         "JOIN AdressUsersEntity au on au.users = u " +
                         "JOIN AdressEntity a on au.address = a " +
                         "where u.idUser = :id")

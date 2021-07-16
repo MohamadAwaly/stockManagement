@@ -128,10 +128,12 @@
             <div class="mb-1">
                 <label for="idRoleUpdate" class="form-label"><span class="etoile">*</span> Role : </label>
                 <SELECT id="idRoleUpdate" name="role" size="1" class="form-control">
+                    <option  disabled selected><c:out value="${ user[0].roles.role } "/></option>
                     <c:forEach var="roles" items="${ roles }">
                     <OPTION value="${ roles.idRole}">
                             <c:out value="${ roles.role } "/>
                         </c:forEach>
+                    </OPTION>
                 </SELECT>
             </div>
             <div class="row">
@@ -141,10 +143,12 @@
                             Adresse: </label>
                         <SELECT id="idTypeadresseUpdate" name="typeAdresse" size="1" class="form-control"
                                 required>
+                            <option  disabled selected><c:out value="${ user[2].typeAdress } "/></option>
                             <c:forEach var="allTypeAdress" items="${ allTypeAdress }">
                             <OPTION value="${ allTypeAdress}">
                                     <c:out value="${allTypeAdress } "/>
                                 </c:forEach>
+                            </OPTION>
                         </SELECT>
                     </div>
                 </div>
@@ -154,12 +158,15 @@
                             postal :
                         </label>
                         <SELECT id="idCityUpdate" name="city" size="1" class="form-control" required>
+                            <option  disabled selected><c:out value="${ user[1].city.citie } "/></option>
                             <c:forEach var="cities" items="${ cities }">
-                            <optgroup value="${ cities.idCity}">
+                            <OPTION value="${ cities.idCity}">
                                     <c:out value="${ cities.postalCode } "/>
                                     <c:out value="${ cities.citie } "/>
                                 </c:forEach>
+                            </OPTION>
                         </SELECT>
+
                     </div>
                 </div>
             </div>
@@ -189,11 +196,4 @@
         </form>
     </div>
 </c:forEach>
-<%--            <div class="modal-footer">--%>
-<%--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Femer</button>--%>
-<%--                <button type="button" class="btn btn-primary">valider</button>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--</div>--%>
 <c:import url="footer.jsp"/>

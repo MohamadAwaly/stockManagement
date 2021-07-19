@@ -54,6 +54,22 @@ public class UserService {
         }
     }
 
+    public void updateUser( UsersEntity user, AdressEntity adressEntity, AdressUsersEntity adressUser ) {
+        try {
+            trans.begin();
+            em.merge( user );
+//            em.merge( adressEntity );
+//            em.merge( adressUser );
+            trans.commit();
+            logger.log( Level.INFO, "User updated" );
+        } catch ( Exception e ) {
+            logger.log( Level.INFO, "Error in method update user" );
+            trans.rollback();
+        } finally {
+            // em.close();
+        }
+    }
+
     /**
      * List of users with adress and roles
      *
@@ -116,9 +132,9 @@ public class UserService {
         }
     }
 
-    public List<Object[]> selectUserById (int id){
+    public List<Object[]> selectUserById( int id ) {
         Query query = em.createNamedQuery( "User.SelectById" );
-        query.setParameter("id",id);
+        query.setParameter( "id", id );
         return query.getResultList();
     }
 

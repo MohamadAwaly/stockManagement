@@ -16,7 +16,7 @@
         </button>
     </div>
 </div>
-<form action="userUpdate" method="post" class="selectedUserForm">
+<form action="userUpdate" method="get" class="selectedUserForm">
     <div class="row">
         <div class="col">
             <div class="mb-3">

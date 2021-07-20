@@ -20,6 +20,9 @@
     </div>
     <div class="modal-body" >
         <form class="formUpdateUser" action="userUpdate" method="post" >
+            <div class="mb-3">
+                <c:if test="${ !empty errorPassword}"><p class="alert alert-danger"><c:out value="${ errorPassword }"/></p></c:if>
+            </div>
                 <%--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--%>
             <button type="submit" class="btn btn-outline-info">Valider</button>
             <div class="mb-1">
@@ -123,7 +126,7 @@
                             le
                             mot de
                             passe</label>
-                        <input type="password" name="rpPassword" class="form-control" id="rpPasswordUpdate"
+                        <input type="password" name="rpPasswordUpdate" class="form-control" id="rpPasswordUpdate"
                                required value="<c:out value="${ user[0].password }"/>">
                         <div id="errorRPasswordUpdate" hidden class="alert alert-danger">Les mots de passe ne
                             sont pas

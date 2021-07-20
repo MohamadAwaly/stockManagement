@@ -57,10 +57,10 @@ public class UserUpdate extends HttpServlet {
             List<RolesEntity> roleList = roleService.showAllRoles();
             List<CitiesEntity> citiesList = citieService.showAllCities();
             //Define role
-            logger.log( Level.INFO, "Role: " +  request.getParameter( "RoleUpdate" ) );
-            logger.log( Level.INFO,"LastName: " + request.getParameter( "lastNameUpdate" ) );
-            logger.log( Level.INFO,"first: " + request.getParameter( "firstNameUpdate" ) );
-            logger.log( Level.INFO,"id user: " + request.getParameter( "iduserUpdate" ) );
+            logger.log( Level.INFO, "Role: " + request.getParameter( "RoleUpdate" ) );
+            logger.log( Level.INFO, "LastName: " + request.getParameter( "lastNameUpdate" ) );
+            logger.log( Level.INFO, "first: " + request.getParameter( "firstNameUpdate" ) );
+            logger.log( Level.INFO, "id user: " + request.getParameter( "iduserUpdate" ) );
             int parameterrole = Integer.parseInt( request.getParameter( "RoleUpdate" ) );
             RolesEntity role = new RolesEntity();
             for ( RolesEntity roles : roleList ) {
@@ -70,27 +70,23 @@ public class UserUpdate extends HttpServlet {
                 }
             }
 
-            String password = request.getParameter( "passwordUpdate" );
-            String passwordHached = BCrypt.hashpw( password, BCrypt.gensalt() );
-
             UsersEntity user = new UsersEntity();
             user.setIdUser( Integer.parseInt( request.getParameter( "iduserUpdate" ) ) );
-            user.setActive( Boolean.parseBoolean( request.getParameter( "activeUpdate" ) ) );
-            String test = request.getParameter("activeUpdate");
-            logger.log(Level.INFO, "active: " + request.getParameter( "activeUpdate" ) );
-            logger.log(Level.INFO, "active: " + Boolean.parseBoolean( request.getParameter( "activeUpdate" ) ) );
-            logger.log(Level.INFO, "active String : " + test );
-
+            if ( request.getParameter( "activeUpdate" ).equals( "on" ) ) {
+                user.setActive( true );
+            } else {
+                user.setActive( false );
+            }
             user.setLastName( request.getParameter( "lastNameUpdate" ) );
             user.setFirstName( request.getParameter( "firstNameUpdate" ) );
             user.setDayOfBirth( Date.valueOf( request.getParameter( "dayOfBirthUpdate" ) ) );
             user.setInscriptionDate( Date.valueOf( request.getParameter( "inscriptionDateUpdate" ) ) );
             user.setVat( request.getParameter( "vatUpdate" ) );
             user.setMail( request.getParameter( "emailUpdate" ) );
-            user.setPassword( passwordHached );
+            user.setPassword( request.getParameter( "passwordUpdate" ) );
             user.setLogin( request.getParameter( "loginUpdate" ) );
             user.setRoles( role );
-//            user.setActive( true );
+            //            user.setActive( true );
 
             //retrieve adress data
             AdressEntity adress = new AdressEntity();
@@ -118,16 +114,32 @@ public class UserUpdate extends HttpServlet {
             adressUsers.setAddress( adress );
             TypeAdress typeAdress = TypeAdress.valueOf( request.getParameter( "TypeadresseUpdate" ) );
             adressUsers.setTypeAdress( typeAdress );
-
-            userService.updateUser( user, adress, adressUsers );
-
-            //Send parameter to JSP
-            List<Object[]> userList = userService.showAllUsers();
-            request.setAttribute( "user", userList );
-            this.getServletContext().getRequestDispatcher( VUE_LISTUSER ).forward( request, response );
-
+            if (request.getParameter( "passwordUpdate" ).equals( request.getParameter( "rpPasswordUpdate" ) )){
+                userService.updateUser( user, adress, adressUsers );
+                //Send parameter to JSP
+                List<Object[]> userList = userService.showAllUsers();
+                request.setAttribute( "user", userList );
+                this.getServletContext().getRequestDispatcher( VUE_LISTUSER ).forward( request, response );
+            } else {
+                logger.log( Level.ERROR, "the password does not match " );
+                String errorPassword = "Les deux mot de passe ne corresponde pas !!!";
+                UserService userService = new UserService();
+                List<Object[]> users = userService
+                        .selectUserById( user.getIdUser() );
+                //cities
+                try {
+                    request.setAttribute( "errorPassword", errorPassword );
+                    request.setAttribute( "user", users );
+                    request.setAttribute( "roles", roleList );
+                    request.setAttribute( "cities", citiesList );
+                    request.setAttribute( "allTypeAdress", allTypeAdress );
+                } catch ( Exception e ) {
+                    logger.log( Level.ERROR, "User error" + e.getMessage() );
+                }
+                this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+            }
         } catch ( Exception e ) {
-            logger.log( Level.INFO, "Erreur Servlet " + e.getMessage() );
+            logger.log( Level.INFO, "Error Servlet Update User " + e.getMessage() );
         }
 
     }

@@ -6,6 +6,7 @@ import be.atc.entities.AdressUsersEntity;
 import be.atc.entities.UsersEntity;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -58,14 +59,24 @@ public class UserService {
         try {
 
             trans.begin();
-
-            UsersEntity userTest = em.find(UsersEntity.class, user.getIdUser());
-            userTest.setLastName(user.getLastName());
-            userTest.setFirstName(user.getFirstName());
-            userTest.setActive(user.isActive());
-            em.merge(userTest);
-//            em.merge( adressEntity );
-//            em.merge( adressUser );
+            UsersEntity userUpdate = em.find( UsersEntity.class, user.getIdUser() );
+            userUpdate.setLastName( user.getLastName() );
+            userUpdate.setFirstName( user.getFirstName() );
+            userUpdate.setActive( user.isActive() );
+            userUpdate.setRoles( user.getRoles() );
+            //check if the password has been changed
+            if ( !userUpdate.getPassword().equals( user.getPassword() ) ) {
+                String password = user.getPassword();
+                String passwordHached = BCrypt.hashpw( password, BCrypt.gensalt() );
+                userUpdate.setPassword( passwordHached );
+                logger.log( Level.INFO, "Password modified " );
+            } else {
+                logger.log( Level.INFO, " password not modified" );
+            }
+            logger.log( Level.INFO, "methode update isActive: " + user.isActive() );
+            em.merge( userUpdate );
+            //            em.merge( adressEntity );
+            //            em.merge( adressUser );
             trans.commit();
             logger.log( Level.INFO, "User updated" );
         } catch ( Exception e ) {
@@ -75,7 +86,6 @@ public class UserService {
             // em.close();
         }
     }
-
     /**
      * List of users with adress and roles
      *

@@ -29,8 +29,8 @@
             </div>
             <div class="col">
                 <div class="mb-1">
-                    <input type="checkbox" id="active" name="active" ${ user[0].active == true ? 'checked' : "" }>
-                    <label for="active">Active</label>
+                    <input type="checkbox" id="activeUpdate" name="activeUpdate" ${ user[0].active == true ? 'checked' : "" }>
+                    <label for="activeUpdate">Active</label>
                 </div>
             </div>
             <div class="mb-1">

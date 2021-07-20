@@ -75,7 +75,12 @@ public class UserUpdate extends HttpServlet {
 
             UsersEntity user = new UsersEntity();
             user.setIdUser( Integer.parseInt( request.getParameter( "iduserUpdate" ) ) );
-            user.setActive( Boolean.parseBoolean( request.getParameter( "active" ) ) );
+            user.setActive( Boolean.parseBoolean( request.getParameter( "activeUpdate" ) ) );
+            String test = request.getParameter("activeUpdate");
+            logger.log(Level.INFO, "active: " + request.getParameter( "activeUpdate" ) );
+            logger.log(Level.INFO, "active: " + Boolean.parseBoolean( request.getParameter( "activeUpdate" ) ) );
+            logger.log(Level.INFO, "active String : " + test );
+
             user.setLastName( request.getParameter( "lastNameUpdate" ) );
             user.setFirstName( request.getParameter( "firstNameUpdate" ) );
             user.setDayOfBirth( Date.valueOf( request.getParameter( "dayOfBirthUpdate" ) ) );
@@ -83,9 +88,9 @@ public class UserUpdate extends HttpServlet {
             user.setVat( request.getParameter( "vatUpdate" ) );
             user.setMail( request.getParameter( "emailUpdate" ) );
             user.setPassword( passwordHached );
-//            user.setLogin( request.getParameter( "loginUpdate" ) );
+            user.setLogin( request.getParameter( "loginUpdate" ) );
             user.setRoles( role );
-            user.setActive( true );
+//            user.setActive( true );
 
             //retrieve adress data
             AdressEntity adress = new AdressEntity();

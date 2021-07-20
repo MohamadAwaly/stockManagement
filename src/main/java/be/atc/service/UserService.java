@@ -56,8 +56,14 @@ public class UserService {
 
     public void updateUser( UsersEntity user, AdressEntity adressEntity, AdressUsersEntity adressUser ) {
         try {
+
             trans.begin();
-            em.merge( user );
+
+            UsersEntity userTest = em.find(UsersEntity.class, user.getIdUser());
+            userTest.setLastName(user.getLastName());
+            userTest.setFirstName(user.getFirstName());
+            userTest.setActive(user.isActive());
+            em.merge(userTest);
 //            em.merge( adressEntity );
 //            em.merge( adressUser );
             trans.commit();

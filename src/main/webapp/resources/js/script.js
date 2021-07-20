@@ -1,19 +1,19 @@
 $(document).ready(function () {
     //Var add User
-    var login = $('#login'),
-        lastName = $('#lastName'),
-        firstName = $('#firstName'),
-        dayOfBoirth = $('#dayOfBirth'),
-        vat = $('#vat'),
-        mail = $('#email'),
-        password = $('#password'),
-        rpassword = $('#rpPassword');
+    var login = $('.login'),
+        lastName = $('.lastNameClass'),
+        firstName = $('.firstNameClass'),
+        dayOfBoirth = $('.dayOfBirthClass'),
+        vat = $('.vatClass'),
+        mail = $('.emailClass'),
+        password = $('.passwordClass'),
+        rpassword = $('.rpPasswordClass');
     //Minimum eight characters, at least one upper case English letter, one lower case English letter, one number and one special character
     var regPass = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$");
     var regEmail = new RegExp(/[a-zA-Z0-9\.]{1,}[@][a-zA-Z0-9\.]{1,}[\.][a-zA-Z0-9\.]{1,}$/);
     var regVat = new RegExp("^(BE){0,1}[0]{0,1}[0-9]{9}$");
 
-    //Form addUser
+    //Form addUser & updateUser
 
     login.keyup(function () {
         var errorVal = $(this).val();
@@ -163,22 +163,13 @@ $(document).ready(function () {
     $('.usersList').dblclick( function () {
         $('.usersList').removeAttr('style');
         $(this).css('background', '#31B0D5');
-
-        var test1 = new Date($(this).find("td").eq(5).html());
-        var test1 = $(this).find("td").eq(5).html();
-        var day = test1.substring(0,2);
-        var month = test1.substring(3,5);
-        // var test2 = new Date($(this).find("td").eq(5).html());
-        // var test = dateFormat(dTest);
-        // console.log("date: " + dTest);
+        // var test1 = new Date($(this).find("td").eq(5).html());
+        // var test1 = $(this).find("td").eq(5).html();
+        // var day = test1.substring(0,2);
+        // var month = test1.substring(3,5);
         $('#selectedUserid').attr('value',$(this).find("td").eq(0).html());
         $('#selectedUserLogin').attr('value',$(this).find("td").eq(1).html());
-        // $('#iduserUpdate').attr('value',$(this).find("td").eq(0).html());
-        // $('#loginUpdate').attr('value',$(this).find("td").eq(1).html());
-        // $('#lastNameUpdate').attr('value',$(this).find("td").eq(3).html());
-        // $('#firstNameUpdate').attr('value',$(this).find("td").eq(4).html());
-        // $('#dayOfBirthUpdate').attr('value',test2);
-        // $('#inscriptionDateUpdate').attr('value',$(this).find("td").eq(6).html());
+
     });
 });
 

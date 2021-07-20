@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div class="mb-1">
-                <label for="loginUpdate" class="form-label"><span class="etoile">*</span> Login</label>
+                <label for="loginUpdate" class="form-label login"><span class="etoile">*</span> Login</label>
                 <input type="text" name="loginUpdate" class="form-control" id="loginUpdate" aria-describedby="login"
                        required readonly value=<c:out value="${ user[0].login }"/>>
             </div>
@@ -45,7 +45,7 @@
                 <div class="col">
                     <div class="mb-1">
                         <label for="lastNameUpdate" class="form-label"><span class="etoile">*</span> Nom </label>
-                        <input type="text" name="lastNameUpdate" class="form-control" id="lastNameUpdate"
+                        <input type="text" name="lastNameUpdate" class="form-control lastNameClass" id="lastNameUpdate"
                                aria-describedby="Nom" required value=<c:out value="${ user[0].lastName }"/>>
                         <div id="errorlastNameUpdate" hidden class="alert alert-danger">Le nom doit contenir au
                             moin 3
@@ -57,7 +57,7 @@
                     <div class="mb-1">
                         <label for="firstNameUpdate" class="form-label"><span class="etoile">*</span>
                             Prenom</label>
-                        <input type="text" name="firstNameUpdate" class="form-control" id="firstNameUpdate"
+                        <input type="text" name="firstNameUpdate" class="form-control firstNameClass" id="firstNameUpdate"
                                aria-describedby="prenom" required value=<c:out value="${ user[0].firstName }"/>>
                         <div id="errorfirstNameUpdate" hidden class="alert alert-danger">Le prenom doit contenir
                             au
@@ -70,7 +70,7 @@
                 <div class="col">
                     <div class="mb-1">
                         <label for="dayOfBirthUpdate" class="form-label">Date de naissance</label>
-                        <input type="Date" name="dayOfBirthUpdate" class="form-control" id="dayOfBirthUpdate"
+                        <input type="Date" name="dayOfBirthUpdate" class="form-control dayOfBirthClass" id="dayOfBirthUpdate"
                                aria-describedby="date de naissance" value=<c:out value="${ user[0].dayOfBirth }"/>>
                         <div id="errodayOfBirthUpdate" hidden class="alert alert-danger">Date non valide</div>
                         <div id="errodayOfBirth17ansUpdate" hidden class="alert alert-danger">vous devez avoir
@@ -91,23 +91,22 @@
             </div>
             <div class="mb-1">
                 <label for="vatUpdate" class="form-label">Num&eacute;ro de tva</label>
-                <input type="text" name="vatUpdate" class="form-control" id="vatUpdate"
+                <input type="text" name="vatUpdate" class="form-control vatClass" id="vatUpdate"
                        aria-describedby="Numéro de tva"
                        placeholder="BE123456789" value=<c:out value="${ user[0].vat }"/>>
                 <div id="errorTvaUpdate" hidden class="alert alert-danger">Numero de tva non valide</div>
             </div>
             <div class="mb-1">
                 <label for="emailUpdate" class="form-label">adresse email</label>
-                <input type="email" name="emailUpdate" class="form-control" id="emailUpdate"
+                <input type="email" name="emailUpdate" class="form-control emailClass" id="emailUpdate"
                        placeholder="name@example.com" value="<c:out value="${ user[0].mail }"/>">
                 <div id="errorEmailUpdate" hidden class="alert alert-danger">Adresse email non valide</div>
             </div>
             <div class="row">
                 <div class="col">
                     <div class="mb-1">
-                        <label for="passwordUpdate" class="form-label"><span class="etoile">*</span> Mot de
-                            passe</label>
-                        <input type="password" name="passwordUpdate" class="form-control" id="passwordUpdate"
+                        <label for="passwordUpdate" class="form-label"><span class="etoile">*</span> Mot de passe</label>
+                        <input type="password" name="passwordUpdate" class="form-control passwordClass" id="passwordUpdate"
                                required value="<c:out value="${ user[0].password }"/>">
                         <div id="erroPasswordUpdate" hidden class="alert alert-danger">Mot de passe doit
                             contenir au
@@ -126,7 +125,7 @@
                             le
                             mot de
                             passe</label>
-                        <input type="password" name="rpPasswordUpdate" class="form-control" id="rpPasswordUpdate"
+                        <input type="password" name="rpPasswordUpdate" class="form-control rpPasswordClass" id="rpPasswordUpdate"
                                required value="<c:out value="${ user[0].password }"/>">
                         <div id="errorRPasswordUpdate" hidden class="alert alert-danger">Les mots de passe ne
                             sont pas

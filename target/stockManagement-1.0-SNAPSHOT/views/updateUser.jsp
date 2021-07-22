@@ -18,21 +18,24 @@
     <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Mettre a jour</h5>
     </div>
-    <div class="modal-body" >
-        <form class="formUpdateUser" action="userUpdate" method="post" >
+    <div class="modal-body">
+        <form class="formUpdateUser" action="userUpdate" method="post">
             <div class="mb-3">
-                <c:if test="${ !empty errorPassword}"><p class="alert alert-danger"><c:out value="${ errorPassword }"/></p></c:if>
+                <c:if test="${ !empty errorPassword}"><p class="alert alert-danger"><c:out
+                        value="${ errorPassword }"/></p></c:if>
             </div>
                 <%--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--%>
             <button type="submit" class="btn btn-outline-info">Valider</button>
             <div class="mb-1">
                 <label for="iduserUpdate" class="form-label" hidden><span class="etoile">*</span> id</label>
-                <input type="number" name="iduserUpdate" class="form-control" id="iduserUpdate" aria-describedby="idUser"
+                <input type="number" name="iduserUpdate" class="form-control" id="iduserUpdate"
+                       aria-describedby="idUser"
                        required readonly hidden value="<c:out value="${ user[0].idUser }"/>">
             </div>
             <div class="col">
                 <div class="mb-1">
-                    <input type="checkbox" id="activeUpdate" name="activeUpdate" ${ user[0].active == true ? 'checked' : "" }>
+                    <input type="checkbox" id="activeUpdate"
+                           name="activeUpdate" ${ user[0].active == true ? 'checked' : "" }>
                     <label for="activeUpdate">Active</label>
                 </div>
             </div>
@@ -57,7 +60,8 @@
                     <div class="mb-1">
                         <label for="firstNameUpdate" class="form-label"><span class="etoile">*</span>
                             Prenom</label>
-                        <input type="text" name="firstNameUpdate" class="form-control firstNameClass" id="firstNameUpdate"
+                        <input type="text" name="firstNameUpdate" class="form-control firstNameClass"
+                               id="firstNameUpdate"
                                aria-describedby="prenom" required value=<c:out value="${ user[0].firstName }"/>>
                         <div id="errorfirstNameUpdate" hidden class="alert alert-danger">Le prenom doit contenir
                             au
@@ -70,7 +74,8 @@
                 <div class="col">
                     <div class="mb-1">
                         <label for="dayOfBirthUpdate" class="form-label">Date de naissance</label>
-                        <input type="Date" name="dayOfBirthUpdate" class="form-control dayOfBirthClass" id="dayOfBirthUpdate"
+                        <input type="Date" name="dayOfBirthUpdate" class="form-control dayOfBirthClass"
+                               id="dayOfBirthUpdate"
                                aria-describedby="date de naissance" value=<c:out value="${ user[0].dayOfBirth }"/>>
                         <div id="errodayOfBirthUpdate" hidden class="alert alert-danger">Date non valide</div>
                         <div id="errodayOfBirth17ansUpdate" hidden class="alert alert-danger">vous devez avoir
@@ -105,8 +110,10 @@
             <div class="row">
                 <div class="col">
                     <div class="mb-1">
-                        <label for="passwordUpdate" class="form-label"><span class="etoile">*</span> Mot de passe</label>
-                        <input type="password" name="passwordUpdate" class="form-control passwordClass" id="passwordUpdate"
+                        <label for="passwordUpdate" class="form-label"><span class="etoile">*</span> Mot de
+                            passe</label>
+                        <input type="password" name="passwordUpdate" class="form-control passwordClass"
+                               id="passwordUpdate"
                                required value="<c:out value="${ user[0].password }"/>">
                         <div id="erroPasswordUpdate" hidden class="alert alert-danger">Mot de passe doit
                             contenir au
@@ -125,7 +132,8 @@
                             le
                             mot de
                             passe</label>
-                        <input type="password" name="rpPasswordUpdate" class="form-control rpPasswordClass" id="rpPasswordUpdate"
+                        <input type="password" name="rpPasswordUpdate" class="form-control rpPasswordClass"
+                               id="rpPasswordUpdate"
                                required value="<c:out value="${ user[0].password }"/>">
                         <div id="errorRPasswordUpdate" hidden class="alert alert-danger">Les mots de passe ne
                             sont pas
@@ -134,21 +142,14 @@
                     </div>
                 </div>
             </div>
-
-            <c:forEach items="${ roles }" var="roles">
-<%--                <p>N°<c:out value="${ status.count }" /> : <c:out value="${ roles.role }" /> !</p>--%>
-                <p>${roles.role == user[0].roles.role ? user[0].roles.role : "" }</p>
-            </c:forEach>
-
             <div class="mb-1">
                 <label for="idRoleUpdate" class="form-label"><span class="etoile">*</span> Role : </label>
                 <SELECT id="idRoleUpdate" name="RoleUpdate" size="1" class="form-control">
-                    <option disabled selected><c:out value="${ user[0].roles.role } "/></option>
+<%--                    <option disabled selected><c:out value="${ user[0].roles.role } "/></option>--%>
                     <c:forEach var="roles" items="${ roles }">
-                    <OPTION value="${ roles.idRole}">
-                        <c:out value="${ roles.role } "/>
-                        </c:forEach>
-                    </OPTION>
+                        <OPTION value="${ roles.idRole}" ${roles.role == user[0].roles.role ? 'selected' : ''}>
+                            <c:out value="${ roles.role } "/>
+                    </c:forEach>
                 </SELECT>
             </div>
             <div class="row">
@@ -158,9 +159,9 @@
                             Adresse: </label>
                         <SELECT id="idTypeadresseUpdate" name="TypeadresseUpdate" size="1" class="form-control"
                                 required>
-                            <option disabled selected><c:out value="${ user[2].typeAdress } "/></option>
+<%--                            <option disabled selected><c:out value="${ user[2].typeAdress } "/></option>--%>
                             <c:forEach var="allTypeAdress" items="${ allTypeAdress }">
-                            <OPTION value="${ allTypeAdress}">
+                            <OPTION value="${ allTypeAdress}" ${ allTypeAdress == user[2].typeAdress ? 'selected' : ''}>
                                 <c:out value="${allTypeAdress } "/>
                                 </c:forEach>
                             </OPTION>
@@ -173,9 +174,9 @@
                             postal :
                         </label>
                         <SELECT id="idCityUpdate" name="cityUpdate" size="1" class="form-control" required>
-                            <option disabled selected><c:out value="${ user[1].city.citie } "/></option>
+<%--                            <option disabled selected><c:out value="${ user[1].city.citie } "/></option>--%>
                             <c:forEach var="cities" items="${ cities }">
-                            <OPTION value="${ cities.idCity}">
+                            <OPTION value="${ cities.idCity}" ${ cities.citie == user[1].city.citie ? 'selected' : ''}>
                                 <c:out value="${ cities.postalCode } "/>
                                 <c:out value="${ cities.citie } "/>
                                 </c:forEach>

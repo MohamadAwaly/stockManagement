@@ -134,6 +134,12 @@
                     </div>
                 </div>
             </div>
+
+            <c:forEach items="${ roles }" var="roles">
+<%--                <p>N°<c:out value="${ status.count }" /> : <c:out value="${ roles.role }" /> !</p>--%>
+                <p>${roles.role == user[0].roles.role ? user[0].roles.role : "" }</p>
+            </c:forEach>
+
             <div class="mb-1">
                 <label for="idRoleUpdate" class="form-label"><span class="etoile">*</span> Role : </label>
                 <SELECT id="idRoleUpdate" name="RoleUpdate" size="1" class="form-control">

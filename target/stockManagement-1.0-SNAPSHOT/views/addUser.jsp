@@ -13,7 +13,7 @@
         <c:if test="${ !empty error}"><p class="alert alert-danger"><c:out value="${ error }"/></p></c:if>
     </div>
     <div class="mb-3">
-        <label for="login" class="form-label"><span class="etoile">*</span> Login</label>
+        <label for="login" class="form-label login"><span class="etoile">*</span> Login</label>
         <input type="text" name="login" class="form-control" id="login" aria-describedby="login" required value=<c:out
                 value="${user.login}"/>>
         <div id="errorLogin" hidden class="alert alert-danger">Le login doit contenir au moin 4 caract&egrave;res</div>
@@ -22,7 +22,7 @@
         <div class="col">
             <div class="mb-3">
                 <label for="lastName" class="form-label"><span class="etoile">*</span> Nom de famille</label>
-                <input type="text" name="lastName" class="form-control" id="lastName" aria-describedby="Nom" required
+                <input type="text" name="lastName" class="form-control lastNameClass" id="lastName" aria-describedby="Nom" required
                        value=<c:out value="${user.lastName}"/>>
                 <div id="errorlastName" hidden class="alert alert-danger">Le nom doit contenir au moin 3 caract&egrave;res</div>
             </div>
@@ -30,7 +30,7 @@
         <div class="col">
             <div class="mb-3">
                 <label for="firstName" class="form-label"><span class="etoile">*</span> Prenom</label>
-                <input type="text" name="firstName" class="form-control" id="firstName" aria-describedby="prenom"
+                <input type="text" name="firstName" class="form-control firstNameClass" id="firstName" aria-describedby="prenom"
                        required value="<c:out value="${user.firstName}"/>">
                 <div id="errorfirstName" hidden class="alert alert-danger">Le prenom doit contenir au moin 3 caract&egrave;re</div>
             </div>
@@ -38,20 +38,20 @@
     </div>
     <div class="mb-3">
         <label for="dayOfBirth" class="form-label">Date de naissance</label>
-        <input type="Date" name="dayOfBirth" class="form-control" id="dayOfBirth"
+        <input type="Date" name="dayOfBirth" class="form-control dayOfBirthClass" id="dayOfBirth"
                aria-describedby="date de naissance" value=<c:out value="${user.dayOfBirth}"/>>
         <div id="errodayOfBirth" hidden class="alert alert-danger">Date non valide</div>
         <div id="errodayOfBirth17ans" hidden class="alert alert-danger">vous devez avoir minimum 17 ans</div>
     </div>
     <div class="mb-3">
         <label for="vat" class="form-label">Num&eacute;ro de tva</label>
-        <input type="text" name="vat" class="form-control" id="vat" aria-describedby="Numéro de tva"
+        <input type="text" name="vat" class="form-control vatClass" id="vat" aria-describedby="Numéro de tva"
                placeholder="BE123456789" value=<c:out value="${user.vat}"/>>
         <div id="errorTva" hidden class="alert alert-danger">Numero de tva non valide</div>
     </div>
     <div class="mb-3">
         <label for="email" class="form-label">Adresse email</label>
-        <input type="email" name="email" class="form-control" id="email"
+        <input type="email" name="email" class="form-control emailClass" id="email"
                placeholder="name@example.com" value=<c:out value="${user.mail}"/>>
         <div id="errorEmail" hidden class="alert alert-danger">Adresse email non valide</div>
     </div>
@@ -59,7 +59,7 @@
         <div class="col">
             <div class="mb-3">
                 <label for="password" class="form-label"><span class="etoile">*</span> Mot de passe</label>
-                <input type="password" name="password" class="form-control" id="password" required>
+                <input type="password" name="password" class="form-control passwordClass" id="password" required>
                 <div id="erroPassword" hidden class="alert alert-danger">Mot de passe doit contenir au moin 8 caract&egrave;re,
                     une lettre majuscule,
                     une lettre minuscule, un caract&egrave;re sp&eacute;ciale
@@ -71,7 +71,7 @@
             <div class="mb-3">
                 <label for="rpPassword" class="form-label"><span class="etoile">*</span> Confirmer le mot de
                     passe</label>
-                <input type="password" name="rpPassword" class="form-control" id="rpPassword" required>
+                <input type="password" name="rpPassword" class="form-control rpPasswordClass" id="rpPassword" required>
                 <div id="errorRPassword" hidden class="alert alert-danger">Les mots de passe ne sont pas identique</div>
             </div>
         </div>

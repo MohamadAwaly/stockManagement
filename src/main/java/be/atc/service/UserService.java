@@ -62,6 +62,8 @@ public class UserService {
             UsersEntity userUpdate = em.find( UsersEntity.class, user.getIdUser() );
             userUpdate.setLastName( user.getLastName() );
             userUpdate.setFirstName( user.getFirstName() );
+            userUpdate.setDayOfBirth( user.getDayOfBirth() );
+            userUpdate.setMail( user.getMail() );
             userUpdate.setActive( user.isActive() );
             userUpdate.setRoles( user.getRoles() );
             //check if the password has been changed
@@ -71,7 +73,7 @@ public class UserService {
                 userUpdate.setPassword( passwordHached );
                 logger.log( Level.INFO, "Password modified " );
             } else {
-                logger.log( Level.INFO, " password not modified" );
+                logger.log( Level.INFO, " Password not modified" );
             }
             logger.log( Level.INFO, "methode update isActive: " + user.isActive() );
             em.merge( userUpdate );
@@ -86,6 +88,7 @@ public class UserService {
             // em.close();
         }
     }
+
     /**
      * List of users with adress and roles
      *

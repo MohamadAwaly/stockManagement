@@ -2,6 +2,7 @@ package be.atc.controler.servlet;
 
 import be.atc.controler.enumm.TypeAdress;
 import be.atc.entities.*;
+import be.atc.service.AdressService;
 import be.atc.service.CitieService;
 import be.atc.service.RoleService;
 import be.atc.service.UserService;
@@ -34,15 +35,18 @@ public class UserUpdate extends HttpServlet {
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
         UserService userService = new UserService();
+        AdressService adressService = new AdressService();
         List<Object[]> user = userService
                 .selectUserById( Integer.parseInt( request.getParameter( "selectedUser-id" ) ) );
         logger.log( Level.INFO, "ID : " + Integer.parseInt( request.getParameter( "selectedUser-id" ) ) );
+        List<Object[]> adress = adressService.listAdressByIdUser( Integer.parseInt( request.getParameter( "selectedUser-id" ) ) );
         //cities
         try {
             request.setAttribute( "user", user );
             request.setAttribute( "roles", roleList );
             request.setAttribute( "cities", citiesList );
             request.setAttribute( "allTypeAdress", allTypeAdress );
+            request.setAttribute( "adress", adress );
         } catch ( Exception e ) {
             logger.log( Level.ERROR, "User error" + e.getMessage() );
         }

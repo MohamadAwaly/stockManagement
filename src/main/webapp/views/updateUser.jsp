@@ -14,8 +14,41 @@
 <%--    <div class="modal-dialog modal-dialog-centered modal-xl p-3 mb-2 ">--%>
 <%--        <div class="modal-content">--%>
 
+
+<table class="table table-striped table-hover" border="1px solid black">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>ID</th>
+        <th>ID</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>test3</td>
+        <td>test3</td>
+        <td>test3</td>
+    </tr>
+    <c:forEach var="adress" items="${ adress }">
+        <%--        <h3><c:out value="${ user[0].login }"/></h3>--%>
+        <tr>
+            <td>test1</td>
+            <td>test1</td>
+            <td>test1</td>
+            <td>test1</td>
+            <td>test1</td>
+        </tr>
+        <tr class="usersList">
+                <%--            <td><c:out value="${ adress[0].idAdress }"/></td>--%>
+            <td>test</td>
+        </tr>
+    </c:forEach>
+    </tbody>
+</table>
+
+
 <c:forEach var="user" items="${ user }">
-    <div class="modal-header">
+    <div class="modal-header " >
         <h5 class="modal-title" id="staticBackdropLabel">Mettre a jour</h5>
     </div>
     <div class="modal-body">
@@ -25,7 +58,7 @@
                         value="${ errorPassword }"/></p></c:if>
             </div>
                 <%--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--%>
-            <button type="submit" class="btn btn-outline-info">Valider</button>
+            <button type="submit" class="btn btn-outline-info float-right">Valider</button>
             <div class="mb-1">
                 <label for="iduserUpdate" class="form-label" hidden><span class="etoile">*</span> id</label>
                 <input type="number" name="iduserUpdate" class="form-control" id="iduserUpdate"
@@ -39,7 +72,7 @@
                     <label for="activeUpdate">Active</label>
                 </div>
             </div>
-            <div class="mb-1">
+            <div class="mb-1 ">
                 <label for="loginUpdate" class="form-label login"><span class="etoile">*</span> Login</label>
                 <input type="text" name="loginUpdate" class="form-control" id="loginUpdate" aria-describedby="login"
                        required readonly value=<c:out value="${ user[0].login }"/>>
@@ -92,7 +125,6 @@
                                 value="${ user[0].inscriptionDate }"/>>
                     </div>
                 </div>
-
             </div>
             <div class="mb-1">
                 <label for="vatUpdate" class="form-label">Num&eacute;ro de tva</label>
@@ -145,11 +177,11 @@
             <div class="mb-1">
                 <label for="idRoleUpdate" class="form-label"><span class="etoile">*</span> Role : </label>
                 <SELECT id="idRoleUpdate" name="RoleUpdate" size="1" class="form-control">
-<%--                    <option disabled selected><c:out value="${ user[0].roles.role } "/></option>--%>
+                        <%--                    <option disabled selected><c:out value="${ user[0].roles.role } "/></option>--%>
                     <c:forEach var="roles" items="${ roles }">
-                        <OPTION value="${ roles.idRole}" ${roles.role == user[0].roles.role ? 'selected' : ''}>
+                    <OPTION value="${ roles.idRole}" ${roles.role == user[0].roles.role ? 'selected' : ''}>
                             <c:out value="${ roles.role } "/>
-                    </c:forEach>
+                        </c:forEach>
                 </SELECT>
             </div>
             <div class="row">
@@ -159,7 +191,7 @@
                             Adresse: </label>
                         <SELECT id="idTypeadresseUpdate" name="TypeadresseUpdate" size="1" class="form-control"
                                 required>
-<%--                            <option disabled selected><c:out value="${ user[2].typeAdress } "/></option>--%>
+                                <%--                            <option disabled selected><c:out value="${ user[2].typeAdress } "/></option>--%>
                             <c:forEach var="allTypeAdress" items="${ allTypeAdress }">
                             <OPTION value="${ allTypeAdress}" ${ allTypeAdress == user[2].typeAdress ? 'selected' : ''}>
                                 <c:out value="${allTypeAdress } "/>
@@ -174,7 +206,7 @@
                             postal :
                         </label>
                         <SELECT id="idCityUpdate" name="cityUpdate" size="1" class="form-control" required>
-<%--                            <option disabled selected><c:out value="${ user[1].city.citie } "/></option>--%>
+                                <%--                            <option disabled selected><c:out value="${ user[1].city.citie } "/></option>--%>
                             <c:forEach var="cities" items="${ cities }">
                             <OPTION value="${ cities.idCity}" ${ cities.citie == user[1].city.citie ? 'selected' : ''}>
                                 <c:out value="${ cities.postalCode } "/>
@@ -212,4 +244,10 @@
         </form>
     </div>
 </c:forEach>
+
+
+
+
+
+
 <c:import url="footer.jsp"/>

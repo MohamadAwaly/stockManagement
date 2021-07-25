@@ -3,7 +3,7 @@ $(document).ready(function () {
     var login = $('.login'),
         lastName = $('.lastNameClass'),
         firstName = $('.firstNameClass'),
-        dayOfBoirth = $('.dayOfBirthClass'),
+        dayOfBirth = $('.dayOfBirthClass'),
         vat = $('.vatClass'),
         mail = $('.emailClass'),
         password = $('.passwordClass'),
@@ -55,7 +55,7 @@ $(document).ready(function () {
             errorfirstName.hidden = true;
         }
     })
-    dayOfBoirth.keyup(function () {
+    dayOfBirth.keyup(function () {
         const months = [
             'January',
             'February',
@@ -73,8 +73,8 @@ $(document).ready(function () {
         var errordate = document.getElementById("errodayOfBirth");
         var errordate17ans = document.getElementById("errodayOfBirth17ans");
         var today = new Date();
-        var dateFormLenght = $('#dayOfBirth').val();
-        var dateForm = new Date($('#dayOfBirth').val());
+        var dateFormLenght = $('.dayOfBirthClass').val();
+        var dateForm = new Date($('.dayOfBirthClass').val());
         if (dateFormLenght.length == 10) {
             if (dateForm.getUTCFullYear() > 1900) {
                 var dateOfBirth = new Date(dateForm.getDate() + " " + months[dateForm.getMonth()] + " " + dateForm.getUTCFullYear());

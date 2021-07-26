@@ -40,17 +40,8 @@ public class UserUpdate extends HttpServlet {
         List<Object[]> user = userService
                 .selectUserById( Integer.parseInt( request.getParameter( "selectedUser-id" ) ) );
         logger.log( Level.INFO, "ID : " + Integer.parseInt( request.getParameter( "selectedUser-id" ) ) );
-        List<Object[]> adress = adressService.listAdressByIdUser( Integer.parseInt( request.getParameter( "selectedUser-id" ) ) );
-
-//        for (List <Object[]> list: adress) {
-//            logger.log(Level.INFO,"Adress1: " + list);
-//        }
-
-//        for (int i = 0; i <adress.size(); i++){
-//            adress.get(i);
-//            logger.log(Level.INFO,"adress: " + Arrays.toString(adress.get(i)));
-//        }
-
+        List<Object[]> adress = adressService
+                .listAdressByIdUser( Integer.parseInt( request.getParameter( "selectedUser-id" ) ) );
         //cities
         try {
             request.setAttribute( "user", user );
@@ -129,7 +120,7 @@ public class UserUpdate extends HttpServlet {
             adressUsers.setAddress( adress );
             TypeAdress typeAdress = TypeAdress.valueOf( request.getParameter( "TypeadresseUpdate" ) );
             adressUsers.setTypeAdress( typeAdress );
-            if (request.getParameter( "passwordUpdate" ).equals( request.getParameter( "rpPasswordUpdate" ) )){
+            if ( request.getParameter( "passwordUpdate" ).equals( request.getParameter( "rpPasswordUpdate" ) ) ) {
                 userService.updateUser( user, adress, adressUsers );
                 //Send parameter to JSP
                 List<Object[]> userList = userService.showAllUsers();

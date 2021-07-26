@@ -8,8 +8,8 @@ import java.util.Objects;
         @NamedQuery( name = "Adress.SelectByIdUser",
                 query = "SELECT a, au FROM AdressEntity a " +
                         "JOIN AdressUsersEntity au on au.address = a " +
-                        "JOIN UsersEntity u on u.idUser = au.idAdressUsers" +
-                        " where u.idUser = :id" )
+                        "JOIN UsersEntity u on au.users = u  " +
+                        " where au.users.idUser = :id" )
 } )
 
 @Entity

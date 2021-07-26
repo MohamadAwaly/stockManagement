@@ -16,6 +16,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @WebServlet( name = "userUpdate", value = "/userUpdate" )
@@ -40,6 +41,16 @@ public class UserUpdate extends HttpServlet {
                 .selectUserById( Integer.parseInt( request.getParameter( "selectedUser-id" ) ) );
         logger.log( Level.INFO, "ID : " + Integer.parseInt( request.getParameter( "selectedUser-id" ) ) );
         List<Object[]> adress = adressService.listAdressByIdUser( Integer.parseInt( request.getParameter( "selectedUser-id" ) ) );
+
+//        for (List <Object[]> list: adress) {
+//            logger.log(Level.INFO,"Adress1: " + list);
+//        }
+
+//        for (int i = 0; i <adress.size(); i++){
+//            adress.get(i);
+//            logger.log(Level.INFO,"adress: " + Arrays.toString(adress.get(i)));
+//        }
+
         //cities
         try {
             request.setAttribute( "user", user );

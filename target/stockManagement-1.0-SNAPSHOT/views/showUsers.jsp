@@ -5,33 +5,33 @@
 
 <c:import url="header.jsp"/>
 <!-- Button trigger modal -->
-<div class="pull-right mb-3">
-<%--    #staticBackdrop--%>
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="userUpdate">
-            Mettre à jour
-        </button>
-        <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-            Supprimer
-        </button>
-    </div>
-</div>
-<form action="userUpdate" method="get" class="selectedUserForm">
-    <div class="row">
-        <div class="col">
-            <div class="mb-3">
+<%--<div class="pull-right mb-3">--%>
+<%--&lt;%&ndash;    #staticBackdrop&ndash;%&gt;--%>
+<%--    <div class="d-grid gap-2 d-md-flex justify-content-md-end">--%>
+<%--        <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="userUpdate">--%>
+<%--            Mettre à jour--%>
+<%--        </button>--%>
+<%--        <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#staticBackdrop">--%>
+<%--            Supprimer--%>
+<%--        </button>--%>
+<%--    </div>--%>
+<%--</div>--%>
+<form action="userUpdate" method="get" class="selectedUserForm float-right bg-transparent border-0">
+<%--    <div class="row">--%>
+<%--        <div class="col">--%>
+<%--            <div class="mb-3">--%>
                 <input type="text" name="selectedUser-Login" class="form-control" id="selectedUserLogin"
-                       aria-describedby="selectedUser">
-            </div>
-        </div>
-        <div class="col">
-            <div class="mb-3">
+                       aria-describedby="selectedUser" hidden>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--        <div class="col">--%>
+<%--            <div class="mb-3">--%>
                 <input type="text" name="selectedUser-id" class="form-control" id="selectedUserid"
                        aria-describedby="selectedUser" hidden>
-            </div>
-        </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Valider</button>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+    <button type="submit" class="btn btn-primary float-right">Mettre à jour</button>
 </form>
 <table class="table table-striped table-hover" border="1px solid black">
     <thead>
@@ -75,5 +75,4 @@
     </c:forEach>
     </tbody>
 </table>
-<%--<c:import url="updateUser.jsp"/>--%>
 <c:import url="footer.jsp"/>

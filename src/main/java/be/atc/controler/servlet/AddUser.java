@@ -93,7 +93,7 @@ public class AddUser extends HttpServlet {
             } else {
                 adress.setBox( Integer.parseInt( request.getParameter( "box" ) ) );
             }
-            //initialize a city and recover the user's city
+            //initialize a city and get the user's city
             CitiesEntity city = new CitiesEntity();
             int paramCity = Integer.parseInt( request.getParameter( "city" ) );
             for ( CitiesEntity citiesEntity : citiesList ) {

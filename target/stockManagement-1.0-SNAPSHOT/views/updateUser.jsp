@@ -145,21 +145,33 @@
                 <SELECT id="idRoleUpdate" name="RoleUpdate" size="1" class="form-control">
                         <%--                    <option disabled selected><c:out value="${ user[0].roles.role } "/></option>--%>
                     <c:forEach var="roles" items="${ roles }">
-                    <OPTION value="${ roles.idRole}" ${roles.role == user.roles.role ? 'selected' : ''}>
+                        <OPTION value="${ roles.idRole}" ${roles.role == user.roles.role ? 'selected' : ''}>
                             <c:out value="${ roles.role } "/>
-                        </c:forEach>
+                        </OPTION>
+                    </c:forEach>
                 </SELECT>
             </div>
-
         </form>
     </div>
 </c:forEach>
+
+<%--<form action="userUpdate" method="get" class="selectedUserForm float-right bg-transparent border-0">--%>
+<form action="addAdress" method="get" class="selectedUserForm float-right bg-transparent border-0">
+    <input type="text" name="selectedUserUpdate-Login" class="form-control" id="selectedUserLoginUpdate"
+           aria-describedby="selectedUser" hidden>
+    <input type="text" name="selectedUserUpdate-id" class="form-control" id="selectedUseridUpdate"
+           aria-describedby="selectedUser" hidden>
+    <button type="submit" class="btn btn-outline-info float-right" id="idAddAdress">Ajouter une adresse</button>
+</form>
+
+
 <table class="table table-striped table-hover" border="1px solid black">
     <h3>Liste des adresses</h3>
     <thead>
     <tr>
-        <th>Type d'adresse</th>
         <th>id</th>
+        <th>ville</th>
+        <th>Type d'adresse</th>
         <th>Rue</th>
         <th>Numéro</th>
         <th>boite</th>
@@ -167,9 +179,10 @@
     </thead>
     <tbody>
     <c:forEach var="adress" items="${ adress }">
-        <tr class="usersList">
-            <td><c:out value="${ adress[1].typeAdress }"/></td>
+        <tr class="adressList">
             <td><c:out value="${ adress[0].idAdress }"/></td>
+            <td><c:out value="${ adress[2].citie }"/></td>
+            <td><c:out value="${ adress[1].typeAdress }"/></td>
             <td><c:out value="${ adress[0].street }"/></td>
             <td><c:out value="${ adress[0].number }"/></td>
             <td><c:out value="${ adress[0].box }"/></td>
@@ -177,5 +190,4 @@
     </c:forEach>
     </tbody>
 </table>
-
 <c:import url="footer.jsp"/>

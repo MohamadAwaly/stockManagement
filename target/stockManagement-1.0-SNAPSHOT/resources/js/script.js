@@ -171,6 +171,10 @@ $(document).ready(function () {
         $('#selectedUserLogin').attr('value',$(this).find("td").eq(1).html());
 
     });
+    $('#idAddAdress').click( function () {
+        $('#selectedUseridUpdate').attr('value',$('#iduserUpdate').val());
+        $('#selectedUserLoginUpdate').attr('value',$('#loginUpdate').val());
+    });
 });
 
 

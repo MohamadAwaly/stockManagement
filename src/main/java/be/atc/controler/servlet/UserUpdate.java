@@ -96,30 +96,30 @@ public class UserUpdate extends HttpServlet {
 
             //retrieve adress data
             AdressEntity adress = new AdressEntity();
-            adress.setStreet( request.getParameter( "streetUpdate" ) );
-            adress.setNumber( Integer.parseInt( request.getParameter( "numberUpdate" ) ) );
-            if ( request.getParameter( "boxUpdate" ).equals( "" ) ) {
-                adress.setBox( 0 );
-            } else {
-                adress.setBox( Integer.parseInt( request.getParameter( "boxUpdate" ) ) );
-            }
+//            adress.setStreet( request.getParameter( "streetUpdate" ) );
+//            adress.setNumber( Integer.parseInt( request.getParameter( "numberUpdate" ) ) );
+//            if ( request.getParameter( "boxUpdate" ).equals( "" ) ) {
+//                adress.setBox( 0 );
+//            } else {
+//                adress.setBox( Integer.parseInt( request.getParameter( "boxUpdate" ) ) );
+//            }
             //initialize a city and recover the user's city
-            CitiesEntity city = new CitiesEntity();
-            int paramCity = Integer.parseInt( request.getParameter( "cityUpdate" ) );
-            for ( CitiesEntity citiesEntity : citiesList ) {
-                if ( paramCity == citiesEntity.getIdCity() ) {
-                    city.setIdCity( citiesEntity.getIdCity() );
-                    city.setCitie( city.getCitie() );
-                }
-            }
-            adress.setCity( city );
+//            CitiesEntity city = new CitiesEntity();
+//            int paramCity = Integer.parseInt( request.getParameter( "cityUpdate" ) );
+//            for ( CitiesEntity citiesEntity : citiesList ) {
+//                if ( paramCity == citiesEntity.getIdCity() ) {
+//                    city.setIdCity( citiesEntity.getIdCity() );
+//                    city.setCitie( city.getCitie() );
+//                }
+//            }
+//            adress.setCity( city );
 
             //initialize entity entity join
             AdressUsersEntity adressUsers = new AdressUsersEntity();
-            adressUsers.setUsers( user );
-            adressUsers.setAddress( adress );
-            TypeAdress typeAdress = TypeAdress.valueOf( request.getParameter( "TypeadresseUpdate" ) );
-            adressUsers.setTypeAdress( typeAdress );
+//            adressUsers.setUsers( user );
+//            adressUsers.setAddress( adress );
+//            TypeAdress typeAdress = TypeAdress.valueOf( request.getParameter( "TypeadresseUpdate" ) );
+//            adressUsers.setTypeAdress( typeAdress );
             if ( request.getParameter( "passwordUpdate" ).equals( request.getParameter( "rpPasswordUpdate" ) ) ) {
                 userService.updateUser( user, adress, adressUsers );
                 //Send parameter to JSP

@@ -6,9 +6,10 @@ import java.util.Objects;
 
 @NamedQueries( value = {
         @NamedQuery( name = "Adress.SelectByIdUser",
-                query = "SELECT a, au FROM AdressEntity a " +
+                query = "SELECT a, au, c FROM AdressEntity a " +
                         "JOIN AdressUsersEntity au on au.address = a " +
                         "JOIN UsersEntity u on au.users = u  " +
+                        "JOIN CitiesEntity c on a.city = c"+
                         " where au.users.idUser = :id" )
 } )
 

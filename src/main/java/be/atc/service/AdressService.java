@@ -45,15 +45,25 @@ public class AdressService {
         return query.getResultList();
     }
 
-    public void addMultipleAdress(int idUser, AdressEntity adress, TypeAdress typeAdress){
-        trans.begin();
-        UsersEntity user = em.find(UsersEntity.class, idUser);
-        AdressUsersEntity adressUsers = new AdressUsersEntity();
+    public void addMultipleAdress(int idUser, AdressEntity adress, AdressUsersEntity adressUsers){
+            try {
+                trans.begin();
+                UsersEntity user = em.find(UsersEntity.class, idUser);
+//                AdressUsersEntity adressUsers = new AdressUsersEntity();
 
-        adressUsers.setTypeAdress(typeAdress);
-        adressUsers.setUsers(user);
-        adressUsers.setAddress(adress);
+                adressUsers.setUsers(user);
+                adressUsers.setAddress(adress);
 
+                em.merge(adress);
+                em.merge(adressUsers);
+                trans.commit();
+
+            } catch (Exception e){
+                logger.log(Level.ERROR, "Error in method addMultipleAdress " + e.getMessage());
+                trans.rollback();
+            } finally {
+//                em.close();
+            }
 
 
     }

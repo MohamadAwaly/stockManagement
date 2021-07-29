@@ -4,12 +4,19 @@ import be.atc.controler.enumm.TypeAdress;
 import be.atc.entities.AdressEntity;
 import be.atc.entities.AdressUsersEntity;
 import be.atc.entities.CitiesEntity;
-import be.atc.entities.UsersEntity;
+import be.atc.entities.RolesEntity;
+import be.atc.service.AdressService;
 import be.atc.service.CitieService;
+import be.atc.service.RoleService;
+import be.atc.service.UserService;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
@@ -18,9 +25,30 @@ public class addAdress extends HttpServlet {
     public static final String VUE = "/views/addAdress.jsp";
     public static final String VUE_UPDATEUSER = "/views/updateUser.jsp";
     private CitieService citieService = new CitieService();
+    private static final Logger logger = Logger.getLogger(addAdress.class);
+    TypeAdress[] allTypeAdress = TypeAdress.values();
+    List<CitiesEntity> citiesList = citieService.showAllCities();
+    private RoleService roleService  = new RoleService();
+    List<RolesEntity>  roleList      = roleService.showAllRoles();
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //get id user
+        int idUser = Integer.parseInt(request.getParameter("selectedUserUpdate-id"));
+        //send request to jsp
+        try {
+            request.setAttribute("id", idUser);
+            request.setAttribute("allTypeAdress", allTypeAdress);
+            request.setAttribute("cities", citiesList);
+        } catch (Exception e) {
+            logger.log(Level.ERROR, "error - send request to jsp: " + e.getMessage());
+        }
+        this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //get id user
         int idUser = Integer.parseInt(request.getParameter("iduserUpdate"));
 
@@ -48,12 +76,31 @@ public class addAdress extends HttpServlet {
         }
         adress.setCity(city);
 
+        AdressService adressService = new AdressService();
+        adressService.addMultipleAdress(idUser, adress, adressUsers);
+        logger.log(Level.INFO,"Adress added");
 
-        this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
-    }
+        //request JSP
+        UserService userService = new UserService();
+        List<Object[]> user = userService
+                .selectUserById( Integer.parseInt( request.getParameter( "iduserUpdate" ) ) );
+        List<Object[]> adressList = adressService
+                .listAdressByIdUser( Integer.parseInt( request.getParameter( "iduserUpdate" ) ) );
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            request.setAttribute( "user", user );
+            request.setAttribute( "roles", roleList );
+            request.setAttribute( "cities", citiesList );
+            request.setAttribute( "allTypeAdress", allTypeAdress );
+            request.setAttribute( "adress", adressList );
+        } catch ( Exception e ) {
+            logger.log( Level.ERROR, "User error" + e.getMessage() );
+        }
+
+
+
+
+
         this.getServletContext().getRequestDispatcher(VUE_UPDATEUSER).forward(request, response);
 
 

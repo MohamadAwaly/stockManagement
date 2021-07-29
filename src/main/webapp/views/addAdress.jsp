@@ -14,7 +14,7 @@
         <label for="iduserUpdate" class="form-label"><span class="etoile">*</span> id</label>
         <input type="number" name="iduserUpdate" class="form-control" id="iduserUpdate"
                aria-describedby="idUser"
-               required readonly>
+               required readonly value=<c:out value="${id}"/>>
         <%--        value="<c:out value="${ user.idUser }"/>"--%>
     </div>
     <div class="mb-3">

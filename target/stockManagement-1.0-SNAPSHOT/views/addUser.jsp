@@ -92,6 +92,7 @@
             <OPTION value="${ allTypeAdress}">
                     <c:out value="${allTypeAdress } "/>
                 </c:forEach>
+            </OPTION>
         </SELECT>
     </div>
     <div class="mb-3">
@@ -102,6 +103,7 @@
                     <c:out value="${ cities.postalCode } "/>
                     <c:out value="${ cities.citie } "/>
                 </c:forEach>
+            </OPTION>
         </SELECT>
     </div>
     <div class="mb-3">

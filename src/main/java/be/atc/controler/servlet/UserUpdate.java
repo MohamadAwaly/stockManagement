@@ -75,10 +75,10 @@ public class UserUpdate extends HttpServlet {
                     role.setRole( roles.getRole() );
                 }
             }
-
             UsersEntity user = new UsersEntity();
             user.setIdUser( Integer.parseInt( request.getParameter( "iduserUpdate" ) ) );
-            if ( request.getParameter( "activeUpdate" ).equals( "on" ) ) {
+            String isActive = request.getParameter("activeUpdate");
+            if ( isActive != null &&  request.getParameter( "activeUpdate" ).equals( "on" ) ) {
                 user.setActive( true );
             } else {
                 user.setActive( false );

@@ -86,6 +86,8 @@ public class addAdress extends HttpServlet {
                 .selectUserById( Integer.parseInt( request.getParameter( "iduserUpdate" ) ) );
         List<Object[]> adressList = adressService
                 .listAdressByIdUser( Integer.parseInt( request.getParameter( "iduserUpdate" ) ) );
+        boolean ifTypeAdressExist = adressService.verfyIfTypeAdressExist(typeAdress, idUser);
+        logger.log(Level.INFO, "ifTypeAdressexist"  + ifTypeAdressExist);
 
         try {
             request.setAttribute( "user", user );
@@ -96,10 +98,6 @@ public class addAdress extends HttpServlet {
         } catch ( Exception e ) {
             logger.log( Level.ERROR, "User error" + e.getMessage() );
         }
-
-
-
-
 
         this.getServletContext().getRequestDispatcher(VUE_UPDATEUSER).forward(request, response);
 

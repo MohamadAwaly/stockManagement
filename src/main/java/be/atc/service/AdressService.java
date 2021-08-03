@@ -70,16 +70,19 @@ public class AdressService {
 
     public boolean verfyIfTypeAdressExist (TypeAdress typeAdress, int idUser){
         Query query = em.createNamedQuery("Adress.TypeAdressExist");
-        query.setParameter("typeAdress",typeAdress);
+        query.setParameter("typeAdress",typeAdress );
         query.setParameter("idUser", idUser);
-//        String result = (String) query.getSingleResult();
-//        logger.log(Level.INFO,"adressService: " + result);
-        logger.log(Level.INFO,"adressService: " + query.getResultList());
-//        if(result != null ){
-//            return false;
-//        } else{
-//            return false;
-//        }
-        return true;
+        try {
+            String result = (String) query.getSingleResult();
+            if(result != null ){
+                return false;
+            } else{
+                return false;
+            }
+        } catch (Exception e){
+            logger.log(Level.ERROR, "Error - verify if type adress exist: " + e.getMessage());
+            return false;
+        }
+
     }
 }

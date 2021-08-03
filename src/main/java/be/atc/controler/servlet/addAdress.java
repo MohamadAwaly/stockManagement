@@ -75,10 +75,16 @@ public class addAdress extends HttpServlet {
             }
         }
         adress.setCity(city);
-
+        String error = "";
         AdressService adressService = new AdressService();
-        adressService.addMultipleAdress(idUser, adress, adressUsers);
-        logger.log(Level.INFO,"Adress added");
+        boolean ifTypeAdressExist = adressService.verfyIfTypeAdressExist(typeAdress, idUser);
+        if(ifTypeAdressExist){
+            adressService.addMultipleAdress(idUser, adress, adressUsers);
+            logger.log(Level.INFO,"Adress added");
+        } else {
+            error = "l'utilisateur possede deja une adresse de " + typeAdress;
+        }
+
 
         //request JSP
         UserService userService = new UserService();
@@ -86,8 +92,7 @@ public class addAdress extends HttpServlet {
                 .selectUserById( Integer.parseInt( request.getParameter( "iduserUpdate" ) ) );
         List<Object[]> adressList = adressService
                 .listAdressByIdUser( Integer.parseInt( request.getParameter( "iduserUpdate" ) ) );
-        boolean ifTypeAdressExist = adressService.verfyIfTypeAdressExist(typeAdress, idUser);
-        logger.log(Level.INFO, "ifTypeAdressexist"  + ifTypeAdressExist);
+
 
         try {
             request.setAttribute( "user", user );
@@ -99,8 +104,12 @@ public class addAdress extends HttpServlet {
             logger.log( Level.ERROR, "User error" + e.getMessage() );
         }
 
+
+
         this.getServletContext().getRequestDispatcher(VUE_UPDATEUSER).forward(request, response);
 
 
     }
+
+
 }

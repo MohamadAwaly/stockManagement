@@ -50,6 +50,7 @@
         <th>Numero</th>
         <th>boite</th>
         <th>Ville</th>
+        <th>Type addresse</th>
     </tr>
     </thead>
     <tbody>
@@ -71,6 +72,7 @@
             <td><c:out value="${ user[1].number }"/></td>
             <td><c:out value="${ user[1].box }"/></td>
             <td><c:out value="${ user[1].city.citie }"/></td>
+            <td><c:out value="${ user[2].typeAdress }"/></td>
         </tr>
     </c:forEach>
     </tbody>

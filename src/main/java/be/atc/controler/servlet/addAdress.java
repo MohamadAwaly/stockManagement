@@ -78,6 +78,7 @@ public class addAdress extends HttpServlet {
         String error = "";
         AdressService adressService = new AdressService();
         boolean ifTypeAdressExist = adressService.verfyIfTypeAdressExist(typeAdress, idUser);
+        logger.log(Level.INFO,"type of adress: (return methode) " + ifTypeAdressExist);
         if(ifTypeAdressExist){
             adressService.addMultipleAdress(idUser, adress, adressUsers);
             logger.log(Level.INFO,"Adress added");
@@ -93,20 +94,32 @@ public class addAdress extends HttpServlet {
         List<Object[]> adressList = adressService
                 .listAdressByIdUser( Integer.parseInt( request.getParameter( "iduserUpdate" ) ) );
 
+        //iduserUpdate
+        int id = Integer.parseInt(request.getParameter("iduserUpdate"));
 
         try {
-            request.setAttribute( "user", user );
-            request.setAttribute( "roles", roleList );
-            request.setAttribute( "cities", citiesList );
-            request.setAttribute( "allTypeAdress", allTypeAdress );
-            request.setAttribute( "adress", adressList );
+            if (error.equals("")){
+                request.setAttribute( "user", user );
+                request.setAttribute( "roles", roleList );
+                request.setAttribute( "cities", citiesList );
+                request.setAttribute( "allTypeAdress", allTypeAdress );
+                request.setAttribute( "adress", adressList );
+            } else {
+                request.setAttribute("error", error);
+                request.setAttribute("id", id);
+                request.setAttribute("allTypeAdress", allTypeAdress);
+                request.setAttribute("cities", citiesList);
+            }
         } catch ( Exception e ) {
             logger.log( Level.ERROR, "User error" + e.getMessage() );
         }
 
+        if (error.equals("")){
+            this.getServletContext().getRequestDispatcher(VUE_UPDATEUSER).forward(request, response);
+        } else {
+            this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+        }
 
-
-        this.getServletContext().getRequestDispatcher(VUE_UPDATEUSER).forward(request, response);
 
 
     }

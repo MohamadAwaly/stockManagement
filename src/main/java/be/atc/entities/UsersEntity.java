@@ -7,7 +7,7 @@ import java.util.Objects;
 
 @NamedQueries( value = {
         @NamedQuery( name = "User.finddall",
-                query = "SELECT u, a FROM UsersEntity u " +
+                query = "SELECT u, a, au FROM UsersEntity u " +
                         "JOIN AdressUsersEntity au on au.users = u " +
                         "JOIN AdressEntity a on au.address = a " +
                         "where au.typeAdress = be.atc.controler.enumm.TypeAdress.Domicile " +

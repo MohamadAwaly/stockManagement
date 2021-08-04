@@ -45,6 +45,12 @@ public class AdressService {
         return query.getResultList();
     }
 
+    /**
+     * add different adress by type for user
+     * @param idUser
+     * @param adress
+     * @param adressUsers
+     */
     public void addMultipleAdress(int idUser, AdressEntity adress, AdressUsersEntity adressUsers){
             try {
                 trans.begin();
@@ -68,21 +74,27 @@ public class AdressService {
 
     }
 
+    /**
+     * Very if user has already the type of adress
+     * @param typeAdress
+     * @param idUser
+     * @return
+     */
     public boolean verfyIfTypeAdressExist (TypeAdress typeAdress, int idUser){
         Query query = em.createNamedQuery("Adress.TypeAdressExist");
         query.setParameter("typeAdress",typeAdress );
         query.setParameter("idUser", idUser);
-        try {
-            String result = (String) query.getSingleResult();
-            if(result != null ){
-                return false;
-            } else{
-                return false;
+        List<Object> result = new ArrayList<Object>();
+            try{
+                result = (List<Object>) query.getResultList();
+                if(result.isEmpty()){
+                    return true;
+                } else {
+                    return false;
+                }
+            } catch (Exception e){
+                logger.log(Level.ERROR,"no result so adress can be added " + e.getMessage());
+                return true;
             }
-        } catch (Exception e){
-            logger.log(Level.ERROR, "Error - verify if type adress exist: " + e.getMessage());
-            return false;
-        }
-
     }
 }

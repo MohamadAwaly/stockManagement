@@ -4,6 +4,12 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
 
+@NamedQueries(value = {
+        @NamedQuery(name = "suppliers.findAll",query = "SELECT s FROM SuppliersEntity s"),
+        @NamedQuery(name="Suppliers.findName",query = "SELECT s.name from SuppliersEntity s")
+})
+
+
 @Entity
 @Table( name = "suppliers", schema = "stockmanagement" )
 public class SuppliersEntity {

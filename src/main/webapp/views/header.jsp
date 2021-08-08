@@ -49,6 +49,17 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                       aria-haspopup="true" aria-expanded="false">Liste des fournisseurs</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="">Ajouter fournisseurs</a>
+                        <a class="dropdown-item" href="#">MÀJ fournisseurs</a>
+                        <a class="dropdown-item" href="#">Supprimer fournisseurs</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="suppliersShowAll">Liste des fournisseurs</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                        aria-haspopup="true" aria-expanded="false">Address</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="#">Add City</a>

@@ -5,8 +5,8 @@ import java.util.Collection;
 import java.util.Objects;
 
 @NamedQueries(value = {
-        @NamedQuery(name = "suppliers.findAll",query = "SELECT s FROM SuppliersEntity s"),
-        @NamedQuery(name="Suppliers.findName",query = "SELECT s.name from SuppliersEntity s")
+        @NamedQuery(name = "suppliers.findAll",query = "SELECT s.idSupplier, s.name FROM SuppliersEntity s"),
+        @NamedQuery(name="suppliers.findName",query = "SELECT s.name from SuppliersEntity s")
 })
 
 

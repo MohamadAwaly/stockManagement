@@ -163,17 +163,17 @@ $(document).ready(function () {
     $('.usersList').dblclick( function () {
         $('.usersList').removeAttr('style');
         $(this).css('background', '#31B0D5');
-        // var test1 = new Date($(this).find("td").eq(5).html());
-        // var test1 = $(this).find("td").eq(5).html();
-        // var day = test1.substring(0,2);
-        // var month = test1.substring(3,5);
         $('#selectedUserid').attr('value',$(this).find("td").eq(0).html());
         $('#selectedUserLogin').attr('value',$(this).find("td").eq(1).html());
-
     });
+    //add the information in the field to add an address
     $('#idAddAdress').click( function () {
         $('#selectedUseridUpdate').attr('value',$('#iduserUpdate').val());
         $('#selectedUserLoginUpdate').attr('value',$('#loginUpdate').val());
+    });
+    //add id-adress in the field to update adress selected
+    $('.adressList').dblclick(function (){
+        $('#selected-IdAdress').attr('value',$(this).find("td").eq(0).html());
     });
 });
 

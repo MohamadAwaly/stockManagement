@@ -22,8 +22,17 @@ public class SupplierService {
         return  lst_suppliers;
     }
     public void supplierCreate(SuppliersEntity supplier){
-        transaction.begin();
-        entityManager.merge(supplier);
-        transaction.commit();
+        try{
+            transaction.begin();
+            entityManager.merge(supplier);
+            transaction.commit();
+        }
+        catch (Exception e){
+            transaction.rollback();
+        }finally {
+            entityManager.close();
+        }
+
     }
+
 }

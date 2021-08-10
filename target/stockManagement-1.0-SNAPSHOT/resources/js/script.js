@@ -126,21 +126,21 @@ $(document).ready(function () {
             errorEmail.hidden = false;
         }
     })
-    // password.keyup(function () {
-    //     var errorPass = document.getElementById("erroPassword");
-    //     var errorRP = document.getElementById("errorRP");
-    //     var pass = $(this).val();
-    //     var rpass = $(this).val();
-    //     if (regPass.test(pass)) {
-    //         $(this).removeClass("is-invalid");
-    //         $(this).addClass("is-valid");
-    //         errorPass.hidden = true;
-    //     } else {
-    //         $(this).removeClass("is-valid");
-    //         $(this).addClass("is-invalid");
-    //         errorPass.hidden = false;
-    //     }
-    // })
+    password.keyup(function () {
+        var errorPass = document.getElementById("erroPassword");
+        var errorRP = document.getElementById("errorRP");
+        var pass = $(this).val();
+        var rpass = $(this).val();
+        if (regPass.test(pass)) {
+            $(this).removeClass("is-invalid");
+            $(this).addClass("is-valid");
+            errorPass.hidden = true;
+        } else {
+            $(this).removeClass("is-valid");
+            $(this).addClass("is-invalid");
+            errorPass.hidden = false;
+        }
+    })
     rpassword.keyup(function () {
         var errorRpass = document.getElementById("errorRPassword");
         var rpass = $(this).val();

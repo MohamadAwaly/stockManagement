@@ -14,7 +14,10 @@ import java.util.Objects;
         @NamedQuery(name = "Adress.TypeAdressExist",
                 query = "Select au.typeAdress from AdressUsersEntity au" +
                         " join UsersEntity u on au.users = u" +
-                        " where au.users.idUser = :idUser and au.typeAdress = :typeAdress")
+                        " where au.users.idUser = :idUser and au.typeAdress = :typeAdress"),
+        @NamedQuery(name = "Adress.SelectAdressById",
+                query = "SELECT a from AdressEntity a " +
+                        "where a.idAdress = :id")
 })
 
 @Entity

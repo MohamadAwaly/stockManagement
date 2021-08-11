@@ -97,4 +97,10 @@ public class AdressService {
                 return true;
             }
     }
+
+    public List<Object[]> adressbyIdAdress (int idAdress){
+        Query query = em.createNamedQuery("Adress.SelectAdressById");
+        query.setParameter("id", idAdress);
+        return query.getResultList();
+    }
 }

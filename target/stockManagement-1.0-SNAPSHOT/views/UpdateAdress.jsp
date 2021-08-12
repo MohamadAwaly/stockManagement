@@ -10,7 +10,7 @@
 <c:import url="header.jsp"/>
 
 <c:forEach var="adress" items="${ adress }">
-    <form action="addAdress" method="post">
+    <form action="UpdateAdress" method="post">
         <div class="mb-3">
             <c:if test="${ !empty error}"><p class="alert alert-danger"><c:out value="${ error }"/></p></c:if>
         </div>

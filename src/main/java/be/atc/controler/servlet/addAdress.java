@@ -49,6 +49,7 @@ public class addAdress extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         //get id user
         int idUser = Integer.parseInt(request.getParameter("iduserUpdate"));
 

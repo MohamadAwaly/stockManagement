@@ -10,13 +10,14 @@
 
 <form action="adduser" method="post">
     <div class="mb-3">
-        <c:if test="${ !empty error}"><p class="alert alert-danger"><c:out value="${ error }"/></p></c:if>
+        <c:if test="${ !empty error}"><p class="alert alert-danger" id="error"><c:out value="${ error }"/></p></c:if>
     </div>
     <div class="mb-3">
         <label for="login" class="form-label login"><span class="etoile">*</span> Login</label>
         <input type="text" name="login" class="form-control" id="login" aria-describedby="login" required value=<c:out
                 value="${user.login}"/>>
         <div id="errorLogin" hidden class="alert alert-danger">Le login doit contenir au moin 4 caract&egrave;res</div>
+        <div id="errorUserExist" hidden class="alert alert-danger">L'utilisateur existe d&eacute;ja</div>
     </div>
     <div class="row">
         <div class="col">

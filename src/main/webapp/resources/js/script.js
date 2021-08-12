@@ -1,6 +1,6 @@
 $(document).ready(function () {
     //Var add User
-    var login = $('.login'),
+    var login = $('#login'),
         lastName = $('.lastNameClass'),
         firstName = $('.firstNameClass'),
         dayOfBirth = $('.dayOfBirthClass'),
@@ -18,6 +18,7 @@ $(document).ready(function () {
     login.keyup(function () {
         var errorVal = $(this).val();
         var errorLogin = document.getElementById("errorLogin");
+        var errorUserExist = document.getElementById("errorUserExist");
         if (errorVal.length < 4) {
             console.log("login");
             $(this).removeClass("is-valid");
@@ -28,6 +29,27 @@ $(document).ready(function () {
             $(this).addClass("is-valid");
             errorLogin.hidden = true;
         }
+        //test ajax
+        $.ajax({
+            type: "POST",
+            url : 'UserAjaxCheckUserExist',
+            data : {
+                login : login.val(),
+            },
+            // dataType : 'json',
+        }).done(function (data){
+            $('#error').attr('value', data);
+            if (data == "error"){
+                login.removeClass("is-valid");
+                login.addClass("is-invalid");
+                $('#errorUserExist').html("l'utilisateur " + login.val() + " existe deja");
+                errorUserExist.hidden = false;
+            } else{
+                login.removeClass("is-invalid");
+                login.addClass("is-valid");
+                errorUserExist.hidden = true;
+            }
+        });
     });
     lastName.keyup(function () {
         var errorValLastName = $(this).val();
@@ -161,6 +183,7 @@ $(document).ready(function () {
 
     /*Color lign on double click*/
     $('.usersList').dblclick( function () {
+        console.log("test dbclick");
         $('.usersList').removeAttr('style');
         $(this).css('background', '#31B0D5');
         $('#selectedUserid').attr('value',$(this).find("td").eq(0).html());
@@ -175,6 +198,7 @@ $(document).ready(function () {
     $('.adressList').dblclick(function (){
         $('#selected-IdAdress').attr('value',$(this).find("td").eq(0).html());
     });
+
 });
 
 

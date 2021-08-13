@@ -96,3 +96,27 @@
         </div>
     </div>
 </nav>
+<header>
+    <c:choose>
+        <c:when test="${sessionScope.sessionUtilisateur.login != null}">
+            <form>
+                <SELECT name="nom" size="1" action="deconnexion" class="class-session" onchange="location = this.value">
+                    <option><c:out value="${sessionScope.sessionUtilisateur.login}"/></option>
+                    <option value="deconnexion">Logout</option>
+                </SELECT>
+            </form>
+        </c:when>
+        <c:when test="${sessionScope.sessionUtilisateur.login == null}">
+            <form method="get" action="Login">
+                <button type="submit" class="btn btn-light class-session" >Se connecter</button>
+            </form>
+        </c:when>
+    </c:choose>
+<%--    <form>--%>
+<%--        <SELECT name="nom" size="1" action="deconnexion" class="class-session" onchange="location = this.value">--%>
+<%--            <option><c:out value="${sessionScope.sessionUtilisateur.login}"/></option>--%>
+<%--            <option value="deconnexion">Logout</option>--%>
+<%--        </SELECT>--%>
+<%--    </form>--%>
+
+</header>

@@ -201,7 +201,6 @@ $(document).ready(function () {
 
 });
 
-
 /**
  * Return the difference between the two date in day
  * @param a Date of birth

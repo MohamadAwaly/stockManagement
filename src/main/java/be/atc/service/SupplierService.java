@@ -2,6 +2,7 @@ package be.atc.service;
 
 import be.atc.controler.connexion.EMF;
 import be.atc.entities.SuppliersEntity;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import javax.persistence.EntityManager;
@@ -30,9 +31,14 @@ public class SupplierService {
         catch (Exception e){
             transaction.rollback();
         }finally {
-            entityManager.close();
+            logger.log(Level.INFO,"supplierCreate : ");
         }
-
     }
-
+    public Object supplierExist(String pWhereName){
+        Query query = entityManager.createNamedQuery("suppliers.supplierExist")
+                .setParameter("pWhereName",pWhereName);
+        Object supplier = query.getSingleResult();
+        logger.log(Level.INFO, "supplier exist : "+supplier);
+        return supplier;
+    }
 }

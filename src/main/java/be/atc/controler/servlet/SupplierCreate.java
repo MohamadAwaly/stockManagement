@@ -35,6 +35,7 @@ public class SupplierCreate extends HttpServlet {
         newSuppliersEntity.setName(supplierName);
         logger.log(Level.INFO,"Entity : " + newSuppliersEntity);
         this.getServletContext().getRequestDispatcher(VUE_SupplierList).forward(request,response);
-        //supplierService.supplierCreate(newSuppliersEntity);
+        supplierService.supplierCreate(newSuppliersEntity);
+
     }
 }

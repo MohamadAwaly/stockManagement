@@ -10,7 +10,7 @@
 <%@include file="header.jsp"%>
 
 <form id="formSupplierAdd" action="supplierCreate" method="post">
-    <input type="text" name="supplierName" class="form-control" id="supplierName">
-    <input type="submit" class="btn btn-primary">
+    <input type="text" name="supplierName" class="form-control" id="formNewSupplierName">
+    <input type="submit" class="btn btn-primary" id="submitNewSupplier">
 </form>
 <%@include file="footer.jsp"%>

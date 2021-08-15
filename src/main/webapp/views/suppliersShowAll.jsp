@@ -14,11 +14,10 @@
 
 <table class="table table-striped table-hover" border="1px solid black">
     <thead>
+    <th>Id (temporaire - brouillon)</th>
     <th>Nom</th>
-    <th>téléphone</th>
     </thead>
     <c:forEach var="supplier" items="${suppliers}">
-
     <tr>
         <td><c:out value="${supplier[0]}"></c:out></td>
         <td><c:out value="${supplier[1]}"></c:out></td>

@@ -14,6 +14,7 @@ public class CommandsuppliersEntity {
     @GeneratedValue( strategy = GenerationType.IDENTITY )
     @Column( name = "id_commandSuppliers", nullable = false )
     private int  idCommandSuppliers;
+
     @Basic
     @Column( name = "orderDate", nullable = false )
     private Date orderDate;

@@ -199,5 +199,37 @@ function dateDiffInDays(a, b) {
 //     return utc;
 // }
 
+/**
+ *  PARTIE FOURNISSEUR
+ */
+
+/**
+ * Control de foournisseur si Existe
+ */
+$(document).on('keyup','#formNewSupplierName',function (){
+    let inputNewSupplierName = $(this).val().toString().trim();
+    console.log('formNewSupplierName  : ' + inputNewSupplierName);
+    $.ajax({
+        url : "SupplierExist",
+        method : "POST",
+        data : {
+            name : inputNewSupplierName
+        }
+    }).done(function (data){
+            console.log('Response Data : '+data);
+            let supplierExist = parseInt(data.toString().trim());
+            if (supplierExist == 1){
+                $('#formNewSupplierName').attr('class','form-control is-invalid');
+                $('#submitNewSupplier').attr('disabled','true');
+            }
+            else{
+                $('#formNewSupplierName').attr('class','form-control is-valid');
+                $('#submitNewSupplier').removeAttr('disabled');
+            }
+        }
+    )
+});
+
+
 
 

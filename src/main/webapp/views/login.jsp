@@ -21,7 +21,8 @@
         <div class="fadeIn first">
             <img src="${pageContext.request.contextPath}/resources/pictures/Logo.png" id="icon" alt="User Icon"/>
         </div>
-        <form method="post" action="home">
+        <form method="post" action="Login">
+            <div id="errorLoginPassword" hidden class="alert alert-danger">L'utilisateur existe d&eacute;ja</div>
             <input type="text" id="login-user" class="fadeIn second" name="login-user" placeholder="nom d'utilisateur">
             <input type="password" id="password" class="fadeIn third" name="password" placeholder="mot de passe">
             <input type="submit" class="fadeIn fourth" value="se connecter">

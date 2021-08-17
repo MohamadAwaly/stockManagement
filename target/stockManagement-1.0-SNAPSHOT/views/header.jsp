@@ -8,18 +8,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE HTML>
-<html>
+<html lang="fr">
 <head>
-    <title>Stock management</title>
     <meta charset="utf-8">
+    <title>Stock management</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/allCss.css" />
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/script.js"></script>
     <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
-<%--    <link rel="stylesheet" href="../resources/css/allCss.css">--%>
-<%--    <script type="text/javascript" src="../resources/js/script.js"></script>--%>
-<%--    <script type="text/javascript" src="../resources/js/jquery-3.5.1.js"></script>--%>
+    <%--    <link rel="stylesheet" href="../resources/css/allCss.css">--%>
+    <%--    <script type="text/javascript" src="../resources/js/script.js"></script>--%>
+    <%--    <script type="text/javascript" src="../resources/js/jquery-3.5.1.js"></script>--%>
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
@@ -54,6 +54,7 @@
                         <a class="dropdown-item" href="supplierCreate">Ajouter fournisseurs</a>
                         <a class="dropdown-item" href="#">MÀJ fournisseurs</a>
                         <a class="dropdown-item" href="#">Supprimer fournisseurs</a>
+                        <a class="dropdown-item" href="CommandSupplierCreate">Faire une commande aux fournisseur</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="suppliersShowAll">Liste des fournisseurs</a>
                     </div>

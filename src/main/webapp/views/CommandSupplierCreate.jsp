@@ -16,7 +16,11 @@
                 <div class="mb-3">
                     <label for="inputSelectSupplierName">Fournisseur</label>
                     <select id="inputSelectSupplierName" name="SupplierName" class="form-control">
-                        <option value="">caca</option>
+                        <c:forEach var="supplier" items="${suppliers}">
+                            <option value="<c:out value="${supplier[0]}}"/>">
+                                <c:out value="${supplier[1]}"/>
+                            </option>
+                        </c:forEach>
                     </select>
                     <label for="inputSelectUser">Utilisateur</label>
                     <select id="inputSelectUser" name="User" class="form-control">

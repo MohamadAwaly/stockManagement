@@ -3,6 +3,9 @@ package be.atc.entities;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
+@NamedQueries({
+        @NamedQuery(name = "product.AllIdAndName",query = "SELECT p.idProduct, p.designation FROM ProductsEntity p")
+})
 
 @Entity
 @Table( name = "products", schema = "stockmanagement" )

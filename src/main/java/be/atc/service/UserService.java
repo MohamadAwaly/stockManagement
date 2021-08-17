@@ -70,6 +70,8 @@ public class UserService {
             if (!userUpdate.getPassword().equals(user.getPassword())) {
                 String password = user.getPassword();
                 String passwordHached = BCrypt.hashpw(password, BCrypt.gensalt());
+                logger.log(Level.INFO,"le mot de passe recu par les parametre: " + password);
+                logger.log(Level.INFO,"passwordhached dans la méthode update user: " + passwordHached);
                 userUpdate.setPassword(passwordHached);
                 logger.log(Level.INFO, "Password modified ");
             } else {
@@ -161,15 +163,12 @@ public class UserService {
      * Check login and password
      *
      * @param login
-     * @param password
      * @return
      */
-    public List<UsersEntity[]> checkLogin(String login, String password) {
+    public List<Object> checkLogin(String login) {
         Query query = em.createNamedQuery("User.CheckLogin");
         query.setParameter("login", login);
-        query.setParameter("password", password);
         return query.getResultList();
-
 
     }
 

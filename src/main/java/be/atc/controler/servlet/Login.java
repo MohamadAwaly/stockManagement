@@ -31,28 +31,19 @@ public class Login extends HttpServlet {
         String password = "";
         login = request.getParameter("login-user");
         password = request.getParameter("password");
-        logger.log(Level.INFO,"login: " + login);
-        logger.log(Level.INFO, "password: " + password );
-        String passwordHached = BCrypt.hashpw( password, BCrypt.gensalt() );
-
+//        String passwordHached = BCrypt.hashpw( password, BCrypt.gensalt() );
         UserService userService = new UserService();
-        logger.log(Level.INFO, "response methode: " + userService.checkLogin(login, passwordHached));
-
-        List user = userService.checkLogin(login,password);
-        logger.log(Level.INFO, "List: " + user);
-        for (Object test:
-             user) {
-            logger.log(Level.INFO,"test: " + test);
-//            logger.log(Level.INFO,"test: " + test.getLogin());
+        List <Object> user = userService.checkLogin(login);
+        Boolean checkpw = false;
+        String error = "Erreur! Username/password incorrect ";
+        for (Object str: user) {
+            checkpw =  BCrypt.checkpw(password,(String)str);
+            logger.log(Level.INFO,"User checked login is: " + checkpw);
         }
-
-        if (!(userService.checkLogin(login, passwordHached ).equals(null))) {
-            logger.log(Level.INFO,"dans le if");
-//            this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+        if (checkpw) {
             response.sendRedirect(request.getContextPath() +"/UsersShowAll");
         } else {
-            logger.log(Level.INFO,"dans le else");
-
+            request.setAttribute("error", error);
             this.getServletContext().getRequestDispatcher(VUE_LOGIN).forward(request, response);
         }
     }

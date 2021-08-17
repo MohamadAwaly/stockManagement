@@ -22,8 +22,8 @@ import java.util.Objects;
                 query = "SELECT u FROM UsersEntity u " +
                         "where u.idUser = :id"),
         @NamedQuery(name = "User.CheckLogin",
-                query ="SELECT u.login, u.password from UsersEntity u" +
-                        " where u.login = :login and u.password = :password")
+                query = "SELECT u.password FROM UsersEntity u " +
+                        "where u.login = :login")
 })
 @Entity
 @Table(name = "users", schema = "stockmanagement")

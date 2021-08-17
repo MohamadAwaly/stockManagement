@@ -8,6 +8,7 @@ $(document).ready(function () {
         mail = $('.emailClass'),
         password = $('.passwordClass'),
         rpassword = $('.rpPasswordClass');
+
     //Minimum eight characters, at least one upper case English letter, one lower case English letter, one number and one special character
     var regPass = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$");
     var regEmail = new RegExp(/[a-zA-Z0-9\.]{1,}[@][a-zA-Z0-9\.]{1,}[\.][a-zA-Z0-9\.]{1,}$/);
@@ -32,19 +33,19 @@ $(document).ready(function () {
         //test ajax
         $.ajax({
             type: "POST",
-            url : 'UserAjaxCheckUserExist',
-            data : {
-                login : login.val(),
+            url: 'UserAjaxCheckUserExist',
+            data: {
+                login: login.val(),
             },
             // dataType : 'json',
-        }).done(function (data){
+        }).done(function (data) {
             $('#error').attr('value', data);
-            if (data == "error"){
+            if (data == "error") {
                 login.removeClass("is-valid");
                 login.addClass("is-invalid");
                 $('#errorUserExist').html("l'utilisateur " + login.val() + " existe deja");
                 errorUserExist.hidden = false;
-            } else{
+            } else {
                 login.removeClass("is-invalid");
                 login.addClass("is-valid");
                 errorUserExist.hidden = true;
@@ -181,22 +182,23 @@ $(document).ready(function () {
 
     })
 
+
     /*Color lign on double click*/
-    $('.usersList').dblclick( function () {
+    $('.usersList').dblclick(function () {
         console.log("test dbclick");
         $('.usersList').removeAttr('style');
         $(this).css('background', '#31B0D5');
-        $('#selectedUserid').attr('value',$(this).find("td").eq(0).html());
-        $('#selectedUserLogin').attr('value',$(this).find("td").eq(1).html());
+        $('#selectedUserid').attr('value', $(this).find("td").eq(0).html());
+        $('#selectedUserLogin').attr('value', $(this).find("td").eq(1).html());
     });
     //add the information in the field to add an address
-    $('#idAddAdress').click( function () {
-        $('#selectedUseridUpdate').attr('value',$('#iduserUpdate').val());
-        $('#selectedUserLoginUpdate').attr('value',$('#loginUpdate').val());
+    $('#idAddAdress').click(function () {
+        $('#selectedUseridUpdate').attr('value', $('#iduserUpdate').val());
+        $('#selectedUserLoginUpdate').attr('value', $('#loginUpdate').val());
     });
     //add id-adress in the field to update adress selected
-    $('.adressList').dblclick(function (){
-        $('#selected-IdAdress').attr('value',$(this).find("td").eq(0).html());
+    $('.adressList').dblclick(function () {
+        $('#selected-IdAdress').attr('value', $(this).find("td").eq(0).html());
     });
 
 });
@@ -216,6 +218,7 @@ function dateDiffInDays(a, b) {
 
     return Math.floor((utc2 - utc1) / _MS_PER_DAY);
 }
+
 // function dateFormat (date){
 //     // const utc = new Date(date.getDate() + " " + [date.getMonth()] + " " + date.getUTCFullYear());
 //     // const utc = new Date(date.getUTCFullYear() + " " + [date.getMonth()] + " " + date.getDate());

@@ -204,11 +204,12 @@ function dateDiffInDays(a, b) {
  */
 
 /**
- * Control de foournisseur si Existe
+ * Page : supplierCreate
+ * Contrôle fournisseur si Existe
+ * @author Jiwaii
  */
 $(document).on('keyup','#formNewSupplierName',function (){
     let inputNewSupplierName = $(this).val().toString().trim();
-    console.log('formNewSupplierName  : ' + inputNewSupplierName);
     $.ajax({
         url : "SupplierExist",
         method : "POST",
@@ -216,7 +217,7 @@ $(document).on('keyup','#formNewSupplierName',function (){
             name : inputNewSupplierName
         }
     }).done(function (data){
-            console.log('Response Data : '+data);
+            // console.log('Response Data : '+data);
             let supplierExist = parseInt(data.toString().trim());
             if (supplierExist == 1){
                 $('#formNewSupplierName').attr('class','form-control is-invalid');

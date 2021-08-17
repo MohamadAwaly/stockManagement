@@ -22,7 +22,6 @@ public class SuppliersShowAll extends HttpServlet {
         List<Object[]> lst_suppliers = supplierService.suppliersShowAll();
         logger.log(Level.INFO,"___INFO SUPP____ "+lst_suppliers);
         request.setAttribute("suppliers",lst_suppliers);
-        request.setAttribute("nom","Laurent de Jambes");
         request.getRequestDispatcher(VUE).forward(request,response);
     }
 

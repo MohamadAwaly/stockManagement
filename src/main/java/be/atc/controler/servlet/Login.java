@@ -29,6 +29,7 @@ public class Login extends HttpServlet {
 
         String login = "";
         String password = "";
+        HttpSession session = request.getSession();
         login = request.getParameter("login-user");
         password = request.getParameter("password");
 //        String passwordHached = BCrypt.hashpw( password, BCrypt.gensalt() );
@@ -42,7 +43,9 @@ public class Login extends HttpServlet {
         }
         if (checkpw) {
             response.sendRedirect(request.getContextPath() +"/UsersShowAll");
+            session.setAttribute("SessionUser", login);
         } else {
+            session.setAttribute("SessionUser", null);
             request.setAttribute("error", error);
             this.getServletContext().getRequestDispatcher(VUE_LOGIN).forward(request, response);
         }

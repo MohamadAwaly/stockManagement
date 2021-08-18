@@ -34,13 +34,20 @@ public class Login extends HttpServlet {
         password = request.getParameter("password");
 //        String passwordHached = BCrypt.hashpw( password, BCrypt.gensalt() );
         UserService userService = new UserService();
-        List <Object> user = userService.checkLogin(login);
+//        List <Object> user = userService.checkLogin(login);
+        UsersEntity user = userService.checkLogin(login);
         Boolean checkpw = false;
+//        logger.log(Level.INFO,"Taille de la liste: " + user.size());
         String error = "Erreur! Username/password incorrect ";
-        for (Object str: user) {
-            checkpw =  BCrypt.checkpw(password,(String)str);
-            logger.log(Level.INFO,"User checked login is: " + checkpw);
-        }
+//        for (Object str: user) {
+            checkpw =  BCrypt.checkpw(password,user.getPassword());
+//            logger.log(Level.INFO,"User checked login is: " + checkpw);
+//            logger.log(Level.INFO,"i : " + str);
+//        }
+
+        logger.log(Level.INFO, "CheckUser dans la servlet: " + user.getLogin());
+
+
         if (checkpw) {
             response.sendRedirect(request.getContextPath() +"/UsersShowAll");
             session.setAttribute("SessionUser", login);

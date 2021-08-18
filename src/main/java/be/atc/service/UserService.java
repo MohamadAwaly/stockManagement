@@ -165,10 +165,11 @@ public class UserService {
      * @param login
      * @return
      */
-    public List<Object> checkLogin(String login) {
-        Query query = em.createNamedQuery("User.CheckLogin");
+    public UsersEntity checkLogin(String login) {
+        Query query = em.createNamedQuery("User.CheckLogin",UsersEntity.class);
         query.setParameter("login", login);
-        return query.getResultList();
+        int id = (int) query.getSingleResult();
+        return em.find(UsersEntity.class, id);
 
     }
 

@@ -98,15 +98,15 @@
 </nav>
 <header>
     <c:choose>
-        <c:when test="${sessionScope.sessionUtilisateur.login != null}">
+        <c:when test="${sessionScope.SessionUser != null}">
             <form>
                 <SELECT name="nom" size="1" action="deconnexion" class="class-session" onchange="location = this.value">
-                    <option><c:out value="${sessionScope.sessionUtilisateur.login}"/></option>
+                    <option><c:out value="${sessionScope.SessionUser}"/></option>
                     <option value="deconnexion">Logout</option>
                 </SELECT>
             </form>
         </c:when>
-        <c:when test="${sessionScope.sessionUtilisateur.login == null}">
+        <c:when test="${sessionScope.SessionUser == null}">
             <form method="get" action="Login">
                 <button type="submit" class="btn btn-light class-session" >Se connecter</button>
             </form>

@@ -12,6 +12,9 @@ import java.util.Objects;
                         "JOIN AdressEntity a on au.address = a " +
                         "where au.typeAdress = be.atc.controler.enumm.TypeAdress.Domicile " +
                         "order by u.idUser desc " ),
+        @NamedQuery(name = "User.findAllIdAndName",
+                query = "SELECT u.idUser, concat(u.lastName,'  ',u.firstName) FROM UsersEntity u " +
+                        "order by u.lastName asc"),
         @NamedQuery( name = "User.findName",
                 query = "SELECT u.lastName FROM UsersEntity u" ),
         @NamedQuery( name = "User.checkUserExist",

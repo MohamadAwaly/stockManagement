@@ -15,16 +15,21 @@
             <div class="col">
                 <div class="mb-3">
                     <label for="inputSelectSupplierName">Fournisseur</label>
-                    <select id="inputSelectSupplierName" name="SupplierName" class="form-control">
+                    <select id="inputSelectSupplierName" name="Supplier" class="form-control">
                         <c:forEach var="supplier" items="${suppliers}">
-                            <option value="<c:out value="${supplier[0]}}"/>">
+                            <option value="<c:out value="${supplier[0]}"/>">
                                 <c:out value="${supplier[1]}"/>
                             </option>
                         </c:forEach>
                     </select>
                     <label for="inputSelectUser">Utilisateur</label>
                     <select id="inputSelectUser" name="User" class="form-control">
-                        <option value="">cacao</option>
+                        <c:forEach var="user" items="${users}">
+                        <option value="<c:out value="${user[0]}"/>">
+                            <c:out value="${user[1]}"/>
+                        </option>
+
+                        </c:forEach>
                     </select>
                 </div>
             </div>
@@ -32,13 +37,19 @@
                 <div class="mb-3">
                     <label for="inputSelectProduct">Produit</label>
                     <select id="inputSelectProduct" name="Product" class="form-control">
-                        <option value="">cacaola</option>
+                        <c:forEach var="product" items="${products}">
+
+                        <option value="<c:out value="${product[0]}"/>">
+                            <c:out value="${product[1]}"/>
+                        </option>
+                        </c:forEach>
                     </select>
                     <label for="inputQuantity">Quantité</label>
-                    <input type="text" id="inputQuantity" class="form-control" placeholder="Quantité"/>
+                    <input type="text" id="inputQuantity" name="Quantity" class="form-control" placeholder="Quantité"/>
                 </div>
             </div>
         </div>
+        <input type="submit" class="font-menu-button" value="Enregistrer la commande"/>
     </form>
 </div>
 

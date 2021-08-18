@@ -102,6 +102,17 @@ public class UserService {
     }
 
     /**
+     * List of id and username
+     * @return List<Objet>
+     */
+    public List<Object[]>showAllUsersIdAndName() {
+        List<Object[]> user = new ArrayList<>();
+        Query query = em.createNamedQuery( "User.findAllIdAndName" );
+        user = query.getResultList();
+        return query.getResultList();
+    }
+
+    /**
      * check if login & vat exist
      *
      * @param login

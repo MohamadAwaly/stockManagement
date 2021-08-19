@@ -100,9 +100,9 @@
     <c:choose>
         <c:when test="${sessionScope.SessionUser != null}">
             <form>
-                <SELECT name="nom" size="1" action="deconnexion" class="class-session" onchange="location = this.value">
+                <SELECT name="nom" size="1" action="UserSignOut" class="class-session" onchange="location = this.value">
                     <option><c:out value="${sessionScope.SessionUser}"/></option>
-                    <option value="deconnexion">Logout</option>
+                    <option value="UserSignOut">Logout</option>
                 </SELECT>
             </form>
         </c:when>
@@ -112,11 +112,4 @@
             </form>
         </c:when>
     </c:choose>
-<%--    <form>--%>
-<%--        <SELECT name="nom" size="1" action="deconnexion" class="class-session" onchange="location = this.value">--%>
-<%--            <option><c:out value="${sessionScope.sessionUtilisateur.login}"/></option>--%>
-<%--            <option value="deconnexion">Logout</option>--%>
-<%--        </SELECT>--%>
-<%--    </form>--%>
-
 </header>

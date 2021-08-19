@@ -78,7 +78,11 @@ public class AddUser extends HttpServlet {
             newuser.setDayOfBirth( Date.valueOf( request.getParameter( "dayOfBirth" ) ) );
             newuser.setInscriptionDate( Date.valueOf( currentDate ) );
             newuser.setVat( request.getParameter( "vat" ) );
-            newuser.setMail( request.getParameter( "email" ) );
+            try {
+                newuser.setMail( request.getParameter( "email" ) );
+            } catch (Exception e){
+                /*ignored*/
+            }
             newuser.setPassword( passwordHached );
             newuser.setLogin( request.getParameter( "login" ) );
             newuser.setRoles( role );
@@ -88,10 +92,11 @@ public class AddUser extends HttpServlet {
             AdressEntity adress = new AdressEntity();
             adress.setStreet( request.getParameter( "street" ) );
             adress.setNumber( Integer.parseInt( request.getParameter( "number" ) ) );
-            if ( request.getParameter( "box" ).equals( "" ) ) {
-                adress.setBox( 0 );
-            } else {
+
+            try {
                 adress.setBox( Integer.parseInt( request.getParameter( "box" ) ) );
+            } catch (Exception e ){
+                /*ignored*/
             }
             //initialize a city and get the user's city
             CitiesEntity city = new CitiesEntity();

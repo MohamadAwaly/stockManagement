@@ -27,9 +27,11 @@ public class UserService {
     //    }
 
     /**
-     * add user
-     *
+     * add new user
      * @param user
+     * @param adressEntity
+     * @param adressUser
+     * @return
      */
     public boolean addUser(UsersEntity user, AdressEntity adressEntity, AdressUsersEntity adressUser) {
         try {
@@ -55,6 +57,12 @@ public class UserService {
         }
     }
 
+    /**
+     * Update user
+     * @param user
+     * @param adressEntity
+     * @param adressUser
+     */
     public void updateUser(UsersEntity user, AdressEntity adressEntity, AdressUsersEntity adressUser) {
         try {
 
@@ -153,6 +161,11 @@ public class UserService {
         }
     }
 
+    /**
+     * Select user by id
+     * @param id
+     * @return
+     */
     public List<Object[]> selectUserById(int id) {
         Query query = em.createNamedQuery("User.SelectById");
         query.setParameter("id", id);
@@ -168,9 +181,13 @@ public class UserService {
     public UsersEntity checkLogin(String login) {
         Query query = em.createNamedQuery("User.CheckLogin",UsersEntity.class);
         query.setParameter("login", login);
-        int id = (int) query.getSingleResult();
-        return em.find(UsersEntity.class, id);
-
+        int id = 0;
+        try {
+            id = (int) query.getSingleResult();
+            return em.find(UsersEntity.class, id);
+        } catch (Exception e ){
+            return null;
+        }
     }
 
 }

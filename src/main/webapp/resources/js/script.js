@@ -134,12 +134,14 @@ $(document).ready(function () {
             $(this).addClass("is-invalid");
             errorTva.hidden = false;
         }
+
+
     })
     mail.keyup(function () {
         var email = $(this).val();
         var errorEmail = document.getElementById("errorEmail");
         console.log("mail");
-        if (email.length > 0){
+        if (email.length > 0) {
             if (regEmail.test(email)) {
                 $(this).removeClass("is-invalid");
                 $(this).addClass("is-valid");

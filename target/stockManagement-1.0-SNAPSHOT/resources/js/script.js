@@ -134,19 +134,23 @@ $(document).ready(function () {
             $(this).addClass("is-invalid");
             errorTva.hidden = false;
         }
+
+
     })
     mail.keyup(function () {
         var email = $(this).val();
         var errorEmail = document.getElementById("errorEmail");
         console.log("mail");
-        if (regEmail.test(email)) {
-            $(this).removeClass("is-invalid");
-            $(this).addClass("is-valid");
-            errorEmail.hidden = true;
-        } else {
-            $(this).removeClass("is-valid");
-            $(this).addClass("is-invalid");
-            errorEmail.hidden = false;
+        if (email.length > 0) {
+            if (regEmail.test(email)) {
+                $(this).removeClass("is-invalid");
+                $(this).addClass("is-valid");
+                errorEmail.hidden = true;
+            } else {
+                $(this).removeClass("is-valid");
+                $(this).addClass("is-invalid");
+                errorEmail.hidden = false;
+            }
         }
     })
     password.keyup(function () {

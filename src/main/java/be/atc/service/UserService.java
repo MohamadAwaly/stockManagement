@@ -28,6 +28,7 @@ public class UserService {
 
     /**
      * add new user
+     *
      * @param user
      * @param adressEntity
      * @param adressUser
@@ -36,8 +37,14 @@ public class UserService {
     public boolean addUser(UsersEntity user, AdressEntity adressEntity, AdressUsersEntity adressUser) {
         try {
             UserService usercheck = new UserService();
-            if (usercheck.checkUserExist(user.getLogin()) || usercheck.checkVatExist(user.getVat())) {
-                logger.log(Level.INFO, "user already exists, Cannot add");
+            boolean chekvatisempty = true;
+            if (user.getVat() == null) {
+                chekvatisempty = false;
+            } else {
+                chekvatisempty = usercheck.checkVatExist(user.getVat());
+            }
+            if (usercheck.checkUserExist(user.getLogin()) || chekvatisempty) {
+                logger.log(Level.INFO, "user/vat already exists, Cannot add");
                 return false;
             } else {
                 trans.begin();
@@ -59,6 +66,7 @@ public class UserService {
 
     /**
      * Update user
+     *
      * @param user
      * @param adressEntity
      * @param adressUser
@@ -78,8 +86,8 @@ public class UserService {
             if (!userUpdate.getPassword().equals(user.getPassword())) {
                 String password = user.getPassword();
                 String passwordHached = BCrypt.hashpw(password, BCrypt.gensalt());
-                logger.log(Level.INFO,"le mot de passe recu par les parametre: " + password);
-                logger.log(Level.INFO,"passwordhached dans la méthode update user: " + passwordHached);
+                logger.log(Level.INFO, "le mot de passe recu par les parametre: " + password);
+                logger.log(Level.INFO, "passwordhached dans la méthode update user: " + passwordHached);
                 userUpdate.setPassword(passwordHached);
                 logger.log(Level.INFO, "Password modified ");
             } else {
@@ -163,6 +171,7 @@ public class UserService {
 
     /**
      * Select user by id
+     *
      * @param id
      * @return
      */
@@ -179,13 +188,13 @@ public class UserService {
      * @return
      */
     public UsersEntity checkLogin(String login) {
-        Query query = em.createNamedQuery("User.CheckLogin",UsersEntity.class);
+        Query query = em.createNamedQuery("User.CheckLogin", UsersEntity.class);
         query.setParameter("login", login);
         int id = 0;
         try {
             id = (int) query.getSingleResult();
             return em.find(UsersEntity.class, id);
-        } catch (Exception e ){
+        } catch (Exception e) {
             return null;
         }
     }

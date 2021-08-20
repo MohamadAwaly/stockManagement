@@ -77,11 +77,13 @@ public class AddUser extends HttpServlet {
             newuser.setFirstName( request.getParameter( "firstName" ) );
             newuser.setDayOfBirth( Date.valueOf( request.getParameter( "dayOfBirth" ) ) );
             newuser.setInscriptionDate( Date.valueOf( currentDate ) );
-            newuser.setVat( request.getParameter( "vat" ) );
-            try {
+            if (!request.getParameter( "vat" ).isEmpty() ){
+                newuser.setVat( request.getParameter( "vat" ) );
+            } else {
+                newuser.setVat(null);
+            }
+            if ( !request.getParameter( "email" ).isEmpty() ){
                 newuser.setMail( request.getParameter( "email" ) );
-            } catch (Exception e){
-                /*ignored*/
             }
             newuser.setPassword( passwordHached );
             newuser.setLogin( request.getParameter( "login" ) );
@@ -120,7 +122,7 @@ public class AddUser extends HttpServlet {
             boolean adduser = false;
             adduser = userService.addUser( newuser, adress, adressUsers );
             //            HttpSession session = request.getSession();
-            String errorUserExist = "l'utilisateur " + newuser.getLogin() + " existe déja ";
+            String errorUserExist = "l'utilisateur " + newuser.getLogin() + " ou le numéro de tva " + newuser.getVat()+ " existe déja ";
             //Send parameter to JSP
             if ( adduser ) {
                 List<Object[]> userList = user.showAllUsers();

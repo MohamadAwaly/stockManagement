@@ -39,10 +39,7 @@
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                        aria-haspopup="true" aria-expanded="false">Users</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Add Role</a>
                         <a class="dropdown-item" href="adduser">Ajouter utilisateur</a>
-                        <a class="dropdown-item" href="#">Update user</a>
-                        <a class="dropdown-item" href="#">Delete user</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="UsersShowAll">Liste des utilisateurs</a>
                     </div>

@@ -12,16 +12,22 @@
 <table class="table table-striped table-hover" border="1px solid black">
     <thead>
     <th># Commande</th>
-    <th>Produit</th>
-    <th>Lot</th>
-    <th>date de la commande</th>
     <th>Fournisseur</th>
+    <th>date de la commande</th>
+    <th>Produit</th>
+    <th>Qté</th>
+    <th>Lot</th>
     <th>Utilisateur</th>
     </thead>
-    <c:forEach var="supplier" items="${suppliers}">
+    <c:forEach var="cs" items="${commandSuppliers}">
         <tr>
-            <td><c:out value="${supplier[0]}"></c:out></td>
-            <td><c:out value="${supplier[1]}"></c:out></td>
+            <td><c:out value="${cs[1].idCommandSuppliers}"/></td>
+            <td><c:out value="${cs[0].name}"/></td>
+            <td><c:out value="${cs[1].orderDate}"/></td>
+            <td><c:out value="${cs[4].designation}"/></td>
+            <td><c:out value="${cs[3].quantity}"/></td>
+            <td><c:out value="${cs[3].numberBatch}"/></td>
+            <td><c:out value="${cs[1].users.lastName}"/></td>
         </tr>
     </c:forEach>
 </table>

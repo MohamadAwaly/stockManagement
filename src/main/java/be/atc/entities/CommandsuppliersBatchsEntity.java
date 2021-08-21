@@ -4,19 +4,14 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @NamedQueries({
-        @NamedQuery(name = "commandsuppliers_batchs.FindAll",
-                query = "SELECT s,cs,csb,b,p FROM SuppliersEntity s " +
-                        "JOIN CommandsuppliersEntity cs ON cs.suppliers = s " +
-                        "JOIN CommandsuppliersBatchsEntity csb ON csb.commandsuppliers = cs " +
-                        "JOIN UsersEntity u ON u.commandsuppliers = cs "+
-                        "JOIN BatchsEntity b ON b.commandsuppliersBatch = csb " +
-                        "JOIN ProductsEntity p ON p.batchs = b ")
+        @NamedQuery(name = "commandSuppliersBatchs.FindAll",
+                 query = "SELECT s, cs, csb, b, p FROM CommandsuppliersBatchsEntity csb " +
+                         "JOIN CommandsuppliersEntity cs ON cs = csb.commandsuppliers " +
+                         "JOIN BatchsEntity b ON b = csb.batchs " +
+                         "JOIN SuppliersEntity s ON s = cs.suppliers " +
+                         "JOIN ProductsEntity p ON p = b.products " +
+                         "ORDER BY cs.orderDate desc ")
 })
-
-// query = "SELECT csb, cs,b FROM CommandsuppliersBatchsEntity csb " +
-//         " JOIN CommandsuppliersEntity cs ON cs.commandsuppliersBatchs = csb " +
-//         " JOIN SuppliersEntity s ON s.commandsuppliers = cs " +
-//         " JOIN BatchsEntity b ON b.commandsuppliersBatch = cs ")
 
 @Entity
 @Table( name = "commandsuppliers_batchs", schema = "stockmanagement" )

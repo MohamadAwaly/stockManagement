@@ -54,7 +54,8 @@
                         <a class="dropdown-item" href="supplierCreate">Ajouter fournisseurs</a>
                         <a class="dropdown-item" href="#">MÀJ fournisseurs</a>
                         <a class="dropdown-item" href="#">Supprimer fournisseurs</a>
-                        <a class="dropdown-item" href="CommandSupplierCreate">Faire une commande aux fournisseur</a>
+                        <a class="dropdown-item" href="CommandSupplierCreate">Faire une commande au fournisseur</a>
+                        <a class="dropdown-item" href="CommandSupplierShowAll">Voir les commandes fournisseurs</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="suppliersShowAll">Liste des fournisseurs</a>
                     </div>

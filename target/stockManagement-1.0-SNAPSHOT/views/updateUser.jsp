@@ -166,8 +166,8 @@
     </form>
     <form action="UpdateAdress" method="get" class="selectedUserForm float-right bg-transparent border-0 d-flex     ">
         <input type="text" name="selected-IdAdress" class="form-control p-2" id="selected-IdAdress"
-               aria-describedby="selectedUser"  hidden>
-        <button type="submit" class="btn btn-outline-info float-right p-2" id="id-UpdateAdress">Mettre à jour</button>
+               aria-describedby="selectedUser" >
+        <button type="submit"  disabled class="btn btn-outline-info float-right p-2" id="id-UpdateAdress">Mettre à jour</button>
     </form>
 </div>
 <table class="table table-striped table-hover" border="1px solid black">

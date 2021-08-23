@@ -18,7 +18,11 @@ import java.util.Objects;
         @NamedQuery(name = "Adress.SelectAdressById",
                 query = "SELECT a, au from AdressEntity a " +
                         "left join AdressUsersEntity au on au.address = a " +
-                        "where a.idAdress = :id")
+                        "where a.idAdress = :id"),
+        @NamedQuery(name = "Adress.GetIdAdress",
+                query = "SELECT au.idAdressUsers from AdressEntity a " +
+                        "join AdressUsersEntity au on au.address = a " +
+                        "where a.idAdress = :idAdress")
 })
 
 @Entity

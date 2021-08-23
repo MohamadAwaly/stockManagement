@@ -14,10 +14,19 @@
         <div class="mb-3">
             <c:if test="${ !empty error}"><p class="alert alert-danger"><c:out value="${ error }"/></p></c:if>
         </div>
+
         <div class="mb-1">
-            <label for="iduserUpdate" class="form-label"><span class="etoile">*</span> id</label>
-            <input type="number" name="iduserUpdate" class="form-control" id="iduserUpdate"
-                   aria-describedby="idUser"
+            <label for="idUseradressUpdate" class="form-label"><span class="etoile">*</span> id user</label>
+            <input type="number" name="idUseradressUpdate" class="form-control" id="idUseradressUpdate"
+                   aria-describedby="idUseradressUpdate"
+                   required readonly value=<c:out value="${adress[0].idAdress}"/>>
+                <%--        value="<c:out value="${ user.idUser }"/>"--%>
+        </div>
+
+        <div class="mb-1">
+            <label for="idadressUpdate" class="form-label"><span class="etoile">*</span> id adress</label>
+            <input type="number" name="idadressUpdate" class="form-control" id="idadressUpdate"
+                   aria-describedby="idadressUpdate"
                    required readonly value=<c:out value="${adress[0].idAdress}"/>>
                 <%--        value="<c:out value="${ user.idUser }"/>"--%>
         </div>

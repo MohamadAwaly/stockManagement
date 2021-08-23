@@ -1,5 +1,6 @@
 package be.atc.controler.servlet;
 
+import be.atc.controler.enumm.TypeAdress;
 import be.atc.entities.CitiesEntity;
 import be.atc.service.AdressService;
 import be.atc.service.CitieService;
@@ -16,16 +17,21 @@ import java.util.List;
 public class UpdateAdress extends HttpServlet {
     private static final Logger logger = Logger.getLogger(UpdateAdress.class);
     AdressService adressService = new AdressService();
+    TypeAdress[] allTypeAdress = TypeAdress.values();
     private CitieService citieService = new CitieService();
     public static final String VUE = "/views/UpdateAdress.jsp";
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Object[]> adress = adressService
                 .adressbyIdAdress(Integer.parseInt(request.getParameter("selected-IdAdress")));
         List<CitiesEntity> citiesList = citieService.showAllCities();
+
         try {
             request.setAttribute("adress", adress);
             request.setAttribute("cities", citiesList);
+            request.setAttribute("allTypeAdress", allTypeAdress);
+
         } catch (Exception e) {
             logger.log(Level.ERROR, "Error - update adress");
         }
@@ -35,11 +41,9 @@ public class UpdateAdress extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
-//        response.setContentType("application/json");
-//        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write("json: je teste ma servlet");
 
+
+        this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 
 
     }

@@ -134,8 +134,6 @@ $(document).ready(function () {
             $(this).addClass("is-invalid");
             errorTva.hidden = false;
         }
-
-
     })
     mail.keyup(function () {
         var email = $(this).val();
@@ -203,6 +201,7 @@ $(document).ready(function () {
     //add id-adress in the field to update adress selected
     $('.adressList').dblclick(function () {
         $('#selected-IdAdress').attr('value', $(this).find("td").eq(0).html());
+        $('#id-UpdateAdress').prop('disabled', false);
     });
 
 });

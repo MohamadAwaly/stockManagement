@@ -100,6 +100,7 @@ public class AdressService {
 
     public List<Object[]> adressbyIdAdress (int idAdress){
         Query query = em.createNamedQuery("Adress.SelectAdressById");
+//        AdressEntity adress = em.find(AdressEntity.class, idAdress );
         query.setParameter("id", idAdress);
         return query.getResultList();
     }

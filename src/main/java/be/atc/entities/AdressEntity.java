@@ -16,7 +16,8 @@ import java.util.Objects;
                         " join UsersEntity u on au.users = u" +
                         " where au.users.idUser = :idUser and au.typeAdress = :typeAdress"),
         @NamedQuery(name = "Adress.SelectAdressById",
-                query = "SELECT a from AdressEntity a " +
+                query = "SELECT a, au from AdressEntity a " +
+                        "left join AdressUsersEntity au on au.address = a " +
                         "where a.idAdress = :id")
 })
 

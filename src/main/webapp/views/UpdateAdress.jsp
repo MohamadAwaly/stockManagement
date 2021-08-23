@@ -18,14 +18,14 @@
             <label for="iduserUpdate" class="form-label"><span class="etoile">*</span> id</label>
             <input type="number" name="iduserUpdate" class="form-control" id="iduserUpdate"
                    aria-describedby="idUser"
-                   required readonly value=<c:out value="${id}"/>>
+                   required readonly value=<c:out value="${adress[0].idAdress}"/>>
                 <%--        value="<c:out value="${ user.idUser }"/>"--%>
         </div>
         <div class="mb-3">
             <label for="idTypeadresse" class="form-label"><span class="etoile">*</span> Type Adresse: </label>
             <SELECT id="idTypeadresse" name="typeAdresse" size="1" class="form-control" required>
                 <c:forEach var="allTypeAdress" items="${ allTypeAdress }">
-                <OPTION value="${ allTypeAdress}">
+                <OPTION value="${ allTypeAdress}" ${allTypeAdress == adress[1].typeAdress ? 'selected' : ''}>
                     <c:out value="${allTypeAdress } "/>
                     </c:forEach>
                 </OPTION>
@@ -35,30 +35,31 @@
             <label for="idCity" class="form-label"><span class="etoile">*</span> Ville et code postal : </label>
             <SELECT id="idCity" name="city" size="1" class="form-control" required>
                 <c:forEach var="cities" items="${ cities }">
-                <OPTION value="${ cities.idCity} ${cities.citie == adress.city.citie ? 'selected' : ''}">
-                    <c:out value="${ cities.postalCode } "/>
-                    <c:out value="${ cities.citie } "/>
-                    </c:forEach>
-                </OPTION>
+                    <OPTION value="${cities.idCity}" ${cities.idCity == adress[0].city.idCity ? 'selected' : ''}>
+                        <c:out value="${ cities.postalCode } "/>
+                        <c:out value="${ cities.citie } "/>
+                    </OPTION>
+                </c:forEach>
             </SELECT>
         </div>
         <div class="mb-3">
             <label for="street" class="form-label"><span class="etoile">*</span> Rue</label>
             <input type="text" name="street" class="form-control" id="street" aria-describedby="Rue" required
-                   value="<c:out value="${ adress.street }"/>">
+                   value="<c:out value="${ adress[0].street }"/>">
         </div>
         <div class="row">
             <div class="col">
                 <div class="mb-3">
                     <label for="number" class="form-label"><span class="etoile">*</span> Num&eacute;ro</label>
                     <input type="number" name="number" class="form-control" id="number" aria-describedby="Numéro"
-                           required value="<c:out value="${ adress.number }"/>">
+                           required value="<c:out value="${ adress[0].number }"/>">
                 </div>
             </div>
             <div class="col">
                 <div>
                     <label for="box" class="form-label">Boite</label>
-                    <input type="number" name="box" class="form-control" id="box" aria-describedby="boite" value="<c:out value="${ adress.box }"/>">
+                    <input type="number" name="box" class="form-control" id="box" aria-describedby="boite"
+                           value="<c:out value="${ adress[0].box }"/>">
                 </div>
             </div>
         </div>

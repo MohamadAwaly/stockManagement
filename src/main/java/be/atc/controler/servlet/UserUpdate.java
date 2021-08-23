@@ -63,10 +63,6 @@ public class UserUpdate extends HttpServlet {
             List<RolesEntity> roleList = roleService.showAllRoles();
             List<CitiesEntity> citiesList = citieService.showAllCities();
             //Define role
-//            logger.log( Level.INFO, "Role: " + request.getParameter( "RoleUpdate" ) );
-//            logger.log( Level.INFO, "LastName: " + request.getParameter( "lastNameUpdate" ) );
-//            logger.log( Level.INFO, "first: " + request.getParameter( "firstNameUpdate" ) );
-//            logger.log( Level.INFO, "id user: " + request.getParameter( "iduserUpdate" ) );
             int parameterrole = Integer.parseInt( request.getParameter( "RoleUpdate" ) );
             RolesEntity role = new RolesEntity();
             for ( RolesEntity roles : roleList ) {

@@ -46,17 +46,6 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                       aria-haspopup="true" aria-expanded="false">Address</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Add City</a>
-                        <a class="dropdown-item" href="#">Add country</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Cities list</a>
-                        <a class="dropdown-item" href="#">Countries list</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                        aria-haspopup="true" aria-expanded="true">Product</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="#">Add product</a>

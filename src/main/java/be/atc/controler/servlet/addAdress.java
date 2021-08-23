@@ -57,8 +57,11 @@ public class addAdress extends HttpServlet {
         AdressEntity adress = new AdressEntity();
         adress.setStreet(request.getParameter("street"));
         adress.setNumber(Integer.parseInt(request.getParameter("number")));
-        adress.setBox(Integer.parseInt(request.getParameter("box")));
-
+        if (!request.getParameter("box").isEmpty()){
+            adress.setBox(Integer.parseInt(request.getParameter("box")));
+        } else {
+            /*ignored*/
+        }
         //get type of adress
         TypeAdress typeAdress = TypeAdress.valueOf(request.getParameter("typeAdresse"));
 
@@ -79,7 +82,6 @@ public class addAdress extends HttpServlet {
         String error = "";
         AdressService adressService = new AdressService();
         boolean ifTypeAdressExist = adressService.verfyIfTypeAdressExist(typeAdress, idUser);
-        logger.log(Level.INFO,"type of adress: (return methode) " + ifTypeAdressExist);
         if(ifTypeAdressExist){
             adressService.addMultipleAdress(idUser, adress, adressUsers);
             logger.log(Level.INFO,"Adress added");

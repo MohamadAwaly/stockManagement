@@ -19,13 +19,6 @@ public class UserService {
     EntityManager em = EMF.getEM();
     EntityTransaction trans = em.getTransaction();
 
-    //    public List showAllUsers() {
-    //        List<Object> user = new ArrayList<>();
-    //        Query query = em.createNamedQuery("User.finddall");
-    //        user = query.getResultList();
-    //        return user;
-    //    }
-
     /**
      * add new user
      *
@@ -73,7 +66,6 @@ public class UserService {
      */
     public void updateUser(UsersEntity user, AdressEntity adressEntity, AdressUsersEntity adressUser) {
         try {
-
             trans.begin();
             UsersEntity userUpdate = em.find(UsersEntity.class, user.getIdUser());
             userUpdate.setLastName(user.getLastName());
@@ -86,14 +78,11 @@ public class UserService {
             if (!userUpdate.getPassword().equals(user.getPassword())) {
                 String password = user.getPassword();
                 String passwordHached = BCrypt.hashpw(password, BCrypt.gensalt());
-                logger.log(Level.INFO, "le mot de passe recu par les parametre: " + password);
-                logger.log(Level.INFO, "passwordhached dans la méthode update user: " + passwordHached);
                 userUpdate.setPassword(passwordHached);
                 logger.log(Level.INFO, "Password modified ");
             } else {
                 logger.log(Level.INFO, " Password not modified");
             }
-            logger.log(Level.INFO, "methode update isActive: " + user.isActive());
             em.merge(userUpdate);
             //            em.merge( adressEntity );
             //            em.merge( adressUser );

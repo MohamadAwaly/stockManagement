@@ -16,19 +16,18 @@
         </div>
 
         <div class="mb-1">
-            <label for="idUseradressUpdate" class="form-label"><span class="etoile">*</span> id user</label>
+            <label for="idUseradressUpdate" class="form-label" hidden><span class="etoile">*</span> id user</label>
             <input type="number" name="idUseradressUpdate" class="form-control" id="idUseradressUpdate"
-                   aria-describedby="idUseradressUpdate"
-                   required readonly value=<c:out value="${adress[0].idAdress}"/>>
+                   aria-describedby="idUseradressUpdate" hidden
+                   required readonly value=<c:out value="${iduser}"/>>
                 <%--        value="<c:out value="${ user.idUser }"/>"--%>
         </div>
 
         <div class="mb-1">
-            <label for="idadressUpdate" class="form-label"><span class="etoile">*</span> id adress</label>
+            <label for="idadressUpdate" class="form-label" hidden><span class="etoile">*</span> id adress</label>
             <input type="number" name="idadressUpdate" class="form-control" id="idadressUpdate"
-                   aria-describedby="idadressUpdate"
+                   aria-describedby="idadressUpdate" hidden
                    required readonly value=<c:out value="${adress[0].idAdress}"/>>
-                <%--        value="<c:out value="${ user.idUser }"/>"--%>
         </div>
         <div class="mb-3">
             <label for="idTypeadresse" class="form-label"><span class="etoile">*</span> Type Adresse: </label>
@@ -77,6 +76,4 @@
         </div>
     </form>
 </c:forEach>
-
-
 <c:import url="footer.jsp"/>

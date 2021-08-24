@@ -187,7 +187,7 @@ $(document).ready(function () {
 
     /*Color lign on double click*/
     $('.usersList').dblclick(function () {
-        console.log("test dbclick");
+        // console.log("test dbclick");
         $('.usersList').removeAttr('style');
         $(this).css('background', '#31B0D5');
         $('#selectedUserid').attr('value', $(this).find("td").eq(0).html());
@@ -202,6 +202,7 @@ $(document).ready(function () {
     $('.adressList').dblclick(function () {
         $('#selected-IdAdress').attr('value', $(this).find("td").eq(0).html());
         $('#id-UpdateAdress').prop('disabled', false);
+        $('#user-id').attr('value', $('#iduserUpdate').val());
     });
 
 });

@@ -49,3 +49,12 @@ form {
     right: 0;
     position: fixed;
 }
+
+/*profile CSS*/
+.bodyProfile{
+    background-image: url("/resources/pictures/Logo.png");
+    /*background-repeat: no-repeat;*/
+    /*background-attachment: fixed;*/
+    /*background-position: center;*/
+    /*background-color: red;*/
+}

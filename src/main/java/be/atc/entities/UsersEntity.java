@@ -23,6 +23,9 @@ import java.util.Objects;
                         "where u.idUser = :id"),
         @NamedQuery(name = "User.CheckLogin",
                 query = "SELECT u.idUser FROM UsersEntity u " +
+                        "where u.login = :login"),
+        @NamedQuery(name = "User.profile",
+                query = "SELECT u FROM UsersEntity u " +
                         "where u.login = :login")
 })
 @Entity

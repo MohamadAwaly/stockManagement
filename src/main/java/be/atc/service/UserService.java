@@ -53,7 +53,7 @@ public class UserService {
             trans.rollback();
             return false;
         } finally {
-            // em.close();
+//             em.close();
         }
     }
 
@@ -187,6 +187,12 @@ public class UserService {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    public List<UsersEntity> profile(String login){
+        Query query = em.createNamedQuery("User.profile");
+        query.setParameter("login", login);
+        return query.getResultList();
     }
 
 }

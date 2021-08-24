@@ -19,6 +19,7 @@ public class AdressService {
     EntityManager em = EMF.getEM();
     EntityTransaction trans = em.getTransaction();
 
+
     /**
      * add adress
      *
@@ -30,7 +31,7 @@ public class AdressService {
         } catch (Exception e) {
             logger.log(Level.INFO, "error add UserAdress: " + e.getMessage());
         } finally {
-            em.close();
+//            em.close();
         }
 
     }
@@ -71,7 +72,7 @@ public class AdressService {
             logger.log(Level.ERROR, "Error in method addMultipleAdress " + e.getMessage());
             trans.rollback();
         } finally {
-//                em.close();
+//            em.close();
         }
 
 
@@ -99,6 +100,8 @@ public class AdressService {
         } catch (Exception e) {
             logger.log(Level.ERROR, "no result so adress can be added " + e.getMessage());
             return true;
+        } finally {
+//            em.close();
         }
     }
 
@@ -124,11 +127,13 @@ public class AdressService {
             adressUpdate.setBox(adress.getBox());
             adressUpdate.setCity(adress.getCity());
             adressUsersUpdate.setTypeAdress(adressUsers.getTypeAdress());
-
             trans.commit();
+
         } catch (Exception e) {
             logger.log(Level.ERROR, "Error - update adress user");
             trans.rollback();
+        } finally {
+//            em.close();
         }
 
 

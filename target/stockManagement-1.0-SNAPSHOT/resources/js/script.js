@@ -206,6 +206,7 @@ function dateDiffInDays(a, b) {
 /**
  * Page : supplierCreate
  * Contrôle fournisseur si Existe
+ * Retourne 1 = existe ou 0 = n'existe pas
  * @author Jiwaii
  */
 $(document).on('keyup','#formNewSupplierName',function (){
@@ -219,7 +220,8 @@ $(document).on('keyup','#formNewSupplierName',function (){
     }).done(function (data){
             // console.log('Response Data : '+data);
             let supplierExist = parseInt(data.toString().trim());
-            if (supplierExist == 1){
+            let inputName = $('#formNewSupplierName').val().trim();
+            if (supplierExist == 1 || inputName == '' ){
                 $('#formNewSupplierName').attr('class','form-control is-invalid');
                 $('#submitNewSupplier').attr('disabled','true');
             }
@@ -230,6 +232,17 @@ $(document).on('keyup','#formNewSupplierName',function (){
         }
     )
 });
+/**
+ * Page : CommandSupplierCreate.jsp
+ * Quantity control
+ */
+// $(document).on('keyup','#inputQuantity',function (){
+//     let qte = $('#inputQuantity').val();
+//     console.log('is a number : '+!isNaN(qte));
+//     if (isNaN(qte)){
+//         $('#inputQuantity').val('');
+//     }
+// })
 
 
 

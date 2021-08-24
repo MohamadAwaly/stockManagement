@@ -31,7 +31,8 @@ public class SupplierService {
         catch (Exception e){
             transaction.rollback();
         }finally {
-            logger.log(Level.INFO,"supplierCreate : ");
+            entityManager.close();
+            logger.log(Level.INFO,"supplierCreate ");
         }
     }
     public Object supplierExist(String pWhereName){

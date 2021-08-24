@@ -18,7 +18,6 @@ import java.io.IOException;
 public class SupplierCreate extends HttpServlet {
 
     public static final String VUE = "/views/supplierCreate.jsp";
-    public static final String VUE_SupplierList = "/views/suppliersShowAll.jsp";
     private             SupplierService supplierService = new SupplierService();
     private             Logger logger = Logger.getLogger(SupplierCreate.class);
 
@@ -30,12 +29,16 @@ public class SupplierCreate extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String supplierName = request.getParameter("supplierName").toString();
-        logger.log(Level.INFO,"RECU : "+supplierName);
-        SuppliersEntity newSuppliersEntity = new SuppliersEntity();
-        newSuppliersEntity.setName(supplierName);
-        logger.log(Level.INFO,"Entity : " + newSuppliersEntity);
-        this.getServletContext().getRequestDispatcher(VUE_SupplierList).forward(request,response);
-        supplierService.supplierCreate(newSuppliersEntity);
+        int supplierExist = Integer.parseInt(supplierService.supplierExist(supplierName).toString());
+        if (supplierExist == 1){
+            request.setAttribute("message","Le founisseur inséré est déjà existant");
+            request.getRequestDispatcher("/views/error.jsp").forward(request,response);
+        }else{
+            SuppliersEntity newSuppliersEntity = new SuppliersEntity();
+            newSuppliersEntity.setName(supplierName);
+            supplierService.supplierCreate(newSuppliersEntity);
+            response.sendRedirect(request.getContextPath()+"/suppliersShowAll");
+        }
 
     }
 }

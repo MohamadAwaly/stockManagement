@@ -49,7 +49,7 @@
                 </div>
             </div>
         </div>
-        <input type="submit" class="font-menu-button" value="Enregistrer la commande"/>
+        <input type="submit" class="btn btn-primary" value="Enregistrer la commande"/>
     </form>
 </div>
 

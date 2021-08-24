@@ -236,13 +236,13 @@ $(document).on('keyup','#formNewSupplierName',function (){
  * Page : CommandSupplierCreate.jsp
  * Quantity control
  */
-// $(document).on('keyup','#inputQuantity',function (){
-//     let qte = $('#inputQuantity').val();
-//     console.log('is a number : '+!isNaN(qte));
-//     if (isNaN(qte)){
-//         $('#inputQuantity').val('');
-//     }
-// })
+$(document).on('keyup','#inputQuantity',function (){
+    let qte = $('#inputQuantity').val();
+    console.log('is a number : '+!isNaN(qte));
+    if (isNaN(qte)){
+        $('#inputQuantity').val('');
+    }
+})
 
 
 

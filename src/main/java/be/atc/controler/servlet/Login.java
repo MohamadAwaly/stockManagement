@@ -2,22 +2,22 @@ package be.atc.controler.servlet;
 
 import be.atc.entities.UsersEntity;
 import be.atc.service.UserService;
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.mindrot.jbcrypt.BCrypt;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet(name = "Login", value = "/Login")
 public class Login extends HttpServlet {
     public static final String VUE = "/UsersShowAll";
     public static final String VUE_LOGIN = "/views/login.jsp";
     private static final Logger logger = Logger.getLogger(Login.class);
-
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

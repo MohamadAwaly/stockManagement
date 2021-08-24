@@ -1,5 +1,6 @@
 package be.atc.controler.servlet;
 
+import be.atc.controler.connexion.EMF;
 import be.atc.controler.enumm.TypeAdress;
 import be.atc.entities.*;
 import be.atc.service.AdressService;
@@ -10,6 +11,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.mindrot.jbcrypt.BCrypt;
 
+import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

@@ -105,7 +105,6 @@ public class UserService {
         List<Object[]> user = new ArrayList<>();
         Query query = em.createNamedQuery("User.finddall");
         user = query.getResultList();
-        logger.log(Level.INFO," je passe par la ");
         em.clear();
         return query.getResultList();
     }

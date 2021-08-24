@@ -29,7 +29,7 @@
                 <label for="iduserUpdate" class="form-label" hidden><span class="etoile">*</span> id</label>
                 <input type="number" name="iduserUpdate" class="form-control" id="iduserUpdate"
                        aria-describedby="idUser"
-                       required readonly hidden value="<c:out value="${ user.idUser }"/>">
+                       required readonly value="<c:out value="${ user.idUser }"/>">
             </div>
             <div class="col">
                 <div class="mb-1">
@@ -166,6 +166,8 @@
     </form>
     <form action="UpdateAdress" method="get" class="selectedUserForm float-right bg-transparent border-0 d-flex     ">
         <input type="text" name="selected-IdAdress" class="form-control p-2" id="selected-IdAdress"
+               aria-describedby="selectedUser" hidden>
+        <input type="text" name="user-id" class="form-control p-2" id="user-id"
                aria-describedby="selectedUser" hidden>
         <button type="submit"  disabled class="btn btn-outline-info float-right p-2" id="id-UpdateAdress">Mettre à jour</button>
     </form>

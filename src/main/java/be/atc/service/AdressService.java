@@ -122,13 +122,8 @@ public class AdressService {
             adressUpdate.setStreet(adress.getStreet());
             adressUpdate.setNumber(adress.getNumber());
             adressUpdate.setBox(adress.getBox());
+            adressUpdate.setCity(adress.getCity());
             adressUsersUpdate.setTypeAdress(adressUsers.getTypeAdress());
-
-            logger.log(Level.INFO, "rue: " + adressUpdate.getStreet());
-            logger.log(Level.INFO, "box: " + adressUpdate.getBox());
-//        adress.setCity(adress.getCity());
-//            em.mer(adressUpdate);
-//            em.persist(adressUsersUpdate);
 
             trans.commit();
         } catch (Exception e) {

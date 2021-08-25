@@ -243,7 +243,35 @@ $(document).on('keyup','#inputQuantity',function (){
         $('#inputQuantity').val('');
     }
 })
-
-
+/**
+ * Page : CommandSupplierShowAll.jsp
+ * search Bar and AJAX
+ */
+$(document).on('keyup','#CmdSupBchSearchBar',function (){
+    $.ajax({
+        url : "CommandSuppliersSearch",
+        method : "POST",
+        data : {
+            searchBar : $('#CmdSupBchSearchBar').val()
+        }
+    }).done( function (data){
+        let json = data; // pas de parse Json, déjà fait dans la servlet
+        console.log(json);
+        $('#CmdSupListContent').empty();
+        json.forEach(obj => {
+        //cs.idCommandSuppliers ,s.name, cs.orderDate, csb.lotQuantity, b.idBatch, p.designation,cs.users.lastName
+            $('#CmdSupListContent').append("" +
+                "<tr id='"+obj[0]+"'>" +
+                    "<td>"+obj[0]+"</td>" +
+                    "<td>"+obj[1]+"</td>" +
+                    "<td>"+obj[2]+"</td>" +
+                    "<td>"+obj[5]+"</td>" +
+                    "<td>"+obj[3]+"</td>" +
+                    "<td>"+obj[4]+"</td>" +
+                    "<td>"+obj[6]+"</td>" +
+                "</tr>");
+        })
+    });
+})
 
 

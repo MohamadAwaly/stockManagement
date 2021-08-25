@@ -42,4 +42,9 @@ public class SupplierService {
         logger.log(Level.INFO, "supplier exist : "+supplier);
         return supplier;
     }
+    public List<Object[]> CommandSupplierList(String pWhere){
+        Query query = entityManager.createNamedQuery("commandSuppliersBatchs.Find").setParameter("pWhere","%"+pWhere+"%");
+        List<Object[]> commandSupplierBatch = query.getResultList();
+        return commandSupplierBatch;
+    }
 }

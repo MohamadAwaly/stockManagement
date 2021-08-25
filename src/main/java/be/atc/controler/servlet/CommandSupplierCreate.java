@@ -99,7 +99,7 @@ public class CommandSupplierCreate extends HttpServlet {
             }
             response.sendRedirect(request.getContextPath()+"/CommandSupplierShowAll");
         }
-        // BAD DATA :
+        // DATA is KO :
         else{
             logger.log(Level.WARN,"Data is : "+ dataChecked);
             request.setAttribute("message","Certaines entrées sont incohérentes");

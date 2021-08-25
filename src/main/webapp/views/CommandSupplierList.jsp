@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="header.jsp"%>
-
+<input id="CmdSupBchSearchBar" type="text" class="form-control" name="searchBar" placeholder="Chercher une commande"/>
 <table class="table table-striped table-hover" border="1px solid black">
     <thead>
     <th># Commande</th>
@@ -19,6 +19,7 @@
     <th>Lot</th>
     <th>Utilisateur</th>
     </thead>
+    <tbody id="CmdSupListContent" >
     <c:forEach var="cs" items="${commandSuppliers}">
         <tr>
             <td><c:out value="${cs[1].idCommandSuppliers}"/></td>
@@ -30,6 +31,7 @@
             <td><c:out value="${cs[1].users.lastName}"/></td>
         </tr>
     </c:forEach>
+    </tbody>
 </table>
 
 <%@include file="footer.jsp"%>

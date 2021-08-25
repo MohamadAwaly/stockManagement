@@ -26,7 +26,8 @@ public class UserUpdate extends HttpServlet {
     public static final  String       VUE          = "/views/updateUser.jsp";
     public static final  String       VUE_LISTUSER = "/views/showUsers.jsp";
     private static final Logger       logger       = Logger.getLogger( UserUpdate.class );
-    private              UserService  userService  = new UserService();
+    EntityManager em = EMF.getEM();;
+    private              UserService  userService  = new UserService(em);
     private              RoleService  roleService  = new RoleService();
     private              CitieService citieService = new CitieService();
 
@@ -37,8 +38,8 @@ public class UserUpdate extends HttpServlet {
     @Override
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
-        UserService userService = new UserService();
-        AdressService adressService = new AdressService();
+        UserService userService = new UserService(em);
+        AdressService adressService = new AdressService(em);
         List<Object[]> user = userService
                 .selectUserById( Integer.parseInt( request.getParameter( "selectedUser-id" ) ) );
         logger.log( Level.INFO, "ID : " + Integer.parseInt( request.getParameter( "selectedUser-id" ) ) );
@@ -128,7 +129,7 @@ public class UserUpdate extends HttpServlet {
             } else {
                 logger.log( Level.ERROR, "the password does not match " );
                 String errorPassword = "Les deux mot de passe ne corresponde pas !!!";
-                UserService userService = new UserService();
+                UserService userService = new UserService(em);
                 List<Object[]> users = userService
                         .selectUserById( user.getIdUser() );
                 //cities
@@ -140,6 +141,8 @@ public class UserUpdate extends HttpServlet {
                     request.setAttribute( "allTypeAdress", allTypeAdress );
                 } catch ( Exception e ) {
                     logger.log( Level.ERROR, "User error" + e.getMessage() );
+                } finally {
+                    em.close();
                 }
                 this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
             }

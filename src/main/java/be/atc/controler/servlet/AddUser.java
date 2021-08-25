@@ -28,10 +28,11 @@ public class AddUser extends HttpServlet {
     public static final  String       VUE          = "/views/addUser.jsp";
     public static final  String       VUE_LISTUSER = "/views/showUsers.jsp";
     public static final  String       VUE_ADDUSER  = "/views/addUser.jsp";
-    private              UserService  userService  = new UserService();
+    EntityManager em = EMF.getEM(); ;
+    private              UserService  userService  = new UserService(em);
     private              RoleService  roleService  = new RoleService();
     private              CitieService citieService = new CitieService();
-    private              UserService  user         = new UserService();
+    private              UserService  user         = new UserService(em);
     List<RolesEntity>  roleList      = roleService.showAllRoles();
     List<CitiesEntity> citiesList    = citieService.showAllCities();
     TypeAdress[]       allTypeAdress = TypeAdress.values();

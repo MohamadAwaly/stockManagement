@@ -16,8 +16,14 @@ import java.util.List;
 
 public class UserService {
     private static final Logger logger = Logger.getLogger(UserService.class);
-    EntityManager em = EMF.getEM();
-    EntityTransaction trans = em.getTransaction();
+    EntityManager em ;
+    EntityTransaction trans ;
+
+    public UserService (EntityManager em ){
+        this.em = em;
+        trans = em.getTransaction();
+    }
+
 
     /**
      * add new user
@@ -29,7 +35,7 @@ public class UserService {
      */
     public boolean addUser(UsersEntity user, AdressEntity adressEntity, AdressUsersEntity adressUser) {
         try {
-            UserService usercheck = new UserService();
+            UserService usercheck = new UserService(em);
             boolean chekvatisempty = true;
             if (user.getVat() == null) {
                 chekvatisempty = false;
@@ -74,7 +80,9 @@ public class UserService {
             userUpdate.setMail(user.getMail());
             userUpdate.setActive(user.isActive());
             userUpdate.setRoles(user.getRoles());
-            //check if the password has been changed
+            /**
+             *             check if the password has been changed
+             */
             if (!userUpdate.getPassword().equals(user.getPassword())) {
                 String password = user.getPassword();
                 String passwordHached = BCrypt.hashpw(password, BCrypt.gensalt());
@@ -92,7 +100,7 @@ public class UserService {
             logger.log(Level.INFO, "Error in method update user");
             trans.rollback();
         } finally {
-            // em.close();
+//             em.close();
         }
     }
 
@@ -106,6 +114,7 @@ public class UserService {
         Query query = em.createNamedQuery("User.finddall");
         user = query.getResultList();
         em.clear();
+//        em.close();
         return query.getResultList();
     }
 
@@ -128,6 +137,8 @@ public class UserService {
             }
         } catch (Exception e) {
             return false;
+        } finally {
+//            em.close();
         }
 
     }
@@ -156,6 +167,8 @@ public class UserService {
         } catch (Exception e) {
             logger.log(Level.INFO, "Numéro de tva existe: " + e.getMessage());
             return false;
+        } finally {
+//            em.close();
         }
     }
 
@@ -186,6 +199,8 @@ public class UserService {
             return em.find(UsersEntity.class, id);
         } catch (Exception e) {
             return null;
+        } finally {
+//            em.close();
         }
     }
 

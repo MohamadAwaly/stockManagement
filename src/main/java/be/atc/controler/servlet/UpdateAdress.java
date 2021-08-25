@@ -24,11 +24,13 @@ import java.util.List;
 @WebServlet(name = "UpdateAdress", value = "/UpdateAdress")
 public class UpdateAdress extends HttpServlet {
     private static final Logger logger = Logger.getLogger(UpdateAdress.class);
-    AdressService adressService = new AdressService();
+    EntityManager em = EMF.getEM();
+    AdressService adressService = new AdressService(em);
     TypeAdress[] allTypeAdress = TypeAdress.values();
     private CitieService citieService = new CitieService();
     public static final String VUE = "/views/UpdateAdress.jsp";
     public static final String VUE_UPDATEUSER = "/views/updateUser.jsp";
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -90,13 +92,13 @@ public class UpdateAdress extends HttpServlet {
         adressUsers.setAddress(adress);
         TypeAdress typeAdress = TypeAdress.valueOf( request.getParameter( "typeAdresse" ) );
         adressUsers.setTypeAdress(typeAdress);
-        AdressService adressService = new AdressService();
+        AdressService adressService = new AdressService(em);
         adressService.updateadress(adress,adressUsers);
         logger.log(Level.INFO,"adress updated");
 
         //get id user to send user and list adress to jsp
         int iduser = Integer.parseInt(request.getParameter("idUseradressUpdate"));
-        UserService userService = new UserService();
+        UserService userService = new UserService(em);
         List<Object[]> user = userService
                 .selectUserById( iduser);
         List<Object[]> adressList = adressService
@@ -111,6 +113,8 @@ public class UpdateAdress extends HttpServlet {
 
         } catch (Exception e){
             /*ignored*/
+        } finally {
+            em.close();
         }
         this.getServletContext().getRequestDispatcher(VUE_UPDATEUSER).forward(request, response);
 

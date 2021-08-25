@@ -1,10 +1,12 @@
 package be.atc.controler.servlet;
 
+import be.atc.controler.connexion.EMF;
 import be.atc.entities.UsersEntity;
 import be.atc.service.UserService;
 import org.apache.log4j.Logger;
 import org.mindrot.jbcrypt.BCrypt;
 
+import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,6 +20,7 @@ public class Login extends HttpServlet {
     public static final String VUE = "/UsersShowAll";
     public static final String VUE_LOGIN = "/views/login.jsp";
     private static final Logger logger = Logger.getLogger(Login.class);
+    EntityManager em = EMF.getEM(); ;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -30,7 +33,7 @@ public class Login extends HttpServlet {
         HttpSession session = request.getSession();
         String login = request.getParameter("login-user");
         String password = request.getParameter("password");
-        UserService userService = new UserService();
+        UserService userService = new UserService(em);
         UsersEntity user = userService.checkLogin(login);
         String error = "Erreur! Username/password incorrect ";
         boolean checkpw = BCrypt.checkpw(password, user.getPassword());

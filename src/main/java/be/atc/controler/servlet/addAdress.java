@@ -32,6 +32,7 @@ public class addAdress extends HttpServlet {
     List<CitiesEntity> citiesList = citieService.showAllCities();
     private RoleService roleService  = new RoleService();
     List<RolesEntity>  roleList      = roleService.showAllRoles();
+    EntityManager em = EMF.getEM();;
 
 
     @Override
@@ -82,7 +83,7 @@ public class addAdress extends HttpServlet {
         }
         adress.setCity(city);
         String error = "";
-        AdressService adressService = new AdressService();
+        AdressService adressService = new AdressService(em);
         boolean ifTypeAdressExist = adressService.verfyIfTypeAdressExist(typeAdress, idUser);
         if(ifTypeAdressExist){
             adressService.addMultipleAdress(idUser, adress, adressUsers);
@@ -93,7 +94,7 @@ public class addAdress extends HttpServlet {
 
 
         //request JSP
-        UserService userService = new UserService();
+        UserService userService = new UserService(em);
         List<Object[]> user = userService
                 .selectUserById( Integer.parseInt( request.getParameter( "iduserUpdate" ) ) );
         List<Object[]> adressList = adressService
@@ -117,6 +118,8 @@ public class addAdress extends HttpServlet {
             }
         } catch ( Exception e ) {
             logger.log( Level.ERROR, "User error" + e.getMessage() );
+        } finally {
+//            em.close();
         }
 
         if (error.equals("")){

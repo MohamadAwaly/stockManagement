@@ -12,14 +12,14 @@
 <head>
     <title>Stock management</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/allCss.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/allCss.css"/>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/script.js"></script>
     <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
-<%--    <link rel="stylesheet" href="../resources/css/allCss.css">--%>
-<%--    <script type="text/javascript" src="../resources/js/script.js"></script>--%>
-<%--    <script type="text/javascript" src="../resources/js/jquery-3.5.1.js"></script>--%>
+    <%--    <link rel="stylesheet" href="../resources/css/allCss.css">--%>
+    <%--    <script type="text/javascript" src="../resources/js/script.js"></script>--%>
+    <%--    <script type="text/javascript" src="../resources/js/jquery-3.5.1.js"></script>--%>
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
@@ -79,9 +79,18 @@
                 </li>
 
             </ul>
+            <c:choose>
+                <c:when test="${sessionScope.SessionUser != null}">
+                    <a class="navbar-brand " href="UserProfile"> Ma Fiche </a>
+                </c:when>
+            </c:choose>
+
         </div>
+
     </div>
+
 </nav>
+
 <header>
     <c:choose>
         <c:when test="${sessionScope.SessionUser != null}">
@@ -94,7 +103,7 @@
         </c:when>
         <c:when test="${sessionScope.SessionUser == null}">
             <form method="get" action="Login">
-                <button type="submit" class="btn btn-light class-session" >Se connecter</button>
+                <button type="submit" class="btn btn-light class-session">Se connecter</button>
             </form>
         </c:when>
     </c:choose>

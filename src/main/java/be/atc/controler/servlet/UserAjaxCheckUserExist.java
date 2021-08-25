@@ -25,7 +25,7 @@ public class UserAjaxCheckUserExist extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        UserService userService = new UserService();
+        UserService userService = new UserService(em);
         String login = request.getParameter("login");
 //        logger.log(Level.INFO, "checkUserAjax: " + login);
         boolean checkLoginExist = userService.checkUserExist(login);

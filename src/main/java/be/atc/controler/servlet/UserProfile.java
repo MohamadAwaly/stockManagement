@@ -1,10 +1,12 @@
 package be.atc.controler.servlet;
 
+import be.atc.controler.connexion.EMF;
 import be.atc.entities.UsersEntity;
 import be.atc.service.UserService;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
+import javax.persistence.EntityManager;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -15,11 +17,12 @@ import java.util.List;
 public class UserProfile extends HttpServlet {
     private static final Logger logger = Logger.getLogger(UserProfile.class);
     public static final  String      VUE    = "/views/UserProfile.jsp";
+    EntityManager em = EMF.getEM();;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        UserService userService = new UserService();
+        UserService userService = new UserService(em);
         String userlogin = (String) session.getAttribute("SessionUser");
         List<UsersEntity> user = userService.profile(userlogin);
         try {

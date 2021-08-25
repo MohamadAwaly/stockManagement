@@ -16,7 +16,8 @@ import java.util.List;
 
 @WebServlet( name = "usersshowall", value = "/UsersShowAll" )
 public class UsersShowAll extends HttpServlet {
-    private              UserService user   = new UserService();
+    EntityManager em = EMF.getEM();
+    private              UserService user   = new UserService(em);
     public static final  String      VUE    = "/views/showUsers.jsp";
     private static final Logger      logger = Logger.getLogger( UsersShowAll.class );
 
@@ -29,6 +30,8 @@ public class UsersShowAll extends HttpServlet {
             request.setAttribute( "user", users );
         } catch ( Exception e ) {
             logger.log(Level.ERROR, "Error: " + e.getMessage() );
+        } finally {
+//            em.close();
         }
         this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
     }

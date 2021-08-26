@@ -1,5 +1,6 @@
 package be.atc.controler.servlet;
 
+import be.atc.controler.connexion.EMF;
 import be.atc.controler.enumm.TypeAdress;
 import be.atc.entities.AdressEntity;
 import be.atc.entities.AdressUsersEntity;
@@ -12,6 +13,7 @@ import be.atc.service.UserService;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
+import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,7 +33,6 @@ public class addAdress extends HttpServlet {
     private RoleService roleService  = new RoleService();
     List<RolesEntity>  roleList      = roleService.showAllRoles();
 
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //get id user
@@ -49,6 +50,7 @@ public class addAdress extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         //get id user
         int idUser = Integer.parseInt(request.getParameter("iduserUpdate"));
 
@@ -56,8 +58,11 @@ public class addAdress extends HttpServlet {
         AdressEntity adress = new AdressEntity();
         adress.setStreet(request.getParameter("street"));
         adress.setNumber(Integer.parseInt(request.getParameter("number")));
-        adress.setBox(Integer.parseInt(request.getParameter("box")));
-
+        if (!request.getParameter("box").isEmpty()){
+            adress.setBox(Integer.parseInt(request.getParameter("box")));
+        } else {
+            /*ignored*/
+        }
         //get type of adress
         TypeAdress typeAdress = TypeAdress.valueOf(request.getParameter("typeAdresse"));
 
@@ -78,15 +83,12 @@ public class addAdress extends HttpServlet {
         String error = "";
         AdressService adressService = new AdressService();
         boolean ifTypeAdressExist = adressService.verfyIfTypeAdressExist(typeAdress, idUser);
-        logger.log(Level.INFO,"type of adress: (return methode) " + ifTypeAdressExist);
         if(ifTypeAdressExist){
             adressService.addMultipleAdress(idUser, adress, adressUsers);
             logger.log(Level.INFO,"Adress added");
         } else {
             error = "l'utilisateur possede deja une adresse de " + typeAdress;
         }
-
-
         //request JSP
         UserService userService = new UserService();
         List<Object[]> user = userService
@@ -113,15 +115,11 @@ public class addAdress extends HttpServlet {
         } catch ( Exception e ) {
             logger.log( Level.ERROR, "User error" + e.getMessage() );
         }
-
         if (error.equals("")){
             this.getServletContext().getRequestDispatcher(VUE_UPDATEUSER).forward(request, response);
         } else {
             this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
         }
-
-
-
     }
 
 

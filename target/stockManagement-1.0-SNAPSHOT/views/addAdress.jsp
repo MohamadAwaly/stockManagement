@@ -10,6 +10,9 @@
 <c:import url="header.jsp"/>
 
 <form action="addAdress" method="post">
+    <div class="mb-3">
+        <c:if test="${ !empty error}"><p class="alert alert-danger"><c:out value="${ error }"/></p></c:if>
+    </div>
     <div class="mb-1">
         <label for="iduserUpdate" class="form-label"><span class="etoile">*</span> id</label>
         <input type="number" name="iduserUpdate" class="form-control" id="iduserUpdate"

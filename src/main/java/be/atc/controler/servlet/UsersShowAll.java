@@ -1,9 +1,11 @@
 package be.atc.controler.servlet;
 
+import be.atc.controler.connexion.EMF;
 import be.atc.service.UserService;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
+import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,6 +29,8 @@ public class UsersShowAll extends HttpServlet {
             request.setAttribute( "user", users );
         } catch ( Exception e ) {
             logger.log(Level.ERROR, "Error: " + e.getMessage() );
+        } finally {
+//            em.close();
         }
         this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
     }

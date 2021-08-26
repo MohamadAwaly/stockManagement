@@ -1,5 +1,6 @@
 package be.atc.controler.servlet;
 
+import be.atc.controler.connexion.EMF;
 import be.atc.controler.enumm.TypeAdress;
 import be.atc.entities.*;
 import be.atc.service.AdressService;
@@ -10,6 +11,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.mindrot.jbcrypt.BCrypt;
 
+import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -77,8 +79,14 @@ public class AddUser extends HttpServlet {
             newuser.setFirstName( request.getParameter( "firstName" ) );
             newuser.setDayOfBirth( Date.valueOf( request.getParameter( "dayOfBirth" ) ) );
             newuser.setInscriptionDate( Date.valueOf( currentDate ) );
-            newuser.setVat( request.getParameter( "vat" ) );
-            newuser.setMail( request.getParameter( "email" ) );
+            if (!request.getParameter( "vat" ).isEmpty() ){
+                newuser.setVat( request.getParameter( "vat" ) );
+            } else {
+                newuser.setVat(null);
+            }
+            if ( !request.getParameter( "email" ).isEmpty() ){
+                newuser.setMail( request.getParameter( "email" ) );
+            }
             newuser.setPassword( passwordHached );
             newuser.setLogin( request.getParameter( "login" ) );
             newuser.setRoles( role );
@@ -88,10 +96,11 @@ public class AddUser extends HttpServlet {
             AdressEntity adress = new AdressEntity();
             adress.setStreet( request.getParameter( "street" ) );
             adress.setNumber( Integer.parseInt( request.getParameter( "number" ) ) );
-            if ( request.getParameter( "box" ).equals( "" ) ) {
-                adress.setBox( 0 );
-            } else {
+
+            try {
                 adress.setBox( Integer.parseInt( request.getParameter( "box" ) ) );
+            } catch (Exception e ){
+                /*ignored*/
             }
             //initialize a city and get the user's city
             CitiesEntity city = new CitiesEntity();
@@ -115,7 +124,7 @@ public class AddUser extends HttpServlet {
             boolean adduser = false;
             adduser = userService.addUser( newuser, adress, adressUsers );
             //            HttpSession session = request.getSession();
-            String errorUserExist = "l'utilisateur " + newuser.getLogin() + " existe déja ";
+            String errorUserExist = "l'utilisateur " + newuser.getLogin() + " ou le numéro de tva " + newuser.getVat()+ " existe déja ";
             //Send parameter to JSP
             if ( adduser ) {
                 List<Object[]> userList = user.showAllUsers();

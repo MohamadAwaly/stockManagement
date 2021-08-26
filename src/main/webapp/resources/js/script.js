@@ -1,6 +1,6 @@
 $(document).ready(function () {
     //Var add User
-    var login = $('.login'),
+    var login = $('#login'),
         lastName = $('.lastNameClass'),
         firstName = $('.firstNameClass'),
         dayOfBirth = $('.dayOfBirthClass'),
@@ -8,16 +8,17 @@ $(document).ready(function () {
         mail = $('.emailClass'),
         password = $('.passwordClass'),
         rpassword = $('.rpPasswordClass');
+
     //Minimum eight characters, at least one upper case English letter, one lower case English letter, one number and one special character
     var regPass = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$");
     var regEmail = new RegExp(/[a-zA-Z0-9\.]{1,}[@][a-zA-Z0-9\.]{1,}[\.][a-zA-Z0-9\.]{1,}$/);
     var regVat = new RegExp("^(BE){0,1}[0]{0,1}[0-9]{9}$");
 
     //Form addUser & updateUser
-
     login.keyup(function () {
         var errorVal = $(this).val();
         var errorLogin = document.getElementById("errorLogin");
+        var errorUserExist = document.getElementById("errorUserExist");
         if (errorVal.length < 4) {
             console.log("login");
             $(this).removeClass("is-valid");
@@ -28,6 +29,27 @@ $(document).ready(function () {
             $(this).addClass("is-valid");
             errorLogin.hidden = true;
         }
+        //test ajax
+        $.ajax({
+            type: "POST",
+            url: 'UserAjaxCheckUserExist',
+            data: {
+                login: login.val(),
+            },
+            // dataType : 'json',
+        }).done(function (data) {
+            $('#error').attr('value', data);
+            if (data == "error") {
+                login.removeClass("is-valid");
+                login.addClass("is-invalid");
+                $('#errorUserExist').html("l'utilisateur " + login.val() + " existe deja");
+                errorUserExist.hidden = false;
+            } else {
+                login.removeClass("is-invalid");
+                login.addClass("is-valid");
+                errorUserExist.hidden = true;
+            }
+        });
     });
     lastName.keyup(function () {
         var errorValLastName = $(this).val();
@@ -116,14 +138,16 @@ $(document).ready(function () {
         var email = $(this).val();
         var errorEmail = document.getElementById("errorEmail");
         console.log("mail");
-        if (regEmail.test(email)) {
-            $(this).removeClass("is-invalid");
-            $(this).addClass("is-valid");
-            errorEmail.hidden = true;
-        } else {
-            $(this).removeClass("is-valid");
-            $(this).addClass("is-invalid");
-            errorEmail.hidden = false;
+        if (email.length > 0) {
+            if (regEmail.test(email)) {
+                $(this).removeClass("is-invalid");
+                $(this).addClass("is-valid");
+                errorEmail.hidden = true;
+            } else {
+                $(this).removeClass("is-valid");
+                $(this).addClass("is-invalid");
+                errorEmail.hidden = false;
+            }
         }
     })
     password.keyup(function () {
@@ -160,23 +184,34 @@ $(document).ready(function () {
     })
 
     /*Color lign on double click*/
-    $('.usersList').dblclick( function () {
+    $('.usersList').dblclick(function () {
+        $('#updateUserbtn').removeAttr('disabled');
         $('.usersList').removeAttr('style');
         $(this).css('background', '#31B0D5');
-        // var test1 = new Date($(this).find("td").eq(5).html());
-        // var test1 = $(this).find("td").eq(5).html();
-        // var day = test1.substring(0,2);
-        // var month = test1.substring(3,5);
-        $('#selectedUserid').attr('value',$(this).find("td").eq(0).html());
-        $('#selectedUserLogin').attr('value',$(this).find("td").eq(1).html());
+        $('#selectedUserid').attr('value', $(this).find("td").eq(0).html());
+        $('#selectedUserLogin').attr('value', $(this).find("td").eq(1).html());
+    });
+    //add the information in the field to add an address
+    $('#idAddAdress').click(function () {
+        $('#selectedUseridUpdate').attr('value', $('#iduserUpdate').val());
+        $('#selectedUserLoginUpdate').attr('value', $('#loginUpdate').val());
+    });
+    //add id-adress in the field to update adress selected
+    $('.adressList').dblclick(function () {
+        $('#selected-IdAdress').attr('value', $(this).find("td").eq(0).html());
+        $('#id-UpdateAdress').prop('disabled', false);
+        $('#user-id').attr('value', $('#iduserUpdate').val());
+    });
+    // retrieve id and login user to update from session
+    $('#id-btn-profile').on('click', function (){
+        var login = $('#logUserProfile').text();
+        var id = $('#idUserprofile').text();
 
+        console.log("user: " + login);
+        console.log("id: " + id);
     });
-    $('#idAddAdress').click( function () {
-        $('#selectedUseridUpdate').attr('value',$('#iduserUpdate').val());
-        $('#selectedUserLoginUpdate').attr('value',$('#loginUpdate').val());
-    });
+
 });
-
 
 /**
  * Return the difference between the two date in day
@@ -193,11 +228,6 @@ function dateDiffInDays(a, b) {
 
     return Math.floor((utc2 - utc1) / _MS_PER_DAY);
 }
-// function dateFormat (date){
-//     // const utc = new Date(date.getDate() + " " + [date.getMonth()] + " " + date.getUTCFullYear());
-//     // const utc = new Date(date.getUTCFullYear() + " " + [date.getMonth()] + " " + date.getDate());
-//     return utc;
-// }
 
 /**
  *  PARTIE FOURNISSEUR

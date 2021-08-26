@@ -27,9 +27,9 @@
             <button type="submit" class="btn btn-outline-info float-right">Valider</button>
             <div class="mb-1">
                 <label for="iduserUpdate" class="form-label" hidden><span class="etoile">*</span> id</label>
-                <input type="number" name="iduserUpdate" class="form-control" id="iduserUpdate"
+                <input type="number" name="iduserUpdate" class="form-control" id="iduserUpdate" hidden
                        aria-describedby="idUser"
-                       required readonly hidden value="<c:out value="${ user.idUser }"/>">
+                       required readonly value="<c:out value="${ user.idUser }"/>">
             </div>
             <div class="col">
                 <div class="mb-1">
@@ -156,15 +156,22 @@
 </c:forEach>
 
 <%--<form action="userUpdate" method="get" class="selectedUserForm float-right bg-transparent border-0">--%>
-<form action="addAdress" method="get" class="selectedUserForm float-right bg-transparent border-0">
-    <input type="text" name="selectedUserUpdate-Login" class="form-control" id="selectedUserLoginUpdate"
-           aria-describedby="selectedUser" hidden>
-    <input type="text" name="selectedUserUpdate-id" class="form-control" id="selectedUseridUpdate"
-           aria-describedby="selectedUser" hidden>
-    <button type="submit" class="btn btn-outline-info float-right" id="idAddAdress">Ajouter une adresse</button>
-</form>
-
-
+<div class="d-flex flex-row-reverse float-right">
+    <form action="addAdress" method="get" class="selectedUserForm float-right bg-transparent border-0 d-flex " >
+        <input type="text" name="selectedUserUpdate-Login" class="form-control p-2" id="selectedUserLoginUpdate"
+               aria-describedby="selectedUser" hidden>
+        <input type="text" name="selectedUserUpdate-id" class="form-control p-2" id="selectedUseridUpdate"
+               aria-describedby="selectedUser" hidden>
+        <button type="submit" class="btn btn-outline-info float-right p-2 " id="idAddAdress">Ajouter une adresse</button>
+    </form>
+    <form action="UpdateAdress" method="get" class="selectedUserForm float-right bg-transparent border-0 d-flex     ">
+        <input type="text" name="selected-IdAdress" class="form-control p-2" id="selected-IdAdress"
+               aria-describedby="selectedUser" hidden>
+        <input type="text" name="user-id" class="form-control p-2" id="user-id"
+               aria-describedby="selectedUser" hidden>
+        <button type="submit"  disabled class="btn btn-outline-info float-right p-2" id="id-UpdateAdress">Mettre à jour</button>
+    </form>
+</div>
 <table class="table table-striped table-hover" border="1px solid black">
     <h3>Liste des adresses</h3>
     <thead>
@@ -179,7 +186,7 @@
     </thead>
     <tbody>
     <c:forEach var="adress" items="${ adress }">
-        <tr class="adressList">
+        <tr class="adressList usersList">
             <td><c:out value="${ adress[0].idAdress }"/></td>
             <td><c:out value="${ adress[2].citie }"/></td>
             <td><c:out value="${ adress[1].typeAdress }"/></td>

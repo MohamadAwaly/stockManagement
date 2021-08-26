@@ -8,11 +8,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE HTML>
-<html lang="fr">
+<html>
 <head>
-    <meta charset="utf-8">
     <title>Stock management</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/allCss.css" />
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/allCss.css"/>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/script.js"></script>
@@ -35,42 +35,17 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav me-auto">
+                <c:if test="${sessionScope.SessionUserEntity.roles.role.trim() == 'administrateur' || sessionScope.SessionUserEntity.roles.role.trim() == 'directeur'}">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                        aria-haspopup="true" aria-expanded="false">Users</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Add Role</a>
                         <a class="dropdown-item" href="adduser">Ajouter utilisateur</a>
-                        <a class="dropdown-item" href="#">Update user</a>
-                        <a class="dropdown-item" href="#">Delete user</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="UsersShowAll">Liste des utilisateurs</a>
                     </div>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                       aria-haspopup="true" aria-expanded="false">Liste des fournisseurs</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="supplierCreate">Ajouter fournisseurs</a>
-                        <a class="dropdown-item" href="#">MÀJ fournisseurs</a>
-                        <a class="dropdown-item" href="#">Supprimer fournisseurs</a>
-                        <a class="dropdown-item" href="CommandSupplierCreate">Faire une commande au fournisseur</a>
-                        <a class="dropdown-item" href="CommandSupplierShowAll">Voir les commandes fournisseurs</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="suppliersShowAll">Liste des fournisseurs</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                       aria-haspopup="true" aria-expanded="false">Address</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Add City</a>
-                        <a class="dropdown-item" href="#">Add country</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Cities list</a>
-                        <a class="dropdown-item" href="#">Countries list</a>
-                    </div>
-                </li>
+                </c:if>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                        aria-haspopup="true" aria-expanded="true">Product</a>
@@ -106,6 +81,32 @@
                 </li>
 
             </ul>
+            <c:choose>
+                <c:when test="${sessionScope.SessionUser != null}">
+                    <a class="navbar-brand " href="UserProfile"> Ma Fiche </a>
+                </c:when>
+            </c:choose>
+
         </div>
+
     </div>
+
 </nav>
+
+<header>
+    <c:choose>
+        <c:when test="${sessionScope.SessionUser != null}">
+            <form>
+                <SELECT name="nom" size="1" action="UserSignOut" class="class-session" onchange="location = this.value">
+                    <option><c:out value="${sessionScope.SessionUser}"/></option>
+                    <option value="UserSignOut">se deconnecter</option>
+                </SELECT>
+            </form>
+        </c:when>
+        <c:when test="${sessionScope.SessionUser == null}">
+            <form method="get" action="Login">
+                <button type="submit" class="btn btn-light class-session">Se connecter</button>
+            </form>
+        </c:when>
+    </c:choose>
+</header>

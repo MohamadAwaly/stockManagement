@@ -24,6 +24,7 @@
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.25" />
           <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.11.4" />
           <element id="library" level="project" name="Maven: org.webjars.bower:jquery:3.6.0" />
+          <element id="library" level="project" name="Maven: org.mindrot:jbcrypt:0.3m" />
         </element>
       </element>
       <element id="directory" name="META-INF">

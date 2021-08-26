@@ -4,6 +4,27 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
 
+@NamedQueries(value = {
+        @NamedQuery(name = "Adress.SelectByIdUser",
+                query = "SELECT a, au, c FROM AdressEntity a " +
+                        "JOIN AdressUsersEntity au on au.address = a " +
+                        "JOIN UsersEntity u on au.users = u  " +
+                        "JOIN CitiesEntity c on a.city = c" +
+                        " where au.users.idUser = :id"),
+        @NamedQuery(name = "Adress.TypeAdressExist",
+                query = "Select au.typeAdress from AdressUsersEntity au" +
+                        " join UsersEntity u on au.users = u" +
+                        " where au.users.idUser = :idUser and au.typeAdress = :typeAdress"),
+        @NamedQuery(name = "Adress.SelectAdressById",
+                query = "SELECT a, au from AdressEntity a " +
+                        "left join AdressUsersEntity au on au.address = a " +
+                        "where a.idAdress = :id"),
+        @NamedQuery(name = "Adress.GetIdAdress",
+                query = "SELECT au.idAdressUsers from AdressEntity a " +
+                        "join AdressUsersEntity au on au.address = a " +
+                        "where a.idAdress = :idAdress")
+})
+
 @Entity
 @Table(name = "address", schema = "stockmanagement")
 public class AdressEntity {
@@ -79,7 +100,6 @@ public class AdressEntity {
         return Objects.hash(idAdress, street, number, box, city);
     }
 
-
     public CitiesEntity getCity() {
         return city;
     }
@@ -88,7 +108,7 @@ public class AdressEntity {
         this.city = city;
     }
 
-    @OneToMany(mappedBy = "address")
+    @OneToMany(mappedBy = "address", cascade = CascadeType.PERSIST)
     public Collection<AdressUsersEntity> getAdressUsers() {
         return adressUsers;
     }

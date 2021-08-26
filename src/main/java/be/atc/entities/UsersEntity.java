@@ -7,10 +7,26 @@ import java.util.Objects;
 
 @NamedQueries(value = {
         @NamedQuery(name = "User.finddall",
-                query = "SELECT u FROM UsersEntity u"),
+                query = "SELECT u FROM UsersEntity u " +
+//                        "LEFT JOIN AdressUsersEntity au on au.users = u " +
+//                        "LEFT JOIN AdressEntity a on au.address = a " +
+//                        "where au.typeAdress = be.atc.controler.enumm.TypeAdress.Domicile " +
+                        "order by u.idUser desc "),
         @NamedQuery(name = "User.findName",
-                query = "SELECT u.lastName FROM UsersEntity u")
-
+                query = "SELECT u.lastName FROM UsersEntity u"),
+        @NamedQuery(name = "User.checkUserExist",
+                query = "SELECT u.login FROM UsersEntity u where u.login = :login"),
+        @NamedQuery(name = "User.checkVatExist",
+                query = "SELECT u.vat FROM UsersEntity u where u.vat = :vat"),
+        @NamedQuery(name = "User.SelectById",
+                query = "SELECT u FROM UsersEntity u " +
+                        "where u.idUser = :id"),
+        @NamedQuery(name = "User.CheckLogin",
+                query = "SELECT u.idUser FROM UsersEntity u " +
+                        "where u.login = :login"),
+        @NamedQuery(name = "User.profile",
+                query = "SELECT u FROM UsersEntity u " +
+                        "where u.login = :login")
 })
 @Entity
 @Table(name = "users", schema = "stockmanagement")
@@ -138,15 +154,25 @@ public class UsersEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         UsersEntity that = (UsersEntity) o;
-        return idUser == that.idUser && active == that.active && Objects.equals(lastName, that.lastName) && Objects.equals(firstName, that.firstName) && Objects.equals(dayOfBirth, that.dayOfBirth) && Objects.equals(inscriptionDate, that.inscriptionDate) && Objects.equals(vat, that.vat) && Objects.equals(mail, that.mail) && Objects.equals(password, that.password) && Objects.equals(login, that.login) && Objects.equals(roles, that.roles) && Objects.equals(adress, that.adress) && Objects.equals(commandsuppliers, that.commandsuppliers) && Objects.equals(orders, that.orders);
+        return idUser == that.idUser && active == that.active && Objects.equals(lastName, that.lastName) && Objects
+                .equals(firstName, that.firstName) && Objects.equals(dayOfBirth, that.dayOfBirth) && Objects
+                .equals(inscriptionDate, that.inscriptionDate) && Objects.equals(vat, that.vat) && Objects
+                .equals(mail, that.mail) && Objects.equals(password, that.password) && Objects
+                .equals(login, that.login) && Objects.equals(roles, that.roles) && Objects
+                .equals(adress, that.adress) && Objects.equals(commandsuppliers, that.commandsuppliers) && Objects
+                .equals(orders, that.orders);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idUser, lastName, firstName, dayOfBirth, inscriptionDate, vat, mail, password, login, active, roles, adress, commandsuppliers, orders);
+        return Objects
+                .hash(idUser, lastName, firstName, dayOfBirth, inscriptionDate, vat, mail, password, login, active,
+                        roles, adress, commandsuppliers, orders);
     }
 
     //Relation avec la table Roles via le champ id role
@@ -160,7 +186,7 @@ public class UsersEntity {
     }
 
     //Realation avec la table de jointure adressUser via le champ users
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "users", cascade = CascadeType.PERSIST)
     public Collection<AdressUsersEntity> getAdress() {
         return adress;
     }

@@ -229,5 +229,79 @@ function dateDiffInDays(a, b) {
     return Math.floor((utc2 - utc1) / _MS_PER_DAY);
 }
 
+/**
+ *  PARTIE FOURNISSEUR
+ */
+
+/**
+ * Page : supplierCreate
+ * Contrôle fournisseur si Existe
+ * Retourne 1 = existe ou 0 = n'existe pas
+ * @author Jiwaii
+ */
+$(document).on('keyup','#formNewSupplierName',function (){
+    let inputNewSupplierName = $(this).val().toString().trim();
+    $.ajax({
+        url : "SupplierExist",
+        method : "POST",
+        data : {
+            name : inputNewSupplierName
+        }
+    }).done(function (data){
+            // console.log('Response Data : '+data);
+            let supplierExist = parseInt(data.toString().trim());
+            let inputName = $('#formNewSupplierName').val().trim();
+            if (supplierExist == 1 || inputName == '' ){
+                $('#formNewSupplierName').attr('class','form-control is-invalid');
+                $('#submitNewSupplier').attr('disabled','true');
+            }
+            else{
+                $('#formNewSupplierName').attr('class','form-control is-valid');
+                $('#submitNewSupplier').removeAttr('disabled');
+            }
+        }
+    )
+});
+/**
+ * Page : CommandSupplierCreate.jsp
+ * Quantity control
+ */
+$(document).on('keyup','#inputQuantity',function (){
+    let qte = $('#inputQuantity').val();
+    console.log('is a number : '+!isNaN(qte));
+    if (isNaN(qte)){
+        $('#inputQuantity').val('');
+    }
+})
+/**
+ * Page : CommandSupplierShowAll.jsp
+ * search Bar and AJAX
+ */
+$(document).on('keyup','#CmdSupBchSearchBar',function (){
+    $.ajax({
+        url : "CommandSuppliersSearch",
+        method : "POST",
+        data : {
+            searchBar : $('#CmdSupBchSearchBar').val()
+        }
+    }).done( function (data){
+        let json = data; // pas de parse Json, déjà fait dans la servlet
+        console.log(json);
+        $('#CmdSupListContent').empty();
+        json.forEach(obj => {
+        //cs.idCommandSuppliers ,s.name, cs.orderDate, csb.lotQuantity, b.idBatch, p.designation,cs.users.lastName
+            $('#CmdSupListContent').append("" +
+                "<tr id='"+obj[0]+"'>" +
+                    "<td>"+obj[0]+"</td>" +
+                    "<td>"+obj[1]+"</td>" +
+                    "<td>"+obj[2]+"</td>" +
+                    "<td>"+obj[5]+"</td>" +
+                    "<td>"+obj[3]+"</td>" +
+                    "<td>"+obj[4]+"</td>" +
+                    "<td>"+obj[6]+"</td>" +
+                "</tr>");
+        })
+    });
+})
 
 

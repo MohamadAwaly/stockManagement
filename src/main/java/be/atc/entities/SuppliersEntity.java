@@ -1,8 +1,17 @@
 package be.atc.entities;
 
+import com.sun.org.apache.bcel.internal.generic.Select;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
+
+@NamedQueries(value = {
+        @NamedQuery(name = "suppliers.findAll",query = "SELECT s.idSupplier, s.name FROM SuppliersEntity s order by s.name asc"),
+        @NamedQuery(name="suppliers.findName",query = "SELECT s.name from SuppliersEntity s"),
+        @NamedQuery(name="suppliers.supplierExist",query = "SELECT COUNT(s.name) FROM SuppliersEntity s WHERE s.name = :pWhereName")
+})
+
 
 @Entity
 @Table( name = "suppliers", schema = "stockmanagement" )

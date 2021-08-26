@@ -26,7 +26,7 @@ form {
     margin-left: auto;
     margin-right: auto;
     margin-top: 2em;
-    border: 1px solid #CCC;
+    /*border: 1px solid #CCC;*/
     /*background-color: #f2f2f2;*/
     background-color: rgba(200, 208, 208, 0.9);
     border-radius: 4px;

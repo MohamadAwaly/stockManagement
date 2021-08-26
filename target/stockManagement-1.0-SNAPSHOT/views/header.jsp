@@ -60,50 +60,7 @@
                         <a class="dropdown-item" href="suppliersShowAll">Liste des fournisseurs</a>
                     </div>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                       aria-haspopup="true" aria-expanded="false">Address</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Add City</a>
-                        <a class="dropdown-item" href="#">Add country</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Cities list</a>
-                        <a class="dropdown-item" href="#">Countries list</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                       aria-haspopup="true" aria-expanded="true">Product</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Add product</a>
-                        <a class="dropdown-item" href="#">update product</a>
-                        <a class="dropdown-item" href="#">delete product</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Product list</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                       aria-haspopup="true" aria-expanded="true">Brands</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Add brand</a>
-                        <a class="dropdown-item" href="#">update brand</a>
-                        <a class="dropdown-item" href="#">delete brand</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Brands list</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                       aria-haspopup="true" aria-expanded="true">Categories</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Add category</a>
-                        <a class="dropdown-item" href="#">update category</a>
-                        <a class="dropdown-item" href="#">delete category</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Categories list</a>
-                    </div>
-                </li>
+
 
             </ul>
             <c:choose>

@@ -12,7 +12,7 @@
 <c:forEach var="user" items="${ user }">
     <div class="fram">
         <div class="titleFram">
-            <h2><c:out value="${ user.login }"/></h2>
+            <h2 id="logUserProfile"><c:out value="${ user.login }"/></h2>
         </div>
         <table class="profileTable">
             <tr hidden>
@@ -47,7 +47,9 @@
                 <th>Role</th>
                 <td><c:out value="${ user.roles.role }"/></td>
             </tr>
+
         </table>
+        <button class="btn btn-primary float-right btnprofile" id="id-btn-profile" type="button">mettre a jour</button>
     </div>
 </c:forEach>
 </body>

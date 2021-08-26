@@ -35,6 +35,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav me-auto">
+                <c:if test="${sessionScope.SessionUserEntity.roles.role.trim() == 'administrateur' || sessionScope.SessionUserEntity.roles.role.trim() == 'directeur'}">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                        aria-haspopup="true" aria-expanded="false">Users</a>
@@ -44,6 +45,7 @@
                         <a class="dropdown-item" href="UsersShowAll">Liste des utilisateurs</a>
                     </div>
                 </li>
+                </c:if>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                        aria-haspopup="true" aria-expanded="true">Product</a>
@@ -97,7 +99,7 @@
             <form>
                 <SELECT name="nom" size="1" action="UserSignOut" class="class-session" onchange="location = this.value">
                     <option><c:out value="${sessionScope.SessionUser}"/></option>
-                    <option value="UserSignOut">Logout</option>
+                    <option value="UserSignOut">se deconnecter</option>
                 </SELECT>
             </form>
         </c:when>

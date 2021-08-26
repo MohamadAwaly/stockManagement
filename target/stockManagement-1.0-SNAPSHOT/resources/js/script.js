@@ -15,7 +15,6 @@ $(document).ready(function () {
     var regVat = new RegExp("^(BE){0,1}[0]{0,1}[0-9]{9}$");
 
     //Form addUser & updateUser
-
     login.keyup(function () {
         var errorVal = $(this).val();
         var errorLogin = document.getElementById("errorLogin");
@@ -184,10 +183,9 @@ $(document).ready(function () {
 
     })
 
-
     /*Color lign on double click*/
     $('.usersList').dblclick(function () {
-        // console.log("test dbclick");
+        $('#updateUserbtn').removeAttr('disabled');
         $('.usersList').removeAttr('style');
         $(this).css('background', '#31B0D5');
         $('#selectedUserid').attr('value', $(this).find("td").eq(0).html());
@@ -203,6 +201,14 @@ $(document).ready(function () {
         $('#selected-IdAdress').attr('value', $(this).find("td").eq(0).html());
         $('#id-UpdateAdress').prop('disabled', false);
         $('#user-id').attr('value', $('#iduserUpdate').val());
+    });
+    // retrieve id and login user to update from session
+    $('#id-btn-profile').on('click', function (){
+        var login = $('#logUserProfile').text();
+        var id = $('#idUserprofile').text();
+
+        console.log("user: " + login);
+        console.log("id: " + id);
     });
 
 });
@@ -222,12 +228,6 @@ function dateDiffInDays(a, b) {
 
     return Math.floor((utc2 - utc1) / _MS_PER_DAY);
 }
-
-// function dateFormat (date){
-//     // const utc = new Date(date.getDate() + " " + [date.getMonth()] + " " + date.getUTCFullYear());
-//     // const utc = new Date(date.getUTCFullYear() + " " + [date.getMonth()] + " " + date.getDate());
-//     return utc;
-// }
 
 
 

@@ -202,6 +202,14 @@ $(document).ready(function () {
         $('#id-UpdateAdress').prop('disabled', false);
         $('#user-id').attr('value', $('#iduserUpdate').val());
     });
+    // retrieve id and login user to update from session
+    $('#id-btn-profile').on('click', function (){
+        var login = $('#logUserProfile').text();
+        var id = $('#idUserprofile').text();
+
+        console.log("user: " + login);
+        console.log("id: " + id);
+    });
 
 });
 

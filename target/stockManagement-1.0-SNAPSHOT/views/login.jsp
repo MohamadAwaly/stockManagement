@@ -33,7 +33,7 @@
             <input type="submit" class="fadeIn fourth" value="se connecter">
         </form>
         <div id="formFooter">
-            <a class="underlineHover" href="#">Mot de passe oublié?</a>
+            <a class="underlineHover" href="adduser"> Inscription</a>
         </div>
     </div>
 </div>

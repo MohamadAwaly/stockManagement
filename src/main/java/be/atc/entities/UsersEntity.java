@@ -7,10 +7,10 @@ import java.util.Objects;
 
 @NamedQueries( value = {
         @NamedQuery( name = "User.finddall",
-                query = "SELECT u, a, au FROM UsersEntity u " +
-                        "JOIN AdressUsersEntity au on au.users = u " +
-                        "JOIN AdressEntity a on au.address = a " +
-                        "where au.typeAdress = be.atc.controler.enumm.TypeAdress.Domicile " +
+                query = "SELECT u FROM UsersEntity u " +
+                     //   "JOIN AdressUsersEntity au on au.users = u " +
+                       // "JOIN AdressEntity a on au.address = a " +
+                       // "where au.typeAdress = be.atc.controler.enumm.TypeAdress.Domicile " +
                         "order by u.idUser desc " ),
         @NamedQuery(name = "User.findAllIdAndName",
                 query = "SELECT u.idUser, concat(u.lastName,'  ',u.firstName) FROM UsersEntity u " +
@@ -22,10 +22,10 @@ import java.util.Objects;
         @NamedQuery( name = "User.checkVatExist",
                 query = "SELECT u.vat FROM UsersEntity u where u.vat = :vat" ),
         @NamedQuery( name = "User.SelectById",
-                query = "SELECT u FROM UsersEntity u " +
-//                        "LEFT JOIN AdressUsersEntity au on au.users = u " +
-//                        "LEFT JOIN AdressEntity a on au.address = a " +
-//                        "where au.typeAdress = be.atc.controler.enumm.TypeAdress.Domicile " +
+                query = "SELECT u, a, au FROM UsersEntity u " +
+                       "LEFT JOIN AdressUsersEntity au on au.users = u " +
+                        "LEFT JOIN AdressEntity a on au.address = a " +
+                        "where au.typeAdress = be.atc.controler.enumm.TypeAdress.Domicile " +
                         "order by u.idUser desc "),
         @NamedQuery(name = "User.checkUserExist",
                 query = "SELECT u.login FROM UsersEntity u where u.login = :login"),

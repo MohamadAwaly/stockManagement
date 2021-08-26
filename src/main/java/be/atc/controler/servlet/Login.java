@@ -1,12 +1,11 @@
 package be.atc.controler.servlet;
 
-import be.atc.controler.connexion.EMF;
 import be.atc.entities.UsersEntity;
 import be.atc.service.UserService;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.mindrot.jbcrypt.BCrypt;
 
-import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,12 +18,15 @@ import java.io.IOException;
 public class Login extends HttpServlet {
     public static final String VUE = "/UsersShowAll";
     public static final String VUE_LOGIN = "/views/login.jsp";
+    public static final  String       VUE_HOME  = "/index.jsp";
+
     private static final Logger logger = Logger.getLogger(Login.class);
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         this.getServletContext().getRequestDispatcher(VUE_LOGIN).forward(request, response);
     }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -35,18 +37,25 @@ public class Login extends HttpServlet {
         UsersEntity user = new UsersEntity();
         String error = "";
         boolean checkpw = false;
+        String sessionOK = "OK";
         try {
             user = userService.checkLogin(login);
             checkpw = BCrypt.checkpw(password, user.getPassword());
-            if(!checkpw){
+            if (!checkpw) {
                 error = "Erreur! Username/password incorrect ";
             }
-        } catch (NullPointerException e ){
+        } catch (NullPointerException e) {
             error = "Erreur! Username/password incorrect ";
         }
         if (checkpw) {
-            response.sendRedirect(request.getContextPath() + VUE);
+            if (user.getRoles().getRole().trim().equals("administrateur")) {
+                response.sendRedirect(request.getContextPath() + VUE);
+            } else {
+                this.getServletContext().getRequestDispatcher(VUE_HOME).forward(request, response);
+            }
+            session.setAttribute("SessionUserEntity", user);
             session.setAttribute("SessionUser", login);
+            session.setAttribute("sessionOK", sessionOK);
         } else {
             session.setAttribute("SessionUser", null);
             request.setAttribute("error", error);

@@ -23,7 +23,8 @@
         <div class="col">
             <div class="mb-3">
                 <label for="lastName" class="form-label"><span class="etoile">*</span> Nom de famille</label>
-                <input type="text" name="lastName" class="form-control lastNameClass" id="lastName" aria-describedby="Nom" required
+                <input type="text" name="lastName" class="form-control lastNameClass" id="lastName"
+                       aria-describedby="Nom" required
                        value=<c:out value="${user.lastName}"/>>
                 <div id="errorlastName" hidden class="alert alert-danger">Le nom doit contenir au moin 3 caract&egrave;res</div>
             </div>
@@ -31,7 +32,8 @@
         <div class="col">
             <div class="mb-3">
                 <label for="firstName" class="form-label"><span class="etoile">*</span> Prenom</label>
-                <input type="text" name="firstName" class="form-control firstNameClass" id="firstName" aria-describedby="prenom"
+                <input type="text" name="firstName" class="form-control firstNameClass" id="firstName"
+                       aria-describedby="prenom"
                        required value="<c:out value="${user.firstName}"/>">
                 <div id="errorfirstName" hidden class="alert alert-danger">Le prenom doit contenir au moin 3 caract&egrave;re</div>
             </div>
@@ -78,20 +80,35 @@
         </div>
     </div>
     <div class="mb-3">
-        <label for="idRole" class="form-label"><span class="etoile">*</span> Role : </label>
-        <SELECT id="idRole" name="role" size="1" class="form-control">
-            <c:forEach var="roles" items="${ roles }">
-            <OPTION value="${ roles.idRole}">
-                    <c:out value="${ roles.role } "/>
+
+            <c:if test="${sessionScope.SessionUserEntity.roles.role.trim() == 'administrateur' || sessionScope.SessionUserEntity.roles.role.trim() == 'directeur'}">
+                <label for="idRole" class="form-label"><span class="etoile">*</span> Role : </label>
+                <SELECT id="idRole" name="role" size="1" class="form-control">
+                <c:forEach var="roles" items="${ roles }">
+                    <OPTION value="${ roles.idRole}">
+                        <c:out value="${ roles.role } "/>
+                    </OPTION>
                 </c:forEach>
+                </SELECT>
+            </c:if>
+
+        <c:if test="${sessionScope.SessionUserEntity.roles.role.trim() == null}">
+        <label for="idRole" class="form-label" hidden><span class="etoile">*</span> Role : </label>
+        <SELECT id="idRole" name="role" size="1" class="form-control" hidden>
+            <c:forEach var="roles" items="${ roles }">
+                <OPTION hidden value="${ roles.idRole}" ${roles.role.trim() == 'client' ? 'selected' : ""}>
+                    <c:out value="${ roles.role } "/>
+                </OPTION>
+            </c:forEach>
         </SELECT>
+        </c:if>
     </div>
-    <div class="mb-3">
+        <div class="mb-3">
         <label for="idTypeadresse" class="form-label"><span class="etoile">*</span> Type Adresse: </label>
         <SELECT id="idTypeadresse" name="typeAdresse" size="1" class="form-control" required>
             <c:forEach var="allTypeAdress" items="${ allTypeAdress }">
             <OPTION value="${ allTypeAdress}">
-                    <c:out value="${allTypeAdress } "/>
+                <c:out value="${allTypeAdress } "/>
                 </c:forEach>
             </OPTION>
         </SELECT>
@@ -101,8 +118,8 @@
         <SELECT id="idCity" name="city" size="1" class="form-control" required>
             <c:forEach var="cities" items="${ cities }">
             <OPTION value="${ cities.idCity}">
-                    <c:out value="${ cities.postalCode } "/>
-                    <c:out value="${ cities.citie } "/>
+                <c:out value="${ cities.postalCode } "/>
+                <c:out value="${ cities.citie } "/>
                 </c:forEach>
             </OPTION>
         </SELECT>

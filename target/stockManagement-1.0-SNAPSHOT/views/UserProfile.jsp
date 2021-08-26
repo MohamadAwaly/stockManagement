@@ -15,6 +15,10 @@
             <h2><c:out value="${ user.login }"/></h2>
         </div>
         <table class="profileTable">
+            <tr hidden>
+                <th>id</th>
+                <td id="idUserprofile"><c:out value="${ user.idUser }"/></td>
+            </tr>
             <tr>
                 <th>Nom</th>
                 <td><c:out value="${ user.lastName }"/></td>

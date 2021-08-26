@@ -194,8 +194,6 @@ public class UserService {
             return em.find(UsersEntity.class, id);
         } catch (Exception e) {
             return null;
-        } finally {
-//            em.close();
         }
     }
 

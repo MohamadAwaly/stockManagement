@@ -16,16 +16,8 @@ import java.util.List;
 
 public class AdressService {
     private static Logger logger = Logger.getLogger(AdressService.class);
-//    EntityManager em = EMF.getEM();
-//    EntityTransaction trans = em.getTransaction();
-    EntityManager em ;
-    EntityTransaction trans ;
-
-    public AdressService (EntityManager em){
-        this.em = em;
-        trans = em.getTransaction();
-    }
-
+    EntityManager em = EMF.getEM();
+    EntityTransaction trans = em.getTransaction();
 
     /**
      * add adress

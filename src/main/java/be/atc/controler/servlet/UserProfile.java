@@ -17,12 +17,11 @@ import java.util.List;
 public class UserProfile extends HttpServlet {
     private static final Logger logger = Logger.getLogger(UserProfile.class);
     public static final  String      VUE    = "/views/UserProfile.jsp";
-    EntityManager em = EMF.getEM();;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        UserService userService = new UserService(em);
+        UserService userService = new UserService();
         String userlogin = (String) session.getAttribute("SessionUser");
         List<UsersEntity> user = userService.profile(userlogin);
         try {

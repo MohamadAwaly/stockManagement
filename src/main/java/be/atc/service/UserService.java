@@ -16,13 +16,8 @@ import java.util.List;
 
 public class UserService {
     private static final Logger logger = Logger.getLogger(UserService.class);
-    EntityManager em ;
-    EntityTransaction trans ;
-
-    public UserService (EntityManager em ){
-        this.em = em;
-        trans = em.getTransaction();
-    }
+    EntityManager em =EMF.getEM();
+    EntityTransaction trans = em.getTransaction() ;
 
 
     /**
@@ -35,7 +30,7 @@ public class UserService {
      */
     public boolean addUser(UsersEntity user, AdressEntity adressEntity, AdressUsersEntity adressUser) {
         try {
-            UserService usercheck = new UserService(em);
+            UserService usercheck = new UserService();
             boolean chekvatisempty = true;
             if (user.getVat() == null) {
                 chekvatisempty = false;

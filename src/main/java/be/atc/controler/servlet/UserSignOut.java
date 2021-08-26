@@ -19,7 +19,6 @@ public class UserSignOut extends HttpServlet {
         HttpSession session = request.getSession();
         session.invalidate();
         /* Redirection to the home page ! */
-//        response.sendRedirect( request.getContextPath() +"/UsersShowAll" );
         this.getServletContext().getRequestDispatcher( VUE_HOME ).forward( request, response );
     }
     @Override

@@ -19,9 +19,8 @@ import java.util.List;
 public class Servlet2Test extends HttpServlet {
     final static org.apache.log4j.Logger logger = org.apache.log4j.Logger
             .getLogger(Servlet2Test.class);
-    EntityManager em = EMF.getEM(); ;
     private EntityTest pers = new EntityTest();
-    private UserService user = new UserService(em);
+    private UserService user = new UserService();
     private RoleService role = new RoleService();
     public static final String VUE = "/views/showUsers.jsp";
 

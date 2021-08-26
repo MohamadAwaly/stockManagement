@@ -20,23 +20,30 @@ public class Login extends HttpServlet {
     public static final String VUE = "/UsersShowAll";
     public static final String VUE_LOGIN = "/views/login.jsp";
     private static final Logger logger = Logger.getLogger(Login.class);
-    EntityManager em = EMF.getEM(); ;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         this.getServletContext().getRequestDispatcher(VUE_LOGIN).forward(request, response);
     }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession();
         String login = request.getParameter("login-user");
         String password = request.getParameter("password");
-        UserService userService = new UserService(em);
-        UsersEntity user = userService.checkLogin(login);
-        String error = "Erreur! Username/password incorrect ";
-        boolean checkpw = BCrypt.checkpw(password, user.getPassword());
+        UserService userService = new UserService();
+        UsersEntity user = new UsersEntity();
+        String error = "";
+        boolean checkpw = false;
+        try {
+            user = userService.checkLogin(login);
+            checkpw = BCrypt.checkpw(password, user.getPassword());
+            if(!checkpw){
+                error = "Erreur! Username/password incorrect ";
+            }
+        } catch (NullPointerException e ){
+            error = "Erreur! Username/password incorrect ";
+        }
         if (checkpw) {
             response.sendRedirect(request.getContextPath() + VUE);
             session.setAttribute("SessionUser", login);

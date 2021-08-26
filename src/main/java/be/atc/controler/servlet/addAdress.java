@@ -32,8 +32,6 @@ public class addAdress extends HttpServlet {
     List<CitiesEntity> citiesList = citieService.showAllCities();
     private RoleService roleService  = new RoleService();
     List<RolesEntity>  roleList      = roleService.showAllRoles();
-    EntityManager em = EMF.getEM();;
-
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -83,7 +81,7 @@ public class addAdress extends HttpServlet {
         }
         adress.setCity(city);
         String error = "";
-        AdressService adressService = new AdressService(em);
+        AdressService adressService = new AdressService();
         boolean ifTypeAdressExist = adressService.verfyIfTypeAdressExist(typeAdress, idUser);
         if(ifTypeAdressExist){
             adressService.addMultipleAdress(idUser, adress, adressUsers);
@@ -91,10 +89,8 @@ public class addAdress extends HttpServlet {
         } else {
             error = "l'utilisateur possede deja une adresse de " + typeAdress;
         }
-
-
         //request JSP
-        UserService userService = new UserService(em);
+        UserService userService = new UserService();
         List<Object[]> user = userService
                 .selectUserById( Integer.parseInt( request.getParameter( "iduserUpdate" ) ) );
         List<Object[]> adressList = adressService
@@ -118,18 +114,12 @@ public class addAdress extends HttpServlet {
             }
         } catch ( Exception e ) {
             logger.log( Level.ERROR, "User error" + e.getMessage() );
-        } finally {
-//            em.close();
         }
-
         if (error.equals("")){
             this.getServletContext().getRequestDispatcher(VUE_UPDATEUSER).forward(request, response);
         } else {
             this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
         }
-
-
-
     }
 
 

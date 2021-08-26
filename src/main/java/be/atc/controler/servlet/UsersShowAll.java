@@ -16,8 +16,7 @@ import java.util.List;
 
 @WebServlet( name = "usersshowall", value = "/UsersShowAll" )
 public class UsersShowAll extends HttpServlet {
-    EntityManager em = EMF.getEM();
-    private              UserService user   = new UserService(em);
+    private              UserService user   = new UserService();
     public static final  String      VUE    = "/views/showUsers.jsp";
     private static final Logger      logger = Logger.getLogger( UsersShowAll.class );
 

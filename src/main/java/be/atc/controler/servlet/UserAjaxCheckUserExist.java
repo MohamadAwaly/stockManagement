@@ -16,16 +16,13 @@ import java.util.List;
 @WebServlet(name = "UserAjaxCheckUserExist", value = "/UserAjaxCheckUserExist")
 public class UserAjaxCheckUserExist extends HttpServlet {
     private static Logger logger = Logger.getLogger( UserAjaxCheckUserExist.class );
-    EntityManager em = EMF.getEM();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        UserService userService = new UserService(em);
+        UserService userService = new UserService();
         String login = request.getParameter("login");
 //        logger.log(Level.INFO, "checkUserAjax: " + login);
         boolean checkLoginExist = userService.checkUserExist(login);

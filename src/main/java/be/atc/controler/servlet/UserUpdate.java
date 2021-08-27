@@ -21,76 +21,80 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@WebServlet( name = "userUpdate", value = "/userUpdate" )
+@WebServlet(name = "userUpdate", value = "/userUpdate")
 public class UserUpdate extends HttpServlet {
-    public static final  String       VUE          = "/views/updateUser.jsp";
-    public static final  String       VUE_LISTUSER = "/views/showUsers.jsp";
-    private static final Logger       logger       = Logger.getLogger( UserUpdate.class );
-    private              UserService  userService  = new UserService();
-    private              RoleService  roleService  = new RoleService();
-    private              CitieService citieService = new CitieService();
+    public static final String VUE = "/views/updateUser.jsp";
+    public static final String VUE_LISTUSER = "/views/showUsers.jsp";
+    public static final String VUE_PROFILE = "/views/UserProfile.jsp";
+    public static final  String       VUE_HOME  = "/index.jsp";
 
-    List<RolesEntity>  roleList      = roleService.showAllRoles();
-    List<CitiesEntity> citiesList    = citieService.showAllCities();
-    TypeAdress[]       allTypeAdress = TypeAdress.values();
+
+    private static final Logger logger = Logger.getLogger(UserUpdate.class);
+    private UserService userService = new UserService();
+    private RoleService roleService = new RoleService();
+    private CitieService citieService = new CitieService();
+
+    List<RolesEntity> roleList = roleService.showAllRoles();
+    List<CitiesEntity> citiesList = citieService.showAllCities();
+    TypeAdress[] allTypeAdress = TypeAdress.values();
 
     @Override
-    protected void doGet( HttpServletRequest request, HttpServletResponse response )
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         UserService userService = new UserService();
         AdressService adressService = new AdressService();
         List<Object[]> user = userService
-                .selectUserById( Integer.parseInt( request.getParameter( "selectedUser-id" ) ) );
-        logger.log( Level.INFO, "ID : " + Integer.parseInt( request.getParameter( "selectedUser-id" ) ) );
+                .selectUserById(Integer.parseInt(request.getParameter("selectedUser-id")));
+        logger.log(Level.INFO, "ID : " + Integer.parseInt(request.getParameter("selectedUser-id")));
         List<Object[]> adress = adressService
-                .listAdressByIdUser( Integer.parseInt( request.getParameter( "selectedUser-id" ) ) );
-        //cities
+                .listAdressByIdUser(Integer.parseInt(request.getParameter("selectedUser-id")));
+
         try {
-            request.setAttribute( "user", user );
-            request.setAttribute( "roles", roleList );
-            request.setAttribute( "cities", citiesList );
-            request.setAttribute( "allTypeAdress", allTypeAdress );
-            request.setAttribute( "adress", adress );
-        } catch ( Exception e ) {
-            logger.log( Level.ERROR, "User error" + e.getMessage() );
+            request.setAttribute("user", user);
+            request.setAttribute("roles", roleList);
+            request.setAttribute("cities", citiesList);
+            request.setAttribute("allTypeAdress", allTypeAdress);
+            request.setAttribute("adress", adress);
+        } catch (Exception e) {
+            logger.log(Level.ERROR, "User error" + e.getMessage());
         }
-        this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+        this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
     }
 
     @Override
-    protected void doPost( HttpServletRequest request, HttpServletResponse response )
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
 
             List<RolesEntity> roleList = roleService.showAllRoles();
             List<CitiesEntity> citiesList = citieService.showAllCities();
             //Define role
-            int parameterrole = Integer.parseInt( request.getParameter( "RoleUpdate" ) );
+            int parameterrole = Integer.parseInt(request.getParameter("RoleUpdate"));
             RolesEntity role = new RolesEntity();
-            for ( RolesEntity roles : roleList ) {
-                if ( parameterrole == roles.getIdRole() ) {
-                    role.setIdRole( roles.getIdRole() );
-                    role.setRole( roles.getRole() );
+            for (RolesEntity roles : roleList) {
+                if (parameterrole == roles.getIdRole()) {
+                    role.setIdRole(roles.getIdRole());
+                    role.setRole(roles.getRole());
                 }
             }
             UsersEntity user = new UsersEntity();
-            user.setIdUser( Integer.parseInt( request.getParameter( "iduserUpdate" ) ) );
+            user.setIdUser(Integer.parseInt(request.getParameter("iduserUpdate")));
             String isActive = request.getParameter("activeUpdate");
-            if ( isActive != null &&  request.getParameter( "activeUpdate" ).equals( "on" ) ) {
-                user.setActive( true );
+            if (isActive != null && request.getParameter("activeUpdate").equals("on")) {
+                user.setActive(true);
             } else {
-                user.setActive( false );
+                user.setActive(false);
             }
-            user.setLastName( request.getParameter( "lastNameUpdate" ) );
-            user.setFirstName( request.getParameter( "firstNameUpdate" ) );
-            user.setDayOfBirth( Date.valueOf( request.getParameter( "dayOfBirthUpdate" ) ) );
-            user.setInscriptionDate( Date.valueOf( request.getParameter( "inscriptionDateUpdate" ) ) );
-            user.setVat( request.getParameter( "vatUpdate" ) );
-            user.setMail( request.getParameter( "emailUpdate" ) );
-            logger.log(Level.INFO,"password updated: " + request.getParameter("passwordUpdate"));
-            user.setPassword( request.getParameter( "passwordUpdate" ) );
-            user.setLogin( request.getParameter( "loginUpdate" ) );
-            user.setRoles( role );
+            user.setLastName(request.getParameter("lastNameUpdate"));
+            user.setFirstName(request.getParameter("firstNameUpdate"));
+            user.setDayOfBirth(Date.valueOf(request.getParameter("dayOfBirthUpdate")));
+            user.setInscriptionDate(Date.valueOf(request.getParameter("inscriptionDateUpdate")));
+            user.setVat(request.getParameter("vatUpdate"));
+            user.setMail(request.getParameter("emailUpdate"));
+            logger.log(Level.INFO, "password updated: " + request.getParameter("passwordUpdate"));
+            user.setPassword(request.getParameter("passwordUpdate"));
+            user.setLogin(request.getParameter("loginUpdate"));
+            user.setRoles(role);
             //            user.setActive( true );
 
             //retrieve adress data
@@ -119,32 +123,49 @@ public class UserUpdate extends HttpServlet {
 //            adressUsers.setAddress( adress );
 //            TypeAdress typeAdress = TypeAdress.valueOf( request.getParameter( "TypeadresseUpdate" ) );
 //            adressUsers.setTypeAdress( typeAdress );
-            if ( request.getParameter( "passwordUpdate" ).equals( request.getParameter( "rpPasswordUpdate" ) ) ) {
-                userService.updateUser( user, adress, adressUsers );
+            if (request.getParameter("passwordUpdate").equals(request.getParameter("rpPasswordUpdate"))) {
+                userService.updateUser(user, adress, adressUsers);
                 //Send parameter to JSP
                 List<Object[]> userList = userService.showAllUsers();
-                request.setAttribute( "user", userList );
-                this.getServletContext().getRequestDispatcher( VUE_LISTUSER ).forward( request, response );
+                //retrieve session
+                HttpSession session = request.getSession();
+                UsersEntity userSession = (UsersEntity) session.getAttribute("SessionUserEntity");
+                request.setAttribute("user", userList);
+
+                if (userSession.getRoles().getRole().trim().equals("administrateur")) {
+                    logger.log(Level.INFO, "session administrateur");
+                } else {
+                    logger.log(Level.INFO, "session customer or other");
+                }
+                if (userSession.getRoles().getRole().trim().equals("administrateur")) {
+                    logger.log(Level.INFO, " dans le if");
+                    this.getServletContext().getRequestDispatcher(VUE_LISTUSER).forward(request, response);
+                } else {
+                    logger.log(Level.INFO, " dans le else");
+                    this.getServletContext().getRequestDispatcher(VUE_HOME).forward(request, response);
+                }
+//                this.getServletContext().getRequestDispatcher(VUE_LISTUSER).forward(request, response);
             } else {
-                logger.log( Level.ERROR, "the password does not match " );
+                logger.log(Level.ERROR, "the password does not match ");
                 String errorPassword = "Les deux mot de passe ne corresponde pas !!!";
                 UserService userService = new UserService();
                 List<Object[]> users = userService
-                        .selectUserById( user.getIdUser() );
+                        .selectUserById(user.getIdUser());
                 //cities
+
                 try {
-                    request.setAttribute( "errorPassword", errorPassword );
-                    request.setAttribute( "user", users );
-                    request.setAttribute( "roles", roleList );
-                    request.setAttribute( "cities", citiesList );
-                    request.setAttribute( "allTypeAdress", allTypeAdress );
-                } catch ( Exception e ) {
-                    logger.log( Level.ERROR, "User error" + e.getMessage() );
+                    request.setAttribute("errorPassword", errorPassword);
+                    request.setAttribute("user", users);
+                    request.setAttribute("roles", roleList);
+                    request.setAttribute("cities", citiesList);
+                    request.setAttribute("allTypeAdress", allTypeAdress);
+                } catch (Exception e) {
+                    logger.log(Level.ERROR, "User error" + e.getMessage());
                 }
-                this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+                    this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
             }
-        } catch ( Exception e ) {
-            logger.log( Level.INFO, "Error Servlet Update User " + e.getMessage() );
+        } catch (Exception e) {
+            logger.log(Level.INFO, "Error Servlet Update User " + e.getMessage());
         }
 
     }

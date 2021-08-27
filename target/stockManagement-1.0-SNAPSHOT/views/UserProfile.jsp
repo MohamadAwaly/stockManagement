@@ -15,10 +15,6 @@
             <h2 id="logUserProfile"><c:out value="${ user.login }"/></h2>
         </div>
         <table class="profileTable">
-            <tr hidden>
-                <th>id</th>
-                <td id="idUserprofile"><c:out value="${ user.idUser }"/></td>
-            </tr>
             <tr>
                 <th>Nom</th>
                 <td><c:out value="${ user.lastName }"/></td>
@@ -47,9 +43,12 @@
                 <th>Role</th>
                 <td><c:out value="${ user.roles.role }"/></td>
             </tr>
-
         </table>
-        <button class="btn btn-primary float-right btnprofile" id="id-btn-profile" type="button">mettre a jour</button>
+        <form action="userUpdate" method="get" class="float-right bg-transparent border-0">
+            <input type="text" name="selectedUser-id" class="form-control" id="selectedUserid" value="<c:out value="${ user.idUser }"/>"
+                   aria-describedby="selectedUser" hidden >
+            <button type="submit" class="btn btn-primary float-right" id="update-customer-btn" >Mettre à jour</button>
+        </form>
     </div>
 </c:forEach>
 </body>

@@ -48,14 +48,14 @@ public class Login extends HttpServlet {
             error = "Erreur! Username/password incorrect ";
         }
         if (checkpw) {
+            session.setAttribute("SessionUserEntity", user);
+            session.setAttribute("SessionUser", login);
+            session.setAttribute("sessionOK", sessionOK);
             if (user.getRoles().getRole().trim().equals("administrateur")) {
                 response.sendRedirect(request.getContextPath() + VUE);
             } else {
                 this.getServletContext().getRequestDispatcher(VUE_HOME).forward(request, response);
             }
-            session.setAttribute("SessionUserEntity", user);
-            session.setAttribute("SessionUser", login);
-            session.setAttribute("sessionOK", sessionOK);
         } else {
             session.setAttribute("SessionUser", null);
             request.setAttribute("error", error);

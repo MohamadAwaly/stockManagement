@@ -49,8 +49,8 @@ public class MailSender {
         */
 		boolean sendFlag = false;
 		
-		final String username = "your_account@gmail.com";
-        final String password = "your_password";
+		final String username = "stockmanagementatc@gmail.com";
+        final String password = "atc123456";
 		
 		// Check nick and replyTo
 		if(mail.getNick() == null || mail.getNick().equals(""))

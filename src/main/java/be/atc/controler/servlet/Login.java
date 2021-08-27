@@ -1,5 +1,7 @@
 package be.atc.controler.servlet;
 
+import be.atc.controler.mail.Mail;
+import be.atc.controler.mail.MailSender;
 import be.atc.entities.UsersEntity;
 import be.atc.service.UserService;
 import org.apache.log4j.Level;
@@ -38,6 +40,7 @@ public class Login extends HttpServlet {
         String error = "";
         boolean checkpw = false;
         String sessionOK = "OK";
+
         try {
             user = userService.checkLogin(login);
             checkpw = BCrypt.checkpw(password, user.getPassword());

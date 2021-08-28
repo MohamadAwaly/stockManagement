@@ -302,6 +302,18 @@ $(document).on('keyup','#CmdSupBchSearchBar',function (){
                 "</tr>");
         })
     });
+});
+
+$(document).on('click','#GetCmdSuppPdf',function (){
+    $.ajax({
+        url : "GetPdfCmdSupp",
+        method : "POST",
+        data : {
+            searchBar : $('#CmdSupBchSearchBar').val()
+        }
+    }).done( function (data){
+
+    })
 })
 
 

@@ -28,17 +28,7 @@ public class GetPdfCmdSupp extends HttpServlet {
         }
 
 
-        List<String> lst_to = new ArrayList<String>();
-        lst_to.add("jeanyves.laurent@promsocatc.net");
-        lst_to.add("awalymhassan@hotmail.com");
 
-        Mail mail = new Mail();
-        mail.setListTo(lst_to);
-        mail.setSubject("Test Stock management");
-        mail.setMsgBody("TEST 1234");
-        mail.setNick(" je suis Nick !");
-        mail.setFrom("stockmanagementatc@gmail.com");
-        MailSender.sendMail(mail);
 
 
     }

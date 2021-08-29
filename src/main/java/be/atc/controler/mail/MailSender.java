@@ -2,7 +2,7 @@ package be.atc.controler.mail;
 
 import org.apache.log4j.Logger;
 
-
+import com.sun.mail.util.MailLogger;
 import javax.mail.*;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;

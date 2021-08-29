@@ -12,7 +12,7 @@ import java.util.Objects;
                          "JOIN ProductsEntity p ON p = b.products " +
                          "ORDER BY cs.orderDate desc "),
         @NamedQuery(name = "commandSuppliersBatchs.Find",
-                query = "SELECT cs.idCommandSuppliers ,s.name, cs.orderDate, b.quantity, b.idBatch, p.designation, cs.users.lastName FROM CommandsuppliersBatchsEntity csb " +
+                query = "SELECT cs.idCommandSuppliers ,s.name, cs.orderDate, b.quantity, b.numberBatch, p.designation, cs.users.lastName FROM CommandsuppliersBatchsEntity csb " +
                         "JOIN CommandsuppliersEntity cs ON cs = csb.commandsuppliers " +
                         "JOIN BatchsEntity b ON b = csb.batchs " +
                         "JOIN SuppliersEntity s ON s = cs.suppliers " +

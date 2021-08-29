@@ -1,7 +1,5 @@
 package be.atc.controler.servlet;
 
-import be.atc.controler.mail.Mail;
-import be.atc.controler.mail.MailSender;
 import be.atc.controler.pdf.PdfManager;
 import be.atc.service.SupplierService;
 import com.itextpdf.text.DocumentException;
@@ -13,7 +11,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -28,9 +25,9 @@ public class GetPdfCmdSupp extends HttpServlet {
             Path path = Paths.get("C:\\StockManagement\\");
             if (!Files.exists(path)){
                 Files.createDirectories(path);
-                PdfManager.createPdf("C:\\stockmanagement\\stockManagementPDF.pdf",lst_supplierCommand);
+                PdfManager.createPdfCommandsSuppliers("C:\\stockmanagement\\stockManagementPDF.pdf",lst_supplierCommand);
             }else{
-            PdfManager.createPdf("C:\\stockmanagement\\stockManagementPDF.pdf",lst_supplierCommand);
+            PdfManager.createPdfCommandsSuppliers("C:\\stockmanagement\\stockManagementPDF.pdf",lst_supplierCommand);
             }
         } catch (DocumentException e) {
             e.printStackTrace();

@@ -16,7 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 public class PdfManager {
-    public static void createPdf(String destination, List<Object[]> lst_objects)
+    public static void createPdfCommandsSuppliers(String destination, List<Object[]> lst_objects)
             throws FileNotFoundException, DocumentException, DocumentException {
         Document document = new Document();
         FileOutputStream file = new FileOutputStream(destination);
@@ -47,9 +47,9 @@ public class PdfManager {
                 table.addCell(lst_objects.get(iRow)[0].toString());
                 table.addCell(lst_objects.get(iRow)[1].toString());
                 table.addCell(lst_objects.get(iRow)[2].toString());
+                table.addCell(lst_objects.get(iRow)[5].toString());
                 table.addCell(lst_objects.get(iRow)[3].toString());
                 table.addCell(lst_objects.get(iRow)[4].toString());
-                table.addCell(lst_objects.get(iRow)[5].toString());
                 table.addCell(lst_objects.get(iRow)[6].toString());
             };
 

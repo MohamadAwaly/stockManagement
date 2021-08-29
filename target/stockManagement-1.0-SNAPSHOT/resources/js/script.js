@@ -274,6 +274,16 @@ $(document).on('keyup','#inputQuantity',function (){
     }
 })
 /**
+ * Page : CommandSupplierCreate.jsp
+ * Btn Add produit to command
+ */
+$(document).on('click','#CmdSuppAddProductToCmd',function (){
+    console.log('bouton ajouter produit');
+    $('#1').attr('class','product').clone().appendTo('#Products');
+})
+
+
+/**
  * Page : CommandSupplierShowAll.jsp
  * search Bar and AJAX
  */

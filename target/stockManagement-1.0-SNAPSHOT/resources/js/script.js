@@ -281,9 +281,9 @@ $(document).on('click','#CmdSuppAddProductToCmd',function (){
     let nbProduct = $('#tableProducts tr').length;
     $('#product1').clone().appendTo('#tableProducts');
     $('#tableProducts tr:last').attr('id','product'+nbProduct);
-    $('#tableProducts tr:last td:first').attr('name','TEST');
-    $('#tableProducts tr:last td:last').attr('name','TEST-OUI');
-
+    $('#tableProducts tr:last td:first select').attr('name','Product'+nbProduct);
+    $('#tableProducts tr:last td:last input').attr('name','Quantity'+nbProduct);
+    $('#nbRowProduct').attr('value',nbProduct);
     console.log('bouton ajouter produit , nb produits : '+nbProduct);
 
 })

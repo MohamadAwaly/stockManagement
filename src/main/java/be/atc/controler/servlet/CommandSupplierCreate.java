@@ -49,25 +49,37 @@ public class CommandSupplierCreate extends HttpServlet {
         int userId = 0;
         int productId = 0;
         int quantity = 0;
+        int nbRowProduct = 0;
         Date dateNow = new Date(System.currentTimeMillis()) ;
         EntityTransaction transaction = em.getTransaction();
 
         //CONTROL DATA supply from user
         boolean dataChecked = true;
-        List<Integer> lst_idProducts = new ArrayList<>();
+        List<Integer> lst_ProductId = new ArrayList<>();
         List<Integer> lst_ProductQty = new ArrayList<>();
         try{
+            nbRowProduct = Integer.parseInt(request.getParameter("nbRow"));
             supplierId = Integer.parseInt(request.getParameter("Supplier"));
             userId = Integer.parseInt(request.getParameter("User"));
-            productId = Integer.parseInt(request.getParameter("Product"));
-            quantity = Integer.parseInt(request.getParameter("Quantity"));
+            if (nbRowProduct == 1){
+                lst_ProductId.add(Integer.parseInt(request.getParameter("Product")));
+                lst_ProductQty.add(Integer.parseInt(request.getParameter("Quantity")));
+            }else{
+                lst_ProductId.add(Integer.parseInt(request.getParameter("Product")));
+                lst_ProductQty.add(Integer.parseInt(request.getParameter("Quantity")));
+                //for start to "Product2" and "Product3","Product4",...
+                for (int i = 2; i < nbRowProduct; i++){
+                    lst_ProductId.add(Integer.parseInt(request.getParameter("Product"+i)));
+                    lst_ProductQty.add(Integer.parseInt(request.getParameter("Quantity"+i)));
+                }
+            }
 
         }catch (Exception e){
             dataChecked = false;
         }
-//        // DATA IS OK
-//        if (dataChecked){
-//            logger.log(Level.INFO,"Data is : "+ dataChecked);
+        // DATA IS OK
+        if (dataChecked){
+            logger.log(Level.INFO,"Data is : "+ dataChecked);
 //            try{
 //                transaction.begin();
 //                SuppliersEntity suppliersEntity = em.find(SuppliersEntity.class,supplierId);
@@ -102,13 +114,13 @@ public class CommandSupplierCreate extends HttpServlet {
 //                //em.close();
 //                logger.log(Level.INFO,"CommandSupplier TRY CATCH Transaction Finish");
 //            }
-//            response.sendRedirect(request.getContextPath()+"/CommandSupplierShowAll");
-//        }
-//        // DATA is KO :
-//        else{
-//            logger.log(Level.WARN,"Data is : "+ dataChecked);
-//            request.setAttribute("message","Certaines entrées sont incohérentes");
-//            request.getRequestDispatcher("/views/error.jsp").forward(request,response);
-//        }
+            response.sendRedirect(request.getContextPath()+"/CommandSupplierShowAll");
+        }
+        // DATA is KO :
+        else{
+            logger.log(Level.WARN,"Data is : "+ dataChecked);
+            request.setAttribute("message","Certaines entrées sont incohérentes");
+            request.getRequestDispatcher("/views/error.jsp").forward(request,response);
+        }
     }
 }

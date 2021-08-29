@@ -22,7 +22,7 @@
                             </option>
                         </c:forEach>
                     </select>
-                    <input type="text" name="User" value="${sessionScope.SessionUserEntity.idUser}" />
+                    <input type="text" name="User" value="${sessionScope.SessionUserEntity.idUser}" hidden />
 <%--                    <label for="inputSelectUser">Utilisateur</label>--%>
 <%--                    <select id="inputSelectUser" name="User" class="form-control">--%>
 <%--                        <c:forEach var="user" items="${users}">--%>

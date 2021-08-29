@@ -48,7 +48,7 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                           aria-haspopup="true" aria-expanded="false">Liste des fournisseurs</a>
+                           aria-haspopup="true" aria-expanded="false">Fournisseurs</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="supplierCreate">Ajouter fournisseurs</a>
                             <a class="dropdown-item" href="CommandSupplierCreate">Faire une commande au fournisseur</a>

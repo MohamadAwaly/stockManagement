@@ -37,11 +37,15 @@
         </div>
         <div class="container">
             <div class="row Products">
-                <table id="Products">
-                    <tr class="product" id="1">
+                <table id="tableProducts" class="products">
+                    <thead>
+                    <th>Produit</th>
+                    <th>Quantité</th>
+                    </thead>
+
+                    <tr id="product1" class="product">
                         <td>
-                            <label for="inputSelectProduct">Produit</label>
-                            <select  name="Product" class="form-control"> id="inputSelectProduct"
+                            <select name="Product" class="form-control">
                                 <c:forEach var="product" items="${products}">
                                     <option value="<c:out value="${product[0]}"/>">
                                         <c:out value="${product[1]}"/>
@@ -50,8 +54,7 @@
                             </select>
                         </td>
                         <td>
-                            <label for="inputQuantity">Quantité</label>
-                            <input type="text" id="inputQuantity" name="Quantity" class="form-control" placeholder="Quantité"/>
+                            <input type="text" name="Quantity" class="inputQuantity form-control" placeholder="Quantité"/>
                         </td>
                     </tr>
                 </table>

@@ -266,20 +266,22 @@ $(document).on('keyup','#formNewSupplierName',function (){
  * Page : CommandSupplierCreate.jsp
  * Quantity control
  */
-$(document).on('keyup','#inputQuantity',function (){
-    let qte = $('#inputQuantity').val();
+$(document).on('keyup','.inputQuantity',function (){
+    let qte = $(this).val();
     console.log('is a number : '+!isNaN(qte));
     if (isNaN(qte)){
-        $('#inputQuantity').val('');
+       $(this).val('') ;//$('.inputQuantity').val('');
     }
 })
 /**
  * Page : CommandSupplierCreate.jsp
- * Btn Add produit to command
+ * Btn Add new row product to the command
  */
 $(document).on('click','#CmdSuppAddProductToCmd',function (){
-    console.log('bouton ajouter produit');
-    $('#1').attr('class','product').clone().appendTo('#Products');
+    $('#product1').clone().appendTo('#tableProducts');
+    let nbProduct = $('#tableProducts tr').length;
+    $('#tableProducts tr:last').attr('id','product'+nbProduct);
+    console.log('bouton ajouter produit , nb produits : '+nbProduct);
 })
 
 

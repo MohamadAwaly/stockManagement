@@ -30,6 +30,7 @@ public class PdfManager {
         // Creation d'une table
         int numberOfColumns = 7;
         PdfPTable table = new PdfPTable(numberOfColumns); // Tout les colonnes doivent être remplis
+        //En-tête
         table.addCell("# Commande");
         table.addCell("Fournisseur");
         table.addCell("date de la commande");
@@ -37,7 +38,7 @@ public class PdfManager {
         table.addCell("Qté");
         table.addCell("Lot fournisseur");
         table.addCell("préparé par");
-
+        // table body
         int numberOfRow = lst_objects.size();
             for (int iRow = 0; iRow < numberOfRow; iRow++){
                 table.addCell(lst_objects.get(iRow)[0].toString());

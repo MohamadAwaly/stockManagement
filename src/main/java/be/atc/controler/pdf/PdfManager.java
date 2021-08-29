@@ -1,4 +1,5 @@
 package be.atc.controler.pdf;
+
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
@@ -14,7 +15,8 @@ import java.util.Date;
 import java.util.List;
 
 public class PdfManager {
-    public static void createPdf(String destination, List<Object[]> lst_objects) throws FileNotFoundException, DocumentException {
+    public static void createPdf(String destination, List<Object[]> lst_objects)
+            throws FileNotFoundException, DocumentException, DocumentException {
         Document document = new Document();
         FileOutputStream file = new FileOutputStream(destination);
         PdfWriter.getInstance(document,file);

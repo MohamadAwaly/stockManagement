@@ -11,11 +11,14 @@ import org.apache.log4j.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NamedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.ClientInfoStatus;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "CommandSupplierCreate", value = "/CommandSupplierCreate")
@@ -51,6 +54,8 @@ public class CommandSupplierCreate extends HttpServlet {
 
         //CONTROL DATA supply from user
         boolean dataChecked = true;
+        List<Integer> lst_idProducts = new ArrayList<>();
+        List<Integer> lst_ProductQty = new ArrayList<>();
         try{
             supplierId = Integer.parseInt(request.getParameter("Supplier"));
             userId = Integer.parseInt(request.getParameter("User"));
@@ -60,50 +65,50 @@ public class CommandSupplierCreate extends HttpServlet {
         }catch (Exception e){
             dataChecked = false;
         }
-        // DATA IS OK
-        if (dataChecked){
-            logger.log(Level.INFO,"Data is : "+ dataChecked);
-            try{
-                transaction.begin();
-                SuppliersEntity suppliersEntity = em.find(SuppliersEntity.class,supplierId);
-                UsersEntity usersEntity = em.find(UsersEntity.class,userId);
-                ProductsEntity productsEntity = em.find(ProductsEntity.class, productId);
-
-                //CREATION BATCH with quantity
-                BatchsEntity batchsEntity = new BatchsEntity();
-                batchsEntity.setProducts(productsEntity);
-                batchsEntity.setQuantity(quantity);
-                em.merge(batchsEntity);
-
-                //CREATION CommandSupplier with date today
-                CommandsuppliersEntity commandsuppliersEntity = new CommandsuppliersEntity();
-                commandsuppliersEntity.setSuppliers(suppliersEntity);
-                commandsuppliersEntity.setUsers(usersEntity);
-                commandsuppliersEntity.setOrderDate(dateNow);
-                em.merge(commandsuppliersEntity);
-
-                //CREATION CommandsuppliersBatchsEntity
-                CommandsuppliersBatchsEntity commandsuppliersBatchsEntity = new CommandsuppliersBatchsEntity();
-                commandsuppliersBatchsEntity.setBatchs(batchsEntity);
-                commandsuppliersBatchsEntity.setCommandsuppliers(commandsuppliersEntity);
-                em.merge(commandsuppliersBatchsEntity);
-
-                transaction.commit();
-            }
-            catch (Exception e){
-                transaction.rollback();
-                logger.log(Level.FATAL,"Servlet CommandSupplier Transaction EM Fatal Error");
-            }finally {
-                //em.close();
-                logger.log(Level.INFO,"CommandSupplier TRY CATCH Transaction Finish");
-            }
-            response.sendRedirect(request.getContextPath()+"/CommandSupplierShowAll");
-        }
-        // DATA is KO :
-        else{
-            logger.log(Level.WARN,"Data is : "+ dataChecked);
-            request.setAttribute("message","Certaines entrées sont incohérentes");
-            request.getRequestDispatcher("/views/error.jsp").forward(request,response);
-        }
+//        // DATA IS OK
+//        if (dataChecked){
+//            logger.log(Level.INFO,"Data is : "+ dataChecked);
+//            try{
+//                transaction.begin();
+//                SuppliersEntity suppliersEntity = em.find(SuppliersEntity.class,supplierId);
+//                UsersEntity usersEntity = em.find(UsersEntity.class,userId);
+//                ProductsEntity productsEntity = em.find(ProductsEntity.class, productId);
+//
+//                //CREATION BATCH with quantity
+//                BatchsEntity batchsEntity = new BatchsEntity();
+//                batchsEntity.setProducts(productsEntity);
+//                batchsEntity.setQuantity(quantity);
+//                em.merge(batchsEntity);
+//
+//                //CREATION CommandSupplier with date today
+//                CommandsuppliersEntity commandsuppliersEntity = new CommandsuppliersEntity();
+//                commandsuppliersEntity.setSuppliers(suppliersEntity);
+//                commandsuppliersEntity.setUsers(usersEntity);
+//                commandsuppliersEntity.setOrderDate(dateNow);
+//                em.merge(commandsuppliersEntity);
+//
+//                //CREATION CommandsuppliersBatchsEntity
+//                CommandsuppliersBatchsEntity commandsuppliersBatchsEntity = new CommandsuppliersBatchsEntity();
+//                commandsuppliersBatchsEntity.setBatchs(batchsEntity);
+//                commandsuppliersBatchsEntity.setCommandsuppliers(commandsuppliersEntity);
+//                em.merge(commandsuppliersBatchsEntity);
+//
+//                transaction.commit();
+//            }
+//            catch (Exception e){
+//                transaction.rollback();
+//                logger.log(Level.FATAL,"Servlet CommandSupplier Transaction EM Fatal Error");
+//            }finally {
+//                //em.close();
+//                logger.log(Level.INFO,"CommandSupplier TRY CATCH Transaction Finish");
+//            }
+//            response.sendRedirect(request.getContextPath()+"/CommandSupplierShowAll");
+//        }
+//        // DATA is KO :
+//        else{
+//            logger.log(Level.WARN,"Data is : "+ dataChecked);
+//            request.setAttribute("message","Certaines entrées sont incohérentes");
+//            request.getRequestDispatcher("/views/error.jsp").forward(request,response);
+//        }
     }
 }

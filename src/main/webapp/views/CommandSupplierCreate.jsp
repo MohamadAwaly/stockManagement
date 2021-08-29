@@ -23,15 +23,6 @@
                         </c:forEach>
                     </select>
                     <input type="text" name="User" value="${sessionScope.SessionUserEntity.idUser}" hidden />
-                    <%--                    <label for="inputSelectUser">Utilisateur</label>--%>
-                    <%--                    <select id="inputSelectUser" name="User" class="form-control">--%>
-                    <%--                        <c:forEach var="user" items="${users}">--%>
-                    <%--                        <option value="<c:out value="${user[0]}"/>">--%>
-                    <%--                            <c:out value="${user[1]}"/>--%>
-                    <%--                        </option>--%>
-
-                    <%--                        </c:forEach>--%>
-                    <%--                    </select>--%>
                 </div>
             </div>
         </div>

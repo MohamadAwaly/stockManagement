@@ -278,10 +278,14 @@ $(document).on('keyup','.inputQuantity',function (){
  * Btn Add new row product to the command
  */
 $(document).on('click','#CmdSuppAddProductToCmd',function (){
-    $('#product1').clone().appendTo('#tableProducts');
     let nbProduct = $('#tableProducts tr').length;
+    $('#product1').clone().appendTo('#tableProducts');
     $('#tableProducts tr:last').attr('id','product'+nbProduct);
+    $('#tableProducts tr:last td:first').attr('name','TEST');
+    $('#tableProducts tr:last td:last').attr('name','TEST-OUI');
+
     console.log('bouton ajouter produit , nb produits : '+nbProduct);
+
 })
 
 

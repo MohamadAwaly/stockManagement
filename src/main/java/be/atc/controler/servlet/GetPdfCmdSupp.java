@@ -10,6 +10,9 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,15 +25,16 @@ public class GetPdfCmdSupp extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       List<Object[]> lst_supplierCommand = supplierService.CommandSupplierList(request.getParameter("searchBar"));
         try {
-            PdfManager.createPdf("C:\\Users\\Jiwai\\Downloads\\stockManagementPDF.pdf",lst_supplierCommand);
+            Path path = Paths.get("C:\\StockManagement\\");
+            if (!Files.exists(path)){
+                Files.createDirectories(path);
+                PdfManager.createPdf("C:\\stockmanagement\\stockManagementPDF.pdf",lst_supplierCommand);
+            }else{
+            PdfManager.createPdf("C:\\stockmanagement\\stockManagementPDF.pdf",lst_supplierCommand);
+            }
         } catch (DocumentException e) {
             e.printStackTrace();
         }
-
-
-
-
-
     }
 
     @Override

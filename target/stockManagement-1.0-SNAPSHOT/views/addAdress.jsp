@@ -14,8 +14,8 @@
         <c:if test="${ !empty error}"><p class="alert alert-danger"><c:out value="${ error }"/></p></c:if>
     </div>
     <div class="mb-1">
-        <label for="iduserUpdate" class="form-label"><span class="etoile">*</span> id</label>
-        <input type="number" name="iduserUpdate" class="form-control" id="iduserUpdate"
+        <label for="iduserUpdate" class="form-label" hidden><span class="etoile">*</span> id</label>
+        <input type="number" name="iduserUpdate" class="form-control" id="iduserUpdate" hidden
                aria-describedby="idUser"
                required readonly value=<c:out value="${id}"/>>
         <%--        value="<c:out value="${ user.idUser }"/>"--%>

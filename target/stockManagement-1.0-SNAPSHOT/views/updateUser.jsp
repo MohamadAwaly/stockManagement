@@ -140,6 +140,7 @@
                     </div>
                 </div>
             </div>
+            <c:if test="${sessionScope.SessionUserEntity.roles.role.trim() == 'administrateur' || sessionScope.SessionUserEntity.roles.role.trim() == 'directeur'}">
             <div class="mb-1">
                 <label for="idRoleUpdate" class="form-label"><span class="etoile">*</span> Role : </label>
                 <SELECT id="idRoleUpdate" name="RoleUpdate" size="1" class="form-control">
@@ -151,6 +152,20 @@
                     </c:forEach>
                 </SELECT>
             </div>
+            </c:if>
+             <c:if test="${sessionScope.SessionUserEntity.roles.role.trim() != 'administrateur' || sessionScope.SessionUserEntity.roles.role.trim() != 'directeur'}">
+            <div class="mb-1">
+                <label for="idRoleUpdate" class="form-label" hidden><span class="etoile">*</span> Role : </label>
+                <SELECT id="idRoleUpdateclient" name="RoleUpdate" size="1" class="form-control" hidden>
+                        <%--                    <option disabled selected><c:out value="${ user[0].roles.role } "/></option>--%>
+                    <c:forEach var="roles" items="${ roles }">
+                        <OPTION value="${ roles.idRole}" ${roles.role == user.roles.role ? 'selected' : ''}>
+                            <c:out value="${ roles.role } "/>
+                        </OPTION>
+                    </c:forEach>
+                </SELECT>
+            </div>
+            </c:if>
         </form>
     </div>
 </c:forEach>

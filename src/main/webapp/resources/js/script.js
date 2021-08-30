@@ -26,8 +26,7 @@ $(document).ready(function () {
     var regPass = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$");
     var regEmail = new RegExp(/[a-zA-Z0-9\.]{1,}[@][a-zA-Z0-9\.]{1,}[\.][a-zA-Z0-9\.]{1,}$/);
     var regVat = new RegExp("^(BE){0,1}[0]{0,1}[0-9]{9}$");
-    var onlyNumber = new RegExp("^[a-zA-Z]+$", "i");
-    // var onlyNumber = new RegExp('^\\d+$');
+    var noNumber = new RegExp("^[a-zA-Z]+$", "i");
 
     //Form addUser & updateUser
     login.keyup(function () {
@@ -76,9 +75,8 @@ $(document).ready(function () {
     lastName.keyup(function () {
         var errorValLastName = $(this).val();
         var errorlastName = document.getElementById("errorlastName");
-        console.log(onlyNumber.test(errorValLastName));
         // errorValLastName.length < 3
-        if (onlyNumber.test(errorValLastName) === false || errorValLastName.length < 3) {
+        if (noNumber.test(errorValLastName) === false || errorValLastName.length < 3) {
             $(this).removeClass("is-valid");
             $(this).addClass("is-invalid");
             errorlastName.hidden = false;
@@ -96,7 +94,7 @@ $(document).ready(function () {
     firstName.keyup(function () {
         var errorVal = $(this).val();
         var errorfirstName = document.getElementById("errorfirstName");
-        if (onlyNumber.test(errorVal) === false || errorVal.length < 3) {
+        if (noNumber.test(errorVal) === false || errorVal.length < 3) {
             $(this).removeClass("is-valid");
             $(this).addClass("is-invalid");
             errorfirstName.hidden = false;
@@ -130,7 +128,10 @@ $(document).ready(function () {
         var today = new Date();
         var dateFormLenght = $('.dayOfBirthClass').val();
         var dateForm = new Date($('.dayOfBirthClass').val());
-        if (dateFormLenght.length == 10) {
+        console.log("dateform: " + dateFormLenght.length);
+        console.log("dateform: " + dateFormLenght);
+
+        if (dateFormLenght.length == 10 ) {
             if (dateForm.getUTCFullYear() > 1900) {
                 var dateOfBirth = new Date(dateForm.getDate() + " " + months[dateForm.getMonth()] + " " + dateForm.getUTCFullYear());
                 var resultDay = dateDiffInDays(dateOfBirth, today);
@@ -151,10 +152,10 @@ $(document).ready(function () {
             }
         } else {
             $(this).removeClass("is-valid");
-            $(this).addClass("is-invalid");
-            errordate.hidden = false;
-            errorDayOfBirthValide = "true";
-            $('#btn-addUser').prop('disabled', true);
+            $(this).removeClass("is-invalid");
+            errordate.hidden = true;
+            errorDayOfBirthValide = "false";
+            $('#btn-addUser').prop('disabled', false);
         }
 
     })

@@ -155,7 +155,7 @@ public class AddUser extends HttpServlet {
                 //List users:
                 List<Object[]> userList = user.showAllUsers();
                 request.setAttribute("user", userList);
-                if (newuser.getRoles().getRole().trim().equals("Client")) {
+                if (newuser.getRoles().getRole().trim().equals("client")) {
                     this.getServletContext().getRequestDispatcher(VUE_LOGIN).forward(request, response);
                 } else {
                     this.getServletContext().getRequestDispatcher(VUE_LISTUSER).forward(request, response);

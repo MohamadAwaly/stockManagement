@@ -33,16 +33,17 @@ $(document).ready(function () {
         var errorLogin = document.getElementById("errorLogin");
         var errorUserExist = document.getElementById("errorUserExist");
         if (errorVal.length < 4) {
-            console.log("login");
-            errorLoginValide = "true";
             $(this).removeClass("is-valid");
             $(this).addClass("is-invalid");
             errorLogin.hidden = false;
+            errorLoginValide = "true";
+            $('#btn-addUser').prop('disabled', true);
         } else {
-            errorLoginValide = "false";
             $(this).removeClass("is-invalid");
             $(this).addClass("is-valid");
             errorLogin.hidden = true;
+            errorLoginValide = "false";
+            $('#btn-addUser').prop('disabled', false);
         }
         //test ajax
         $.ajax({
@@ -59,12 +60,14 @@ $(document).ready(function () {
                 login.addClass("is-invalid");
                 $('#errorUserExist').html("l'utilisateur " + login.val() + " existe deja");
                 errorLoginValide = "true";
+                $('#btn-addUser').prop('disabled', true);
                 errorUserExist.hidden = false;
             } else {
                 login.removeClass("is-invalid");
                 login.addClass("is-valid");
                 errorUserExist.hidden = true;
                 errorLoginValide = "false";
+                $('#btn-addUser').prop('disabled', false);
             }
         });
     });
@@ -76,12 +79,14 @@ $(document).ready(function () {
             $(this).addClass("is-invalid");
             errorlastName.hidden = false;
             errorLastNameValide = "true";
+            $('#btn-addUser').prop('disabled', true);
 
         } else {
             $(this).removeClass("is-invalid");
             $(this).addClass("is-valid");
             errorlastName.hidden = true;
             errorLastNameValide = "false"
+            $('#btn-addUser').prop('disabled', false);
         }
     })
     firstName.keyup(function () {
@@ -92,11 +97,13 @@ $(document).ready(function () {
             $(this).addClass("is-invalid");
             errorfirstName.hidden = false;
             errorFirstNameValide = "true";
+            $('#btn-addUser').prop('disabled', true);
         } else {
             $(this).removeClass("is-invalid");
             $(this).addClass("is-valid");
             errorfirstName.hidden = true;
             errorFirstNameValide = "false"
+            $('#btn-addUser').prop('disabled', false);
         }
     })
     dayOfBirth.keyup(function () {
@@ -126,23 +133,24 @@ $(document).ready(function () {
                 var resultMons = Math.round(resultDay / 30);
                 var resultYears = Math.round(resultMons / 12);
                 if (resultYears > 17 && resultYears < 100) {
-                    console.log("ok");
                     $(this).removeClass("is-invalid");
                     $(this).addClass("is-valid");
                     errordate.hidden = true;
                     errordate17ans.hidden = true;
                     errorDayOfBirthValide = "false";
+                    $('#btn-addUser').prop('disabled', false);
                 } else {
                     errordate17ans.hidden = false;
                     errorDayOfBirthValide = "true";
+                    $('#btn-addUser').prop('disabled', true);
                 }
             }
         } else {
-            console.log("non ok");
             $(this).removeClass("is-valid");
             $(this).addClass("is-invalid");
             errordate.hidden = false;
             errorDayOfBirthValide = "true";
+            $('#btn-addUser').prop('disabled', true);
         }
 
     })
@@ -154,11 +162,13 @@ $(document).ready(function () {
             $(this).addClass("is-valid");
             errorTva.hidden = true;
             errorVatValide = "false";
+            $('#btn-addUser').prop('disabled', false);
         } else {
             $(this).removeClass("is-valid");
             $(this).addClass("is-invalid");
             errorTva.hidden = false;
             errorVatValide = "true";
+            $('#btn-addUser').prop('disabled', true);
         }
     })
     mail.keyup(function () {
@@ -171,11 +181,13 @@ $(document).ready(function () {
                 $(this).addClass("is-valid");
                 errorEmail.hidden = true;
                 errorMailValide = "false";
+                $('#btn-addUser').prop('disabled', false);
             } else {
                 $(this).removeClass("is-valid");
                 $(this).addClass("is-invalid");
                 errorEmail.hidden = false;
                 errorMailValide = "true";
+                $('#btn-addUser').prop('disabled', true);
             }
         }
     })
@@ -189,11 +201,13 @@ $(document).ready(function () {
             $(this).addClass("is-valid");
             errorPass.hidden = true;
             errorPasswordValide = "false";
+            $('#btn-addUser').prop('disabled', false);
         } else {
             $(this).removeClass("is-valid");
             $(this).addClass("is-invalid");
             errorPass.hidden = false;
             errorPasswordValide = "true";
+            $('#btn-addUser').prop('disabled', true);
         }
     })
     rpassword.keyup(function () {
@@ -206,17 +220,28 @@ $(document).ready(function () {
             $(this).addClass("is-valid");
             errorRpass.hidden = true;
             errorRpPAsswordValide = "false";
+            $('#btn-addUser').prop('disabled', false);
         } else {
             $(this).removeClass("is-valid");
             $(this).addClass("is-invalid");
             errorRpass.hidden = false;
             console.log("Password does not match")
             errorRpPAsswordValide = "true";
+            $('#btn-addUser').prop('disabled', true);
         }
 
     })
 
-    $('#btn-addUser').
+    /**
+     * disabled btn add new user if there is any error
+     */
+    $('#btn-addUser').click( function () {
+        if (errorLoginValide == "true" && errorLastNameValide == "true" && errorFirstNameValide == "true" && errorDayOfBirthValide == "true" && errorVatValide == "true" && errorMailValide == "true" && errorPasswordValide == "true" && errorRpPAsswordValide == "true") {
+               $(this).prop('disabled', true);
+        } else {
+            $(this).prop('disabled', false);
+        }
+    });
 
     /*Color lign on double click*/
     $('.usersList').dblclick(function () {

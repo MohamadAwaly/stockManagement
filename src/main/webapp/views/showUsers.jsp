@@ -27,7 +27,6 @@
         <th>TVA</th>
         <th>Email</th>
         <th>active</th>
-
     </tr>
     </thead>
     <tbody>

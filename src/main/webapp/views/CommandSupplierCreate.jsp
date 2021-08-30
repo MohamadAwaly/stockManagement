@@ -22,33 +22,37 @@
                             </option>
                         </c:forEach>
                     </select>
-                    <label for="inputSelectUser">Utilisateur</label>
-                    <select id="inputSelectUser" name="User" class="form-control">
-                        <c:forEach var="user" items="${users}">
-                        <option value="<c:out value="${user[0]}"/>">
-                            <c:out value="${user[1]}"/>
-                        </option>
-
-                        </c:forEach>
-                    </select>
-                </div>
-            </div>
-            <div class="col">
-                <div class="mb-3">
-                    <label for="inputSelectProduct">Produit</label>
-                    <select id="inputSelectProduct" name="Product" class="form-control">
-                        <c:forEach var="product" items="${products}">
-
-                        <option value="<c:out value="${product[0]}"/>">
-                            <c:out value="${product[1]}"/>
-                        </option>
-                        </c:forEach>
-                    </select>
-                    <label for="inputQuantity">Quantité</label>
-                    <input type="text" id="inputQuantity" name="Quantity" class="form-control" placeholder="Quantité"/>
+                    <input type="text" name="User" value="${sessionScope.SessionUserEntity.idUser}" hidden />
                 </div>
             </div>
         </div>
+        <div class="container">
+            <div class="row Products">
+                <table id="tableProducts" class="products">
+                    <thead>
+                    <th>Produit</th>
+                    <th>Quantité</th>
+                    </thead>
+
+                    <tr id="product1" class="product">
+                        <td>
+                            <select name="Product" class="form-control">
+                                <c:forEach var="product" items="${products}">
+                                    <option value="<c:out value="${product[0]}"/>">
+                                        <c:out value="${product[1]}"/>
+                                    </option>
+                                </c:forEach>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" name="Quantity" class="inputQuantity form-control" placeholder="Quantité"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <input type="text" id="nbRowProduct" name="nbRow" value="1" hidden/>
+        <input id="CmdSuppAddProductToCmd" type="button" class="btn btn-alert" value="Ajouter un produit"/>
         <input type="submit" class="btn btn-primary" value="Enregistrer la commande"/>
     </form>
 </div>

@@ -96,7 +96,7 @@
         <label for="idRole" class="form-label" hidden><span class="etoile">*</span> Role : </label>
         <SELECT id="idRole" name="role" size="1" class="form-control" hidden>
             <c:forEach var="roles" items="${ roles }">
-                <OPTION hidden value="${ roles.idRole}" ${roles.role.trim() == 'client' ? 'selected' : ""}>
+                <OPTION hidden value="${ roles.idRole}" ${roles.role.trim() == 'Client' ? 'selected' : ""}>
                     <c:out value="${ roles.role } "/>
                 </OPTION>
             </c:forEach>

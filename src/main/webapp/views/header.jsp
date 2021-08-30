@@ -37,31 +37,27 @@
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav me-auto">
                 <c:if test="${sessionScope.SessionUserEntity.roles.role.trim() == 'administrateur' || sessionScope.SessionUserEntity.roles.role.trim() == 'directeur'}">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                       aria-haspopup="true" aria-expanded="false">Users</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="adduser">Ajouter utilisateur</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="UsersShowAll">Liste des utilisateurs</a>
-                    </div>
-                </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                           aria-haspopup="true" aria-expanded="false">Users</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="adduser">Ajouter utilisateur</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="UsersShowAll">Liste des utilisateurs</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                           aria-haspopup="true" aria-expanded="false">Fournisseurs</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="supplierCreate">Ajouter fournisseurs</a>
+                            <a class="dropdown-item" href="CommandSupplierCreate">Faire une commande au fournisseur</a>
+                            <a class="dropdown-item" href="CommandSupplierShowAll">Voir les commandes fournisseurs</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="suppliersShowAll">Liste des fournisseurs</a>
+                        </div>
+                    </li>
                 </c:if>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                       aria-haspopup="true" aria-expanded="false">Liste des fournisseurs</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="supplierCreate">Ajouter fournisseurs</a>
-                        <a class="dropdown-item" href="#">MÀJ fournisseurs</a>
-                        <a class="dropdown-item" href="#">Supprimer fournisseurs</a>
-                        <a class="dropdown-item" href="CommandSupplierCreate">Faire une commande au fournisseur</a>
-                        <a class="dropdown-item" href="CommandSupplierShowAll">Voir les commandes fournisseurs</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="suppliersShowAll">Liste des fournisseurs</a>
-                    </div>
-                </li>
-
-
             </ul>
             <c:choose>
                 <c:when test="${sessionScope.SessionUser != null}">

@@ -2,6 +2,8 @@ package be.atc.controler.servlet;
 
 import be.atc.controler.connexion.EMF;
 import be.atc.controler.enumm.TypeAdress;
+import be.atc.controler.mail.Mail;
+import be.atc.controler.mail.MailSender;
 import be.atc.entities.*;
 import be.atc.service.AdressService;
 import be.atc.service.CitieService;
@@ -20,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet( name = "AddUser", value = "/adduser" )
@@ -58,6 +61,7 @@ public class AddUser extends HttpServlet {
             List<CitiesEntity> citiesList = citieService.showAllCities();
             //Define role
             int parameterrole = Integer.parseInt( request.getParameter( "role" ) );
+            logger.log(Level.INFO, "**** Parametre Role : "+parameterrole);
             RolesEntity role = new RolesEntity();
             for ( RolesEntity roles : roleList ) {
                 if ( parameterrole == roles.getIdRole() ) {
@@ -127,6 +131,22 @@ public class AddUser extends HttpServlet {
             String errorUserExist = "l'utilisateur " + newuser.getLogin() + " ou le numéro de tva " + newuser.getVat()+ " existe déja ";
             //Send parameter to JSP
             if ( adduser ) {
+                // Send Mail
+                if (!request.getParameter("email").isEmpty()){
+
+                    List<String> lst_to = new ArrayList<String>();
+                    lst_to.add(request.getParameter("email"));
+
+                    Mail mail = new Mail();
+                    mail.setListTo(lst_to);
+                    mail.setSubject("Confirmation de l'inscription");
+                    mail.setMsgBody("Bienvenue "+request.getParameter("login"));
+                    mail.setNick("ATC Stock Management");
+                    mail.setFrom("stockmanagementatc@gmail.com");
+                    MailSender.sendMail(mail);
+                }
+
+                //List users:
                 List<Object[]> userList = user.showAllUsers();
                 request.setAttribute( "user", userList );
                 this.getServletContext().getRequestDispatcher( VUE_LISTUSER ).forward( request, response );
@@ -138,6 +158,7 @@ public class AddUser extends HttpServlet {
                 request.setAttribute( "user", newuser );
                 this.getServletContext().getRequestDispatcher( VUE_ADDUSER ).forward( request, response );
             }
+
         } catch ( Exception e ) {
             logger.log( Level.INFO, "Erreur Servlet " + e.getMessage() );
         }

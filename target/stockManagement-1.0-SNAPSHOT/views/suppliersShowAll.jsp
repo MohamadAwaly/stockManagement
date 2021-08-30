@@ -15,12 +15,10 @@
 <table class="table table-striped table-hover" border="1px solid black">
     <thead>
     <th>Nom</th>
-    <th>Operation</th>
     </thead>
     <c:forEach var="supplier" items="${suppliers}">
     <tr id="<c:out value="${supplier[0]}"/>">
         <td><c:out value="${supplier[1]}"/></td>
-        <td><input type="button" class="btn btn-primary" value="info"></td>
     </tr>
     </c:forEach>
 </table>

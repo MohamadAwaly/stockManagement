@@ -266,13 +266,29 @@ $(document).on('keyup','#formNewSupplierName',function (){
  * Page : CommandSupplierCreate.jsp
  * Quantity control
  */
-$(document).on('keyup','#inputQuantity',function (){
-    let qte = $('#inputQuantity').val();
+$(document).on('keyup','.inputQuantity',function (){
+    let qte = $(this).val();
     console.log('is a number : '+!isNaN(qte));
     if (isNaN(qte)){
-        $('#inputQuantity').val('');
+       $(this).val('') ;//$('.inputQuantity').val('');
     }
 })
+/**
+ * Page : CommandSupplierCreate.jsp
+ * Btn Add new row product to the command
+ */
+$(document).on('click','#CmdSuppAddProductToCmd',function (){
+    let nbProduct = $('#tableProducts tr').length;
+    $('#product1').clone().appendTo('#tableProducts');
+    $('#tableProducts tr:last').attr('id','product'+nbProduct);
+    $('#tableProducts tr:last td:first select').attr('name','Product'+nbProduct);
+    $('#tableProducts tr:last td:last input').attr('name','Quantity'+nbProduct);
+    $('#nbRowProduct').attr('value',nbProduct);
+    console.log('bouton ajouter produit , nb produits : '+nbProduct);
+
+})
+
+
 /**
  * Page : CommandSupplierShowAll.jsp
  * search Bar and AJAX
@@ -302,6 +318,18 @@ $(document).on('keyup','#CmdSupBchSearchBar',function (){
                 "</tr>");
         })
     });
+});
+
+$(document).on('click','#GetCmdSuppPdf',function (){
+    $.ajax({
+        url : "GetPdfCmdSupp",
+        method : "POST",
+        data : {
+            searchBar : $('#CmdSupBchSearchBar').val()
+        }
+    }).done( function (data){
+
+    })
 })
 
 

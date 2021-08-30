@@ -33,5 +33,6 @@
     </c:forEach>
     </tbody>
 </table>
+<input type="button" id="GetCmdSuppPdf" class="btn btn-primary" value="Obtenir en PDF"/>
 
 <%@include file="footer.jsp"%>

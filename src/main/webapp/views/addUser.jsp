@@ -142,6 +142,6 @@
             </div>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">Valider</button>
+    <button type="submit" id="btn-addUser" class="btn btn-primary">Valider</button>
 </form>
 <c:import url="footer.jsp"/>

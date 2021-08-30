@@ -1,3 +1,6 @@
+/**
+ *  PART USER
+ */
 $(document).ready(function () {
     //Var add User
     var login = $('#login'),
@@ -8,6 +11,16 @@ $(document).ready(function () {
         mail = $('.emailClass'),
         password = $('.passwordClass'),
         rpassword = $('.rpPasswordClass');
+
+    // Error add user
+    var errorLoginValide = "true",
+        errorLastNameValide = "true",
+        errorFirstNameValide = "true",
+        errorDayOfBirthValide = "true",
+        errorVatValide = "true",
+        errorMailValide = "true",
+        errorPasswordValide = "true",
+        errorRpPAsswordValide = "true";
 
     //Minimum eight characters, at least one upper case English letter, one lower case English letter, one number and one special character
     var regPass = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$");
@@ -20,14 +33,17 @@ $(document).ready(function () {
         var errorLogin = document.getElementById("errorLogin");
         var errorUserExist = document.getElementById("errorUserExist");
         if (errorVal.length < 4) {
-            console.log("login");
             $(this).removeClass("is-valid");
             $(this).addClass("is-invalid");
             errorLogin.hidden = false;
+            errorLoginValide = "true";
+            $('#btn-addUser').prop('disabled', true);
         } else {
             $(this).removeClass("is-invalid");
             $(this).addClass("is-valid");
             errorLogin.hidden = true;
+            errorLoginValide = "false";
+            $('#btn-addUser').prop('disabled', false);
         }
         //test ajax
         $.ajax({
@@ -43,11 +59,15 @@ $(document).ready(function () {
                 login.removeClass("is-valid");
                 login.addClass("is-invalid");
                 $('#errorUserExist').html("l'utilisateur " + login.val() + " existe deja");
+                errorLoginValide = "true";
+                $('#btn-addUser').prop('disabled', true);
                 errorUserExist.hidden = false;
             } else {
                 login.removeClass("is-invalid");
                 login.addClass("is-valid");
                 errorUserExist.hidden = true;
+                errorLoginValide = "false";
+                $('#btn-addUser').prop('disabled', false);
             }
         });
     });
@@ -58,10 +78,15 @@ $(document).ready(function () {
             $(this).removeClass("is-valid");
             $(this).addClass("is-invalid");
             errorlastName.hidden = false;
+            errorLastNameValide = "true";
+            $('#btn-addUser').prop('disabled', true);
+
         } else {
             $(this).removeClass("is-invalid");
             $(this).addClass("is-valid");
             errorlastName.hidden = true;
+            errorLastNameValide = "false"
+            $('#btn-addUser').prop('disabled', false);
         }
     })
     firstName.keyup(function () {
@@ -71,10 +96,14 @@ $(document).ready(function () {
             $(this).removeClass("is-valid");
             $(this).addClass("is-invalid");
             errorfirstName.hidden = false;
+            errorFirstNameValide = "true";
+            $('#btn-addUser').prop('disabled', true);
         } else {
             $(this).removeClass("is-invalid");
             $(this).addClass("is-valid");
             errorfirstName.hidden = true;
+            errorFirstNameValide = "false"
+            $('#btn-addUser').prop('disabled', false);
         }
     })
     dayOfBirth.keyup(function () {
@@ -104,20 +133,24 @@ $(document).ready(function () {
                 var resultMons = Math.round(resultDay / 30);
                 var resultYears = Math.round(resultMons / 12);
                 if (resultYears > 17 && resultYears < 100) {
-                    console.log("ok");
                     $(this).removeClass("is-invalid");
                     $(this).addClass("is-valid");
                     errordate.hidden = true;
                     errordate17ans.hidden = true;
+                    errorDayOfBirthValide = "false";
+                    $('#btn-addUser').prop('disabled', false);
                 } else {
                     errordate17ans.hidden = false;
+                    errorDayOfBirthValide = "true";
+                    $('#btn-addUser').prop('disabled', true);
                 }
             }
         } else {
-            console.log("non ok");
             $(this).removeClass("is-valid");
             $(this).addClass("is-invalid");
             errordate.hidden = false;
+            errorDayOfBirthValide = "true";
+            $('#btn-addUser').prop('disabled', true);
         }
 
     })
@@ -128,10 +161,14 @@ $(document).ready(function () {
             $(this).removeClass("is-invalid");
             $(this).addClass("is-valid");
             errorTva.hidden = true;
+            errorVatValide = "false";
+            $('#btn-addUser').prop('disabled', false);
         } else {
             $(this).removeClass("is-valid");
             $(this).addClass("is-invalid");
             errorTva.hidden = false;
+            errorVatValide = "true";
+            $('#btn-addUser').prop('disabled', true);
         }
     })
     mail.keyup(function () {
@@ -143,10 +180,14 @@ $(document).ready(function () {
                 $(this).removeClass("is-invalid");
                 $(this).addClass("is-valid");
                 errorEmail.hidden = true;
+                errorMailValide = "false";
+                $('#btn-addUser').prop('disabled', false);
             } else {
                 $(this).removeClass("is-valid");
                 $(this).addClass("is-invalid");
                 errorEmail.hidden = false;
+                errorMailValide = "true";
+                $('#btn-addUser').prop('disabled', true);
             }
         }
     })
@@ -159,10 +200,14 @@ $(document).ready(function () {
             $(this).removeClass("is-invalid");
             $(this).addClass("is-valid");
             errorPass.hidden = true;
+            errorPasswordValide = "false";
+            $('#btn-addUser').prop('disabled', false);
         } else {
             $(this).removeClass("is-valid");
             $(this).addClass("is-invalid");
             errorPass.hidden = false;
+            errorPasswordValide = "true";
+            $('#btn-addUser').prop('disabled', true);
         }
     })
     rpassword.keyup(function () {
@@ -174,14 +219,29 @@ $(document).ready(function () {
             $(this).removeClass("is-invalid");
             $(this).addClass("is-valid");
             errorRpass.hidden = true;
+            errorRpPAsswordValide = "false";
+            $('#btn-addUser').prop('disabled', false);
         } else {
             $(this).removeClass("is-valid");
             $(this).addClass("is-invalid");
             errorRpass.hidden = false;
-            console.log("les mot de passe ne correponde pas")
+            console.log("Password does not match")
+            errorRpPAsswordValide = "true";
+            $('#btn-addUser').prop('disabled', true);
         }
 
     })
+
+    /**
+     * disabled btn add new user if there is any error
+     */
+    $('#btn-addUser').click( function () {
+        if (errorLoginValide == "true" && errorLastNameValide == "true" && errorFirstNameValide == "true" && errorDayOfBirthValide == "true" && errorVatValide == "true" && errorMailValide == "true" && errorPasswordValide == "true" && errorRpPAsswordValide == "true") {
+               $(this).prop('disabled', true);
+        } else {
+            $(this).prop('disabled', false);
+        }
+    });
 
     /*Color lign on double click*/
     $('.usersList').dblclick(function () {
@@ -203,7 +263,7 @@ $(document).ready(function () {
         $('#user-id').attr('value', $('#iduserUpdate').val());
     });
     // retrieve id and login user to update from session
-    $('#id-btn-profile').on('click', function (){
+    $('#id-btn-profile').on('click', function () {
         var login = $('#logUserProfile').text();
         var id = $('#idUserprofile').text();
 
@@ -239,24 +299,23 @@ function dateDiffInDays(a, b) {
  * Retourne 1 = existe ou 0 = n'existe pas
  * @author Jiwaii
  */
-$(document).on('keyup','#formNewSupplierName',function (){
+$(document).on('keyup', '#formNewSupplierName', function () {
     let inputNewSupplierName = $(this).val().toString().trim();
     $.ajax({
-        url : "SupplierExist",
-        method : "POST",
-        data : {
-            name : inputNewSupplierName
+        url: "SupplierExist",
+        method: "POST",
+        data: {
+            name: inputNewSupplierName
         }
-    }).done(function (data){
+    }).done(function (data) {
             // console.log('Response Data : '+data);
             let supplierExist = parseInt(data.toString().trim());
             let inputName = $('#formNewSupplierName').val().trim();
-            if (supplierExist == 1 || inputName == '' ){
-                $('#formNewSupplierName').attr('class','form-control is-invalid');
-                $('#submitNewSupplier').attr('disabled','true');
-            }
-            else{
-                $('#formNewSupplierName').attr('class','form-control is-valid');
+            if (supplierExist == 1 || inputName == '') {
+                $('#formNewSupplierName').attr('class', 'form-control is-invalid');
+                $('#submitNewSupplier').attr('disabled', 'true');
+            } else {
+                $('#formNewSupplierName').attr('class', 'form-control is-valid');
                 $('#submitNewSupplier').removeAttr('disabled');
             }
         }
@@ -266,25 +325,25 @@ $(document).on('keyup','#formNewSupplierName',function (){
  * Page : CommandSupplierCreate.jsp
  * Quantity control
  */
-$(document).on('keyup','.inputQuantity',function (){
+$(document).on('keyup', '.inputQuantity', function () {
     let qte = $(this).val();
-    console.log('is a number : '+!isNaN(qte));
-    if (isNaN(qte)){
-       $(this).val('') ;//$('.inputQuantity').val('');
+    console.log('is a number : ' + !isNaN(qte));
+    if (isNaN(qte)) {
+        $(this).val('');//$('.inputQuantity').val('');
     }
 })
 /**
  * Page : CommandSupplierCreate.jsp
  * Btn Add new row product to the command
  */
-$(document).on('click','#CmdSuppAddProductToCmd',function (){
+$(document).on('click', '#CmdSuppAddProductToCmd', function () {
     let nbProduct = $('#tableProducts tr').length;
     $('#product1').clone().appendTo('#tableProducts');
-    $('#tableProducts tr:last').attr('id','product'+nbProduct);
-    $('#tableProducts tr:last td:first select').attr('name','Product'+nbProduct);
-    $('#tableProducts tr:last td:last input').attr('name','Quantity'+nbProduct);
-    $('#nbRowProduct').attr('value',nbProduct);
-    console.log('bouton ajouter produit , nb produits : '+nbProduct);
+    $('#tableProducts tr:last').attr('id', 'product' + nbProduct);
+    $('#tableProducts tr:last td:first select').attr('name', 'Product' + nbProduct);
+    $('#tableProducts tr:last td:last input').attr('name', 'Quantity' + nbProduct);
+    $('#nbRowProduct').attr('value', nbProduct);
+    console.log('bouton ajouter produit , nb produits : ' + nbProduct);
 
 })
 
@@ -293,41 +352,41 @@ $(document).on('click','#CmdSuppAddProductToCmd',function (){
  * Page : CommandSupplierShowAll.jsp
  * search Bar and AJAX
  */
-$(document).on('keyup','#CmdSupBchSearchBar',function (){
+$(document).on('keyup', '#CmdSupBchSearchBar', function () {
     $.ajax({
-        url : "CommandSuppliersSearch",
-        method : "POST",
-        data : {
-            searchBar : $('#CmdSupBchSearchBar').val()
+        url: "CommandSuppliersSearch",
+        method: "POST",
+        data: {
+            searchBar: $('#CmdSupBchSearchBar').val()
         }
-    }).done( function (data){
+    }).done(function (data) {
         let json = data; // pas de parse Json, déjà fait dans la servlet
         console.log(json);
         $('#CmdSupListContent').empty();
         json.forEach(obj => {
-        //cs.idCommandSuppliers ,s.name, cs.orderDate, csb.lotQuantity, b.idBatch, p.designation,cs.users.lastName
+            //cs.idCommandSuppliers ,s.name, cs.orderDate, csb.lotQuantity, b.idBatch, p.designation,cs.users.lastName
             $('#CmdSupListContent').append("" +
-                "<tr id='"+obj[0]+"'>" +
-                    "<td>"+obj[0]+"</td>" +
-                    "<td>"+obj[1]+"</td>" +
-                    "<td>"+obj[2]+"</td>" +
-                    "<td>"+obj[5]+"</td>" +
-                    "<td>"+obj[3]+"</td>" +
-                    "<td>"+obj[4]+"</td>" +
-                    "<td>"+obj[6]+"</td>" +
+                "<tr id='" + obj[0] + "'>" +
+                "<td>" + obj[0] + "</td>" +
+                "<td>" + obj[1] + "</td>" +
+                "<td>" + obj[2] + "</td>" +
+                "<td>" + obj[5] + "</td>" +
+                "<td>" + obj[3] + "</td>" +
+                "<td>" + obj[4] + "</td>" +
+                "<td>" + obj[6] + "</td>" +
                 "</tr>");
         })
     });
 });
 
-$(document).on('click','#GetCmdSuppPdf',function (){
+$(document).on('click', '#GetCmdSuppPdf', function () {
     $.ajax({
-        url : "GetPdfCmdSupp",
-        method : "POST",
-        data : {
-            searchBar : $('#CmdSupBchSearchBar').val()
+        url: "GetPdfCmdSupp",
+        method: "POST",
+        data: {
+            searchBar: $('#CmdSupBchSearchBar').val()
         }
-    }).done( function (data){
+    }).done(function (data) {
 
     })
 })

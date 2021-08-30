@@ -84,7 +84,11 @@ public class AddUser extends HttpServlet {
             UsersEntity newuser = new UsersEntity();
             newuser.setLastName(request.getParameter("lastName"));
             newuser.setFirstName(request.getParameter("firstName"));
-            newuser.setDayOfBirth(Date.valueOf(request.getParameter("dayOfBirth")));
+            if (!request.getParameter( "dayOfBirth" ).isEmpty()){
+                newuser.setDayOfBirth(Date.valueOf(request.getParameter("dayOfBirth")));
+            } else {
+                /*ignored*/
+            }
             newuser.setInscriptionDate(Date.valueOf(currentDate));
             if (!request.getParameter("vat").isEmpty()) {
                 newuser.setVat(request.getParameter("vat"));

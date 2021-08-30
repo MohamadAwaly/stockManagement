@@ -26,6 +26,8 @@ $(document).ready(function () {
     var regPass = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$");
     var regEmail = new RegExp(/[a-zA-Z0-9\.]{1,}[@][a-zA-Z0-9\.]{1,}[\.][a-zA-Z0-9\.]{1,}$/);
     var regVat = new RegExp("^(BE){0,1}[0]{0,1}[0-9]{9}$");
+    var onlyNumber = new RegExp("^[a-zA-Z]+$", "i");
+    // var onlyNumber = new RegExp('^\\d+$');
 
     //Form addUser & updateUser
     login.keyup(function () {
@@ -74,7 +76,9 @@ $(document).ready(function () {
     lastName.keyup(function () {
         var errorValLastName = $(this).val();
         var errorlastName = document.getElementById("errorlastName");
-        if (errorValLastName.length < 3) {
+        console.log(onlyNumber.test(errorValLastName));
+        // errorValLastName.length < 3
+        if (onlyNumber.test(errorValLastName) === false || errorValLastName.length < 3) {
             $(this).removeClass("is-valid");
             $(this).addClass("is-invalid");
             errorlastName.hidden = false;
@@ -92,7 +96,7 @@ $(document).ready(function () {
     firstName.keyup(function () {
         var errorVal = $(this).val();
         var errorfirstName = document.getElementById("errorfirstName");
-        if (errorVal.length < 3) {
+        if (onlyNumber.test(errorVal) === false || errorVal.length < 3) {
             $(this).removeClass("is-valid");
             $(this).addClass("is-invalid");
             errorfirstName.hidden = false;
@@ -231,6 +235,7 @@ $(document).ready(function () {
         }
 
     })
+    //|| onlyNumber.test(errorValLastName)
 
     /**
      * disabled btn add new user if there is any error

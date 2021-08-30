@@ -26,7 +26,7 @@
                 <input type="text" name="lastName" class="form-control lastNameClass" id="lastName"
                        aria-describedby="Nom" required
                        value=<c:out value="${user.lastName}"/>>
-                <div id="errorlastName" hidden class="alert alert-danger">Le nom doit contenir au moin 3 caract&egrave;res</div>
+                <div id="errorlastName" hidden class="alert alert-danger">Le nom doit contenir au moin 3 caract&egrave;res et ne doit pas contenir des chiffres</div>
             </div>
         </div>
         <div class="col">
@@ -35,7 +35,7 @@
                 <input type="text" name="firstName" class="form-control firstNameClass" id="firstName"
                        aria-describedby="prenom"
                        required value="<c:out value="${user.firstName}"/>">
-                <div id="errorfirstName" hidden class="alert alert-danger">Le prenom doit contenir au moin 3 caract&egrave;re</div>
+                <div id="errorfirstName" hidden class="alert alert-danger">Le prenom doit contenir au moin 3 caract&egrave;re et ne doit pas contenir des chiffres</div>
             </div>
         </div>
     </div>

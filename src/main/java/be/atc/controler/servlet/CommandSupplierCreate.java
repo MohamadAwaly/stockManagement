@@ -47,8 +47,6 @@ public class CommandSupplierCreate extends HttpServlet {
 
         int supplierId = 0;
         int userId = 0;
-        int productId = 0;
-        int quantity = 0;
         int nbRowProduct = 0;
         Date dateNow = new Date(System.currentTimeMillis()) ;
         EntityTransaction transaction = em.getTransaction();
@@ -68,7 +66,7 @@ public class CommandSupplierCreate extends HttpServlet {
                 lst_ProductId.add(Integer.parseInt(request.getParameter("Product")));
                 lst_ProductQty.add(Integer.parseInt(request.getParameter("Quantity")));
                 //for start to "Product2" and "Product3","Product4",...
-                for (int i = 2; i < nbRowProduct; i++){
+                for (int i = 2; i <= nbRowProduct; i++){
                     lst_ProductId.add(Integer.parseInt(request.getParameter("Product"+i)));
                     lst_ProductQty.add(Integer.parseInt(request.getParameter("Quantity"+i)));
                 }
@@ -80,11 +78,41 @@ public class CommandSupplierCreate extends HttpServlet {
         // DATA IS OK
         if (dataChecked){
             logger.log(Level.INFO,"Data is : "+ dataChecked);
-//            try{
-//                transaction.begin();
+            try {
+                transaction.begin();
+
+                SuppliersEntity suppliersEntity = em.find(SuppliersEntity.class, supplierId);
+                UsersEntity usersEntity = em.find(UsersEntity.class, userId);
+
+                //Commande Fournisseur
+                CommandsuppliersEntity commandsuppliersEntity = new CommandsuppliersEntity();
+                commandsuppliersEntity.setSuppliers(suppliersEntity);
+                commandsuppliersEntity.setUsers(usersEntity);
+                commandsuppliersEntity.setOrderDate(dateNow);
+
+                // Liste des batches de la commande
+                for (int i = 0 ;i < lst_ProductId.size();i++)
+                {
+                    //CREATION  PRODUIT et son BATCH
+                    ProductsEntity productsEntity = em.find(ProductsEntity.class,lst_ProductId.get(i));
+                    BatchsEntity batchsEntity = new BatchsEntity();
+                    batchsEntity.setQuantity(lst_ProductQty.get(i));
+                    batchsEntity.setProducts(productsEntity);
+                    em.merge(productsEntity);
+                    em.merge(batchsEntity);
+
+
+                    CommandsuppliersBatchsEntity commandsuppliersBatchsEntity = new CommandsuppliersBatchsEntity();
+                    commandsuppliersBatchsEntity.setCommandsuppliers(commandsuppliersEntity);
+                    commandsuppliersBatchsEntity.setBatchs(batchsEntity);
+                    em.merge(commandsuppliersBatchsEntity);
+                }
+                em.merge(commandsuppliersEntity);
+//
 //                SuppliersEntity suppliersEntity = em.find(SuppliersEntity.class,supplierId);
 //                UsersEntity usersEntity = em.find(UsersEntity.class,userId);
 //                ProductsEntity productsEntity = em.find(ProductsEntity.class, productId);
+//
 //
 //                //CREATION BATCH with quantity
 //                BatchsEntity batchsEntity = new BatchsEntity();
@@ -105,15 +133,15 @@ public class CommandSupplierCreate extends HttpServlet {
 //                commandsuppliersBatchsEntity.setCommandsuppliers(commandsuppliersEntity);
 //                em.merge(commandsuppliersBatchsEntity);
 //
-//                transaction.commit();
-//            }
-//            catch (Exception e){
-//                transaction.rollback();
-//                logger.log(Level.FATAL,"Servlet CommandSupplier Transaction EM Fatal Error");
-//            }finally {
-//                //em.close();
-//                logger.log(Level.INFO,"CommandSupplier TRY CATCH Transaction Finish");
-//            }
+                transaction.commit();
+            }
+            catch (Exception e){
+                transaction.rollback();
+                logger.log(Level.FATAL,"Servlet CommandSupplier Transaction EM Fatal Error");
+            }finally {
+                //em.close();
+                logger.log(Level.INFO,"CommandSupplier TRY CATCH Transaction Finish");
+            }
             response.sendRedirect(request.getContextPath()+"/CommandSupplierShowAll");
         }
         // DATA is KO :

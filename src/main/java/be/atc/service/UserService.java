@@ -219,9 +219,13 @@ public class UserService {
         return query.getResultList();
     }
 
+    /**
+     * Search user bar
+     * @param search
+     * @return
+     */
     public List<Object[]> searchUser (String search){
         Query query = em.createNamedQuery("User.finddallBySerach");
-        logger.log(Level.INFO,"dans la searchUser");
         query.setParameter("search", "%"+search+"%");
         em.clear();
 //        em.close();

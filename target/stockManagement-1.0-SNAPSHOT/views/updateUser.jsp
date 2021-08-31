@@ -191,7 +191,7 @@
     <h3>Liste des adresses</h3>
     <thead>
     <tr>
-        <th>id</th>
+        <th hidden>id</th>
         <th>ville</th>
         <th>Type d'adresse</th>
         <th>Rue</th>
@@ -202,7 +202,7 @@
     <tbody>
     <c:forEach var="adress" items="${ adress }">
         <tr class="adressList usersList">
-            <td><c:out value="${ adress[0].idAdress }"/></td>
+            <td hidden><c:out value="${ adress[0].idAdress }"/></td>
             <td><c:out value="${ adress[2].citie }"/></td>
             <td><c:out value="${ adress[1].typeAdress }"/></td>
             <td><c:out value="${ adress[0].street }"/></td>

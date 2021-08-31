@@ -74,16 +74,16 @@
 <header>
     <c:choose>
         <c:when test="${sessionScope.SessionUser != null}">
-            <form>
-                <SELECT name="nom" size="1" action="UserSignOut" class="class-session" onchange="location = this.value">
+            <form class="form-login">
+                <SELECT name="nom" size="1" action="UserSignOut" class="class-headerlogin" onchange="location = this.value">
                     <option><c:out value="${sessionScope.SessionUser}"/></option>
                     <option value="UserSignOut">se deconnecter</option>
                 </SELECT>
             </form>
         </c:when>
         <c:when test="${sessionScope.SessionUser == null}">
-            <form method="get" action="Login">
-                <button type="submit" class="btn btn-light class-session">Se connecter</button>
+            <form method="get" action="Login" class="form-login">
+                <button type="submit" class="btn btn-light class-headerlogin">Se connecter</button>
             </form>
         </c:when>
     </c:choose>

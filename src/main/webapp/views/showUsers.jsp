@@ -20,7 +20,7 @@
 <table class="table table-striped table-hover" border="1px solid black">
     <thead>
     <tr>
-        <th>ID</th>
+        <th hidden>ID</th>
         <th>login</th>
         <th>Role</th>
         <th>Nom</th>
@@ -37,7 +37,7 @@
         <fmt:formatDate value="${user.dayOfBirth}" pattern="dd/MM/yyyy" var="dayOfBirth"/>
         <fmt:formatDate value="${user.inscriptionDate}" pattern="dd/MM/yyyy" var="inscriptionDate"/>
         <tr class="usersList" id="${ user.idUser }">
-            <td><c:out value="${ user.idUser }"/></td>
+            <td hidden><c:out value="${ user.idUser }"/></td>
             <td><c:out value="${ user.login }"/></td>
             <td><c:out value="${ user.roles.role }"/></td>
             <td><c:out value="${ user.lastName }"/></td>

@@ -295,17 +295,20 @@ $(document).ready(function () {
             console.log('jsonUsers');
             $('#UsersList').empty();
             jsonUsers.forEach(obj => {
+                var tva = obj[7] == null ? "": obj[7];
+                var mail = obj[8] == null ? "": obj[8];
+                var dayofbirth = obj[5] == null ? "": obj[5];
                 $('#UsersList').append("" +
                     "<tr id='" + obj[0] + "'>" +
-                    "<td>" + obj[0] + "</td>" +
+                    "<td hidden>" + obj[0] + "</td>" +
                     "<td>" + obj[1] + "</td>" +
                     "<td>" + obj[2] + "</td>" +
                     "<td>" + obj[3] + "</td>" +
                     "<td>" + obj[4] + "</td>" +
-                    "<td>" + obj[5] + "</td>" +
+                    "<td>" + dayofbirth + "</td>" +
                     "<td>" + obj[6] + "</td>" +
-                    "<td>" + obj[7] + "</td>" +
-                    "<td>" + obj[8] + "</td>" +
+                    "<td>" + tva + "</td>" +
+                    "<td>" + mail+ "</td>" +
                     "<td>" + obj[9] + "</td>" +
                     "</tr>");
             })

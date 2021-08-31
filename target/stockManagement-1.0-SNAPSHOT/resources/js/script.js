@@ -299,7 +299,7 @@ $(document).ready(function () {
                 var mail = obj[8] == null ? "": obj[8];
                 var dayofbirth = obj[5] == null ? "": obj[5];
                 $('#UsersList').append("" +
-                    "<tr id='" + obj[0] + "'>" +
+                    "<tr class='usersList' id='" + obj[0] + "'>" +
                     "<td hidden>" + obj[0] + "</td>" +
                     "<td>" + obj[1] + "</td>" +
                     "<td>" + obj[2] + "</td>" +

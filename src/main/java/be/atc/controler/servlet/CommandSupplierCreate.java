@@ -52,17 +52,21 @@ public class CommandSupplierCreate extends HttpServlet {
         EntityTransaction transaction = em.getTransaction();
 
         //CONTROL DATA supply from user
-        boolean dataChecked = true;
         List<Integer> lst_ProductId = new ArrayList<>();
         List<Integer> lst_ProductQty = new ArrayList<>();
+
+        boolean dataChecked = true;
         try{
             nbRowProduct = Integer.parseInt(request.getParameter("nbRow"));
             supplierId = Integer.parseInt(request.getParameter("Supplier"));
             userId = Integer.parseInt(request.getParameter("User"));
+            // If the user add 1 product
             if (nbRowProduct == 1){
                 lst_ProductId.add(Integer.parseInt(request.getParameter("Product")));
                 lst_ProductQty.add(Integer.parseInt(request.getParameter("Quantity")));
-            }else{
+            }
+            // If the user are more product
+            else{
                 lst_ProductId.add(Integer.parseInt(request.getParameter("Product")));
                 lst_ProductQty.add(Integer.parseInt(request.getParameter("Quantity")));
                 //for start to "Product2" and "Product3","Product4",...
@@ -134,6 +138,7 @@ public class CommandSupplierCreate extends HttpServlet {
 //                em.merge(commandsuppliersBatchsEntity);
 //
                 transaction.commit();
+                em.close();
             }
             catch (Exception e){
                 transaction.rollback();

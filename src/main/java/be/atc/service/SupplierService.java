@@ -43,7 +43,7 @@ public class SupplierService {
         return supplier;
     }
     public List<Object[]> CommandSupplierList(String pWhere){
-        Query query = entityManager.createNamedQuery("commandSuppliersBatchs.Find").setParameter("pWhere","%"+pWhere+"%");
+        Query query = entityManager.createNamedQuery("commandSuppliers.Find").setParameter("pWhere","%"+pWhere+"%");
         List<Object[]> commandSupplierBatch = query.getResultList();
         return commandSupplierBatch;
     }

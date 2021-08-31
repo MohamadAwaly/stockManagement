@@ -243,7 +243,7 @@ $(document).ready(function () {
      */
     $('#btn-addUser').click( function () {
         if (errorLoginValide == "true" && errorLastNameValide == "true" && errorFirstNameValide == "true" && errorDayOfBirthValide == "true" && errorVatValide == "true" && errorMailValide == "true" && errorPasswordValide == "true" && errorRpPAsswordValide == "true") {
-               $(this).prop('disabled', true);
+            $(this).prop('disabled', true);
         } else {
             $(this).prop('disabled', false);
         }
@@ -414,10 +414,7 @@ $(document).on('keyup', '#CmdSupBchSearchBar', function () {
                 "<td>" + obj[0] + "</td>" +
                 "<td>" + obj[1] + "</td>" +
                 "<td>" + obj[2] + "</td>" +
-                "<td>" + obj[5] + "</td>" +
                 "<td>" + obj[3] + "</td>" +
-                "<td>" + obj[4] + "</td>" +
-                "<td>" + obj[6] + "</td>" +
                 "</tr>");
         })
     });
@@ -431,8 +428,10 @@ $(document).on('click', '#GetCmdSuppPdf', function () {
             searchBar: $('#CmdSupBchSearchBar').val()
         }
     }).done(function (data) {
+        alert('Enregistré dans C:\\StockManagement\\ ');
 
     })
 })
+
 
 

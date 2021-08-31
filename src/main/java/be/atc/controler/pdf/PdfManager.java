@@ -25,21 +25,18 @@ public class PdfManager {
 
         document.open();
         // Creation de 2 paragraphes et mise en page
-        Paragraph title = new Paragraph("Liste des commandes fournisseur en cours");
+        Paragraph title = new Paragraph("Liste des commandes fournisseurs ");
         Paragraph titleDate = new Paragraph("Date : "+ dateFormat.format(new Date()));
         title.setSpacingAfter(20);
         titleDate.setSpacingAfter(10);
 
         // Creation d'une table
-        int numberOfColumns = 7;
+        int numberOfColumns = 4;
         PdfPTable table = new PdfPTable(numberOfColumns); // Tout les colonnes doivent être remplis
         //En-tête
         table.addCell("# Commande");
         table.addCell("Fournisseur");
         table.addCell("date de la commande");
-        table.addCell("Produit");
-        table.addCell("Qté");
-        table.addCell("Lot fournisseur");
         table.addCell("préparé par");
         // table body
         int numberOfRow = lst_objects.size();
@@ -47,10 +44,8 @@ public class PdfManager {
                 table.addCell(lst_objects.get(iRow)[0].toString());
                 table.addCell(lst_objects.get(iRow)[1].toString());
                 table.addCell(lst_objects.get(iRow)[2].toString());
-                table.addCell(lst_objects.get(iRow)[5].toString());
                 table.addCell(lst_objects.get(iRow)[3].toString());
-                table.addCell(lst_objects.get(iRow)[4].toString());
-                table.addCell(lst_objects.get(iRow)[6].toString());
+
             };
 
         document.add(title);

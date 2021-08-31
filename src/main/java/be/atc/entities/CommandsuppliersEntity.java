@@ -5,6 +5,20 @@ import java.sql.Date;
 import java.util.Collection;
 import java.util.Objects;
 
+@NamedQueries({
+        @NamedQuery(name = "commandSuppliers.FindAll",
+                query = "SELECT s, cs, u FROM CommandsuppliersEntity cs " +
+                        "JOIN UsersEntity u ON u = cs.users " +
+                        "JOIN SuppliersEntity s ON s = cs.suppliers " +
+                        "ORDER BY cs.orderDate desc "),
+        @NamedQuery(name = "commandSuppliers.Find",
+                query = "SELECT cs.idCommandSuppliers, cs.orderDate, s.name, u.lastName FROM CommandsuppliersEntity cs " +
+                        "JOIN UsersEntity u ON u = cs.users " +
+                        "JOIN SuppliersEntity s ON s = cs.suppliers " +
+                        "WHERE s.name LIKE :pWhere OR cs.users.lastName LIKE :pWhere "+
+                        "ORDER BY cs.orderDate desc ")
+})
+
 @Entity
 @Table( name = "commandsuppliers", schema = "stockmanagement" )
 public class CommandsuppliersEntity {

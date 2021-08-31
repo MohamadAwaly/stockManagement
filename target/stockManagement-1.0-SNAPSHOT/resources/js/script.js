@@ -419,7 +419,10 @@ $(document).on('keyup', '#CmdSupBchSearchBar', function () {
         })
     });
 });
-
+/**
+ * Page : CommandSupplierShowAll.jsp
+ * Get PDF Button
+ */
 $(document).on('click', '#GetCmdSuppPdf', function () {
     $.ajax({
         url: "GetPdfCmdSupp",
@@ -429,9 +432,18 @@ $(document).on('click', '#GetCmdSuppPdf', function () {
         }
     }).done(function (data) {
         alert('Enregistré dans C:\\StockManagement\\ ');
-
     })
+});
+$(document).on('click','.rowCommand', function () {
+    $('.rowCommand').attr();
+    $(this).attr('class','table-primary');
+});
+$(document).on('dblclick','.rowCommand', function (){
+    let idCmdSupp = (this).getAttribute('id');
+    console.log(idCmdSupp);
+    window.location.href = 'CommandSupplierBatchShowAll?idCmdSupp='+idCmdSupp;
 })
+
 
 
 

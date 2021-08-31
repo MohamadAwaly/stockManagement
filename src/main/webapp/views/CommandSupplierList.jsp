@@ -18,7 +18,7 @@
     </thead>
     <tbody id="CmdSupListContent" >
     <c:forEach var="cs" items="${commandSuppliers}">
-        <tr>
+        <tr id="<c:out value="${cs[1].idCommandSuppliers}"/>" class="rowCommand">
             <td><c:out value="${cs[1].idCommandSuppliers}"/></td>
             <td><c:out value="${cs[1].orderDate}"/></td>
             <td><c:out value="${cs[0].name}"/></td>

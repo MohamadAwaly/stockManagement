@@ -138,10 +138,8 @@ public class UserUpdate extends HttpServlet {
                     logger.log(Level.INFO, "session customer or other");
                 }
                 if (userSession.getRoles().getRole().trim().equals("administrateur")) {
-                    logger.log(Level.INFO, " dans le if");
                     this.getServletContext().getRequestDispatcher(VUE_LISTUSER).forward(request, response);
                 } else {
-                    logger.log(Level.INFO, " dans le else");
                     this.getServletContext().getRequestDispatcher(VUE_HOME).forward(request, response);
                 }
 //                this.getServletContext().getRequestDispatcher(VUE_LISTUSER).forward(request, response);

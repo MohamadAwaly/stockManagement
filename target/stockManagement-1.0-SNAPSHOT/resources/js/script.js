@@ -277,6 +277,40 @@ $(document).ready(function () {
         console.log("id: " + id);
     });
 
+    /**
+     * Users search bar
+     */
+    $('#usersSearchBar').keyup(function (){
+        $.ajax({
+            url: "UsersSearchAjax",
+            method: "POST",
+            data: {
+                searchUserBar: $('#usersSearchBar').val()
+            }
+        }).done(function (data) {
+            console.log("ajax");
+            var jsonUsers = data;
+            console.log(jsonUsers);
+            console.log('jsonUsers');
+            $('#UsersList').empty();
+            jsonUsers.forEach(obj => {
+                $('#UsersList').append("" +
+                    "<tr id='" + obj[0] + "'>" +
+                    "<td>" + obj[0] + "</td>" +
+                    "<td>" + obj[1] + "</td>" +
+                    "<td>" + obj[2] + "</td>" +
+                    "<td>" + obj[3] + "</td>" +
+                    "<td>" + obj[4] + "</td>" +
+                    "<td>" + obj[5] + "</td>" +
+                    "<td>" + obj[6] + "</td>" +
+                    "<td>" + obj[7] + "</td>" +
+                    "<td>" + obj[8] + "</td>" +
+                    "<td>" + obj[9] + "</td>" +
+                    "</tr>");
+            })
+        });
+    });
+
 });
 
 /**

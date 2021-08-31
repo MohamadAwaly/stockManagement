@@ -208,9 +208,23 @@ public class UserService {
         }
     }
 
+    /**
+     * Profile user
+     * @param login
+     * @return
+     */
     public List<UsersEntity> profile(String login){
         Query query = em.createNamedQuery("User.profile");
         query.setParameter("login", login);
+        return query.getResultList();
+    }
+
+    public List<Object[]> searchUser (String search){
+        Query query = em.createNamedQuery("User.finddallBySerach");
+        logger.log(Level.INFO,"dans la searchUser");
+        query.setParameter("search", "%"+search+"%");
+        em.clear();
+//        em.close();
         return query.getResultList();
     }
 

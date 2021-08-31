@@ -4,6 +4,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <c:import url="header.jsp"/>
+
+<input id="usersSearchBar" type="text" class="form-control" name="usersSearchBar" placeholder="Chercher un utilisateur"/>
+
 <form action="userUpdate" method="get" class="selectedUserForm float-right bg-transparent border-0">
 
     <input type="text" name="selectedUser-Login" class="form-control" id="selectedUserLogin"
@@ -29,7 +32,7 @@
         <th>active</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody id="UsersList">
     <c:forEach var="user" items="${ user }">
         <fmt:formatDate value="${user.dayOfBirth}" pattern="dd/MM/yyyy" var="dayOfBirth"/>
         <fmt:formatDate value="${user.inscriptionDate}" pattern="dd/MM/yyyy" var="inscriptionDate"/>

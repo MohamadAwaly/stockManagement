@@ -279,6 +279,7 @@ $(document).ready(function () {
 
     /**
      * Users search bar
+     *by login, lastName, firstName, mail, roles")
      */
     $('#usersSearchBar').keyup(function (){
         $.ajax({

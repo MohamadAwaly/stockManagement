@@ -24,8 +24,6 @@ public class UsersSearchAjax extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UserService user   = new UserService();
         List<Object[]> users = user.searchUser(request.getParameter("searchUserBar"));
-//        List<Object[]> users = user.showAllUsers();
-        logger.log(Level.INFO,"users ajax: " + users);
         String json = new Gson().toJson(users);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

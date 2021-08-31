@@ -35,7 +35,6 @@ import java.util.Objects;
         @NamedQuery( name = "User.finddallBySerach",
                 query = "SELECT u.idUser, u.login, u.roles.role, u.firstName, u.lastName, u.dayOfBirth, u.inscriptionDate, u.vat, u.mail, u.active FROM UsersEntity u " +
                         "where u.login like :search or u.lastName like :search or u.firstName like :search or u.mail like :search or u.roles.role like :search")
-
 })
 @Entity
 @Table(name = "users", schema = "stockmanagement")

@@ -17,7 +17,7 @@
 
     <button type="submit" class="btn btn-primary float-right" id="updateUserbtn" disabled>Mettre à jour</button>
 </form>
-<table class="table table-striped table-hover" border="1px solid black">
+<table class="table table-striped table-hover tableListUser" id="tableListUser" border="1px solid black">
     <thead>
     <tr>
         <th hidden>ID</th>

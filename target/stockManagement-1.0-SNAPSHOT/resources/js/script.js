@@ -73,7 +73,9 @@ $(document).ready(function () {
         });
     });
     lastName.keyup(function () {
+        console.log("test last name");
         var errorValLastName = $(this).val();
+        // var errorlastName = document.getElementById("errorlastName");
         var errorlastName = document.getElementById("errorlastName");
         // errorValLastName.length < 3
         if (noNumber.test(errorValLastName) === false || errorValLastName.length < 3) {

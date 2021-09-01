@@ -75,6 +75,7 @@ public class UserService {
             userUpdate.setMail(user.getMail());
             userUpdate.setActive(user.isActive());
             userUpdate.setRoles(user.getRoles());
+            userUpdate.setVat(user.getVat());
             /**
              *             check if the password has been changed
              */

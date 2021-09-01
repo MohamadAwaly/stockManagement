@@ -1,6 +1,5 @@
 package be.atc.controler.servlet;
 
-import be.atc.controler.connexion.EMF;
 import be.atc.controler.enumm.TypeAdress;
 import be.atc.entities.*;
 import be.atc.service.AdressService;
@@ -9,16 +8,15 @@ import be.atc.service.RoleService;
 import be.atc.service.UserService;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.mindrot.jbcrypt.BCrypt;
 
-import javax.persistence.EntityManager;
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @WebServlet(name = "userUpdate", value = "/userUpdate")
@@ -101,34 +99,13 @@ public class UserUpdate extends HttpServlet {
             user.setPassword(request.getParameter("passwordUpdate"));
             user.setLogin(request.getParameter("loginUpdate"));
             user.setRoles(role);
-            //            user.setActive( true );
 
             //retrieve adress data
             AdressEntity adress = new AdressEntity();
-//            adress.setStreet( request.getParameter( "streetUpdate" ) );
-//            adress.setNumber( Integer.parseInt( request.getParameter( "numberUpdate" ) ) );
-//            if ( request.getParameter( "boxUpdate" ).equals( "" ) ) {
-//                adress.setBox( 0 );
-//            } else {
-//                adress.setBox( Integer.parseInt( request.getParameter( "boxUpdate" ) ) );
-//            }
-            //initialize a city and recover the user's city
-//            CitiesEntity city = new CitiesEntity();
-//            int paramCity = Integer.parseInt( request.getParameter( "cityUpdate" ) );
-//            for ( CitiesEntity citiesEntity : citiesList ) {
-//                if ( paramCity == citiesEntity.getIdCity() ) {
-//                    city.setIdCity( citiesEntity.getIdCity() );
-//                    city.setCitie( city.getCitie() );
-//                }
-//            }
-//            adress.setCity( city );
 
             //initialize entity entity join
             AdressUsersEntity adressUsers = new AdressUsersEntity();
-//            adressUsers.setUsers( user );
-//            adressUsers.setAddress( adress );
-//            TypeAdress typeAdress = TypeAdress.valueOf( request.getParameter( "TypeadresseUpdate" ) );
-//            adressUsers.setTypeAdress( typeAdress );
+
             if (request.getParameter("passwordUpdate").equals(request.getParameter("rpPasswordUpdate"))) {
                 userService.updateUser(user, adress, adressUsers);
                 //Send parameter to JSP
@@ -148,7 +125,6 @@ public class UserUpdate extends HttpServlet {
                 } else {
                     this.getServletContext().getRequestDispatcher(VUE_HOME).forward(request, response);
                 }
-//                this.getServletContext().getRequestDispatcher(VUE_LISTUSER).forward(request, response);
             } else {
                 logger.log(Level.ERROR, "the password does not match ");
                 String errorPassword = "Les deux mot de passe ne corresponde pas !!!";

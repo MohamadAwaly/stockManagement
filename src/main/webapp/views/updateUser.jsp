@@ -47,9 +47,9 @@
                 <div class="col">
                     <div class="mb-1">
                         <label for="lastNameUpdate" class="form-label"><span class="etoile">*</span> Nom </label>
-                        <input type="text" name="lastNameUpdate" class="form-control lastNameClass" id="lastNameUpdate"
+                        <input type="text" name="lastName" class="form-control lastNameClass" id="lastNameUpdate"
                                aria-describedby="Nom" required value=<c:out value="${ user.lastName }"/>>
-                        <div id="errorlastNameUpdate" hidden class="alert alert-danger">Le nom doit contenir au
+                        <div id="errorlastNameUpdate" hidden class="alert alert-danger errorlastNameClass">Le nom doit contenir au
                             moin 3
                             caract&egrave;res
                         </div>

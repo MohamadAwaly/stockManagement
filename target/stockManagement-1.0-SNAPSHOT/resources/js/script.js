@@ -434,10 +434,7 @@ $(document).on('click', '#GetCmdSuppPdf', function () {
         alert('Enregistré dans C:\\StockManagement\\ ');
     })
 });
-$(document).on('click','.rowCommand', function () {
-    $('.rowCommand').attr();
-    $(this).attr('class','table-primary');
-});
+
 $(document).on('dblclick','.rowCommand', function (){
     let idCmdSupp = (this).getAttribute('id');
     console.log(idCmdSupp);

@@ -87,10 +87,16 @@ public class UserUpdate extends HttpServlet {
             }
             user.setLastName(request.getParameter("lastNameUpdate"));
             user.setFirstName(request.getParameter("firstNameUpdate"));
-            user.setDayOfBirth(Date.valueOf(request.getParameter("dayOfBirthUpdate")));
+            if (!request.getParameter("dayOfBirthUpdate").isEmpty()){
+                user.setDayOfBirth(Date.valueOf(request.getParameter("dayOfBirthUpdate")));
+            }
             user.setInscriptionDate(Date.valueOf(request.getParameter("inscriptionDateUpdate")));
-            user.setVat(request.getParameter("vatUpdate"));
-            user.setMail(request.getParameter("emailUpdate"));
+            if (!request.getParameter("vatUpdate").isEmpty()){
+                user.setVat(request.getParameter("vatUpdate"));
+            }
+            if (!request.getParameter("emailUpdate").isEmpty()){
+                user.setMail(request.getParameter("emailUpdate"));
+            }
             logger.log(Level.INFO, "password updated: " + request.getParameter("passwordUpdate"));
             user.setPassword(request.getParameter("passwordUpdate"));
             user.setLogin(request.getParameter("loginUpdate"));

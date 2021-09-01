@@ -250,13 +250,22 @@ $(document).ready(function () {
     });
 
     /*Color lign on double click*/
-    $('.usersList').dblclick(function () {
+    $(document).on('dblclick','.usersList',function (){
+        console.log("userList . dblclick");
         $('#updateUserbtn').removeAttr('disabled');
         $('.usersList').removeAttr('style');
         $(this).css('background', '#31B0D5');
         $('#selectedUserid').attr('value', $(this).find("td").eq(0).html());
         $('#selectedUserLogin').attr('value', $(this).find("td").eq(1).html());
-    });
+    })
+    // $('.usersList').dblclick(function () {
+    //     console.log("userList . dblclick");
+    //     $('#updateUserbtn').removeAttr('disabled');
+    //     $('.usersList').removeAttr('style');
+    //     $(this).css('background', '#31B0D5');
+    //     $('#selectedUserid').attr('value', $(this).find("td").eq(0).html());
+    //     $('#selectedUserLogin').attr('value', $(this).find("td").eq(1).html());
+    // });
     //add the information in the field to add an address
     $('#idAddAdress').click(function () {
         $('#selectedUseridUpdate').attr('value', $('#iduserUpdate').val());
@@ -289,32 +298,27 @@ $(document).ready(function () {
                 searchUserBar: $('#usersSearchBar').val()
             }
         }).done(function (data) {
-            console.log("ajax");
-            var jsonUsers = data;
-            console.log(jsonUsers);
-            console.log('jsonUsers');
-            $('#UsersList').empty();
-            jsonUsers.forEach(obj => {
-                var tva = obj[7] == null ? "": obj[7];
-                var mail = obj[8] == null ? "": obj[8];
-                var dayofbirth = obj[5] == null ? "": obj[5];
-                $('#UsersList').append("" +
-                    "<tr class='usersList' id='" + obj[0] + "'>" +
-                    "<td hidden>" + obj[0] + "</td>" +
-                    "<td>" + obj[1] + "</td>" +
-                    "<td>" + obj[2] + "</td>" +
-                    "<td>" + obj[3] + "</td>" +
-                    "<td>" + obj[4] + "</td>" +
-                    "<td>" + dayofbirth + "</td>" +
-                    "<td>" + obj[6] + "</td>" +
-                    "<td>" + tva + "</td>" +
-                    "<td>" + mail+ "</td>" +
-                    "<td>" + obj[9] + "</td>" +
+            $('.usersList').remove();
+            data.forEach(res => {
+                let tva = res[7] == null ? "": res[7];
+                let mail = res[8] == null ? "": res[8];
+                let dayofbirth = res[5] == null ? "": res[5];
+                $('#tableListUser').append(
+                    "<tr class='usersList' id='" + res[0] + "'>" +
+                        "<td hidden>" + res[0] + "</td>" +
+                        "<td>" + res[1] + "</td>" +
+                        "<td>" + res[2] + "</td>" +
+                        "<td>" + res[3] + "</td>" +
+                        "<td>" + res[4] + "</td>" +
+                        "<td>" + dayofbirth + "</td>" +
+                        "<td>" + res[6] + "</td>" +
+                        "<td>" + tva + "</td>" +
+                        "<td>" + mail+ "</td>" +
+                        "<td>" + res[9] + "</td>" +
                     "</tr>");
             })
         });
     });
-
 });
 
 /**

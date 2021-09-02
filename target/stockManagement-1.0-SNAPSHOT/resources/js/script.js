@@ -295,6 +295,28 @@ $(document).ready(function () {
             })
         });
     });
+    /**
+     * test
+     */
+    $('#testsubmit').click(function (){
+        console.log("test");
+        $.confirm({
+            title: 'Logout?',
+            content: 'Your time is out, you will be automatically logged out in 10 seconds.',
+            autoClose: 'logoutUser|10000',
+            buttons: {
+                logoutUser: {
+                    text: 'logout myself',
+                    action: function () {
+                        $.alert('The user was logged out');
+                    }
+                },
+                cancel: function () {
+                    $.alert('canceled');
+                }
+            }
+        });
+    })
 });
 
 /**

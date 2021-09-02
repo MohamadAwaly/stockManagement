@@ -9,15 +9,15 @@ $(document).ready(function () {
         lastName = $('#lastName'),
         firstName = $('#firstName'),
         dayOfBirth = $('.dayOfBirthClass'),
-        vat = $('.vatClass'),
+        vat = $('#vat'),
         mail = $('.emailClass'),
         password = $('.passwordClass'),
         rpassword = $('.rpPasswordClass');
 
     // var update user
     var lastNameUpdate = $('#lastNameUpdate'),
-        firstNameUpdate = $('#firstNameUpdate');
-
+        firstNameUpdate = $('#firstNameUpdate'),
+        vatUpdate = $('#vatUpdate');
 
     // Error add new user
     var errorLoginValide = "true",
@@ -89,7 +89,7 @@ $(document).ready(function () {
         var errorVal = $(this).val();
         var errorfirstName = document.getElementById("errorfirstName");
         var btn = $('#btn-addUser').attr('id');
-        errorFirstName(firstName, errorVal, errorfirstName, btn );
+        errorFirstName(firstName, errorVal, errorfirstName, btn);
     })
     dayOfBirth.keyup(function () {
         const months = [
@@ -143,8 +143,9 @@ $(document).ready(function () {
     vat.keyup(function () {
         var vatVal = $(this).val();
         var errorTva = document.getElementById("errorTva");
-        if (!vat.val() == ""){
-            if (regVat.test(vatVal) &&  vatVal.length == 11){
+        var errorTvaExist = document.getElementById("errorTvaExist");
+        if (!vat.val() == "") {
+            if (regVat.test(vatVal) && vatVal.length == 11) {
                 $.ajax({
                     type: "POST",
                     url: 'UserAjaxCheckVatExist',
@@ -153,15 +154,23 @@ $(document).ready(function () {
                     },
                     // dataType : 'json',
                 }).done(function (data) {
-                    if (data === "ok"){
+                    if (data === "ok") {
                         vat.removeClass("is-invalid");
                         vat.addClass("is-valid");
                         errorTva.hidden = true;
+                        errorTvaExist.hidden = true;
                         errorVatValide = "false";
                         $('#btn-addUser').prop('disabled', false);
+                    } else if (data === "error") {
+                        $(this).removeClass("is-valid");
+                        $(this).addClass("is-invalid");
+                        errorTvaExist.hidden = false;
+                        errorVatValide = "true";
+                        $('#btn-addUser').prop('disabled', true);
                     } else {
                         $(this).removeClass("is-valid");
                         $(this).addClass("is-invalid");
+                        errorTvaExist.hidden = true;
                         errorTva.hidden = false;
                         errorVatValide = "true";
                         $('#btn-addUser').prop('disabled', true);
@@ -172,6 +181,7 @@ $(document).ready(function () {
                 $(this).removeClass("is-valid");
                 $(this).addClass("is-invalid");
                 errorTva.hidden = false;
+                errorTvaExist.hidden = true;
                 errorVatValide = "true";
                 $('#btn-addUser').prop('disabled', true);
             }
@@ -179,22 +189,10 @@ $(document).ready(function () {
             $(this).removeClass("is-invalid");
             $(this).removeClass("is-valid");
             errorTva.hidden = true;
+            errorTvaExist.hidden = true;
             errorVatValide = "false";
             $('#btn-addUser').prop('disabled', false);
         }
-        //Check if vat exist
-        //test ajax
-        // $.ajax({
-        //     type: "POST",
-        //     url: 'UserAjaxCheckVatExist',
-        //     data: {
-        //         vat: vat.val(),
-        //     },
-        //     // dataType : 'json',
-        // }).done(function (data) {
-        //     console.log("data: " + data);
-        // });
-
     })
     mail.keyup(function () {
         var email = $(this).val();
@@ -268,8 +266,9 @@ $(document).ready(function () {
         var errorVal = $(this).val();
         var errorfirstName = document.getElementById("errorfirstNameUpdate");
         var btn = $('#id-valider-updateUser-btn').attr('id');
-        errorFirstName(firstNameUpdate, errorVal, errorfirstName, btn );
+        errorFirstName(firstNameUpdate, errorVal, errorfirstName, btn);
     })
+
     /**
      * disabled btn add new user if there is any error
      */
@@ -376,8 +375,8 @@ function dateDiffInDays(a, b) {
  * @param errorlastName
  * @param btn
  */
-function errorLastName (lastName, errorValLastName, errorlastName, btn) {
-    var btnvalide = $('#'+btn);
+function errorLastName(lastName, errorValLastName, errorlastName, btn) {
+    var btnvalide = $('#' + btn);
     if (noNumber.test(errorValLastName) === false || errorValLastName.length < 3) {
         lastName.removeClass("is-valid");
         lastName.addClass("is-invalid");
@@ -400,8 +399,8 @@ function errorLastName (lastName, errorValLastName, errorlastName, btn) {
  * @param errorfirstName
  * @param btn
  */
-function errorFirstName (firstName, errorVal,errorfirstName,btn ){
-    var btnvalide = $('#'+btn);
+function errorFirstName(firstName, errorVal, errorfirstName, btn) {
+    var btnvalide = $('#' + btn);
     if (noNumber.test(errorVal) === false || errorVal.length < 3) {
         firstName.removeClass("is-valid");
         firstName.addClass("is-invalid");
@@ -416,6 +415,7 @@ function errorFirstName (firstName, errorVal,errorfirstName,btn ){
         btnvalide.prop('disabled', false);
     }
 }
+
 /**
  * ********************************************* *
  * ********************************************* *

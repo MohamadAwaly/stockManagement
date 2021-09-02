@@ -76,7 +76,12 @@ public class UserUpdate extends HttpServlet {
                 }
             }
             UsersEntity user = new UsersEntity();
-            user.setIdUser(Integer.parseInt(request.getParameter("iduserUpdate")));
+            try {
+                user.setIdUser(Integer.parseInt(request.getParameter("iduserUpdate")));
+            } catch ( Exception e ){
+                logger.log( Level.INFO,"Error - id user" );
+            }
+            logger.log( Level.INFO, "id: " + Integer.parseInt(request.getParameter("iduserUpdate")) );
             String isActive = request.getParameter("activeUpdate");
             if (isActive != null && request.getParameter("activeUpdate").equals("on")) {
                 user.setActive(true);
@@ -85,6 +90,7 @@ public class UserUpdate extends HttpServlet {
             }
             user.setLastName(request.getParameter("lastNameUpdate"));
             user.setFirstName(request.getParameter("firstNameUpdate"));
+            logger.log( Level.INFO,"day of birth : " +request.getParameter("dayOfBirthUpdate")  );
             if (!request.getParameter("dayOfBirthUpdate").isEmpty()){
                 user.setDayOfBirth(Date.valueOf(request.getParameter("dayOfBirthUpdate")));
             }
@@ -145,7 +151,7 @@ public class UserUpdate extends HttpServlet {
                     this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
             }
         } catch (Exception e) {
-            logger.log(Level.INFO, "Error Servlet Update User " + e.getMessage());
+            logger.log(Level.INFO, "Error Servlet Update User: " + e.getMessage());
         }
 
     }

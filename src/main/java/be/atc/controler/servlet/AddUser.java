@@ -134,7 +134,6 @@ public class AddUser extends HttpServlet {
 
             boolean adduser = false;
             adduser = userService.addUser(newuser, adress, adressUsers);
-            //            HttpSession session = request.getSession();
             String errorUserExist = "l'utilisateur " + newuser.getLogin() + " ou le numéro de tva " + newuser.getVat() + " existe déja ";
             //Send parameter to JSP
             if (adduser) {
@@ -155,7 +154,18 @@ public class AddUser extends HttpServlet {
                 //List users:
                 List<Object[]> userList = user.showAllUsers();
                 request.setAttribute("user", userList);
-                if (newuser.getRoles().getRole().trim().equals("client")) {
+                HttpSession session = request.getSession();
+                if (session.getAttribute( "SessionUserEntity" ) == null){
+                    logger.log( Level.INFO," la session est null " );
+                } else {
+                    logger.log( Level.INFO,"La session n'est pas null" );
+                }
+                 /*check if session is null,
+                no:  new user (customer)
+                yes: admin is added new user
+                */
+
+                if (session.getAttribute( "SessionUserEntity" ) == null && newuser.getRoles().getRole().trim().equals("client")  ) {
                     this.getServletContext().getRequestDispatcher(VUE_LOGIN).forward(request, response);
                 } else {
                     this.getServletContext().getRequestDispatcher(VUE_LISTUSER).forward(request, response);

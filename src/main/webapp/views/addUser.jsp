@@ -50,7 +50,7 @@
         <label for="vat" class="form-label">Num&eacute;ro de tva</label>
         <input type="text" name="vat" class="form-control vatClass" id="vat" aria-describedby="Numéro de tva"
                placeholder="BE123456789" value=<c:out value="${user.vat}"/>>
-        <div id="errorTva" hidden class="alert alert-danger">Numero de tva non valide</div>
+        <div id="errorTva" hidden class="alert alert-danger">Numero de tva doit commencer par BE et doit contenir 9 chiffres </div>
         <div id="errorTvaExist" hidden class="alert alert-danger">Numero de tva existe</div>
     </div>
     <div class="mb-3">

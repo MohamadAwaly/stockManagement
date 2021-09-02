@@ -47,7 +47,7 @@
                 <div class="col">
                     <div class="mb-1">
                         <label for="lastNameUpdate" class="form-label"><span class="etoile">*</span> Nom </label>
-                        <input type="text" name="lastName" class="form-control lastNameClass" id="lastNameUpdate"
+                        <input type="text" name="lastNameUpdate" class="form-control lastNameClass" id="lastNameUpdate"
                                aria-describedby="Nom" required value=<c:out value="${ user.lastName }"/>>
                         <div id="errorlastNameUpdate" hidden class="alert alert-danger errorlastNameClass">Le nom doit contenir au
                             moin 3
@@ -75,7 +75,7 @@
                         <label for="dayOfBirthUpdate" class="form-label">Date de naissance</label>
                         <input type="Date" name="dayOfBirthUpdate" class="form-control dayOfBirthClass"
                                id="dayOfBirthUpdate"
-                               aria-describedby="date de naissance" disabled value=<c:out value="${ user.dayOfBirth }"/>>
+                               aria-describedby="date de naissance" value=<c:out value="${ user.dayOfBirth }"/>>
                         <div id="errodayOfBirthUpdate" hidden class="alert alert-danger">Date non valide</div>
                         <div id="errodayOfBirth17ansUpdate" hidden class="alert alert-danger">vous devez avoir
                             minimum 17
@@ -98,6 +98,7 @@
                        aria-describedby="Numéro de tva"
                        placeholder="BE123456789" value=<c:out value="${ user.vat }"/>>
                 <div id="errorTvaUpdate" hidden class="alert alert-danger">Numero de tva non valide</div>
+                <div id="errorTvaExistUpdate" hidden class="alert alert-danger">Numero de tva existe</div>
             </div>
             <div class="mb-1">
                 <label for="emailUpdate" class="form-label">adresse email</label>

@@ -51,6 +51,7 @@
         <input type="text" name="vat" class="form-control vatClass" id="vat" aria-describedby="Numéro de tva"
                placeholder="BE123456789" value=<c:out value="${user.vat}"/>>
         <div id="errorTva" hidden class="alert alert-danger">Numero de tva non valide</div>
+        <div id="errorTvaExist" hidden class="alert alert-danger">Numero de tva existe</div>
     </div>
     <div class="mb-3">
         <label for="email" class="form-label">Adresse email</label>

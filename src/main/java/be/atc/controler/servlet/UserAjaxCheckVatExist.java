@@ -17,10 +17,10 @@ public class UserAjaxCheckVatExist extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UserService userService = new UserService();
-        String login = request.getParameter("vat");
+        String vat = request.getParameter("vat");
 //        logger.log(Level.INFO, "checkUserAjax: " + login);
-        boolean checkLoginExist = userService.checkUserExist(login);
-        if (checkLoginExist) {
+        boolean checkVatExist = userService.checkVatExist(vat);
+        if (checkVatExist) {
 //            response.getWriter().write("Error - user exist");
             response.getWriter().write("error");
         } else {

@@ -5,19 +5,20 @@
 
 <c:import url="header.jsp"/>
 
-<input id="usersSearchBar" type="text" class="form-control" name="usersSearchBar" placeholder="Chercher un utilisateur"/>
+<input id="usersSearchBar" type="text" class="form-control" name="usersSearchBar"
+       placeholder="Chercher un utilisateur"/>
 
 <form action="userUpdate" method="get" class="selectedUserForm float-right bg-transparent border-0">
 
     <input type="text" name="selectedUser-Login" class="form-control" id="selectedUserLogin"
-           aria-describedby="selectedUser" hidden>
+           hidden>
 
     <input type="text" name="selectedUser-id" class="form-control" id="selectedUserid"
-           aria-describedby="selectedUser" hidden>
+           hidden>
 
     <button type="submit" class="btn btn-primary float-right" id="updateUserbtn" disabled>Mettre à jour</button>
 </form>
-<table class="table table-striped table-hover tableListUser" id="tableListUser" border="1px solid black">
+<table class="table table-striped table-hover tableListUser" id="tableListUser">
     <thead>
     <tr>
         <th hidden>ID</th>

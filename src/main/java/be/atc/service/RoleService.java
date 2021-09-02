@@ -9,11 +9,11 @@ import javax.persistence.Query;
 import java.util.List;
 
 public class RoleService {
-    private static Logger log = Logger.getLogger(RoleService.class);
+    private static Logger log = Logger.getLogger( RoleService.class );
     EntityManager em = EMF.getEM();
 
     public List showAllRoles() {
-        Query query = em.createNamedQuery("Role.finddall");
+        Query query = em.createNamedQuery( "Role.finddall" );
         List<UsersEntity> userList = query.getResultList();
         return userList;
     }

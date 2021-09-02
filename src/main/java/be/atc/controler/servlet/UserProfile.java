@@ -13,26 +13,29 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "UserProfile", value = "/UserProfile")
+@WebServlet( name = "UserProfile", value = "/UserProfile" )
 public class UserProfile extends HttpServlet {
-    private static final Logger logger = Logger.getLogger(UserProfile.class);
-    public static final  String      VUE    = "/views/UserProfile.jsp";
+    private static final Logger logger = Logger.getLogger( UserProfile.class );
+    public static final  String VUE    = "/views/UserProfile.jsp";
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet( HttpServletRequest request, HttpServletResponse response )
+            throws ServletException, IOException {
         HttpSession session = request.getSession();
         UserService userService = new UserService();
-        String userlogin = (String) session.getAttribute("SessionUser");
-        List<UsersEntity> user = userService.profile(userlogin);
+        String userlogin = (String) session.getAttribute( "SessionUser" );
+        List<UsersEntity> user = userService.profile( userlogin );
         try {
             request.setAttribute( "user", user );
-        }catch (Exception e){
+        } catch ( Exception e ) {
             /*error*/
         }
         this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
     }
+
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost( HttpServletRequest request, HttpServletResponse response )
+            throws ServletException, IOException {
 
     }
 }

@@ -12,21 +12,24 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "UsersSearchAjax", value = "/UsersSearchAjax")
+@WebServlet( name = "UsersSearchAjax", value = "/UsersSearchAjax" )
 public class UsersSearchAjax extends HttpServlet {
 
     private static final Logger logger = Logger.getLogger( UsersSearchAjax.class );
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet( HttpServletRequest request, HttpServletResponse response )
+            throws ServletException, IOException {
     }
+
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        UserService user   = new UserService();
-        List<Object[]> users = user.searchUser(request.getParameter("searchUserBar"));
-        String json = new Gson().toJson(users);
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(json);
+    protected void doPost( HttpServletRequest request, HttpServletResponse response )
+            throws ServletException, IOException {
+        UserService user = new UserService();
+        List<Object[]> users = user.searchUser( request.getParameter( "searchUserBar" ) );
+        String json = new Gson().toJson( users );
+        response.setContentType( "application/json" );
+        response.setCharacterEncoding( "UTF-8" );
+        response.getWriter().write( json );
     }
 }

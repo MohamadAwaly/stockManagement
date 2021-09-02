@@ -26,7 +26,7 @@
                 <input type="text" name="lastName" class="form-control lastNameClass" id="lastName"
                        aria-describedby="Nom" required
                        value=<c:out value="${user.lastName}"/>>
-                <div id="errorlastName" hidden class="alert alert-danger errorlastNameClass">Le nom doit contenir au moin 3 caract&egrave;res et ne doit pas contenir des chiffres</div>
+                <div name="test" id="errorlastName" hidden class="alert alert-danger errorlastNameClass">Le nom doit contenir au moin 3 caract&egrave;res et ne doit pas contenir des chiffres</div>
             </div>
         </div>
         <div class="col">

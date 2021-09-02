@@ -12,7 +12,7 @@ $(document).ready(function () {
         password = $('.passwordClass'),
         rpassword = $('.rpPasswordClass');
 
-    // Error add user
+    // Error add new user
     var errorLoginValide = "true",
         errorLastNameValide = "true",
         errorFirstNameValide = "true",
@@ -22,7 +22,8 @@ $(document).ready(function () {
         errorPasswordValide = "true",
         errorRpPAsswordValide = "true";
 
-    //Minimum eight characters, at least one upper case English letter, one lower case English letter, one number and one special character
+
+    //Minimum eight characters, at least one upper case French letter, one lower case French letter, one number and one special character
     var regPass = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$");
     var regEmail = new RegExp(/[a-zA-Z0-9\.]{1,}[@][a-zA-Z0-9\.]{1,}[\.][a-zA-Z0-9\.]{1,}$/);
     var regVat = new RegExp("^(BE){0,1}[0]{0,1}[0-9]{9}$");
@@ -75,12 +76,11 @@ $(document).ready(function () {
     lastName.keyup(function () {
         console.log("test last name");
         var errorValLastName = $(this).val();
-        // var errorlastName = document.getElementById("errorlastName");
         var errorlastName = document.getElementById("errorlastName");
-        // errorValLastName.length < 3
         if (noNumber.test(errorValLastName) === false || errorValLastName.length < 3) {
             $(this).removeClass("is-valid");
             $(this).addClass("is-invalid");
+            // errorlastName.hide();
             errorlastName.hidden = false;
             errorLastNameValide = "true";
             $('#btn-addUser').prop('disabled', true);
@@ -88,6 +88,7 @@ $(document).ready(function () {
         } else {
             $(this).removeClass("is-invalid");
             $(this).addClass("is-valid");
+            // errorlastName.show();
             errorlastName.hidden = true;
             errorLastNameValide = "false"
             $('#btn-addUser').prop('disabled', false);
@@ -337,6 +338,10 @@ function dateDiffInDays(a, b) {
     const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
 
     return Math.floor((utc2 - utc1) / _MS_PER_DAY);
+}
+
+function errorLastName (errorValLastName, errorlastName){
+
 }
 
 /**

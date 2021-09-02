@@ -114,28 +114,29 @@ $(document).ready(function () {
         var today = new Date();
         var dateFormLenght = $('.dayOfBirthClass').val();
         var dateForm = new Date($('.dayOfBirthClass').val());
-        console.log("dateform: " + dateFormLenght.length);
-        console.log("dateform: " + dateFormLenght);
         if (dateFormLenght.length == 10) {
-            if (dateForm.getUTCFullYear() > 1900) {
-                var dateOfBirth = new Date(dateForm.getDate() + " " + months[dateForm.getMonth()] + " " + dateForm.getUTCFullYear());
-                var resultDay = dateDiffInDays(dateOfBirth, today);
-                var resultMons = Math.round(resultDay / 30);
-                var resultYears = Math.round(resultMons / 12);
-                if (resultYears > 17 && resultYears < 100) {
-                    $(this).removeClass("is-invalid");
-                    $(this).addClass("is-valid");
-                    errordate.hidden = true;
-                    errordate17ans.hidden = true;
-                    errorDayOfBirthValide = "false";
-                    $('#btn-addUser').prop('disabled', false);
-                } else {
-                    errordate17ans.hidden = false;
-                    errorDayOfBirthValide = "true";
-                    $('#btn-addUser').prop('disabled', true);
-                }
+            var dateOfBirth = new Date(dateForm.getDate() + " " + months[dateForm.getMonth()] + " " + dateForm.getUTCFullYear());
+            var resultDay = dateDiffInDays(dateOfBirth, today);
+            var resultMons = Math.round(resultDay / 30);
+            var resultYears = Math.round(resultMons / 12);
+            console.log("age: " + resultYears);
+            if (resultYears > 17 && resultYears <= 101) {
+                console.log("17 ans");
+                $(this).removeClass("is-invalid");
+                $(this).addClass("is-valid");
+                errordate.hidden = true;
+                errordate17ans.hidden = true;
+                errorDayOfBirthValide = "false";
+                $('#btn-addUser').prop('disabled', false);
+            } else {
+                console.log("dans le else");
+                errordate17ans.hidden = false;
+                errorDayOfBirthValide = "true";
+                $('#btn-addUser').prop('disabled', true);
             }
+
         } else {
+            console.log("le grand else");
             $(this).removeClass("is-valid");
             $(this).removeClass("is-invalid");
             errordate.hidden = true;

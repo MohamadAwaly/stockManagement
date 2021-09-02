@@ -95,47 +95,48 @@ $(document).ready(function () {
         errorFirstName(firstName, errorVal, errorfirstName, btn);
     })
     dayOfBirth.keyup(function () {
-        const months = [
-            'January',
-            'February',
-            'March',
-            'April',
-            'May',
-            'June',
-            'July',
-            'August',
-            'September',
-            'October',
-            'November',
-            'December'
-        ]
+        // const months = [
+        //     'January',
+        //     'February',
+        //     'March',
+        //     'April',
+        //     'May',
+        //     'June',
+        //     'July',
+        //     'August',
+        //     'September',
+        //     'October',
+        //     'November',
+        //     'December'
+        // ]
         var errordate = document.getElementById("errodayOfBirth");
         var errordate17ans = document.getElementById("errodayOfBirth17ans");
         var today = new Date();
         var dateFormLenght = $('.dayOfBirthClass').val();
         var dateForm = new Date($('.dayOfBirthClass').val());
-        console.log("dateform: " + dateFormLenght.length);
-        console.log("dateform: " + dateFormLenght);
         if (dateFormLenght.length == 10) {
-            if (dateForm.getUTCFullYear() > 1900) {
-                var dateOfBirth = new Date(dateForm.getDate() + " " + months[dateForm.getMonth()] + " " + dateForm.getUTCFullYear());
-                var resultDay = dateDiffInDays(dateOfBirth, today);
-                var resultMons = Math.round(resultDay / 30);
-                var resultYears = Math.round(resultMons / 12);
-                if (resultYears > 17 && resultYears < 100) {
-                    $(this).removeClass("is-invalid");
-                    $(this).addClass("is-valid");
-                    errordate.hidden = true;
-                    errordate17ans.hidden = true;
-                    errorDayOfBirthValide = "false";
-                    $('#btn-addUser').prop('disabled', false);
-                } else {
-                    errordate17ans.hidden = false;
-                    errorDayOfBirthValide = "true";
-                    $('#btn-addUser').prop('disabled', true);
-                }
+            var dateOfBirth = new Date(dateForm.getDate() + " " + months[dateForm.getMonth()] + " " + dateForm.getUTCFullYear());
+            var resultDay = dateDiffInDays(dateOfBirth, today);
+            var resultMons = Math.round(resultDay / 30);
+            var resultYears = Math.round(resultMons / 12);
+            console.log("age: " + resultYears);
+            if (resultYears > 17 && resultYears <= 101) {
+                console.log("17 ans");
+                $(this).removeClass("is-invalid");
+                $(this).addClass("is-valid");
+                errordate.hidden = true;
+                errordate17ans.hidden = true;
+                errorDayOfBirthValide = "false";
+                $('#btn-addUser').prop('disabled', false);
+            } else {
+                console.log("dans le else");
+                errordate17ans.hidden = false;
+                errorDayOfBirthValide = "true";
+                $('#btn-addUser').prop('disabled', true);
             }
+
         } else {
+            console.log("le grand else");
             $(this).removeClass("is-valid");
             $(this).removeClass("is-invalid");
             errordate.hidden = true;
@@ -203,12 +204,12 @@ $(document).ready(function () {
         var btn = $('#id-valider-updateUser-btn').attr('id');
         errorVat(vatUpdate, vatVal, errorTva, errorTvaExist, errorVatValideUpdate, btn);
     })
-    passwordUpdate.keyup(function (){
+    passwordUpdate.keyup(function () {
         var errorPass = document.getElementById("erroPasswordUpdate");
         var btn = $('#id-valider-updateUser-btn').attr('id');
         errorPassword(passwordUpdate, errorPass, btn, rpasswordUpdate);
     })
-    rpasswordUpdate.keyup(function (){
+    rpasswordUpdate.keyup(function () {
         var errorRpass = document.getElementById("errorRPasswordUpdate");
         var btn = $('#id-valider-updateUser-btn').attr('id');
         erroRpassword(rpasswordUpdate, passwordUpdate, errorRpass, btn);

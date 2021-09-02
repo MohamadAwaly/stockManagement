@@ -44,7 +44,7 @@
         <input type="Date" name="dayOfBirth" class="form-control dayOfBirthClass" id="dayOfBirth"
                aria-describedby="date de naissance" value=<c:out value="${user.dayOfBirth}"/>>
         <div id="errodayOfBirth" hidden class="alert alert-danger">Date non valide</div>
-        <div id="errodayOfBirth17ans" hidden class="alert alert-danger">vous devez avoir minimum 17 ans</div>
+        <div id="errodayOfBirth17ans" hidden class="alert alert-danger">vous devez avoir minimum 17 ans et maximum 100 ans</div>
     </div>
     <div class="mb-3">
         <label for="vat" class="form-label">Num&eacute;ro de tva</label>

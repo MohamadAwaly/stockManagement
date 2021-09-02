@@ -95,20 +95,20 @@ $(document).ready(function () {
         errorFirstName(firstName, errorVal, errorfirstName, btn);
     })
     dayOfBirth.keyup(function () {
-        // const months = [
-        //     'January',
-        //     'February',
-        //     'March',
-        //     'April',
-        //     'May',
-        //     'June',
-        //     'July',
-        //     'August',
-        //     'September',
-        //     'October',
-        //     'November',
-        //     'December'
-        // ]
+        const months = [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December'
+        ]
         var errordate = document.getElementById("errodayOfBirth");
         var errordate17ans = document.getElementById("errodayOfBirth17ans");
         var today = new Date();

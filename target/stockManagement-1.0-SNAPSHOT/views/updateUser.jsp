@@ -24,7 +24,7 @@
                         value="${ errorPassword }"/></p></c:if>
             </div>
                 <%--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--%>
-            <button type="submit" class="btn btn-outline-info float-right">Valider</button>
+            <button type="submit" class="btn btn-outline-info float-right" id="id-valider-updateUser-btn">Valider</button>
             <div class="mb-1">
                 <label for="iduserUpdate" class="form-label" hidden><span class="etoile">*</span> id</label>
                 <input type="number" name="iduserUpdate" class="form-control" id="iduserUpdate" hidden
@@ -75,7 +75,7 @@
                         <label for="dayOfBirthUpdate" class="form-label">Date de naissance</label>
                         <input type="Date" name="dayOfBirthUpdate" class="form-control dayOfBirthClass"
                                id="dayOfBirthUpdate"
-                               aria-describedby="date de naissance" value=<c:out value="${ user.dayOfBirth }"/>>
+                               aria-describedby="date de naissance" disabled value=<c:out value="${ user.dayOfBirth }"/>>
                         <div id="errodayOfBirthUpdate" hidden class="alert alert-danger">Date non valide</div>
                         <div id="errodayOfBirth17ansUpdate" hidden class="alert alert-danger">vous devez avoir
                             minimum 17

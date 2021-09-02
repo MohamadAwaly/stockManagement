@@ -1,18 +1,25 @@
 /**
  *  PART USER
  */
+var noNumber = new RegExp("^[a-zA-Z]+$", "i");
+
 $(document).ready(function () {
     //Var add User
     var login = $('#login'),
-        lastName = $('.lastNameClass'),
-        firstName = $('.firstNameClass'),
+        lastName = $('#lastName'),
+        firstName = $('#firstName'),
         dayOfBirth = $('.dayOfBirthClass'),
         vat = $('.vatClass'),
         mail = $('.emailClass'),
         password = $('.passwordClass'),
         rpassword = $('.rpPasswordClass');
 
-    // Error add user
+    // var update user
+    var lastNameUpdate = $('#lastNameUpdate'),
+        firstNameUpdate = $('#firstNameUpdate');
+
+
+    // Error add new user
     var errorLoginValide = "true",
         errorLastNameValide = "true",
         errorFirstNameValide = "true",
@@ -22,13 +29,13 @@ $(document).ready(function () {
         errorPasswordValide = "true",
         errorRpPAsswordValide = "true";
 
-    //Minimum eight characters, at least one upper case English letter, one lower case English letter, one number and one special character
+
+    //Minimum eight characters, at least one upper case French letter, one lower case French letter, one number and one special character
     var regPass = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$");
     var regEmail = new RegExp(/[a-zA-Z0-9\.]{1,}[@][a-zA-Z0-9\.]{1,}[\.][a-zA-Z0-9\.]{1,}$/);
     var regVat = new RegExp("^(BE){0,1}[0]{0,1}[0-9]{9}$");
-    var noNumber = new RegExp("^[a-zA-Z]+$", "i");
 
-    //Form addUser & updateUser
+    //Form addUser
     login.keyup(function () {
         var errorVal = $(this).val();
         var errorLogin = document.getElementById("errorLogin");
@@ -73,42 +80,16 @@ $(document).ready(function () {
         });
     });
     lastName.keyup(function () {
-        console.log("test last name");
         var errorValLastName = $(this).val();
-        // var errorlastName = document.getElementById("errorlastName");
         var errorlastName = document.getElementById("errorlastName");
-        // errorValLastName.length < 3
-        if (noNumber.test(errorValLastName) === false || errorValLastName.length < 3) {
-            $(this).removeClass("is-valid");
-            $(this).addClass("is-invalid");
-            errorlastName.hidden = false;
-            errorLastNameValide = "true";
-            $('#btn-addUser').prop('disabled', true);
-
-        } else {
-            $(this).removeClass("is-invalid");
-            $(this).addClass("is-valid");
-            errorlastName.hidden = true;
-            errorLastNameValide = "false"
-            $('#btn-addUser').prop('disabled', false);
-        }
+        var btn = $('#btn-addUser').attr('id');
+        errorLastName(lastName, errorValLastName, errorlastName, btn);
     })
     firstName.keyup(function () {
         var errorVal = $(this).val();
         var errorfirstName = document.getElementById("errorfirstName");
-        if (noNumber.test(errorVal) === false || errorVal.length < 3) {
-            $(this).removeClass("is-valid");
-            $(this).addClass("is-invalid");
-            errorfirstName.hidden = false;
-            errorFirstNameValide = "true";
-            $('#btn-addUser').prop('disabled', true);
-        } else {
-            $(this).removeClass("is-invalid");
-            $(this).addClass("is-valid");
-            errorfirstName.hidden = true;
-            errorFirstNameValide = "false"
-            $('#btn-addUser').prop('disabled', false);
-        }
+        var btn = $('#btn-addUser').attr('id');
+        errorFirstName(firstName, errorVal, errorfirstName, btn );
     })
     dayOfBirth.keyup(function () {
         const months = [
@@ -132,8 +113,7 @@ $(document).ready(function () {
         var dateForm = new Date($('.dayOfBirthClass').val());
         console.log("dateform: " + dateFormLenght.length);
         console.log("dateform: " + dateFormLenght);
-
-        if (dateFormLenght.length == 10 ) {
+        if (dateFormLenght.length == 10) {
             if (dateForm.getUTCFullYear() > 1900) {
                 var dateOfBirth = new Date(dateForm.getDate() + " " + months[dateForm.getMonth()] + " " + dateForm.getUTCFullYear());
                 var resultDay = dateDiffInDays(dateOfBirth, today);
@@ -159,7 +139,6 @@ $(document).ready(function () {
             errorDayOfBirthValide = "false";
             $('#btn-addUser').prop('disabled', false);
         }
-
     })
     vat.keyup(function () {
         var vatVal = $(this).val();
@@ -238,12 +217,24 @@ $(document).ready(function () {
         }
 
     })
-    //|| onlyNumber.test(errorValLastName)
 
+    //Form update user
+    lastNameUpdate.keyup(function () {
+        var errorValLastName = $(this).val();
+        var errorlastName = document.getElementById("errorlastNameUpdate");
+        var btn = $('#id-valider-updateUser-btn').attr('id');
+        errorLastName(lastNameUpdate, errorValLastName, errorlastName, btn);
+    })
+    firstNameUpdate.keyup(function () {
+        var errorVal = $(this).val();
+        var errorfirstName = document.getElementById("errorfirstNameUpdate");
+        var btn = $('#id-valider-updateUser-btn').attr('id');
+        errorFirstName(firstNameUpdate, errorVal, errorfirstName, btn );
+    })
     /**
      * disabled btn add new user if there is any error
      */
-    $('#btn-addUser').click( function () {
+    $('#btn-addUser').click(function () {
         if (errorLoginValide == "true" && errorLastNameValide == "true" && errorFirstNameValide == "true" && errorDayOfBirthValide == "true" && errorVatValide == "true" && errorMailValide == "true" && errorPasswordValide == "true" && errorRpPAsswordValide == "true") {
             $(this).prop('disabled', true);
         } else {
@@ -252,7 +243,7 @@ $(document).ready(function () {
     });
 
     /*Color lign on double click*/
-    $(document).on('dblclick','.usersList',function (){
+    $(document).on('dblclick', '.usersList', function () {
         console.log("userList . dblclick");
         $('#updateUserbtn').removeAttr('disabled');
         $('.usersList').removeAttr('style');
@@ -292,7 +283,7 @@ $(document).ready(function () {
      * Users search bar
      *by login, lastName, firstName, mail, roles")
      */
-    $('#usersSearchBar').keyup(function (){
+    $('#usersSearchBar').keyup(function () {
         $.ajax({
             url: "UsersSearchAjax",
             method: "POST",
@@ -302,21 +293,21 @@ $(document).ready(function () {
         }).done(function (data) {
             $('.usersList').remove();
             data.forEach(res => {
-                let tva = res[7] == null ? "": res[7];
-                let mail = res[8] == null ? "": res[8];
-                let dayofbirth = res[5] == null ? "": res[5];
+                let tva = res[7] == null ? "" : res[7];
+                let mail = res[8] == null ? "" : res[8];
+                let dayofbirth = res[5] == null ? "" : res[5];
                 $('#tableListUser').append(
                     "<tr class='usersList' id='" + res[0] + "'>" +
-                        "<td hidden>" + res[0] + "</td>" +
-                        "<td>" + res[1] + "</td>" +
-                        "<td>" + res[2] + "</td>" +
-                        "<td>" + res[3] + "</td>" +
-                        "<td>" + res[4] + "</td>" +
-                        "<td>" + dayofbirth + "</td>" +
-                        "<td>" + res[6] + "</td>" +
-                        "<td>" + tva + "</td>" +
-                        "<td>" + mail+ "</td>" +
-                        "<td>" + res[9] + "</td>" +
+                    "<td hidden>" + res[0] + "</td>" +
+                    "<td>" + res[1] + "</td>" +
+                    "<td>" + res[2] + "</td>" +
+                    "<td>" + res[3] + "</td>" +
+                    "<td>" + res[4] + "</td>" +
+                    "<td>" + dayofbirth + "</td>" +
+                    "<td>" + res[6] + "</td>" +
+                    "<td>" + tva + "</td>" +
+                    "<td>" + mail + "</td>" +
+                    "<td>" + res[9] + "</td>" +
                     "</tr>");
             })
         });
@@ -338,6 +329,60 @@ function dateDiffInDays(a, b) {
 
     return Math.floor((utc2 - utc1) / _MS_PER_DAY);
 }
+
+/**
+ * check last name : update & add new user
+ * @param lastName
+ * @param errorValLastName
+ * @param errorlastName
+ * @param btn
+ */
+function errorLastName (lastName, errorValLastName, errorlastName, btn) {
+    var btnvalide = $('#'+btn);
+    if (noNumber.test(errorValLastName) === false || errorValLastName.length < 3) {
+        lastName.removeClass("is-valid");
+        lastName.addClass("is-invalid");
+        errorlastName.hidden = false;
+        errorLastNameValide = "true";
+        btnvalide.prop('disabled', true);
+    } else {
+        lastName.removeClass("is-invalid");
+        lastName.addClass("is-valid");
+        errorlastName.hidden = true;
+        errorLastNameValide = "false"
+        btnvalide.prop('disabled', false);
+    }
+}
+
+/**
+ * check first name : update & add new user
+ * @param firstName
+ * @param errorVal
+ * @param errorfirstName
+ * @param btn
+ */
+function errorFirstName (firstName, errorVal,errorfirstName,btn ){
+    var btnvalide = $('#'+btn);
+    if (noNumber.test(errorVal) === false || errorVal.length < 3) {
+        firstName.removeClass("is-valid");
+        firstName.addClass("is-invalid");
+        errorfirstName.hidden = false;
+        errorFirstNameValide = "true";
+        btnvalide.prop('disabled', true);
+    } else {
+        firstName.removeClass("is-invalid");
+        firstName.addClass("is-valid");
+        errorfirstName.hidden = true;
+        errorFirstNameValide = "false"
+        btnvalide.prop('disabled', false);
+    }
+}
+/**
+ * ********************************************* *
+ * ********************************************* *
+ * ********************************************* *
+ * ********************************************* *
+ */
 
 /**
  *  PARTIE FOURNISSEUR
@@ -441,10 +486,10 @@ $(document).on('click', '#GetCmdSuppPdf', function () {
     })
 });
 
-$(document).on('dblclick','.rowCommand', function (){
+$(document).on('dblclick', '.rowCommand', function () {
     let idCmdSupp = (this).getAttribute('id');
     console.log(idCmdSupp);
-    window.location.href = 'CommandSupplierBatchShowAll?idCmdSupp='+idCmdSupp;
+    window.location.href = 'CommandSupplierBatchShowAll?idCmdSupp=' + idCmdSupp;
 })
 
 

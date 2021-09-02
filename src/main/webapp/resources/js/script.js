@@ -143,19 +143,40 @@ $(document).ready(function () {
     vat.keyup(function () {
         var vatVal = $(this).val();
         var errorTva = document.getElementById("errorTva");
-        if (regVat.test(vatVal)) {
+        if (!vat.val() == ""){
+            if (regVat.test(vatVal)) {
+                $(this).removeClass("is-invalid");
+                $(this).addClass("is-valid");
+                errorTva.hidden = true;
+                errorVatValide = "false";
+                $('#btn-addUser').prop('disabled', false);
+            } else {
+                $(this).removeClass("is-valid");
+                $(this).addClass("is-invalid");
+                errorTva.hidden = false;
+                errorVatValide = "true";
+                $('#btn-addUser').prop('disabled', true);
+            }
+        } else {
             $(this).removeClass("is-invalid");
-            $(this).addClass("is-valid");
+            $(this).removeClass("is-valid");
             errorTva.hidden = true;
             errorVatValide = "false";
             $('#btn-addUser').prop('disabled', false);
-        } else {
-            $(this).removeClass("is-valid");
-            $(this).addClass("is-invalid");
-            errorTva.hidden = false;
-            errorVatValide = "true";
-            $('#btn-addUser').prop('disabled', true);
         }
+        //Check if vat exist
+        //test ajax
+        $.ajax({
+            type: "POST",
+            url: 'UserAjaxCheckVatExist',
+            data: {
+                vat: vat.val(),
+            },
+            // dataType : 'json',
+        }).done(function (data) {
+            console.log("data: " + data);
+        });
+
     })
     mail.keyup(function () {
         var email = $(this).val();

@@ -1,7 +1,12 @@
 /**
  *  PART USER
  */
+//RegExp
+//Minimum eight characters, at least one upper case French letter, one lower case French letter, one number and one special character
+var regPass = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$");
+var regEmail = new RegExp(/[a-zA-Z0-9\.]{1,}[@][a-zA-Z0-9\.]{1,}[\.][a-zA-Z0-9\.]{1,}$/);
 var noNumber = new RegExp("^[a-zA-Z]+$", "i");
+var regVat = new RegExp("^(BE){0,1}[0]{0,1}[0-9]{9}$");
 
 $(document).ready(function () {
     //Var add User
@@ -11,13 +16,15 @@ $(document).ready(function () {
         dayOfBirth = $('.dayOfBirthClass'),
         vat = $('#vat'),
         mail = $('.emailClass'),
-        password = $('.passwordClass'),
-        rpassword = $('.rpPasswordClass');
+        password = $('#password'),
+        rpassword = $('#rpPassword');
 
     // var update user
     var lastNameUpdate = $('#lastNameUpdate'),
         firstNameUpdate = $('#firstNameUpdate'),
-        vatUpdate = $('#vatUpdate');
+        vatUpdate = $('#vatUpdate'),
+        passwordUpdate = $('#passwordUpdate'),
+        rpasswordUpdate = $('#rpPasswordUpdate');
 
     // Error add new user
     var errorLoginValide = "true",
@@ -29,11 +36,7 @@ $(document).ready(function () {
         errorPasswordValide = "true",
         errorRpPAsswordValide = "true";
 
-
-    //Minimum eight characters, at least one upper case French letter, one lower case French letter, one number and one special character
-    var regPass = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$");
-    var regEmail = new RegExp(/[a-zA-Z0-9\.]{1,}[@][a-zA-Z0-9\.]{1,}[\.][a-zA-Z0-9\.]{1,}$/);
-    var regVat = new RegExp("^(BE){0,1}[0]{0,1}[0-9]{9}$");
+    var errorVatValideUpdate = "true";
 
     //Form addUser
     login.keyup(function () {
@@ -144,55 +147,9 @@ $(document).ready(function () {
         var vatVal = $(this).val();
         var errorTva = document.getElementById("errorTva");
         var errorTvaExist = document.getElementById("errorTvaExist");
-        if (!vat.val() == "") {
-            if (regVat.test(vatVal) && vatVal.length == 11) {
-                $.ajax({
-                    type: "POST",
-                    url: 'UserAjaxCheckVatExist',
-                    data: {
-                        vat: vat.val(),
-                    },
-                    // dataType : 'json',
-                }).done(function (data) {
-                    if (data === "ok") {
-                        vat.removeClass("is-invalid");
-                        vat.addClass("is-valid");
-                        errorTva.hidden = true;
-                        errorTvaExist.hidden = true;
-                        errorVatValide = "false";
-                        $('#btn-addUser').prop('disabled', false);
-                    } else if (data === "error") {
-                        $(this).removeClass("is-valid");
-                        $(this).addClass("is-invalid");
-                        errorTvaExist.hidden = false;
-                        errorVatValide = "true";
-                        $('#btn-addUser').prop('disabled', true);
-                    } else {
-                        $(this).removeClass("is-valid");
-                        $(this).addClass("is-invalid");
-                        errorTvaExist.hidden = true;
-                        errorTva.hidden = false;
-                        errorVatValide = "true";
-                        $('#btn-addUser').prop('disabled', true);
-                    }
-                });
+        var btn = $('#btn-addUser').attr('id');
+        errorVat(vat, vatVal, errorTva, errorTvaExist, errorVatValide, btn);
 
-            } else {
-                $(this).removeClass("is-valid");
-                $(this).addClass("is-invalid");
-                errorTva.hidden = false;
-                errorTvaExist.hidden = true;
-                errorVatValide = "true";
-                $('#btn-addUser').prop('disabled', true);
-            }
-        } else {
-            $(this).removeClass("is-invalid");
-            $(this).removeClass("is-valid");
-            errorTva.hidden = true;
-            errorTvaExist.hidden = true;
-            errorVatValide = "false";
-            $('#btn-addUser').prop('disabled', false);
-        }
     })
     mail.keyup(function () {
         var email = $(this).val();
@@ -216,43 +173,13 @@ $(document).ready(function () {
     })
     password.keyup(function () {
         var errorPass = document.getElementById("erroPassword");
-        var errorRP = document.getElementById("errorRP");
-        var pass = $(this).val();
-        var rpass = $(this).val();
-        if (regPass.test(pass)) {
-            $(this).removeClass("is-invalid");
-            $(this).addClass("is-valid");
-            errorPass.hidden = true;
-            errorPasswordValide = "false";
-            $('#btn-addUser').prop('disabled', false);
-        } else {
-            $(this).removeClass("is-valid");
-            $(this).addClass("is-invalid");
-            errorPass.hidden = false;
-            errorPasswordValide = "true";
-            $('#btn-addUser').prop('disabled', true);
-        }
+        var btn = $('#btn-addUser').attr('id');
+        errorPassword(password, errorPass, btn, rpassword);
     })
     rpassword.keyup(function () {
         var errorRpass = document.getElementById("errorRPassword");
-        var rpass = $(this).val();
-        var pass = password.val();
-        if (rpass == pass) {
-            console.log("les mot de passe correpond");
-            $(this).removeClass("is-invalid");
-            $(this).addClass("is-valid");
-            errorRpass.hidden = true;
-            errorRpPAsswordValide = "false";
-            $('#btn-addUser').prop('disabled', false);
-        } else {
-            $(this).removeClass("is-valid");
-            $(this).addClass("is-invalid");
-            errorRpass.hidden = false;
-            console.log("Password does not match")
-            errorRpPAsswordValide = "true";
-            $('#btn-addUser').prop('disabled', true);
-        }
-
+        var btn = $('#btn-addUser').attr('id');
+        erroRpassword(rpassword, password, errorRpass, btn);
     })
 
     //Form update user
@@ -267,6 +194,24 @@ $(document).ready(function () {
         var errorfirstName = document.getElementById("errorfirstNameUpdate");
         var btn = $('#id-valider-updateUser-btn').attr('id');
         errorFirstName(firstNameUpdate, errorVal, errorfirstName, btn);
+    })
+    vatUpdate.keyup(function () {
+        console.log("vatUpdate");
+        var vatVal = $(this).val();
+        var errorTva = document.getElementById("errorTvaUpdate");
+        var errorTvaExist = document.getElementById("errorTvaExistUpdate");
+        var btn = $('#id-valider-updateUser-btn').attr('id');
+        errorVat(vatUpdate, vatVal, errorTva, errorTvaExist, errorVatValideUpdate, btn);
+    })
+    passwordUpdate.keyup(function (){
+        var errorPass = document.getElementById("erroPasswordUpdate");
+        var btn = $('#id-valider-updateUser-btn').attr('id');
+        errorPassword(passwordUpdate, errorPass, btn, rpasswordUpdate);
+    })
+    rpasswordUpdate.keyup(function (){
+        var errorRpass = document.getElementById("errorRPasswordUpdate");
+        var btn = $('#id-valider-updateUser-btn').attr('id');
+        erroRpassword(rpasswordUpdate, passwordUpdate, errorRpass, btn);
     })
 
     /**
@@ -316,7 +261,6 @@ $(document).ready(function () {
         console.log("user: " + login);
         console.log("id: " + id);
     });
-
     /**
      * Users search bar
      *by login, lastName, firstName, mail, roles")
@@ -413,6 +357,124 @@ function errorFirstName(firstName, errorVal, errorfirstName, btn) {
         errorfirstName.hidden = true;
         errorFirstNameValide = "false"
         btnvalide.prop('disabled', false);
+    }
+}
+
+/**
+ * check if vat exist & if it start by BE and has 9 chiffres
+ * for add new user & update user
+ * @param vat
+ * @param vatVal
+ * @param errorTva
+ * @param errorTvaExist
+ * @param errorVatValide
+ * @param btn
+ */
+function errorVat(vat, vatVal, errorTva, errorTvaExist, errorVatValide, btn) {
+    var btnvalide = $('#' + btn);
+    if (!vat.val() == "") {
+        if (regVat.test(vatVal) && vatVal.length == 11) {
+            $.ajax({
+                type: "POST",
+                url: 'UserAjaxCheckVatExist',
+                data: {
+                    vat: vat.val(),
+                },
+                // dataType : 'json',
+            }).done(function (data) {
+                if (data === "ok") {
+                    vat.removeClass("is-invalid");
+                    vat.addClass("is-valid");
+                    errorTva.hidden = true;
+                    errorTvaExist.hidden = true;
+                    errorVatValide = "false";
+                    btnvalide.prop('disabled', false);
+                } else if (data === "error") {
+                    vat.removeClass("is-valid");
+                    vat.addClass("is-invalid");
+                    errorTvaExist.hidden = false;
+                    errorVatValide = "true";
+                    btnvalide.prop('disabled', true);
+                } else {
+                    vat.removeClass("is-valid");
+                    vat.addClass("is-invalid");
+                    errorTvaExist.hidden = true;
+                    errorTva.hidden = false;
+                    errorVatValide = "true";
+                    btnvalide.prop('disabled', true);
+                }
+            });
+
+        } else {
+            vat.removeClass("is-valid");
+            vat.addClass("is-invalid");
+            errorTva.hidden = false;
+            errorTvaExist.hidden = true;
+            errorVatValide = "true";
+            btnvalide.prop('disabled', true);
+        }
+    } else {
+        vat.removeClass("is-invalid");
+        vat.removeClass("is-valid");
+        errorTva.hidden = true;
+        errorTvaExist.hidden = true;
+        errorVatValide = "false";
+        btnvalide.prop('disabled', false);
+    }
+}
+
+/**
+ * check if password has minimum eight characters, at least one upper case French letter, one lower case French letter, one number and one special character
+ * @param password
+ * @param errorPass
+ * @param btn
+ * @param rpassword
+ */
+function errorPassword(password, errorPass, btn, rpassword) {
+    var btnvalide = $('#' + btn);
+    var pass = password.val();
+    if (regPass.test(pass)) {
+        password.removeClass("is-invalid");
+        password.addClass("is-valid");
+        errorPass.hidden = true;
+        rpassword.prop("disabled", false);
+        errorPasswordValide = "false";
+        btnvalide.prop('disabled', false);
+    } else {
+        password.removeClass("is-valid");
+        password.addClass("is-invalid");
+        rpassword.prop("disabled", true);
+        errorPass.hidden = false;
+        errorPasswordValide = "true";
+        btnvalide.prop('disabled', true);
+    }
+}
+
+/**
+ * check if rp == password
+ * @param rpassword
+ * @param password
+ * @param errorRpass
+ * @param btn
+ */
+function erroRpassword(rpassword, password, errorRpass, btn) {
+    var btnvalide = $('#' + btn);
+    var rpass = rpassword.val();
+    var pass = password.val();
+    if (rpass == pass) {
+        console.log("les mot de passe correpond");
+        rpassword.removeClass("is-invalid");
+        rpassword.addClass("is-valid");
+        errorRpass.hidden = true;
+        errorRpPAsswordValide = "false";
+        btnvalide.prop('disabled', false);
+    } else {
+        rpassword.removeClass("is-valid");
+        rpassword.addClass("is-invalid");
+        errorRpass.hidden = false;
+        console.log("Password does not match")
+        errorRpPAsswordValide = "true";
+        btnvalide.prop('disabled', true);
     }
 }
 

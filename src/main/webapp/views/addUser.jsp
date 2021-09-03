@@ -26,7 +26,9 @@
                 <input type="text" name="lastName" class="form-control lastNameClass" id="lastName"
                        aria-describedby="Nom" required
                        value=<c:out value="${user.lastName}"/>>
-                <div id="errorlastName" hidden class="alert alert-danger errorlastNameClass">Le nom doit contenir au moin 3 caract&egrave;res et ne doit pas contenir des chiffres</div>
+                <div id="errorlastName" hidden class="alert alert-danger errorlastNameClass">Le nom doit contenir au
+                    moin 3 caract&egrave;res et ne doit pas contenir des chiffres
+                </div>
             </div>
         </div>
         <div class="col">
@@ -35,7 +37,9 @@
                 <input type="text" name="firstName" class="form-control firstNameClass" id="firstName"
                        aria-describedby="prenom"
                        required value="<c:out value="${user.firstName}"/>">
-                <div id="errorfirstName" hidden class="alert alert-danger">Le prenom doit contenir au moin 3 caract&egrave;re et ne doit pas contenir des chiffres</div>
+                <div id="errorfirstName" hidden class="alert alert-danger">Le prenom doit contenir au moin 3 caract&egrave;re
+                    et ne doit pas contenir des chiffres
+                </div>
             </div>
         </div>
     </div>
@@ -44,13 +48,17 @@
         <input type="Date" name="dayOfBirth" class="form-control dayOfBirthClass" id="dayOfBirth"
                aria-describedby="date de naissance" value=<c:out value="${user.dayOfBirth}"/>>
         <div id="errodayOfBirth" hidden class="alert alert-danger">Date non valide</div>
-        <div id="errodayOfBirth17ans" hidden class="alert alert-danger">vous devez avoir minimum 17 ans</div>
+        <div id="errodayOfBirth17ans" hidden class="alert alert-danger">vous devez avoir minimum 17 ans et maximum 100
+            ans
+        </div>
     </div>
     <div class="mb-3">
         <label for="vat" class="form-label">Num&eacute;ro de tva</label>
         <input type="text" name="vat" class="form-control vatClass" id="vat" aria-describedby="Numéro de tva"
                placeholder="BE123456789" value=<c:out value="${user.vat}"/>>
-        <div id="errorTva" hidden class="alert alert-danger">Numero de tva non valide</div>
+        <div id="errorTva" hidden class="alert alert-danger">Numero de tva doit commencer par BE et doit contenir 9
+            chiffres
+        </div>
         <div id="errorTvaExist" hidden class="alert alert-danger">Numero de tva existe</div>
     </div>
     <div class="mb-3">
@@ -82,47 +90,47 @@
     </div>
     <div class="mb-3">
 
-            <c:if test="${sessionScope.SessionUserEntity.roles.role.trim() == 'administrateur' || sessionScope.SessionUserEntity.roles.role.trim() == 'directeur'}">
-                <label for="idRole" class="form-label"><span class="etoile">*</span> Role : </label>
-                <SELECT id="idRole" name="role" size="1" class="form-control">
+        <c:if test="${sessionScope.SessionUserEntity.roles.role.trim() == 'administrateur' || sessionScope.SessionUserEntity.roles.role.trim() == 'directeur'}">
+            <label for="idRole" class="form-label"><span class="etoile">*</span> Role : </label>
+            <SELECT id="idRole" name="role" size="1" class="form-control">
                 <c:forEach var="roles" items="${ roles }">
                     <OPTION value="${ roles.idRole}">
                         <c:out value="${ roles.role } "/>
                     </OPTION>
                 </c:forEach>
-                </SELECT>
-            </c:if>
+            </SELECT>
+        </c:if>
 
         <c:if test="${sessionScope.SessionUserEntity.roles.role.trim() == null}">
-        <label for="idRole" class="form-label" hidden><span class="etoile">*</span> Role : </label>
-        <SELECT id="idRole" name="role" size="1" class="form-control" hidden>
-            <c:forEach var="roles" items="${ roles }">
-                <OPTION hidden value="${ roles.idRole}" ${roles.role.trim() == 'client' ? 'selected' : ""}>
-                    <c:out value="${ roles.role } "/>
-                </OPTION>
-            </c:forEach>
-        </SELECT>
+            <label for="idRole" class="form-label" hidden><span class="etoile">*</span> Role : </label>
+            <SELECT id="idRole" name="role" size="1" class="form-control" hidden>
+                <c:forEach var="roles" items="${ roles }">
+                    <OPTION hidden value="${ roles.idRole}" ${roles.role.trim() == 'client' ? 'selected' : ""}>
+                        <c:out value="${ roles.role } "/>
+                    </OPTION>
+                </c:forEach>
+            </SELECT>
         </c:if>
     </div>
-        <div class="mb-3">
+    <div class="mb-3">
         <label for="idTypeadresse" class="form-label"><span class="etoile">*</span> Type Adresse: </label>
         <SELECT id="idTypeadresse" name="typeAdresse" size="1" class="form-control" required>
             <c:forEach var="allTypeAdress" items="${ allTypeAdress }">
-            <OPTION value="${ allTypeAdress}">
-                <c:out value="${allTypeAdress } "/>
-                </c:forEach>
-            </OPTION>
+                <OPTION value="${ allTypeAdress}">
+                    <c:out value="${allTypeAdress } "/>
+                </OPTION>
+            </c:forEach>
         </SELECT>
     </div>
     <div class="mb-3">
         <label for="idCity" class="form-label"><span class="etoile">*</span> Ville et code postal : </label>
         <SELECT id="idCity" name="city" size="1" class="form-control" required>
             <c:forEach var="cities" items="${ cities }">
-            <OPTION value="${ cities.idCity}">
-                <c:out value="${ cities.postalCode } "/>
-                <c:out value="${ cities.citie } "/>
-                </c:forEach>
-            </OPTION>
+                <OPTION value="${ cities.idCity}">
+                    <c:out value="${ cities.postalCode } "/>
+                    <c:out value="${ cities.citie } "/>
+                </OPTION>
+            </c:forEach>
         </SELECT>
     </div>
     <div class="mb-3">

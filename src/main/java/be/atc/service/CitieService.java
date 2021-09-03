@@ -10,11 +10,11 @@ import javax.persistence.Query;
 import java.util.List;
 
 public class CitieService {
-    private static Logger log = Logger.getLogger(CitieService.class);
+    private static Logger log = Logger.getLogger( CitieService.class );
     EntityManager em = EMF.getEM();
 
     public List showAllCities() {
-        Query query = em.createNamedQuery("city.listAll");
+        Query query = em.createNamedQuery( "city.listAll" );
         List<CitiesEntity> citiesList = query.getResultList();
         return citiesList;
     }

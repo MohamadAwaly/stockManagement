@@ -28,9 +28,9 @@ public class UsersShowAll extends HttpServlet {
         try {
             request.setAttribute( "user", users );
         } catch ( Exception e ) {
-            logger.log(Level.ERROR, "Error: " + e.getMessage() );
+            logger.log( Level.ERROR, "Error: " + e.getMessage() );
         } finally {
-//            em.close();
+            //            em.close();
         }
         this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
     }

@@ -7,7 +7,7 @@ import java.util.Objects;
 
 @NamedQueries({
         @NamedQuery(name = "commandSuppliers.FindAll",
-                query = "SELECT s, cs, u FROM CommandsuppliersEntity cs " +
+                query = "SELECT cs.idCommandSuppliers, cs.orderDate, s.name, u.lastName FROM CommandsuppliersEntity cs " +
                         "JOIN UsersEntity u ON u = cs.users " +
                         "JOIN SuppliersEntity s ON s = cs.suppliers " +
                         "ORDER BY cs.orderDate desc "),

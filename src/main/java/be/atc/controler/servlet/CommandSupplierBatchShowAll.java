@@ -25,7 +25,7 @@ public class CommandSupplierBatchShowAll extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.log(Level.INFO, "doGET sevlet entered");
         int pWhere = Integer.parseInt(request.getParameter("idCmdSupp"));
-        Query query =  em.createNamedQuery("commandSuppliersBatchs.Find").setParameter("pWhere",pWhere);
+        Query query =  em.createNamedQuery("commandSuppliersBatchs.FindByIdCommand").setParameter("pWhere",pWhere);
         List<Object[]> commandSupplierBatch = query.getResultList();
         request.setAttribute("commandSuppliersBatch",commandSupplierBatch);
         request.getRequestDispatcher(VUE).forward(request,response);

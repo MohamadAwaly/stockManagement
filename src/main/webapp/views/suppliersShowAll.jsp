@@ -11,7 +11,7 @@
 
 <%--brouillon--%>
 <%--<c:set var="Nom" value="Laurent"></c:set>--%>
-
+<c:if test="${sessionScope['sessionOK'] == 'OK'}">
 <table class="table table-striped table-hover" border="1px solid black">
     <thead>
     <th>Nom</th>
@@ -22,6 +22,6 @@
     </tr>
     </c:forEach>
 </table>
-
+</c:if>
 <%@include file="footer.jsp"%>
 

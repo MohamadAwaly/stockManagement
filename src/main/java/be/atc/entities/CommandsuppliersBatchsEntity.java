@@ -11,7 +11,7 @@ import java.util.Objects;
 //                         "JOIN SuppliersEntity s ON s = cs.suppliers " +
 //                         "JOIN ProductsEntity p ON p = b.products " +
 //                         "ORDER BY cs.orderDate desc "),
-        @NamedQuery(name = "commandSuppliersBatchs.Find",
+        @NamedQuery(name = "commandSuppliersBatchs.FindByIdCommand",
                 query = "SELECT p, b, cs ,s, cs, b, cs FROM CommandsuppliersBatchsEntity csb " +
                         "JOIN CommandsuppliersEntity cs ON cs = csb.commandsuppliers " +
                         "JOIN BatchsEntity b ON b = csb.batchs " +

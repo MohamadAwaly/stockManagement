@@ -28,8 +28,10 @@
         </div>
         <form method="post" action="Login">
             <div id="errorLoginPassword" hidden class="alert alert-danger">L'utilisateur existe d&eacute;ja</div>
-            <input type="text" id="login-user" class="fadeIn second" name="login-user" placeholder="nom d'utilisateur" required>
-            <input type="password" id="password" class="fadeIn third" name="password" placeholder="mot de passe" required>
+            <input type="text" id="login-user" class="fadeIn second" name="login-user" placeholder="nom d'utilisateur"
+                   required>
+            <input type="password" id="password" class="fadeIn third" name="password" placeholder="mot de passe"
+                   required>
             <input type="submit" class="fadeIn fourth" value="se connecter">
         </form>
         <div id="formFooter">

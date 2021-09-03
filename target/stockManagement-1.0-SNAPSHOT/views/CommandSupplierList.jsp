@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="header.jsp"%>
 <c:if test="${sessionScope['sessionOK'] == 'OK'}">
 <input id="CmdSupBchSearchBar" type="text" class="form-control" name="searchBar" placeholder="Chercher fournisseur ou l'utilisateur d'une commande"/>
@@ -20,8 +21,8 @@
     <tbody id="CmdSupListContent" >
     <c:forEach var="cs" items="${commandSuppliers}">
         <tr id="<c:out value="${cs[0]}"/>" class="rowCommand">
-            <td><c:out value="${cs[0]}"/></td>
-            <td><c:out value="${cs[1]}"/></td>
+            <td><c:out value="${cs[0]}"/> </td>
+            <td><fmt:formatDate value="${cs[1]}" pattern="dd-MMM-yyyy"/></td>
             <td><c:out value="${cs[2]}"/></td>
             <td><c:out value="${cs[3]}"/></td>
         </tr>

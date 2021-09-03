@@ -144,7 +144,8 @@ $(document).ready(function () {
             $('#btn-addUser').prop('disabled', false);
         }
     })
-    vat.keyup(function () {
+    vat.keyup(function ()
+    {
         var vatVal = $(this).val();
         var errorTva = document.getElementById("errorTva");
         var errorTvaExist = document.getElementById("errorTvaExist");

@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="header.jsp"%>
+<c:if test="${sessionScope['sessionOK'] == 'OK'}">
 <h3>Info sur la Commande</h3>
 <table class="table table-striped table-hover" border="1px solid black">
     <thead>
@@ -26,5 +27,5 @@
     </tbody>
 </table>
 <div class="container-sm"></div>
-
+</c:if>
 <%@include file="footer.jsp"%>

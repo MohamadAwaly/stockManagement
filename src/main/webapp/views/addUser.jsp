@@ -7,16 +7,18 @@
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:import url="header.jsp"/>
-
 <form action="adduser" method="post">
     <div class="mb-3">
-        <c:if test="${ !empty error}"><p class="alert alert-danger" id="error"><c:out value="${ error }"/></p></c:if>
+        <c:if test="${ !empty error}"><p class="alert alert-danger" id="error"><c:out value="${ error }"/></p>
+        </c:if>
     </div>
     <div class="mb-3">
         <label for="login" class="form-label login"><span class="etoile">*</span> Login</label>
-        <input type="text" name="login" class="form-control" id="login" aria-describedby="login" required value=<c:out
+        <input type="text" name="login" class="form-control" id="login" aria-describedby="login" required value=
+        <c:out
                 value="${user.login}"/>>
-        <div id="errorLogin" hidden class="alert alert-danger">Le login doit contenir au moin 4 caract&egrave;res</div>
+        <div id="errorLogin" hidden class="alert alert-danger">Le login doit contenir au moin 4 caract&egrave;res
+        </div>
         <div id="errorUserExist" hidden class="alert alert-danger">L'utilisateur existe d&eacute;ja</div>
     </div>
     <div class="row">
@@ -48,7 +50,8 @@
         <input type="Date" name="dayOfBirth" class="form-control dayOfBirthClass" id="dayOfBirth"
                aria-describedby="date de naissance" value=<c:out value="${user.dayOfBirth}"/>>
         <div id="errodayOfBirth" hidden class="alert alert-danger">Date non valide</div>
-        <div id="errodayOfBirth17ans" hidden class="alert alert-danger">vous devez avoir minimum 17 ans et maximum 100
+        <div id="errodayOfBirth17ans" hidden class="alert alert-danger">vous devez avoir minimum 17 ans et maximum
+            100
             ans
         </div>
     </div>
@@ -83,8 +86,10 @@
             <div class="mb-3">
                 <label for="rpPassword" class="form-label"><span class="etoile">*</span> Confirmer le mot de
                     passe</label>
-                <input type="password" name="rpPassword" class="form-control rpPasswordClass" id="rpPassword" required>
-                <div id="errorRPassword" hidden class="alert alert-danger">Les mots de passe ne sont pas identique</div>
+                <input type="password" name="rpPassword" class="form-control rpPasswordClass" id="rpPassword"
+                       required>
+                <div id="errorRPassword" hidden class="alert alert-danger">Les mots de passe ne sont pas identique
+                </div>
             </div>
         </div>
     </div>
@@ -141,7 +146,8 @@
         <div class="col">
             <div class="mb-3">
                 <label for="number" class="form-label"><span class="etoile">*</span> Num&eacute;ro</label>
-                <input type="number" name="number" class="form-control" id="number" aria-describedby="Numéro" required>
+                <input type="number" name="number" class="form-control" id="number" aria-describedby="Numéro"
+                       required>
             </div>
         </div>
         <div class="col">

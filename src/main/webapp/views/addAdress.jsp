@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:import url="header.jsp"/>
-
+<c:if test="${sessionScope['sessionOK'] == 'OK'}">
 <form action="addAdress" method="post">
     <div class="mb-3">
         <c:if test="${ !empty error}"><p class="alert alert-danger"><c:out value="${ error }"/></p></c:if>
@@ -63,5 +63,5 @@
         <button type="submit" class="btn btn-primary p-2 bd-highlight">Valider</button>
     </div>
 </form>
-
+</c:if>
 <c:import url="footer.jsp"/>

@@ -4,7 +4,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <c:import url="header.jsp"/>
-
+<c:if test="${sessionScope['sessionOK'] == 'OK'}">
 <input id="usersSearchBar" type="text" class="form-control" name="usersSearchBar"
        placeholder="Chercher un utilisateur"/>
 
@@ -52,4 +52,5 @@
     </c:forEach>
     </tbody>
 </table>
+</c:if>
 <c:import url="footer.jsp"/>

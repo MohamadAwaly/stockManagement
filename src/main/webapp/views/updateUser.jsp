@@ -77,7 +77,7 @@
                     <div class="col">
                         <div class="mb-1">
                             <label for="dayOfBirthUpdate" class="form-label">Date de naissance</label>
-                            <input type="Date" name="dayOfBirthUpdate" class="form-control dayOfBirthClass"
+                            <input type="Date" name="dayOfBirthUpdate" class="form-control dayOfBirthClassUpdate"
                                    id="dayOfBirthUpdate"
                                    aria-describedby="date de naissance" value=<c:out value="${ user.dayOfBirth }"/>>
                             <div id="errodayOfBirthUpdate" hidden class="alert alert-danger">Date non valide</div>

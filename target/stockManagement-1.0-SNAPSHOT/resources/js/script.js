@@ -24,7 +24,8 @@ $(document).ready(function () {
         firstNameUpdate = $('#firstNameUpdate'),
         vatUpdate = $('#vatUpdate'),
         passwordUpdate = $('#passwordUpdate'),
-        rpasswordUpdate = $('#rpPasswordUpdate');
+        rpasswordUpdate = $('#rpPasswordUpdate'),
+        dayOfBirthUpdate = $('#dayOfBirthUpdate');
 
     // Error add new user
     var errorLoginValide = "true",
@@ -94,7 +95,7 @@ $(document).ready(function () {
         var btn = $('#btn-addUser').attr('id');
         errorFirstName(firstName, errorVal, errorfirstName, btn);
     })
-    dayOfBirth.keyup(function () {
+    dayOfBirth.change(function () {
         const months = [
             'January',
             'February',
@@ -144,8 +145,7 @@ $(document).ready(function () {
             $('#btn-addUser').prop('disabled', false);
         }
     })
-    vat.keyup(function ()
-    {
+    vat.keyup(function () {
         var vatVal = $(this).val();
         var errorTva = document.getElementById("errorTva");
         var errorTvaExist = document.getElementById("errorTvaExist");
@@ -215,6 +215,56 @@ $(document).ready(function () {
         var btn = $('#id-valider-updateUser-btn').attr('id');
         erroRpassword(rpasswordUpdate, passwordUpdate, errorRpass, btn);
     })
+    dayOfBirthUpdate.change(function () {
+        const months = [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December'
+        ]
+        var errordate = document.getElementById("errodayOfBirthUpdate");
+        var errordate17ans = document.getElementById("errodayOfBirth17ansUpdate");
+        var today = new Date();
+        var dateFormLenght = $('.dayOfBirthClassUpdate').val();
+        var dateForm = new Date($('.dayOfBirthClassUpdate').val());
+        if (dateFormLenght.length == 10) {
+            var dateOfBirth = new Date(dateForm.getDate() + " " + months[dateForm.getMonth()] + " " + dateForm.getUTCFullYear());
+            var resultDay = dateDiffInDays(dateOfBirth, today);
+            var resultMons = Math.round(resultDay / 30);
+            var resultYears = Math.round(resultMons / 12);
+            console.log("age: " + resultYears);
+            if (resultYears > 17 && resultYears <= 101) {
+                console.log("17 ans");
+                $(this).removeClass("is-invalid");
+                $(this).addClass("is-valid");
+                errordate.hidden = true;
+                errordate17ans.hidden = true;
+                errorDayOfBirthValide = "false";
+                $('#id-valider-updateUser-btn').prop('disabled', false);
+            } else {
+                console.log("dans le else");
+                errordate17ans.hidden = false;
+                errorDayOfBirthValide = "true";
+                $('#id-valider-updateUser-btn').prop('disabled', true);
+            }
+
+        } else {
+            console.log("le grand else");
+            $(this).removeClass("is-valid");
+            $(this).removeClass("is-invalid");
+            errordate.hidden = true;
+            errorDayOfBirthValide = "false";
+            $('#id-valider-updateUser-btn').prop('disabled', false);
+        }
+    })
 
     /**
      * disabled btn add new user if there is any error
@@ -236,14 +286,7 @@ $(document).ready(function () {
         $('#selectedUserid').attr('value', $(this).find("td").eq(0).html());
         $('#selectedUserLogin').attr('value', $(this).find("td").eq(1).html());
     })
-    // $('.usersList').dblclick(function () {
-    //     console.log("userList . dblclick");
-    //     $('#updateUserbtn').removeAttr('disabled');
-    //     $('.usersList').removeAttr('style');
-    //     $(this).css('background', '#31B0D5');
-    //     $('#selectedUserid').attr('value', $(this).find("td").eq(0).html());
-    //     $('#selectedUserLogin').attr('value', $(this).find("td").eq(1).html());
-    // });
+
     //add the information in the field to add an address
     $('#idAddAdress').click(function () {
         $('#selectedUseridUpdate').attr('value', $('#iduserUpdate').val());
@@ -552,9 +595,9 @@ $(document).on('click', '#CmdSuppAddProductToCmd', function () {
  */
 $(document).on('keyup', '#CmdSupBchSearchBar', function () {
     // Btn 'Obtenir la liste PDF' en 'Obtenir la recherche ' if search bar is fill
-    if ($('#CmdSupBchSearchBar').val().length > 0){
+    if ($('#CmdSupBchSearchBar').val().length > 0) {
         $('#GetCmdSuppPdf').val('Obtenir la recherche en PDF');
-    }else{
+    } else {
         $('#GetCmdSuppPdf').val('Obtenir la liste en PDF');
     }
     // Get the searched list of supplier command

@@ -53,6 +53,7 @@ sessionScope.SessionUserEntity.roles.role.trim() == 'préparateur'}">
                 </div>
             </div>
             <input type="text" id="nbRowProduct" name="nbRow" value="1" hidden/>
+            <br/>
             <input id="CmdSuppAddProductToCmd" type="button" class="btn btn-alert" value="Ajouter un produit"/>
             <br/>
             <input type="submit" class="btn btn-primary" value="Enregistrer la commande"/>

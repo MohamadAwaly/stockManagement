@@ -11,8 +11,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.List;
-
+import java.util.Locale;
 
 
 @WebServlet(name = "GetPdfCmdSupp", value = "/GetPdfCmdSupp")
@@ -21,6 +22,12 @@ public class GetPdfCmdSupp extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       List<Object[]> lst_supplierCommand = supplierService.CommandSupplierList(request.getParameter("searchBar"));
+        // Date Format Adapt for commande
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
+        for (Object[] cmdSuppBatch:lst_supplierCommand
+        ) {
+            cmdSuppBatch[1]  = dateFormat.format(cmdSuppBatch[1]);
+        }
         try {
             Path path = Paths.get("C:\\StockManagement\\");
             if (!Files.exists(path)){

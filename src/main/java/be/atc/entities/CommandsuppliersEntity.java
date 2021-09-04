@@ -15,7 +15,7 @@ import java.util.Objects;
                 query = "SELECT cs.idCommandSuppliers, cs.orderDate, s.name, u.lastName FROM CommandsuppliersEntity cs " +
                         "JOIN UsersEntity u ON u = cs.users " +
                         "JOIN SuppliersEntity s ON s = cs.suppliers " +
-                        "WHERE s.name LIKE :pWhere OR cs.users.lastName LIKE :pWhere "+
+                        "WHERE s.name LIKE :pWhere OR cs.users.lastName LIKE :pWhere OR CONCAT(cs.idCommandSuppliers,'') LIKE :pWhere "+
                         "ORDER BY cs.orderDate desc ")
 })
 

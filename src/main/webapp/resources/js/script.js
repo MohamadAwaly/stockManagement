@@ -551,6 +551,13 @@ $(document).on('click', '#CmdSuppAddProductToCmd', function () {
  * search Bar and AJAX
  */
 $(document).on('keyup', '#CmdSupBchSearchBar', function () {
+    // Btn 'Obtenir la liste PDF' en 'Obtenir la recherche ' if search bar is fill
+    if ($('#CmdSupBchSearchBar').val().length > 0){
+        $('#GetCmdSuppPdf').val('Obtenir la recherche en PDF');
+    }else{
+        $('#GetCmdSuppPdf').val('Obtenir la liste en PDF');
+    }
+    // Get the searched list of supplier command
     $.ajax({
         url: "CommandSuppliersSearch",
         method: "POST",
@@ -588,7 +595,7 @@ $(document).on('click', '#GetCmdSuppPdf', function () {
         alert('Enregistré dans C:\\StockManagement\\ ');
     })
 });
-
+// double click to watch more details
 $(document).on('dblclick', '.rowCommand', function () {
     let idCmdSupp = (this).getAttribute('id');
     console.log(idCmdSupp);

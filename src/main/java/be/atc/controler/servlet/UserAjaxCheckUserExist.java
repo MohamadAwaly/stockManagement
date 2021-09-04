@@ -13,24 +13,27 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "UserAjaxCheckUserExist", value = "/UserAjaxCheckUserExist")
+@WebServlet( name = "UserAjaxCheckUserExist", value = "/UserAjaxCheckUserExist" )
 public class UserAjaxCheckUserExist extends HttpServlet {
     private static Logger logger = Logger.getLogger( UserAjaxCheckUserExist.class );
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet( HttpServletRequest request, HttpServletResponse response )
+            throws ServletException, IOException {
     }
+
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost( HttpServletRequest request, HttpServletResponse response )
+            throws ServletException, IOException {
         UserService userService = new UserService();
-        String login = request.getParameter("login");
-//        logger.log(Level.INFO, "checkUserAjax: " + login);
-        boolean checkLoginExist = userService.checkUserExist(login);
-        if (checkLoginExist) {
-//            response.getWriter().write("Error - user exist");
-            response.getWriter().write("error");
+        String login = request.getParameter( "login" );
+        //        logger.log(Level.INFO, "checkUserAjax: " + login);
+        boolean checkLoginExist = userService.checkUserExist( login );
+        if ( checkLoginExist ) {
+            //            response.getWriter().write("Error - user exist");
+            response.getWriter().write( "error" );
         } else {
-            response.getWriter().write("ok");
+            response.getWriter().write( "ok" );
         }
     }
 }

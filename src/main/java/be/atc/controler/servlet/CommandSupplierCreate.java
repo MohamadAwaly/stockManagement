@@ -11,11 +11,14 @@ import org.apache.log4j.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NamedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.ClientInfoStatus;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "CommandSupplierCreate", value = "/CommandSupplierCreate")
@@ -44,18 +47,34 @@ public class CommandSupplierCreate extends HttpServlet {
 
         int supplierId = 0;
         int userId = 0;
-        int productId = 0;
-        int quantity = 0;
+        int nbRowProduct = 0;
         Date dateNow = new Date(System.currentTimeMillis()) ;
         EntityTransaction transaction = em.getTransaction();
 
         //CONTROL DATA supply from user
+        List<Integer> lst_ProductId = new ArrayList<>();
+        List<Integer> lst_ProductQty = new ArrayList<>();
+
         boolean dataChecked = true;
         try{
+            nbRowProduct = Integer.parseInt(request.getParameter("nbRow"));
             supplierId = Integer.parseInt(request.getParameter("Supplier"));
             userId = Integer.parseInt(request.getParameter("User"));
-            productId = Integer.parseInt(request.getParameter("Product"));
-            quantity = Integer.parseInt(request.getParameter("Quantity"));
+            // If the user add 1 product
+            if (nbRowProduct == 1){
+                lst_ProductId.add(Integer.parseInt(request.getParameter("Product")));
+                lst_ProductQty.add(Integer.parseInt(request.getParameter("Quantity")));
+            }
+            // If the user are more product
+            else{
+                lst_ProductId.add(Integer.parseInt(request.getParameter("Product")));
+                lst_ProductQty.add(Integer.parseInt(request.getParameter("Quantity")));
+                //for start to "Product2" and "Product3","Product4",...
+                for (int i = 2; i <= nbRowProduct; i++){
+                    lst_ProductId.add(Integer.parseInt(request.getParameter("Product"+i)));
+                    lst_ProductQty.add(Integer.parseInt(request.getParameter("Quantity"+i)));
+                }
+            }
 
         }catch (Exception e){
             dataChecked = false;
@@ -63,32 +82,63 @@ public class CommandSupplierCreate extends HttpServlet {
         // DATA IS OK
         if (dataChecked){
             logger.log(Level.INFO,"Data is : "+ dataChecked);
-            try{
+            try {
                 transaction.begin();
-                SuppliersEntity suppliersEntity = em.find(SuppliersEntity.class,supplierId);
-                UsersEntity usersEntity = em.find(UsersEntity.class,userId);
-                ProductsEntity productsEntity = em.find(ProductsEntity.class, productId);
 
-                //CREATION BATCH with quantity
-                BatchsEntity batchsEntity = new BatchsEntity();
-                batchsEntity.setProducts(productsEntity);
-                batchsEntity.setQuantity(quantity);
-                em.merge(batchsEntity);
+                SuppliersEntity suppliersEntity = em.find(SuppliersEntity.class, supplierId);
+                UsersEntity usersEntity = em.find(UsersEntity.class, userId);
 
-                //CREATION CommandSupplier with date today
+                //Commande Fournisseur
                 CommandsuppliersEntity commandsuppliersEntity = new CommandsuppliersEntity();
                 commandsuppliersEntity.setSuppliers(suppliersEntity);
                 commandsuppliersEntity.setUsers(usersEntity);
                 commandsuppliersEntity.setOrderDate(dateNow);
+
+                // Liste des batches de la commande
+                for (int i = 0 ;i < lst_ProductId.size();i++)
+                {
+                    //CREATION  PRODUIT et son BATCH
+                    ProductsEntity productsEntity = em.find(ProductsEntity.class,lst_ProductId.get(i));
+                    BatchsEntity batchsEntity = new BatchsEntity();
+                    batchsEntity.setQuantity(lst_ProductQty.get(i));
+                    batchsEntity.setProducts(productsEntity);
+                    em.merge(productsEntity);
+                    em.merge(batchsEntity);
+
+
+                    CommandsuppliersBatchsEntity commandsuppliersBatchsEntity = new CommandsuppliersBatchsEntity();
+                    commandsuppliersBatchsEntity.setCommandsuppliers(commandsuppliersEntity);
+                    commandsuppliersBatchsEntity.setBatchs(batchsEntity);
+                    em.merge(commandsuppliersBatchsEntity);
+                }
                 em.merge(commandsuppliersEntity);
-
-                //CREATION CommandsuppliersBatchsEntity
-                CommandsuppliersBatchsEntity commandsuppliersBatchsEntity = new CommandsuppliersBatchsEntity();
-                commandsuppliersBatchsEntity.setBatchs(batchsEntity);
-                commandsuppliersBatchsEntity.setCommandsuppliers(commandsuppliersEntity);
-                em.merge(commandsuppliersBatchsEntity);
-
+//
+//                SuppliersEntity suppliersEntity = em.find(SuppliersEntity.class,supplierId);
+//                UsersEntity usersEntity = em.find(UsersEntity.class,userId);
+//                ProductsEntity productsEntity = em.find(ProductsEntity.class, productId);
+//
+//
+//                //CREATION BATCH with quantity
+//                BatchsEntity batchsEntity = new BatchsEntity();
+//                batchsEntity.setProducts(productsEntity);
+//                batchsEntity.setQuantity(quantity);
+//                em.merge(batchsEntity);
+//
+//                //CREATION CommandSupplier with date today
+//                CommandsuppliersEntity commandsuppliersEntity = new CommandsuppliersEntity();
+//                commandsuppliersEntity.setSuppliers(suppliersEntity);
+//                commandsuppliersEntity.setUsers(usersEntity);
+//                commandsuppliersEntity.setOrderDate(dateNow);
+//                em.merge(commandsuppliersEntity);
+//
+//                //CREATION CommandsuppliersBatchsEntity
+//                CommandsuppliersBatchsEntity commandsuppliersBatchsEntity = new CommandsuppliersBatchsEntity();
+//                commandsuppliersBatchsEntity.setBatchs(batchsEntity);
+//                commandsuppliersBatchsEntity.setCommandsuppliers(commandsuppliersEntity);
+//                em.merge(commandsuppliersBatchsEntity);
+//
                 transaction.commit();
+                em.close();
             }
             catch (Exception e){
                 transaction.rollback();

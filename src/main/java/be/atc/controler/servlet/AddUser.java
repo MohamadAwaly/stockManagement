@@ -19,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -27,14 +28,16 @@ import java.util.List;
 
 @WebServlet( name = "AddUser", value = "/adduser" )
 public class AddUser extends HttpServlet {
-    private static final Logger       logger       = Logger.getLogger( AddUser.class );
-    public static final  String       VUE          = "/views/addUser.jsp";
-    public static final  String       VUE_LISTUSER = "/views/showUsers.jsp";
-    public static final  String       VUE_ADDUSER  = "/views/addUser.jsp";
-    private              UserService  userService  = new UserService();
-    private              RoleService  roleService  = new RoleService();
-    private              CitieService citieService = new CitieService();
-    private              UserService  user         = new UserService();
+    private static final Logger logger       = Logger.getLogger( AddUser.class );
+    public static final  String VUE          = "/views/addUser.jsp";
+    public static final  String VUE_LISTUSER = "/views/showUsers.jsp";
+    public static final  String VUE_ADDUSER  = "/views/addUser.jsp";
+    public static final  String VUE_LOGIN    = "/views/login.jsp";
+
+    private UserService  userService  = new UserService();
+    private RoleService  roleService  = new RoleService();
+    private CitieService citieService = new CitieService();
+    private UserService  user         = new UserService();
     List<RolesEntity>  roleList      = roleService.showAllRoles();
     List<CitiesEntity> citiesList    = citieService.showAllCities();
     TypeAdress[]       allTypeAdress = TypeAdress.values();
@@ -61,7 +64,7 @@ public class AddUser extends HttpServlet {
             List<CitiesEntity> citiesList = citieService.showAllCities();
             //Define role
             int parameterrole = Integer.parseInt( request.getParameter( "role" ) );
-            logger.log(Level.INFO, "**** Parametre Role : "+parameterrole);
+            logger.log( Level.INFO, "**** Parametre Role : " + parameterrole );
             RolesEntity role = new RolesEntity();
             for ( RolesEntity roles : roleList ) {
                 if ( parameterrole == roles.getIdRole() ) {
@@ -81,14 +84,18 @@ public class AddUser extends HttpServlet {
             UsersEntity newuser = new UsersEntity();
             newuser.setLastName( request.getParameter( "lastName" ) );
             newuser.setFirstName( request.getParameter( "firstName" ) );
-            newuser.setDayOfBirth( Date.valueOf( request.getParameter( "dayOfBirth" ) ) );
+            if ( !request.getParameter( "dayOfBirth" ).isEmpty() ) {
+                newuser.setDayOfBirth( Date.valueOf( request.getParameter( "dayOfBirth" ) ) );
+            } else {
+                /*ignored*/
+            }
             newuser.setInscriptionDate( Date.valueOf( currentDate ) );
-            if (!request.getParameter( "vat" ).isEmpty() ){
+            if ( !request.getParameter( "vat" ).isEmpty() ) {
                 newuser.setVat( request.getParameter( "vat" ) );
             } else {
-                newuser.setVat(null);
+                newuser.setVat( null );
             }
-            if ( !request.getParameter( "email" ).isEmpty() ){
+            if ( !request.getParameter( "email" ).isEmpty() ) {
                 newuser.setMail( request.getParameter( "email" ) );
             }
             newuser.setPassword( passwordHached );
@@ -103,7 +110,7 @@ public class AddUser extends HttpServlet {
 
             try {
                 adress.setBox( Integer.parseInt( request.getParameter( "box" ) ) );
-            } catch (Exception e ){
+            } catch ( Exception e ) {
                 /*ignored*/
             }
             //initialize a city and get the user's city
@@ -127,29 +134,44 @@ public class AddUser extends HttpServlet {
 
             boolean adduser = false;
             adduser = userService.addUser( newuser, adress, adressUsers );
-            //            HttpSession session = request.getSession();
-            String errorUserExist = "l'utilisateur " + newuser.getLogin() + " ou le numéro de tva " + newuser.getVat()+ " existe déja ";
+            String errorUserExist = "l'utilisateur " + newuser.getLogin() + " ou le numéro de tva " + newuser.getVat()
+                    + " existe déja ";
             //Send parameter to JSP
             if ( adduser ) {
-                // Send Mail
-                if (!request.getParameter("email").isEmpty()){
+                // Send confirmation Mail
+                if ( !request.getParameter( "email" ).isEmpty() ) {
 
                     List<String> lst_to = new ArrayList<String>();
-                    lst_to.add(request.getParameter("email"));
+                    lst_to.add( request.getParameter( "email" ) );
 
                     Mail mail = new Mail();
-                    mail.setListTo(lst_to);
-                    mail.setSubject("Confirmation de l'inscription");
-                    mail.setMsgBody("Bienvenue "+request.getParameter("login"));
-                    mail.setNick("ATC Stock Management");
-                    mail.setFrom("stockmanagementatc@gmail.com");
-                    MailSender.sendMail(mail);
+                    mail.setListTo( lst_to );
+                    mail.setSubject( "Confirmation de l'inscription" );
+                    mail.setMsgBody( "Bienvenue " + request.getParameter( "login" ) );
+                    mail.setNick( "ATC Stock Management" );
+                    mail.setFrom( "stockmanagementatc@gmail.com" );
+                    MailSender.sendMail( mail );
                 }
-
                 //List users:
                 List<Object[]> userList = user.showAllUsers();
                 request.setAttribute( "user", userList );
-                this.getServletContext().getRequestDispatcher( VUE_LISTUSER ).forward( request, response );
+                HttpSession session = request.getSession();
+                if ( session.getAttribute( "SessionUserEntity" ) == null ) {
+                    logger.log( Level.INFO, " la session est null " );
+                } else {
+                    logger.log( Level.INFO, "La session n'est pas null" );
+                }
+                 /*check if session is null,
+                no:  new user (customer)
+                yes: admin is added new user
+                */
+
+                if ( session.getAttribute( "SessionUserEntity" ) == null && newuser.getRoles().getRole().trim()
+                        .equals( "client" ) ) {
+                    this.getServletContext().getRequestDispatcher( VUE_LOGIN ).forward( request, response );
+                } else {
+                    this.getServletContext().getRequestDispatcher( VUE_LISTUSER ).forward( request, response );
+                }
             } else {
                 request.setAttribute( "roles", roleList );
                 request.setAttribute( "cities", citiesList );

@@ -22,9 +22,9 @@ public class CommandSupplierShowAll extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.log(Level.INFO, "doGET sevlet entered");
-        Query query =  em.createNamedQuery("commandSuppliersBatchs.FindAll");
-        List<Object[]> commandSupplierBatch = query.getResultList();
-        request.setAttribute("commandSuppliers",commandSupplierBatch);
+        Query query =  em.createNamedQuery("commandSuppliers.FindAll");
+        List<Object[]> commandSupplier = query.getResultList();
+        request.setAttribute("commandSuppliers",commandSupplier);
         request.getRequestDispatcher(VUE).forward(request,response);
     }
 

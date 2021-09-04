@@ -48,7 +48,7 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                           aria-haspopup="true" aria-expanded="false">Liste des fournisseurs</a>
+                           aria-haspopup="true" aria-expanded="false">Fournisseurs</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="supplierCreate">Ajouter fournisseurs</a>
                             <a class="dropdown-item" href="CommandSupplierCreate">Faire une commande au fournisseur</a>
@@ -74,16 +74,16 @@
 <header>
     <c:choose>
         <c:when test="${sessionScope.SessionUser != null}">
-            <form>
-                <SELECT name="nom" size="1" action="UserSignOut" class="class-session" onchange="location = this.value">
+            <form class="form-login">
+                <SELECT name="nom" size="1" action="UserSignOut" class="class-headerlogin" onchange="location = this.value">
                     <option><c:out value="${sessionScope.SessionUser}"/></option>
                     <option value="UserSignOut">se deconnecter</option>
                 </SELECT>
             </form>
         </c:when>
         <c:when test="${sessionScope.SessionUser == null}">
-            <form method="get" action="Login">
-                <button type="submit" class="btn btn-light class-session">Se connecter</button>
+            <form method="get" action="Login" class="form-login">
+                <button type="submit" class="btn btn-light class-headerlogin">Se connecter</button>
             </form>
         </c:when>
     </c:choose>

@@ -8,9 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="header.jsp"%>
-
+<c:if test="${sessionScope['sessionOK'] == 'OK'}">
 <form id="formSupplierAdd" action="supplierCreate" method="post">
     <input type="text" name="supplierName" class="form-control" id="formNewSupplierName" required>
     <input type="submit" class="btn btn-primary" id="submitNewSupplier">
 </form>
+</c:if>
 <%@include file="footer.jsp"%>

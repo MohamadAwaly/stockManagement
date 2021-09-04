@@ -7,32 +7,30 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="header.jsp"%>
-<input id="CmdSupBchSearchBar" type="text" class="form-control" name="searchBar" placeholder="Chercher une commande"/>
+<c:if test="${sessionScope['sessionOK'] == 'OK'}">
+<input id="CmdSupBchSearchBar" type="text" class="form-control" name="searchBar" placeholder="Chercher fournisseur ou l'utilisateur d'une commande"/>
 <table class="table table-striped table-hover" border="1px solid black">
     <thead>
     <th># Commande</th>
-    <th>Fournisseur</th>
     <th>date de la commande</th>
-    <th>Produit</th>
-    <th>Qté</th>
-    <th>Lot</th>
+    <th>Fournisseur</th>
     <th>Utilisateur</th>
     </thead>
     <tbody id="CmdSupListContent" >
     <c:forEach var="cs" items="${commandSuppliers}">
-        <tr>
-            <td><c:out value="${cs[1].idCommandSuppliers}"/></td>
-            <td><c:out value="${cs[0].name}"/></td>
-            <td><c:out value="${cs[1].orderDate}"/></td>
-            <td><c:out value="${cs[4].designation}"/></td>
-            <td><c:out value="${cs[3].quantity}"/></td>
-            <td><c:out value="${cs[3].numberBatch}"/></td>
-            <td><c:out value="${cs[1].users.lastName}"/></td>
+        <tr id="<c:out value="${cs[0]}"/>" class="rowCommand">
+            <td><c:out value="${cs[0]}"/> </td>
+            <td><fmt:formatDate value="${cs[1]}" pattern="dd-MMM-yyyy"/></td>
+            <td><c:out value="${cs[2]}"/></td>
+            <td><c:out value="${cs[3]}"/></td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
+<div class="container-sm"></div>
 <input type="button" id="GetCmdSuppPdf" class="btn btn-primary" value="Obtenir en PDF"/>
+</c:if>
 
 <%@include file="footer.jsp"%>

@@ -32,6 +32,7 @@
     </tbody>
 </table>
 <div class="container-sm"></div>
+    <br/>
 <input type="button" id="GetCmdSuppPdf" class="btn btn-primary" value="Obtenir la liste en PDF"/>
 </c:if>
 

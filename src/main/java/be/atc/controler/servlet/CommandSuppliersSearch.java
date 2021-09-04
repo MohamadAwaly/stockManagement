@@ -27,7 +27,8 @@ public class CommandSuppliersSearch extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Object[]> lst_CommandSupplierBatch = supplierService.CommandSupplierList(request.getParameter("searchBar"));
         logger.log(Level.INFO,lst_CommandSupplierBatch);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy", Locale.FRANCE);
+        // Date Format Adapt for commande
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
         for (Object[] cmdSuppBatch:lst_CommandSupplierBatch
              ) {
             cmdSuppBatch[1]  = dateFormat.format(cmdSuppBatch[1]);

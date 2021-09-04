@@ -38,13 +38,12 @@ public class CommandSupplierCreate extends HttpServlet {
         List<Object[]> lst_User = userService.showAllUsersIdAndName();
         request.setAttribute("products",lst_Product);
         request.setAttribute("suppliers",lst_Supplier);
-        request.setAttribute("users",lst_User);
+        //request.setAttribute("users",lst_User);
         request.getRequestDispatcher(VUE).forward(request,response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         int supplierId = 0;
         int userId = 0;
         int nbRowProduct = 0;
@@ -94,7 +93,7 @@ public class CommandSupplierCreate extends HttpServlet {
                 commandsuppliersEntity.setUsers(usersEntity);
                 commandsuppliersEntity.setOrderDate(dateNow);
 
-                // Liste des batches de la commande
+                // Liste des batches/produits de la commande à créer
                 for (int i = 0 ;i < lst_ProductId.size();i++)
                 {
                     //CREATION  PRODUIT et son BATCH

@@ -46,6 +46,10 @@
                             <a class="dropdown-item" href="UsersShowAll">Liste des utilisateurs</a>
                         </div>
                     </li>
+                </c:if>
+                <c:if test="${sessionScope.SessionUserEntity.roles.role.trim() == 'administrateur' ||
+                                sessionScope.SessionUserEntity.roles.role.trim() == 'directeur' ||
+                                sessionScope.SessionUserEntity.roles.role.trim() == 'préparateur'}">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                            aria-haspopup="true" aria-expanded="false">Fournisseurs</a>

@@ -8,7 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="header.jsp"%>
-<c:if test="${sessionScope['sessionOK'] == 'OK'}">
+<c:if test="${sessionScope.SessionUserEntity.roles.role.trim() == 'administrateur' ||
+sessionScope.SessionUserEntity.roles.role.trim() == 'directeur' ||
+sessionScope.SessionUserEntity.roles.role.trim() == 'préparateur'}">
     <div>
         <form action="CommandSupplierCreate" method="post">
             <div class="row">
@@ -44,7 +46,7 @@
                                 </select>
                             </td>
                             <td>
-                                <input type="text" name="Quantity" class="inputQuantity form-control" placeholder="Quantité"/>
+                                <input type="text" name="Quantity" class="inputQuantity form-control" placeholder="Quantité" required/>
                             </td>
                         </tr>
                     </table>

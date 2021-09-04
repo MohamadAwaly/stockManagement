@@ -47,7 +47,8 @@
                 <td><c:out value="${ inscriptionDate }"/></td>
                 <td><c:out value="${ user.vat }"/></td>
                 <td><c:out value="${ user.mail }"/></td>
-                <td><c:out value="${ user.active }"/></td>
+                <td><c:out value="${ user.active == 'true'?'active':'inactive' }"/>
+                </td>
             </tr>
         </c:forEach>
         </tbody>

@@ -323,6 +323,8 @@ $(document).ready(function () {
                 let tva = res[7] == null ? "" : res[7];
                 let mail = res[8] == null ? "" : res[8];
                 let dayofbirth = res[5] == null ? "" : res[5];
+                let check = (res[9] == true) ? "active" : "inactive";
+                //let checkLabel = (res[9] == 1) ? " Actif" : " Inactif";
                 $('#tableListUser').append(
                     "<tr class='usersList' id='" + res[0] + "'>" +
                     "<td hidden>" + res[0] + "</td>" +
@@ -334,7 +336,8 @@ $(document).ready(function () {
                     "<td>" + res[6] + "</td>" +
                     "<td>" + tva + "</td>" +
                     "<td>" + mail + "</td>" +
-                    "<td>" + res[9] + "</td>" +
+                    "<td>" + check+ "</td>" +
+                    //"<td>" + res[9] + "</td>" +
                     "</tr>");
             })
         });
@@ -522,6 +525,12 @@ function erroRpassword(rpassword, password, errorRpass, btn) {
         btnvalide.prop('disabled', true);
     }
 }
+
+//jQuery(document).ready(function($){
+  //  alert('Le chargement du DOM est terminé');
+
+//});
+
 
 /**
  * ********************************************* *

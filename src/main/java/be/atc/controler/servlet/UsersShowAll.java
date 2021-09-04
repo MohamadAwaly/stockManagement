@@ -1,6 +1,7 @@
 package be.atc.controler.servlet;
 
 import be.atc.controler.connexion.EMF;
+import be.atc.entities.UsersEntity;
 import be.atc.service.UserService;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 @WebServlet( name = "usersshowall", value = "/UsersShowAll" )
@@ -25,6 +27,12 @@ public class UsersShowAll extends HttpServlet {
             throws ServletException, IOException {
         List<Object[]> users = user.showAllUsers();
         //        HttpSession session = request.getSession();
+
+        //users.forEach( user -> logger.log( Level.INFO, "User active? " ) );
+        for (int i = 0 ; i<= users.size(); i++){
+            //logger.log( Level.INFO, "test: " + Arrays.toString( users[1] ) );
+
+        }
         try {
             request.setAttribute( "user", users );
         } catch ( Exception e ) {

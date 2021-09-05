@@ -601,9 +601,7 @@ $(document).on('click', '#CmdSuppAddProductToCmd', function () {
     $('#tableProducts tr:last .productRowDelete')
         .append('<button type="button" id="deleteProduct" class="btn"><i class="fa fa-trash"></i></button>');
     $('#nbRowProduct').attr('value', nbProduct);
-
     console.log('nb produits après btn: ' + $('#tableProducts tr').length);
-
 })
 /**
  * btn Remove last product
@@ -619,8 +617,6 @@ $(document).on('click','#deleteProduct',function (){
     }
     $('#nbRowProduct').attr('value', $('#tableProducts tr').length-1);
 })
-
-
 /**
  * Page : CommandSupplierShowAll.jsp
  * search Bar and AJAX

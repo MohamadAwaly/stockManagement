@@ -617,8 +617,6 @@ $(document).on('click','#deleteProduct',function (){
     }
     $('#nbRowProduct').attr('value', $('#tableProducts tr').length-1);
 })
-
-
 /**
  * Page : CommandSupplierShowAll.jsp
  * search Bar and AJAX

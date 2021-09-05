@@ -24,6 +24,7 @@ public class CommandSupplierBatchShowAll extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.log(Level.INFO, "doGET sevlet entered");
+        //prepare list of the command number # :
         int pWhere = Integer.parseInt(request.getParameter("idCmdSupp"));
         Query query =  em.createNamedQuery("commandSuppliersBatchs.FindByIdCommand").setParameter("pWhere",pWhere);
         List<Object[]> commandSupplierBatch = query.getResultList();

@@ -33,12 +33,11 @@ public class CommandSupplierCreate extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Prepare list product, supplier for JSP to create a command
         List<Object[]> lst_Product = productService.ShowIdAndNameProduct();
         List<Object[]> lst_Supplier = supplierService.suppliersShowAll();
-        List<Object[]> lst_User = userService.showAllUsersIdAndName();
         request.setAttribute("products",lst_Product);
         request.setAttribute("suppliers",lst_Supplier);
-        //request.setAttribute("users",lst_User);
         request.getRequestDispatcher(VUE).forward(request,response);
         HttpSession sessionScoop = request.getSession();
         UsersEntity usersEntity = (UsersEntity) sessionScoop.getAttribute("SessionUserEntity");
@@ -47,26 +46,30 @@ public class CommandSupplierCreate extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        /**
+         * Check IF User session is administrateur directeur or préparateur Before Traitment
+         * ELSE Access denied and go to Error page
+         */
         HttpSession sessionScoop = request.getSession();
         UsersEntity sessionUsersEntity = (UsersEntity) sessionScoop.getAttribute("SessionUserEntity");
         logger.log(Level.INFO , "USER ENTITY : "+sessionUsersEntity.getRoles().getRole() );
-
-        // Add commande if you are administrateur directeur or préparateur
         String sessionRole = sessionUsersEntity.getRoles().getRole().trim();
         if (sessionRole.equals("administrateur")
                 || sessionRole.equals("directeur")
                 || sessionRole.equals("préparateur")){
 
+
+            //Insert a new commande Supplier
             int supplierId = 0;
             int userId = 0;
             int nbRowProduct = 0;
             Date dateNow = new Date(System.currentTimeMillis()) ;
             EntityTransaction transaction = em.getTransaction();
 
-            //CONTROL DATA supply from user
+            // Check IF Data from user,
+            // IF no correct = go to page Error
             List<Integer> lst_ProductId = new ArrayList<>();
             List<Integer> lst_ProductQty = new ArrayList<>();
-
             boolean dataChecked = true;
             try{
                 nbRowProduct = Integer.parseInt(request.getParameter("nbRow"));
@@ -134,7 +137,7 @@ public class CommandSupplierCreate extends HttpServlet {
                 }
                 response.sendRedirect(request.getContextPath()+"/CommandSupplierShowAll");
             }
-            // DATA is KO :
+            // DATA is KO! :
             else{
                 //Throw Error page : Data issues
                 logger.log(Level.WARN,"Data is : "+ dataChecked);

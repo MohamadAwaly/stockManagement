@@ -27,12 +27,13 @@ public class CommandSuppliersSearch extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Object[]> lst_CommandSupplierBatch = supplierService.CommandSupplierList(request.getParameter("searchBar"));
         logger.log(Level.INFO,lst_CommandSupplierBatch);
-        // Date Format Adapt for commande
+        // Format the date for command :
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
         for (Object[] cmdSuppBatch:lst_CommandSupplierBatch
              ) {
             cmdSuppBatch[1]  = dateFormat.format(cmdSuppBatch[1]);
         }
+        // Return the list Json for Ajax Jquery
         String json = new Gson().toJson(lst_CommandSupplierBatch);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

@@ -28,6 +28,7 @@ public class GetPdfCmdSupp extends HttpServlet {
         ) {
             cmdSuppBatch[1]  = dateFormat.format(cmdSuppBatch[1]);
         }
+        //Create the document with a path
         try {
             Path path = Paths.get("C:\\StockManagement\\");
             if (!Files.exists(path)){

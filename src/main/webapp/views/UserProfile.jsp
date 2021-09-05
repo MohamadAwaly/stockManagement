@@ -21,7 +21,7 @@
                         <td><c:out value="${ user.lastName }"/></td>
                     </tr>
                     <tr>
-                        <th>Prenom</th>
+                        <th>Prénom</th>
                         <td><c:out value="${ user.firstName }"/></td>
                     </tr>
                     <tr>
@@ -29,11 +29,11 @@
                         <td><c:out value="${ user.dayOfBirth }"/></td>
                     </tr>
                     <tr>
-                        <th>Date d'inscrition</th>
+                        <th>Date d'inscription</th>
                         <td><c:out value="${ user.inscriptionDate }"/></td>
                     </tr>
                     <tr>
-                        <th>Numéro de tva</th>
+                        <th>Numéro de TVA</th>
                         <td><c:out value="${ user.vat }"/></td>
                     </tr>
                     <tr>
@@ -41,7 +41,7 @@
                         <td><c:out value="${ user.mail }"/></td>
                     </tr>
                     <tr>
-                        <th>Role</th>
+                        <th>Rôle</th>
                         <td><c:out value="${ user.roles.role }"/></td>
                     </tr>
                 </table>

@@ -12,7 +12,7 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/allCss.css"/>
-    <title>Stock management</title>
+    <title>Gestion de stock</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/allCss.css" />
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.js"></script>
@@ -29,7 +29,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#"> Stock management</a>
+        <a class="navbar-brand" href="#"> Gestion de stock</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
                 aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -39,9 +39,9 @@
                 <c:if test="${sessionScope.SessionUserEntity.roles.role.trim() == 'administrateur' || sessionScope.SessionUserEntity.roles.role.trim() == 'directeur'}">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                           aria-haspopup="true" aria-expanded="false">Users</a>
+                           aria-haspopup="true" aria-expanded="false">Utilisateurs</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="adduser">Ajouter utilisateur</a>
+                            <a class="dropdown-item" href="adduser">Ajouter un utilisateur</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="UsersShowAll">Liste des utilisateurs</a>
                         </div>
@@ -65,7 +65,7 @@
             </ul>
             <c:choose>
                 <c:when test="${sessionScope.SessionUser != null}">
-                    <a class="navbar-brand " href="UserProfile"> Ma Fiche </a>
+                    <a class="navbar-brand " href="UserProfile"> Ma fiche </a>
                 </c:when>
             </c:choose>
 
@@ -87,7 +87,7 @@
         </c:when>
         <c:when test="${sessionScope.SessionUser == null}">
             <form method="get" action="Login" class="form-login">
-                <button type="submit" class="btn btn-light class-headerlogin">Se connecter / Inscription</button>
+                <button type="submit" class="btn btn-light class-headerlogin">Connexion / Inscription</button>
             </form>
         </c:when>
     </c:choose>

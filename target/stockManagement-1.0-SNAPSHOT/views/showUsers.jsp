@@ -6,7 +6,7 @@
 <c:import url="header.jsp"/>
 <c:if test="${sessionScope['sessionOK'] == 'OK'}">
     <input id="usersSearchBar" type="text" class="form-control" name="usersSearchBar"
-           placeholder="Chercher un utilisateur"/>
+           placeholder="Recherche"/>
 
     <form action="userUpdate" method="get" class="selectedUserForm float-right bg-transparent border-0">
 
@@ -22,15 +22,15 @@
         <thead>
         <tr>
             <th hidden>ID</th>
-            <th>login</th>
-            <th>Role</th>
+            <th>Login</th>
+            <th>Rôle</th>
             <th>Nom</th>
-            <th>Prenom</th>
+            <th>Prénom</th>
             <th>Date de naissance</th>
-            <th>Date d'insdcription</th>
+            <th>Date d'inscription</th>
             <th>TVA</th>
             <th>Email</th>
-            <th>active</th>
+            <th>Active/Inactive</th>
         </tr>
         </thead>
         <tbody id="UsersList">

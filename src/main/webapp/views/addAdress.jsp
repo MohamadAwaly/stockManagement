@@ -21,7 +21,7 @@
                 <%--        value="<c:out value="${ user.idUser }"/>"--%>
         </div>
         <div class="mb-3">
-            <label for="idTypeadresse" class="form-label"><span class="etoile">*</span> Type Adresse: </label>
+            <label for="idTypeadresse" class="form-label"><span class="etoile">*</span> Type d'adresse </label>
             <SELECT id="idTypeadresse" name="typeAdresse" size="1" class="form-control" required>
                 <c:forEach var="allTypeAdress" items="${ allTypeAdress }">
                 <OPTION value="${ allTypeAdress}">
@@ -31,7 +31,7 @@
             </SELECT>
         </div>
         <div class="mb-3">
-            <label for="idCity" class="form-label"><span class="etoile">*</span> Ville et code postal : </label>
+            <label for="idCity" class="form-label"><span class="etoile">*</span> Ville et code postal </label>
             <SELECT id="idCity" name="city" size="1" class="form-control" required>
                 <c:forEach var="cities" items="${ cities }">
                 <OPTION value="${ cities.idCity}">
@@ -55,7 +55,7 @@
             </div>
             <div class="col">
                 <div>
-                    <label for="box" class="form-label">Boite</label>
+                    <label for="box" class="form-label">Bo&icirc;te</label>
                     <input type="number" name="box" class="form-control" id="box" aria-describedby="boite">
                 </div>
             </div>

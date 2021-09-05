@@ -111,33 +111,7 @@ public class CommandSupplierCreate extends HttpServlet {
                     em.merge(commandsuppliersBatchsEntity);
                 }
                 em.merge(commandsuppliersEntity);
-//
-//                SuppliersEntity suppliersEntity = em.find(SuppliersEntity.class,supplierId);
-//                UsersEntity usersEntity = em.find(UsersEntity.class,userId);
-//                ProductsEntity productsEntity = em.find(ProductsEntity.class, productId);
-//
-//
-//                //CREATION BATCH with quantity
-//                BatchsEntity batchsEntity = new BatchsEntity();
-//                batchsEntity.setProducts(productsEntity);
-//                batchsEntity.setQuantity(quantity);
-//                em.merge(batchsEntity);
-//
-//                //CREATION CommandSupplier with date today
-//                CommandsuppliersEntity commandsuppliersEntity = new CommandsuppliersEntity();
-//                commandsuppliersEntity.setSuppliers(suppliersEntity);
-//                commandsuppliersEntity.setUsers(usersEntity);
-//                commandsuppliersEntity.setOrderDate(dateNow);
-//                em.merge(commandsuppliersEntity);
-//
-//                //CREATION CommandsuppliersBatchsEntity
-//                CommandsuppliersBatchsEntity commandsuppliersBatchsEntity = new CommandsuppliersBatchsEntity();
-//                commandsuppliersBatchsEntity.setBatchs(batchsEntity);
-//                commandsuppliersBatchsEntity.setCommandsuppliers(commandsuppliersEntity);
-//                em.merge(commandsuppliersBatchsEntity);
-//
                 transaction.commit();
-                //em.close();
             }
             catch (Exception e){
                 transaction.rollback();

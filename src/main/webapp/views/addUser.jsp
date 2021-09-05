@@ -17,7 +17,7 @@
         <input type="text" name="login" class="form-control" id="login" aria-describedby="login" required value=
         <c:out
                 value="${user.login}"/>>
-        <div id="errorLogin" hidden class="alert alert-danger">Le login doit contenir au moin 4 caract&egrave;res
+        <div id="errorLogin" hidden class="alert alert-danger">Le login doit contenir au minimum 4 caract&egrave;res
         </div>
         <div id="errorUserExist" hidden class="alert alert-danger">L'utilisateur existe d&eacute;ja</div>
     </div>
@@ -29,18 +29,18 @@
                        aria-describedby="Nom" required
                        value=<c:out value="${user.lastName}"/>>
                 <div id="errorlastName" hidden class="alert alert-danger errorlastNameClass">Le nom doit contenir au
-                    moin 3 caract&egrave;res et ne doit pas contenir des chiffres
+                    minimum 3 caract&egrave;res et ne doit pas contenir des chiffres ni des espaces
                 </div>
             </div>
         </div>
         <div class="col">
             <div class="mb-3">
-                <label for="firstName" class="form-label"><span class="etoile">*</span> Prenom</label>
+                <label for="firstName" class="form-label"><span class="etoile">*</span> Pr&eacute;nom</label>
                 <input type="text" name="firstName" class="form-control firstNameClass" id="firstName"
                        aria-describedby="prenom"
                        required value="<c:out value="${user.firstName}"/>">
-                <div id="errorfirstName" hidden class="alert alert-danger">Le prenom doit contenir au moin 3 caract&egrave;re
-                    et ne doit pas contenir des chiffres
+                <div id="errorfirstName" hidden class="alert alert-danger">Le pr&eacute;nom doit contenir au minimum 3 caract&egrave;re
+                    et ne doit pas contenir des chiffres ni des espaces
                 </div>
             </div>
         </div>
@@ -50,16 +50,14 @@
         <input type="Date" name="dayOfBirth" class="form-control dayOfBirthClass" id="dayOfBirth"
                aria-describedby="date de naissance" value=<c:out value="${user.dayOfBirth}"/>>
         <div id="errodayOfBirth" hidden class="alert alert-danger">Date non valide</div>
-        <div id="errodayOfBirth17ans" hidden class="alert alert-danger">vous devez avoir minimum 17 ans et maximum
-            100
-            ans
+        <div id="errodayOfBirth17ans" hidden class="alert alert-danger">vous devez avoir au moins 17 ans
         </div>
     </div>
     <div class="mb-3">
-        <label for="vat" class="form-label">Num&eacute;ro de tva</label>
+        <label for="vat" class="form-label">Num&eacute;ro de TVA</label>
         <input type="text" name="vat" class="form-control vatClass" id="vat" aria-describedby="Numéro de tva"
                placeholder="BE123456789" value=<c:out value="${user.vat}"/>>
-        <div id="errorTva" hidden class="alert alert-danger">Numero de tva doit commencer par BE et doit contenir 9
+        <div id="errorTva" hidden class="alert alert-danger">le num&eacute;ro de TVA commence par BE et contient 9
             chiffres
         </div>
         <div id="errorTvaExist" hidden class="alert alert-danger">Numero de tva existe</div>
@@ -75,11 +73,11 @@
             <div class="mb-3">
                 <label for="password" class="form-label"><span class="etoile">*</span> Mot de passe</label>
                 <input type="password" name="password" class="form-control passwordClass" id="password" required>
-                <div id="erroPassword" hidden class="alert alert-danger">Mot de passe doit contenir au moin 8 caract&egrave;re,
-                    une lettre majuscule,
-                    une lettre minuscule, un caract&egrave;re sp&eacute;ciale
+                <div id="erroPassword" hidden class="alert alert-danger">Le mot de passe doit comporter au moins 8 caract&egrave;res, un chiffre,
+                    une majuscule,
+                    une minuscule et un caract&egrave;re sp&eacute;cial.
                 </div>
-                <div id="errorRP" hidden class="alert alert-danger">Les mots de passe ne sont pas identique</div>
+                <div id="errorRP" hidden class="alert alert-danger">Les mots de passe ne sont pas identiques</div>
             </div>
         </div>
         <div class="col">
@@ -96,7 +94,7 @@
     <div class="mb-3">
 
         <c:if test="${sessionScope.SessionUserEntity.roles.role.trim() == 'administrateur' || sessionScope.SessionUserEntity.roles.role.trim() == 'directeur'}">
-            <label for="idRole" class="form-label"><span class="etoile">*</span> Role : </label>
+            <label for="idRole" class="form-label"><span class="etoile">*</span> R&ocirc;le : </label>
             <SELECT id="idRole" name="role" size="1" class="form-control">
                 <c:forEach var="roles" items="${ roles }">
                     <OPTION value="${ roles.idRole}">
@@ -107,7 +105,7 @@
         </c:if>
 
         <c:if test="${sessionScope.SessionUserEntity.roles.role.trim() == null}">
-            <label for="idRole" class="form-label" hidden><span class="etoile">*</span> Role : </label>
+            <label for="idRole" class="form-label" hidden><span class="etoile">*</span> R&ocirc;le : </label>
             <SELECT id="idRole" name="role" size="1" class="form-control" hidden>
                 <c:forEach var="roles" items="${ roles }">
                     <OPTION hidden value="${ roles.idRole}" ${roles.role.trim() == 'client' ? 'selected' : ""}>
@@ -118,7 +116,7 @@
         </c:if>
     </div>
     <div class="mb-3">
-        <label for="idTypeadresse" class="form-label"><span class="etoile">*</span> Type Adresse: </label>
+        <label for="idTypeadresse" class="form-label"><span class="etoile">*</span> Type d'adresse: </label>
         <SELECT id="idTypeadresse" name="typeAdresse" size="1" class="form-control" required>
             <c:forEach var="allTypeAdress" items="${ allTypeAdress }">
                 <OPTION value="${ allTypeAdress}">
@@ -152,7 +150,7 @@
         </div>
         <div class="col">
             <div>
-                <label for="box" class="form-label">Boite</label>
+                <label for="box" class="form-label">Bo&icirc;te</label>
                 <input type="number" name="box" class="form-control" id="box" aria-describedby="boite">
             </div>
         </div>

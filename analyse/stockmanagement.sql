@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 27 août 2021 à 11:58
--- Version du serveur :  5.7.31
--- Version de PHP : 7.3.21
+-- Généré le :  Dim 05 sep. 2021 à 10:07
+-- Version du serveur :  8.0.18
+-- Version de PHP :  7.3.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `stockmanagement`
+-- Base de données :  `stockmanagement`
 --
 
 -- --------------------------------------------------------
@@ -36,28 +37,23 @@ CREATE TABLE IF NOT EXISTS `address` (
     `box` int(11) DEFAULT NULL,
     PRIMARY KEY (`id_adress`),
     KEY `ID_City` (`id_city`)
-    ) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8;
+    ) ENGINE=InnoDB AUTO_INCREMENT=133 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `address`
 --
 
 INSERT INTO `address` (`id_adress`, `id_city`, `street`, `number`, `box`) VALUES
-                                                                              (79, 3661, 'Rue antoine', 45, 0),
-                                                                              (80, 3395, 'ChaussÃ©e de bruxelles', 7804, 0),
-                                                                              (81, 385, 'Rue de la gendarmerie', 76, 0),
-                                                                              (82, 3361, 'rue des aulniats', 255, 0),
-                                                                              (83, 2675, 'test', 10, 0),
-                                                                              (84, 3361, 'rue des aulniats', 254, 0),
-                                                                              (85, 3084, 'rue des aulniats', 254, 0),
-                                                                              (86, 3129, 'rue des aulniats', 254, 0),
-                                                                              (87, 3361, 'rue des aulniatsss', 254, 0),
-                                                                              (88, 3361, 'rue des aulniats', 254, 0),
-                                                                              (89, 3770, 'rue des aulniats', 254, 0),
-                                                                              (90, 434, 'rue des aulniats', 254, 1),
-                                                                              (91, 3084, 'rue des aulniats', 254, 15),
-                                                                              (92, 3361, 'rue des aulniats', 254, 0),
-                                                                              (93, 3361, 'rue des aulniats', 254, 0);
+                                                                              (123, 434, 'Rue de la gendarmerie', 74, 9),
+                                                                              (124, 512, 'ChaussÃ©e de bruxelles', 76, 0),
+                                                                              (125, 2920, 'rue de namur', 1, 0),
+                                                                              (126, 1638, 'rue moineau', 1, 0),
+                                                                              (127, 2613, 'Rue de laeken', 2, 0),
+                                                                              (128, 434, 'Route de chatelet', 60, 1),
+                                                                              (129, 671, 'Avenue circulaire', 1, 0),
+                                                                              (130, 434, 'Rue de lavoir', 55, 2),
+                                                                              (131, 434, 'Rue paul lauters', 11, 0),
+                                                                              (132, 1638, 'rue des aulniats', 254, 0);
 
 -- --------------------------------------------------------
 
@@ -74,28 +70,23 @@ CREATE TABLE IF NOT EXISTS `adress_users` (
     PRIMARY KEY (`id_adress_users`) USING BTREE,
     KEY `id_adress` (`id_adress`) USING BTREE,
     KEY `id_user` (`id_user`) USING BTREE
-    ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+    ) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `adress_users`
 --
 
 INSERT INTO `adress_users` (`id_adress_users`, `id_adress`, `id_user`, `typeAdress`) VALUES
-                                                                                         (1, 79, 81, 'Domicile'),
-                                                                                         (2, 80, 81, 'Livraison'),
-                                                                                         (3, 81, 81, 'Facturation'),
-                                                                                         (4, 82, 82, 'Domicile'),
-                                                                                         (5, 83, 83, 'Facturation'),
-                                                                                         (6, 84, 84, 'Domicile'),
-                                                                                         (7, 85, 85, 'Domicile'),
-                                                                                         (8, 86, 86, 'Domicile'),
-                                                                                         (9, 87, 87, 'Domicile'),
-                                                                                         (10, 88, 88, 'Domicile'),
-                                                                                         (11, 89, 89, 'Domicile'),
-                                                                                         (12, 90, 89, 'Facturation'),
-                                                                                         (13, 91, 90, 'Domicile'),
-                                                                                         (14, 92, 91, 'Domicile'),
-                                                                                         (15, 93, 92, 'Domicile');
+                                                                                         (45, 123, 81, 'Domicile'),
+                                                                                         (46, 124, 81, 'Professional'),
+                                                                                         (47, 125, 120, 'Domicile'),
+                                                                                         (48, 126, 121, 'Domicile'),
+                                                                                         (49, 127, 122, 'Domicile'),
+                                                                                         (50, 128, 123, 'Domicile'),
+                                                                                         (51, 129, 124, 'Domicile'),
+                                                                                         (52, 130, 125, 'Domicile'),
+                                                                                         (53, 131, 126, 'Domicile'),
+                                                                                         (54, 132, 125, 'Professional');
 
 -- --------------------------------------------------------
 
@@ -112,7 +103,14 @@ CREATE TABLE IF NOT EXISTS `batchs` (
     `numberBatch` int(11) NOT NULL,
     PRIMARY KEY (`id_batch`),
     KEY `ID_Products` (`id_products`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `batchs`
+--
+
+INSERT INTO `batchs` (`id_batch`, `id_products`, `quantity`, `uniPrice`, `numberBatch`) VALUES
+    (1, 1, 10, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -126,7 +124,14 @@ CREATE TABLE IF NOT EXISTS `brands` (
     `brand` varchar(60) NOT NULL,
     PRIMARY KEY (`id_brand`),
     UNIQUE KEY `brand` (`brand`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `brands`
+--
+
+INSERT INTO `brands` (`id_brand`, `brand`) VALUES
+    (1, 'Piscine');
 
 -- --------------------------------------------------------
 
@@ -4199,7 +4204,14 @@ CREATE TABLE IF NOT EXISTS `commandsuppliers` (
     PRIMARY KEY (`id_commandSuppliers`),
     KEY `ID_User` (`id_user`),
     KEY `ID_Supplier` (`id_supplier`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `commandsuppliers`
+--
+
+INSERT INTO `commandsuppliers` (`id_commandSuppliers`, `id_supplier`, `id_user`, `orderDate`) VALUES
+    (1, 1, 81, '2021-08-31');
 
 -- --------------------------------------------------------
 
@@ -4217,7 +4229,14 @@ CREATE TABLE IF NOT EXISTS `commandsuppliers_batchs` (
     PRIMARY KEY (`id_commandsuppliers_batchs`),
     KEY `ID_Batch` (`id_batch`),
     KEY `ID_CommandSupplier` (`id_commandSupplier`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `commandsuppliers_batchs`
+--
+
+INSERT INTO `commandsuppliers_batchs` (`id_commandsuppliers_batchs`, `id_commandSupplier`, `id_batch`, `costPrice`, `lotQuantity`) VALUES
+    (1, 1, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -4348,7 +4367,15 @@ CREATE TABLE IF NOT EXISTS `products` (
     `minimumQte` int(11) NOT NULL,
     PRIMARY KEY (`id_product`),
     KEY `id_brand` (`id_brand`) USING BTREE
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `products`
+--
+
+INSERT INTO `products` (`id_product`, `id_brand`, `code`, `designation`, `quantityTotal`, `unitCostPrice`, `margin`, `length`, `width`, `height`, `active`, `minimumQte`) VALUES
+                                                                                                                                                                              (1, 1, '123', 'Piscine Gre Louko acier gris anthracite 527x327x122cm', 0, 0, 1, 1, 1, 1, 1, 10),
+                                                                                                                                                                              (2, 1, '6464', 'Piscine Ubbink Sunwater octogonale 360x120cm', 0, 0, 1, 1, 1, 1, 1, 10);
 
 -- --------------------------------------------------------
 
@@ -4405,7 +4432,14 @@ CREATE TABLE IF NOT EXISTS `suppliers` (
     `name` varchar(60) NOT NULL,
     PRIMARY KEY (`id_supplier`),
     UNIQUE KEY `name` (`name`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `suppliers`
+--
+
+INSERT INTO `suppliers` (`id_supplier`, `name`) VALUES
+    (1, 'Awa');
 
 -- --------------------------------------------------------
 
@@ -4429,25 +4463,21 @@ CREATE TABLE IF NOT EXISTS `users` (
     PRIMARY KEY (`id_user`),
     UNIQUE KEY `vat` (`vat`) USING BTREE,
     KEY `id_role` (`id_role`) USING BTREE
-    ) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8;
+    ) ENGINE=InnoDB AUTO_INCREMENT=127 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `users`
 --
 
 INSERT INTO `users` (`id_user`, `id_role`, `lastName`, `firstName`, `dayOfBirth`, `inscriptionDate`, `vat`, `mail`, `password`, `login`, `active`) VALUES
-                                                                                                                                                       (81, 1, 'Awalyi', 'Mohamad', '1988-05-30', '2021-08-23', 'BE112233445', 'awalymhassan@hotmail.com', '$2a$10$U5yPsquyuspRbu0l6grgPeXPkMW98n6RqY5zfpAcs1uo3OsnM8z8a', 'admin', 1),
-                                                                                                                                                       (82, 2, 'Awaly', 'Mohamad Hassan', '1988-05-30', '2021-08-23', NULL, NULL, '$2a$10$S4yjP7rcdM1B4jJJRhloUODv9epbH1ORj/1z/mLZPnc26r4S8TfCm', 'asfour', 1),
-                                                                                                                                                       (83, 4, 'test', 'testclose', '1988-05-30', '2021-08-24', NULL, '', '$2a$10$1IJQTt6R4Zf6MaizPlkrO.ojGTXMKTy57T/YDB6nWPECtwjVkWfQC', 'test', 0),
-                                                                                                                                                       (84, 1, 'Awaly', 'Mohamad Hassan', '1988-05-30', '2021-08-24', NULL, NULL, '$2a$10$hgujoo3Y5zsbzuegGdiEzey1nLlZKH/LA2z6V.jNUxbH2uw5ZW8Yi', 'asfour1', 1),
-                                                                                                                                                       (85, 1, 'Awaly', 'Mohamad Hassan', '1988-05-30', '2021-08-24', NULL, NULL, '$2a$10$IA0yVBvj97uEiwEImWd1MO696L.lxAPV3a4rm.gXxsW8qbUEoK4lC', 'asfour123', 1),
-                                                                                                                                                       (86, 1, 'Awaly123', 'Mohamad', '1988-05-30', '2021-08-24', NULL, '', '$2a$10$K8P34o2i4esH0RSYOS/Cj.1sg8p7uK7KfLMXa8VM0UhrSwUAttVgi', 'asfour4567', 1),
-                                                                                                                                                       (87, 4, 'nabbouh', 'Yousra', '1988-05-30', '2021-08-24', NULL, 'awalymhassan@hotmail.com', '$2a$10$pgqIo1oHhQU2mrYHViTlgu4ltCjS.DYRrJV0bRoW6ozvf73/QVkXi', 'asfour123456', 1),
-                                                                                                                                                       (88, 1, 'Mohamad123', 'Awaly', '1988-05-30', '2021-08-25', NULL, '', '$2a$10$Hll1so.fW.973XfOU1xMo.pMZBp3w83kFcZxXZmSXCuTHuS0Ada8m', 'test3000', 1),
-                                                                                                                                                       (89, 1, 'Awaly8888', 'awa', '1988-05-30', '2021-08-25', NULL, '', '$2a$10$tvxokOqmb1Q8UHo4b/ZtvuXloV7IArmbrTEGOOYv3Vin.Kkg7jQ8q', 'test30005', 1),
-                                                                                                                                                       (90, 1, 'Mohamad', 'Awaly', '1988-05-30', '2021-08-25', NULL, '', '$2a$10$p4MY8sA2ypIZHHCMRwbacu5YxPuJMA4BTWmNNZDBZyik6wYMcZpm.', 'awalymhassan', 1),
-                                                                                                                                                       (91, 6, 'Awaly', 'Mohamad', '1988-05-30', '2021-08-26', NULL, '', '$2a$10$3xlx3AkaOyfGOo6IGZXVRuFBDK4D1ftLLllB4ETfZNo.p2FEKrcCO', 'directeur', 1),
-                                                                                                                                                       (92, 7, 'jetest', 'Awaly', '1988-05-30', '2021-08-26', NULL, NULL, '$2a$10$Isc34DKrTuHUPxkO39xJwOtRBnCScRdTzDmxORJ6CarE2z.tp70pC', 'testdefaultuser', 1);
+                                                                                                                                                       (81, 1, 'Awaly', 'Mohamad', '1980-01-01', '2021-08-23', 'BE112233445', 'awalymhassan@hotmail.com', '$2a$10$U5yPsquyuspRbu0l6grgPeXPkMW98n6RqY5zfpAcs1uo3OsnM8z8a', 'admin', 1),
+                                                                                                                                                       (120, 7, 'jean', 'dupont', '2000-01-03', '2021-09-05', 'BE123456789', 'awalymhassan@hotmail.com', '$2a$10$qcCVJrgFaQZo7fArllSIyupUCCfV7H1G8vrmwPkkJivYGeYVRvUNG', 'jean', 1),
+                                                                                                                                                       (121, 6, 'Marie', 'Boudue', '1999-12-03', '2021-09-05', NULL, 'awalymhassan@hotmail.com', '$2a$10$2XeQOjYl9SiGReOODkeJtOFtG4AiZ4cWsQuI.2PBsDwl8r69xWsq6', 'MarieB', 1),
+                                                                                                                                                       (122, 2, 'Van', 'Piperseel', '1980-05-23', '2021-09-05', NULL, NULL, '$2a$10$wbGO2EKT4pgQRmWvDXYO5eBY5Fz4jqGS.3NzI5xPI6MrT5hMCo2iK', 'VanP', 1),
+                                                                                                                                                       (123, 4, 'Faluche', 'Eline', '1985-02-20', '2021-09-05', NULL, NULL, '$2a$10$jVY9w8Uim1aNJMr6NmQoJe.9Sh4YgG0e0mtUZZcKsJqDSLztq59nq', 'Faluche', 1),
+                                                                                                                                                       (124, 5, 'Maximilien', 'Antoine', '1986-01-09', '2021-09-05', NULL, NULL, '$2a$10$gxmBJAUBbzmlWSKqdvH3hepLVibMvsqIchUZYBbeKYus6cEsGKDre', 'AntoineM', 1),
+                                                                                                                                                       (125, 3, 'Nouvel', 'Johan', '2000-02-22', '2021-09-05', NULL, NULL, '$2a$10$vD2PbVEh/mVLzFMhDLplruGFQbN9KcTew4AtHznRq8Dz9AzDrkn6u', 'NouvelJ', 1),
+                                                                                                                                                       (126, 7, 'Germain', 'Frank', '1987-01-01', '2021-09-05', 'BE123456666', 'awalymhassan@hotmail.com', '$2a$10$IUbzS93ihwNM/NtWN5aFuO/TNuzaiNRRZg3KV1Kdt9CqE11YxDA2a', 'GermainF', 1);
 
 --
 -- Contraintes pour les tables déchargées
@@ -4502,20 +4532,20 @@ ALTER TABLE `documents`
 -- Contraintes pour la table `orders`
 --
 ALTER TABLE `orders`
-    ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`Id_User`) REFERENCES `users` (`id_user`);
+    ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`Id_user`) REFERENCES `users` (`id_user`);
 
 --
 -- Contraintes pour la table `orders_documents`
 --
 ALTER TABLE `orders_documents`
     ADD CONSTRAINT `orders_documents_ibfk_1` FOREIGN KEY (`id_document`) REFERENCES `documents` (`id_document`),
-  ADD CONSTRAINT `orders_documents_ibfk_2` FOREIGN KEY (`id_order`) REFERENCES `orders` (`ID_Order`);
+  ADD CONSTRAINT `orders_documents_ibfk_2` FOREIGN KEY (`id_order`) REFERENCES `orders` (`id_order`);
 
 --
 -- Contraintes pour la table `orders_products`
 --
 ALTER TABLE `orders_products`
-    ADD CONSTRAINT `orders_products_ibfk_1` FOREIGN KEY (`id_order`) REFERENCES `orders` (`ID_Order`),
+    ADD CONSTRAINT `orders_products_ibfk_1` FOREIGN KEY (`id_order`) REFERENCES `orders` (`id_order`),
   ADD CONSTRAINT `orders_products_ibfk_2` FOREIGN KEY (`id_product`) REFERENCES `products` (`id_product`);
 
 --

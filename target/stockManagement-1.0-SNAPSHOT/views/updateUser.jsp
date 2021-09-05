@@ -16,7 +16,7 @@
     <%--        <div class="modal-content">--%>
     <c:forEach var="user" items="${ user }">
         <div class="modal-header ">
-            <h5 class="modal-title" id="staticBackdropLabel">Mettre a jour</h5>
+            <h5 class="modal-title" id="staticBackdropLabel">Mettre à jour</h5>
         </div>
         <div class="modal-body">
             <form class="formUpdateUser" action="userUpdate" method="post">
@@ -54,7 +54,7 @@
                                    aria-describedby="Nom" required value=<c:out value="${ user.lastName }"/>>
                             <div id="errorlastNameUpdate" hidden class="alert alert-danger errorlastNameClass">Le nom
                                 doit contenir au
-                                moin 3
+                                moins 3
                                 caract&egrave;res
                             </div>
                         </div>
@@ -62,13 +62,13 @@
                     <div class="col">
                         <div class="mb-1">
                             <label for="firstNameUpdate" class="form-label"><span class="etoile">*</span>
-                                Prenom</label>
+                                Pr&eacute;nom</label>
                             <input type="text" name="firstNameUpdate" class="form-control firstNameClass"
                                    id="firstNameUpdate"
                                    aria-describedby="prenom" required value=<c:out value="${ user.firstName }"/>>
-                            <div id="errorfirstNameUpdate" hidden class="alert alert-danger">Le prenom doit contenir
+                            <div id="errorfirstNameUpdate" hidden class="alert alert-danger">Le pr&eacute;nom doit contenir
                                 au
-                                moin 3 caract&egrave;re
+                                moins 3 caract&egrave;res
                             </div>
                         </div>
                     </div>
@@ -81,8 +81,8 @@
                                    id="dayOfBirthUpdate"
                                    aria-describedby="date de naissance" value=<c:out value="${ user.dayOfBirth }"/>>
                             <div id="errodayOfBirthUpdate" hidden class="alert alert-danger">Date non valide</div>
-                            <div id="errodayOfBirth17ansUpdate" hidden class="alert alert-danger">vous devez avoir
-                                minimum 17
+                            <div id="errodayOfBirth17ansUpdate" hidden class="alert alert-danger">Vous devez avoir
+                                au moins 17
                                 ans
                             </div>
                         </div>
@@ -102,11 +102,11 @@
                     <input type="text" name="vatUpdate" class="form-control vatClass" id="vatUpdate"
                            aria-describedby="Numéro de tva"
                            placeholder="BE123456789" value=<c:out value="${ user.vat }"/>>
-                    <div id="errorTvaUpdate" hidden class="alert alert-danger">Numero de tva non valide</div>
-                    <div id="errorTvaExistUpdate" hidden class="alert alert-danger">Numero de tva existe</div>
+                    <div id="errorTvaUpdate" hidden class="alert alert-danger">le num&eacute;ro de TVA est invalide</div>
+                    <div id="errorTvaExistUpdate" hidden class="alert alert-danger">le num&eacute;ro de TVA existe deja</div>
                 </div>
                 <div class="mb-1">
-                    <label for="emailUpdate" class="form-label">adresse email</label>
+                    <label for="emailUpdate" class="form-label">Adresse email</label>
                     <input type="email" name="emailUpdate" class="form-control emailClass" id="emailUpdate"
                            placeholder="name@example.com" value="<c:out value="${ user.mail }"/>">
                     <div id="errorEmailUpdate" hidden class="alert alert-danger">Adresse email non valide</div>
@@ -119,11 +119,9 @@
                             <input type="password" name="passwordUpdate" class="form-control passwordClass"
                                    id="passwordUpdate"
                                    required value="<c:out value="${ user.password }"/>">
-                            <div id="erroPasswordUpdate" hidden class="alert alert-danger">Mot de passe doit
-                                contenir au
-                                moin 8 caract&egrave;re,
-                                une lettre majuscule,
-                                une lettre minuscule, un caract&egrave;re sp&eacute;ciale
+                            <div id="erroPasswordUpdate" hidden class="alert alert-danger">Le mot de passe doit comporter au moins 8 caract&egrave;res, un chiffre,
+                                une majuscule,
+                                une minuscule et un caract&egrave;re sp&eacute;cial.
                             </div>
                             <div id="errorRPUpdate" hidden class="alert alert-danger">Les mots de passe ne sont pas
                                 identique
@@ -148,7 +146,7 @@
                 </div>
                 <c:if test="${sessionScope.SessionUserEntity.roles.role.trim() == 'administrateur' || sessionScope.SessionUserEntity.roles.role.trim() == 'directeur'}">
                     <div class="mb-1">
-                        <label for="idRoleUpdate" class="form-label"><span class="etoile">*</span> Role : </label>
+                        <label for="idRoleUpdate" class="form-label"><span class="etoile">*</span> R&ocirc;le </label>
                         <SELECT id="idRoleUpdate" name="RoleUpdate" size="1" class="form-control">
                                 <%--                    <option disabled selected><c:out value="${ user[0].roles.role } "/></option>--%>
                             <c:forEach var="roles" items="${ roles }">
@@ -161,7 +159,7 @@
                 </c:if>
                 <c:if test="${sessionScope.SessionUserEntity.roles.role.trim() != 'administrateur' || sessionScope.SessionUserEntity.roles.role.trim() != 'directeur'}">
                     <div class="mb-1">
-                        <label for="idRoleUpdate" class="form-label" hidden><span class="etoile">*</span> Role :
+                        <label for="idRoleUpdate" class="form-label" hidden><span class="etoile">*</span> R&ocirc;le
                         </label>
                         <SELECT id="idRoleUpdateclient" name="RoleUpdate" size="1" class="form-control" hidden>
                                 <%--                    <option disabled selected><c:out value="${ user[0].roles.role } "/></option>--%>
@@ -203,11 +201,11 @@
         <thead>
         <tr>
             <th hidden>id</th>
-            <th>ville</th>
+            <th>Ville</th>
             <th>Type d'adresse</th>
             <th>Rue</th>
             <th>Numéro</th>
-            <th>boite</th>
+            <th>bo&icirc;te</th>
         </tr>
         </thead>
         <tbody>

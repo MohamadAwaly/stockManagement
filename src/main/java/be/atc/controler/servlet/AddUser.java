@@ -134,8 +134,8 @@ public class AddUser extends HttpServlet {
 
             boolean adduser = false;
             adduser = userService.addUser( newuser, adress, adressUsers );
-            String errorUserExist = "l'utilisateur " + newuser.getLogin() + " ou le numéro de tva " + newuser.getVat()
-                    + " existe déja ";
+            String errorUserExist = "L'utilisateur " + newuser.getLogin() + " ou le numéro de tva " + newuser.getVat()
+                    + " existe deja ";
             //Send parameter to JSP
             if ( adduser ) {
                 // Send confirmation Mail

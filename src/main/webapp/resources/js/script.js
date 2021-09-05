@@ -13,7 +13,7 @@ $(document).ready(function () {
     var login = $('#login'),
         lastName = $('#lastName'),
         firstName = $('#firstName'),
-        dayOfBirth = $('.dayOfBirthClass'),
+        dayOfBirth = $('#dayOfBirth'),
         vat = $('#vat'),
         mail = $('.emailClass'),
         password = $('#password'),
@@ -197,7 +197,7 @@ $(document).ready(function () {
         var btn = $('#id-valider-updateUser-btn').attr('id');
         errorFirstName(firstNameUpdate, errorVal, errorfirstName, btn);
     })
-    vatUpdate.keyup(function () {
+    vatUpdate.change(function () {
         console.log("vatUpdate");
         var vatVal = $(this).val();
         var errorTva = document.getElementById("errorTvaUpdate");

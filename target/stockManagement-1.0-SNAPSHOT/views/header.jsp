@@ -87,7 +87,7 @@
         </c:when>
         <c:when test="${sessionScope.SessionUser == null}">
             <form method="get" action="Login" class="form-login">
-                <button type="submit" class="btn btn-light class-headerlogin">Se connecter</button>
+                <button type="submit" class="btn btn-light class-headerlogin">Se connecter / Inscription</button>
             </form>
         </c:when>
     </c:choose>

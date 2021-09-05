@@ -13,7 +13,7 @@ $(document).ready(function () {
     var login = $('#login'),
         lastName = $('#lastName'),
         firstName = $('#firstName'),
-        dayOfBirth = $('.dayOfBirthClass'),
+        dayOfBirth = $('#dayOfBirth'),
         vat = $('#vat'),
         mail = $('.emailClass'),
         password = $('#password'),

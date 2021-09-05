@@ -30,7 +30,7 @@
                        required readonly value=<c:out value="${adress[0].idAdress}"/>>
             </div>
             <div class="mb-3">
-                <label for="idTypeadresse" class="form-label"><span class="etoile">*</span> Type Adresse: </label>
+                <label for="idTypeadresse" class="form-label"><span class="etoile">*</span> Type d'adresse</label>
                 <SELECT id="idTypeadresse" name="typeAdresse" size="1" class="form-control" required>
                     <c:forEach var="allTypeAdress" items="${ allTypeAdress }">
                     <OPTION value="${ allTypeAdress}" ${allTypeAdress == adress[1].typeAdress ? 'selected' : ''}>
@@ -40,7 +40,7 @@
                 </SELECT>
             </div>
             <div class="mb-3">
-                <label for="idCity" class="form-label"><span class="etoile">*</span> Ville et code postal : </label>
+                <label for="idCity" class="form-label"><span class="etoile">*</span> Ville et code postal</label>
                 <SELECT id="idCity" name="city" size="1" class="form-control" required>
                     <c:forEach var="cities" items="${ cities }">
                         <OPTION value="${cities.idCity}" ${cities.idCity == adress[0].city.idCity ? 'selected' : ''}>
@@ -65,7 +65,7 @@
                 </div>
                 <div class="col">
                     <div>
-                        <label for="box" class="form-label">Boite</label>
+                        <label for="box" class="form-label">Bo&icirc;te</label>
                         <input type="number" name="box" class="form-control" id="box" aria-describedby="boite"
                                value="<c:out value="${ adress[0].box }"/>">
                     </div>

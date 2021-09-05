@@ -11,7 +11,7 @@
 <c:if test="${sessionScope.SessionUserEntity.roles.role.trim() == 'administrateur' ||
                 sessionScope.SessionUserEntity.roles.role.trim() == 'directeur' ||
                 sessionScope.SessionUserEntity.roles.role.trim() == 'préparateur'}">
-<h3>Info sur la Commande</h3>
+<h5>Info sur la Commande</h5>
 <table class="table table-striped table-hover" border="1px solid black">
     <thead>
     <th>Produit</th>

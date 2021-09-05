@@ -2,6 +2,7 @@ package be.atc.controler.servlet;
 
 import be.atc.controler.connexion.EMF;
 import be.atc.entities.SuppliersEntity;
+import be.atc.entities.UsersEntity;
 import be.atc.service.SupplierService;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -28,17 +29,35 @@ public class SupplierCreate extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String supplierName = request.getParameter("supplierName").toString();
-        int supplierExist = Integer.parseInt(supplierService.supplierExist(supplierName).toString());
-        if (supplierExist == 1){
-            request.setAttribute("message","Le founisseur inséré est déjà existant");
-            request.getRequestDispatcher("/views/error.jsp").forward(request,response);
-        }else{
-            SuppliersEntity newSuppliersEntity = new SuppliersEntity();
-            newSuppliersEntity.setName(supplierName);
-            supplierService.supplierCreate(newSuppliersEntity);
-            response.sendRedirect(request.getContextPath()+"/suppliersShowAll");
+        HttpSession sessionScoop = request.getSession();
+        UsersEntity sessionUsersEntity = (UsersEntity) sessionScoop.getAttribute("SessionUserEntity");
+        logger.log(Level.INFO , "USER ENTITY : "+sessionUsersEntity.getRoles().getRole());
+
+        // Add commande if you are administrateur directeur or préparateur
+        String sessionRole = sessionUsersEntity.getRoles().getRole().trim();
+        if (sessionRole.equals("administrateur")
+                || sessionRole.equals("directeur")
+                || sessionRole.equals("préparateur")
+        ){
+            String supplierName = request.getParameter("supplierName").toString();
+            int supplierExist = Integer.parseInt(supplierService.supplierExist(supplierName).toString());
+            if (supplierExist == 1){
+                request.setAttribute("message","Le founisseur inséré est déjà existant");
+                request.getRequestDispatcher("/views/error.jsp").forward(request,response);
+            }else{
+                SuppliersEntity newSuppliersEntity = new SuppliersEntity();
+                newSuppliersEntity.setName(supplierName);
+                supplierService.supplierCreate(newSuppliersEntity);
+                response.sendRedirect(request.getContextPath()+"/suppliersShowAll");
+            }
         }
+        else {
+            // Throw Error Page : Not autorize user
+            logger.log(Level.WARN,"Access denied for: "+ sessionUsersEntity.getLogin());
+            request.setAttribute("message","Vous n'êtes pas autorisé à cette action");
+            request.getRequestDispatcher("/views/error.jsp").forward(request,response);
+        }
+
 
     }
 }

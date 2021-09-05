@@ -11,6 +11,7 @@
 <c:if test="${sessionScope.SessionUserEntity.roles.role.trim() == 'administrateur' ||
 sessionScope.SessionUserEntity.roles.role.trim() == 'directeur' ||
 sessionScope.SessionUserEntity.roles.role.trim() == 'préparateur'}">
+    <h5>Faire une commande</h5>
     <div>
         <form action="CommandSupplierCreate" method="post">
             <div class="row">
@@ -55,8 +56,8 @@ sessionScope.SessionUserEntity.roles.role.trim() == 'préparateur'}">
                         </tr>
                     </table>
                 </div>
-                    <button id="CmdSuppAddProductToCmd" type="button" class="btn btn-info">Ajouter produit</button>
-                    <br/>
+                <button id="CmdSuppAddProductToCmd" type="button" class="btn btn-info">Ajouter produit</button>
+                <br/>
             </div>
             <input type="text" id="nbRowProduct" name="nbRow" value="1" hidden/>
             <br/>

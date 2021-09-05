@@ -598,6 +598,7 @@ $(document).on('click', '#CmdSuppAddProductToCmd', function () {
     $('#tableProducts tr:last').attr('id', 'product' + nbProduct);
     $('#tableProducts tr:last .productName select').attr('name', 'Product' + nbProduct);
     $('#tableProducts tr:last .productQuantity input').attr('name', 'Quantity' + nbProduct);
+    $('#tableProducts tr:last .productQuantity input').val('1');
     $('#tableProducts tr:last .productRowDelete')
         .append('<button type="button" id="deleteProduct" class="btn"><i class="fa fa-trash"></i></button>');
     $('#nbRowProduct').attr('value', nbProduct);

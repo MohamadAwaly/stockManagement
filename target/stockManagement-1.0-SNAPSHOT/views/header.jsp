@@ -18,7 +18,9 @@
     <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/script.js"></script>
     <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
-    <%--    <link rel="stylesheet" href="../resources/css/allCss.css">--%>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<%--    <link rel="stylesheet" href="../resources/css/allCss.css">--%>
     <%--    <script type="text/javascript" src="../resources/js/script.js"></script>--%>
     <%--    <script type="text/javascript" src="../resources/js/jquery-3.5.1.js"></script>--%>
     <!-- JavaScript Bundle with Popper -->

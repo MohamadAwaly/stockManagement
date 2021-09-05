@@ -527,7 +527,7 @@ function erroRpassword(rpassword, password, errorRpass, btn) {
 }
 
 //jQuery(document).ready(function($){
-  //  alert('Le chargement du DOM est terminé');
+//  alert('Le chargement du DOM est terminé');
 
 //});
 
@@ -588,16 +588,36 @@ $(document).on('keyup', '.inputQuantity', function () {
  */
 $(document).on('click', '#CmdSuppAddProductToCmd', function () {
     let nbProduct = $('#tableProducts tr').length;
+    console.log('bouton ajouter produit , nb produits : ' + nbProduct);
+    // !!! 1 row (tr) = length start to 2 !!
+    if (nbProduct > 2){
+        $('.productRowDelete').empty();
+    }
+    //Product1 = tr
     $('#product1').clone().appendTo('#tableProducts');
     $('#tableProducts tr:last').attr('id', 'product' + nbProduct);
-    $('#tableProducts tr:last td:first select').attr('name', 'Product' + nbProduct);
-    $('#tableProducts tr:last td:last input').attr('name', 'Quantity' + nbProduct);
+    $('#tableProducts tr:last .productName select').attr('name', 'Product' + nbProduct);
+    $('#tableProducts tr:last .productQuantity input').attr('name', 'Quantity' + nbProduct);
+    $('#tableProducts tr:last .productQuantity input').val('1');
+    $('#tableProducts tr:last .productRowDelete')
+        .append('<button type="button" id="deleteProduct" class="btn"><i class="fa fa-trash"></i></button>');
     $('#nbRowProduct').attr('value', nbProduct);
-    console.log('bouton ajouter produit , nb produits : ' + nbProduct);
-
+    console.log('nb produits après btn: ' + $('#tableProducts tr').length);
 })
-
-
+/**
+ * btn Remove last product
+ */
+$(document).on('click','#deleteProduct',function (){
+    // if rest 2 rows don't add trash btn for the first tr product
+    if ($('#tableProducts tr').length > 3){
+        $(this).closest('tr').remove();
+        $('#tableProducts tr:last .productRowDelete')
+            .append('<button type="button" id="deleteProduct" class="btn"><i class="fa fa-trash"></i></button>');
+    }else{
+        $(this).closest('tr').remove();
+    }
+    $('#nbRowProduct').attr('value', $('#tableProducts tr').length-1);
+})
 /**
  * Page : CommandSupplierShowAll.jsp
  * search Bar and AJAX

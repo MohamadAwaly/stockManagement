@@ -31,7 +31,7 @@ public class SupplierService {
         catch (Exception e){
             transaction.rollback();
         }finally {
-            entityManager.close();
+//            entityManager.close();
             logger.log(Level.INFO,"supplierCreate ");
         }
     }

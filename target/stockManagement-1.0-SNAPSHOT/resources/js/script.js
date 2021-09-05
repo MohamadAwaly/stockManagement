@@ -161,13 +161,13 @@ $(document).ready(function () {
             if (regEmail.test(email)) {
                 $(this).removeClass("is-invalid");
                 $(this).addClass("is-valid");
-                errorEmail.hidden = true;
+                errorEmailUpdate.hidden = true;
                 errorMailValide = "false";
                 $('#btn-addUser').prop('disabled', false);
             } else {
                 $(this).removeClass("is-valid");
                 $(this).addClass("is-invalid");
-                errorEmail.hidden = false;
+                errorEmailUpdate.hidden = false;
                 errorMailValide = "true";
                 $('#btn-addUser').prop('disabled', true);
             }

@@ -137,13 +137,13 @@ public class CommandSupplierCreate extends HttpServlet {
 //                em.merge(commandsuppliersBatchsEntity);
 //
                 transaction.commit();
-                em.close();
+                //em.close();
             }
             catch (Exception e){
                 transaction.rollback();
                 logger.log(Level.FATAL,"Servlet CommandSupplier Transaction EM Fatal Error");
             }finally {
-                //em.close();
+                em.close();
                 logger.log(Level.INFO,"CommandSupplier TRY CATCH Transaction Finish");
             }
             response.sendRedirect(request.getContextPath()+"/CommandSupplierShowAll");

@@ -30,11 +30,13 @@ sessionScope.SessionUserEntity.roles.role.trim() == 'préparateur'}">
             </div>
             <div class="container">
                 <div class="row Products">
-                    <table id="tableProducts" class="products">
+                    <table id="tableProducts" class="products table table-borderless">
                         <thead>
-                        <th>Produit</th>
-                        <th>Quantité</th>
-                        <th></th>
+                        <tr>
+                            <th scope="col">Produit</th>
+                            <th scope="col">Quantité</th>
+                            <th scope="col"></th>
+                        </tr>
                         </thead>
                         <tr id="product1" class="product">
                             <td class="productName">
@@ -53,10 +55,10 @@ sessionScope.SessionUserEntity.roles.role.trim() == 'préparateur'}">
                         </tr>
                     </table>
                 </div>
+                    <button id="CmdSuppAddProductToCmd" type="button" class="btn btn-alert">Ajouter produit</button>
+                    <br/>
             </div>
             <input type="text" id="nbRowProduct" name="nbRow" value="1" hidden/>
-            <br/>
-            <input id="CmdSuppAddProductToCmd" type="button" class="btn btn-alert" value="Ajouter un produit"/>
             <br/>
             <input type="submit" class="btn btn-primary" value="Enregistrer la commande"/>
         </form>

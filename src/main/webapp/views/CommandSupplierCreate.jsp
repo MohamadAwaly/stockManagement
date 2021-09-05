@@ -30,7 +30,7 @@ sessionScope.SessionUserEntity.roles.role.trim() == 'préparateur'}">
             </div>
             <div class="container">
                 <div class="row Products">
-                    <table id="tableProducts" class="products table">
+                    <table id="tableProducts" class="products table table-borderless">
                         <thead>
                         <tr>
                             <th scope="col">Produit</th>

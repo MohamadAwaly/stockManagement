@@ -34,9 +34,10 @@ sessionScope.SessionUserEntity.roles.role.trim() == 'préparateur'}">
                         <thead>
                         <th>Produit</th>
                         <th>Quantité</th>
+                        <th></th>
                         </thead>
                         <tr id="product1" class="product">
-                            <td>
+                            <td class="productName">
                                 <select name="Product" class="form-control">
                                     <c:forEach var="product" items="${products}">
                                         <option value="<c:out value="${product[0]}"/>">
@@ -45,9 +46,10 @@ sessionScope.SessionUserEntity.roles.role.trim() == 'préparateur'}">
                                     </c:forEach>
                                 </select>
                             </td>
-                            <td>
+                            <td class="productQuantity">
                                 <input type="text" name="Quantity" class="inputQuantity form-control" placeholder="Quantité" required/>
                             </td>
+                            <td class="productRowDelete"></td>
                         </tr>
                     </table>
                 </div>
